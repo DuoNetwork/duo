@@ -109,7 +109,8 @@ type "mailto:"
 \begin_inset Newline newline
 \end_inset
 
-Prof DAI Min(
+Prof.
+ DAI Min(
 \begin_inset CommandInset href
 LatexCommand href
 name "matdm@nus.edu.sg"
@@ -254,11 +255,19 @@ Introduction
 \end_layout
 
 \begin_layout Subsection
-Current Crypto Market
+Stablecoins and Fixed Income Assets
 \end_layout
 
 \begin_layout Subsection
-Financial Market
+Risk Segmentation
+\end_layout
+
+\begin_layout Subsection
+Leveraged Funds
+\end_layout
+
+\begin_layout Subsection
+Smart Contract
 \end_layout
 
 \begin_layout Section
@@ -266,47 +275,51 @@ Product Design
 \end_layout
 
 \begin_layout Subsection
-Three classes
+Overview
 \end_layout
 
 \begin_layout Subsection
-Creation and redemption
+Creation and Redemption
 \end_layout
 
 \begin_layout Subsection
-Resets
+Contingent Resets
+\end_layout
+
+\begin_layout Subsection
+Periodic Resets
 \end_layout
 
 \begin_layout Section
-Market Mechanisam and Scenarios
+Market Mechanism
 \end_layout
 
 \begin_layout Subsection
-Rate discovery
+Premium and Discount
 \end_layout
 
 \begin_layout Subsection
-Arbitrage
+Arbitrage and Market Equilibrium
 \end_layout
 
 \begin_layout Subsection
-2018.1
-\end_layout
-
-\begin_layout Subsection
-2017.9
+Scenario Analysis
 \end_layout
 
 \begin_layout Section
-Conclusion and Further Development
+Further Development
 \end_layout
 
 \begin_layout Subsection
-Other coin based structure
+Base Rate Discovery
 \end_layout
 
 \begin_layout Subsection
-A true stable coin
+Optimal Reset Threshold and Frequency
+\end_layout
+
+\begin_layout Subsection
+Other Coin Based Structure
 \end_layout
 
 \begin_layout Standard
