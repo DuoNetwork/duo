@@ -712,7 +712,11 @@ Upward Reset
 \begin_layout Standard
 When ETH/USD price rises, the Class B token's leverage ratio reduces.
  An Upward Reset is triggered when the Net Value of Class B token reaches
- 2 USD.
+ upper limit 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
  The reset will restore the leverage ratio to 200%, and the Net Value of
  both classes to 1 USD.
  By increasing Class B's leverage ratio, the structure retains attraction
@@ -739,8 +743,8 @@ The ETH amount
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-E_{A} & =\frac{\left(NV_{A}-1\right)\cdot P_{0}}{P_{t}}\\
-E_{B} & =\frac{\left(NV_{B}-1\right)\cdot P_{0}}{P_{t}}
+E_{A} & =\frac{\left(NV_{A}-1\right)}{P_{t}}\\
+E_{B} & =\frac{\left(NV_{B}-1\right)}{P_{t}}
 \end{align*}
 
 \end_inset
@@ -784,7 +788,11 @@ Downward Reset
 \begin_layout Standard
 When ETH/USD price falls, the Class B token's leverage ratio increases.
  A Downward Reset is triggered when the Net Value of Class B token reaches
- 0.25 USD.
+ lower limit 
+\begin_inset Formula $h$
+\end_inset
+
+.
  Similar to an Upward Reset, a Downward Reset restores the leverage ratio
  and Net Value of both classes.
  By reducing leverage ratio and restoring Net Value, the structure strengtherns
@@ -794,7 +802,11 @@ When ETH/USD price falls, the Class B token's leverage ratio increases.
 \begin_layout Standard
 Class A holder will receive certain amount of ETH from the Custodian contract.
  Additionally, A Downward Reset will reduce the total supply of Class A
- and Class B tokens by roughly 75%.
+ and Class B tokens by roughly 
+\begin_inset Formula $1-h$
+\end_inset
+
+.
  
 \end_layout
 
@@ -805,7 +817,7 @@ The ETH amount E(A) of each Class A token is:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-E_{A}=\frac{\left(NV_{A}-NV_{B}\right)\cdot P_{0}}{P_{t}}
+E_{A}=\frac{\left(NV_{A}-NV_{B}\right)}{P_{t}}
 \]
 
 \end_inset
