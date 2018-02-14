@@ -650,7 +650,7 @@ The amount
 \begin_layout Standard
 \begin_inset Formula 
 \[
-N_{R}=\min\left(N_{A},N_{B}\right)
+N_{R}=\min\left\{ N_{A},N_{B}\right\} 
 \]
 
 \end_inset
