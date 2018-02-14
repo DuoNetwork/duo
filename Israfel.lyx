@@ -693,7 +693,7 @@ M_{R}=\frac{N_{R}\cdot\left(1-c\right)\cdot2}{P_{0}}
 \end_layout
 
 \begin_layout Subsection
-Contingent Reset
+Resets
 \end_layout
 
 \begin_layout Standard
@@ -706,14 +706,14 @@ Simply put, the holders of Class B tokens borrow capital from the holders
 \end_layout
 
 \begin_layout Paragraph
-Upward Reset
+Contingent Upward 
 \end_layout
 
 \begin_layout Standard
 When ETH/USD price rises, the Class B token's leverage ratio reduces.
  An Upward Reset is triggered when the Net Value of Class B token reaches
  upper limit 
-\begin_inset Formula $\mathcal{H}$
+\begin_inset Formula $\mathcal{H}_{B}$
 \end_inset
 
 .
@@ -782,7 +782,7 @@ where,
 \end_layout
 
 \begin_layout Paragraph
-Downward Reset
+Contingent Downward
 \end_layout
 
 \begin_layout Standard
@@ -855,8 +855,27 @@ is the amount of Class A and Class B tokens right after the Downward Reset,
 is the amount of Class A and Class B tokens right before the Downward Reset.
 \end_layout
 
-\begin_layout Subsection
-Periodic Reset
+\begin_layout Paragraph
+Periodic
+\end_layout
+
+\begin_layout Standard
+When a given time period has passed from the last reset time, 
+\begin_inset Formula $NV_{A}$
+\end_inset
+
+ grows to upper limit 
+\begin_inset Formula $\mathcal{H}_{A}$
+\end_inset
+
+, a periodic reset is triggered to restore the leverage ratio and net value
+ of both classes.
+ If 
+\begin_inset Formula $NV_{B}$
+\end_inset
+
+ is less than 1, reset will be the same as the Contingent Downward reset.
+ Otherwise, reset will be the same as Contingent Upward reset.
 \end_layout
 
 \begin_layout Section
