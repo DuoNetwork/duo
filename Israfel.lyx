@@ -729,14 +729,19 @@ The ETH amount
 \begin_inset Formula $E_{A}$
 \end_inset
 
- of each Class A token is:
+ for each Class A token and 
+\begin_inset Formula $E_{B}$
+\end_inset
+
+ for each Class B token:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-E_{A}=\frac{\left(NV_{A}-1\right)}{P_{t}}
-\]
+\begin{align*}
+E_{A} & =\frac{\left(NV_{A}-1\right)\cdot P_{0}}{P_{t}}\\
+E_{B} & =\frac{\left(NV_{B}-1\right)\cdot P_{0}}{P_{t}}
+\end{align*}
 
 \end_inset
 
@@ -752,37 +757,24 @@ where,
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula $NV_{B}$
+\end_inset
+
+ is the Net Value of Class B token at current reset time,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ is the ETH/USD price at last reset point.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $P_{t}$
 \end_inset
 
  is the ETH/USD price at current reset point.
-\end_layout
-
-\begin_layout Standard
-The ETH amount 
-\begin_inset Formula $E_{B}$
-\end_inset
-
- of each Class B token is:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-E_{B}=\frac{\left(NV_{B}-1\right)}{P_{t}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where, 
-\begin_inset Formula $NV_{B}$
-\end_inset
-
- is the Net Value of Class B token at current reset time.
 \end_layout
 
 \begin_layout Paragraph
@@ -813,27 +805,12 @@ The ETH amount E(A) of each Class A token is:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-E_{A}=\frac{\left(NV_{A}^{-}-NV_{B}^{-}\right)}{P_{t}}
+E_{A}=\frac{\left(NV_{A}-NV_{B}\right)\cdot P_{0}}{P_{t}}
 \]
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-where, 
-\begin_inset Formula $NV_{A}^{-}$
-\end_inset
-
- is the Net Value of Class A token right before the Downward Reset,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $NV_{B}^{-}$
-\end_inset
-
- is the Net Value of Class B token right before the Downward Reset.
 \end_layout
 
 \begin_layout Standard
@@ -843,7 +820,7 @@ The post-reset amount of Class A and Class B tokens will be calculated as:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-Q_{t}^{+}=Q_{t}^{-}\cdot NV_{B}^{-}
+Q_{t}^{+}=Q_{t}^{-}\cdot NV_{B}
 \]
 
 \end_inset
