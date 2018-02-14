@@ -87,7 +87,27 @@ and Leveraged Investments
 \end_layout
 
 \begin_layout Author
-LI Lewei (
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LI Lewei
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\shape italic
+Email
+\shape default
+: 
 \begin_inset CommandInset href
 LatexCommand href
 name "lewei.li@finbook.co"
@@ -96,7 +116,30 @@ type "mailto:"
 
 \end_inset
 
-), CAO Yizhou (
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CAO Yizhou
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\shape italic
+Email
+\shape default
+:
 \begin_inset CommandInset href
 LatexCommand href
 name "yizhou.cao@finbook.co"
@@ -105,12 +148,31 @@ type "mailto:"
 
 \end_inset
 
-),
-\begin_inset Newline newline
+
+\end_layout
+
 \end_inset
 
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Prof.
- DAI Min(
+ DAI Min
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\shape italic
+Email
+\shape default
+: 
 \begin_inset CommandInset href
 LatexCommand href
 name "matdm@nus.edu.sg"
@@ -119,7 +181,52 @@ type "mailto:"
 
 \end_inset
 
-)
+.
+ Director, Centre for Quantitative Finance, National University of Singapore
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Finbook
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Finbook
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+National University of Sinagpore
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Abstract
