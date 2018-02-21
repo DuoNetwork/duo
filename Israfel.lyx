@@ -510,11 +510,167 @@ The Custodian smart contract performs multiple tasks that facilitate key
  mechanism of the system, including: creation and redemption of DUO tokens,
  safekeeping the underlying digital assets (e.g.
  ETH), calculation of tokens' net values, and execution of Reset events.
- In this paper, we will use ETH as the underlying asset.
+ 
 \end_layout
 
 \begin_layout Subsection
 Creation and Redemption
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Creation-and-Redemption"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Creation
+\end_layout
+
+\begin_layout Standard
+Dual-class tokens can be created by depositing underlying tokens to the
+ Custodian contract.
+ Upon receiving underlying tokens, the Custodian contract will return to
+ the sender certain amount of Class A and Class B tokens.
+ Such amount 
+\begin_inset Formula $C_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{B}$
+\end_inset
+
+ can be calculated by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+C_{B} & =\frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
+C_{A} & =C_{B}\cdot\alpha
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $M_{C}$
+\end_inset
+
+ is the amount of underlying tokens sent to the Custodian contract,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $c$
+\end_inset
+
+ is the processing fee of the smart contract,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a positive number for determine the ratio of A and B
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ is the recorded price of underlying token in USD at last Reset event.
+\end_layout
+
+\begin_layout Standard
+The deposited underlying tokens are kept by the Custodian contract, as collatera
+l of the Class A and Class B tokens issued by the contract.
+ Any user or member of the public can verify the collateral and tokens issued
+ through third party applications such as 
+\begin_inset CommandInset href
+LatexCommand href
+name "Etherscan.io"
+target "etherscan.io"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Redemption
+\end_layout
+
+\begin_layout Standard
+Holders of Class A and Class B tokens can withdraw deposited underlying
+ tokens at any time by performing a redemption.
+ To do this, the user will send certain amount of Class A and Class B tokens
+ to the Custodian contract.
+ The contract will deduct Class A and Class B tokens, and return return
+ to the sender certain amount of underlying tokens.
+ 
+\end_layout
+
+\begin_layout Standard
+The amount 
+\begin_inset Formula $R_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{B}$
+\end_inset
+
+ deducted by the contract is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+R & =\min\left\{ \frac{M_{A}}{\alpha},M_{B}\right\} \\
+R_{A} & =R\cdot\alpha\\
+R_{B} & =R
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $M_{A}$
+\end_inset
+
+ is the amount of Class A sent to the Custodian contract,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $M_{B}$
+\end_inset
+
+ is the amount of Class B sent to the Custodian contract.
+\end_layout
+
+\begin_layout Standard
+The amount 
+\begin_inset Formula $M_{R}$
+\end_inset
+
+ returned by the contract is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -523,15 +679,16 @@ Net Value
 
 \begin_layout Standard
 The net value of tokens are calculated based on the coupon rate, the elapsed
- time from last Reset event, and the latest ETH/USD price fed to the system.
+ time from last Reset event, and the latest underlying token price in USD
+ fed to the system.
  In particular:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-NV_{A} & =1+r\cdot t\\
-NV_{B} & =2\cdot\frac{P_{t}}{P_{0}}-NV_{A}
+V_{A}^{t} & =1+r\cdot t\\
+V_{B}^{t} & =\left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
 \end{align*}
 
 \end_inset
@@ -558,36 +715,21 @@ where,
 \begin_inset Formula $P_{t}$
 \end_inset
 
- is the current ETH/USD price,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $P_{0}$
-\end_inset
-
- is the recorded ETH/USD price at last Reset event.
+ is the current price of underlying token in USD.
 \end_layout
 
 \begin_layout Paragraph
-Creation
+Quantity
 \end_layout
 
 \begin_layout Standard
-Dual-class tokens can be created by depositing ETH tokens to the Custodian
- contract.
- Upon receiving ETH, the Custodian contract will return to the sender equivalent
- amount of Class A and Class B tokens.
- Such amount 
-\begin_inset Formula $N_{C}$
-\end_inset
-
- can be calculated by:
+Below holds in the system at all time
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-N_{C}=\frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{2}
+Q_{A}^{t}=Q_{B}^{t}\cdot\alpha
 \]
 
 \end_inset
@@ -597,61 +739,25 @@ N_{C}=\frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{2}
 
 \begin_layout Standard
 where, 
-\begin_inset Formula $M_{C}$
+\begin_inset Formula $Q_{A}^{t}$
 \end_inset
 
- is the amount of ETH sent to the Custodian contract,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $c$
+ and 
+\begin_inset Formula $Q_{B}^{t}$
 \end_inset
 
- is the processing fee of the smart contract.
-\end_layout
-
-\begin_layout Standard
-The deposited ETH are kept by the Custodian contract, as collateral of the
- Class A and Class B tokens issued by the contract.
- Any user or member of the public can verify the ETH collateral and tokens
- issued through third party applications such as 
-\begin_inset CommandInset href
-LatexCommand href
-name "Etherscan.io"
-target "etherscan.io"
-
-\end_inset
-
-.
+ are the total amount of Class A and Class B tokens.
 \end_layout
 
 \begin_layout Paragraph
-Redemption
-\end_layout
-
-\begin_layout Standard
-Holders of Class A and Class B tokens can withdraw deposited ETH at any
- time by performing a redemption.
- To do this, the user will send certain amount of Class A and Class B tokens
- to the Custodian contract.
- The contract will deduct equal amount of Class A and Class B tokens, and
- return return to the sender certain amount of ETH.
- 
-\end_layout
-
-\begin_layout Standard
-The amount 
-\begin_inset Formula $N_{R}$
-\end_inset
-
- deducted by the contract is:
+Implied Leverage Ratio
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-N_{R}=\min\left\{ N_{A},N_{B}\right\} 
-\]
+\begin{align*}
+L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
+\end{align*}
 
 \end_inset
 
@@ -659,32 +765,10 @@ N_{R}=\min\left\{ N_{A},N_{B}\right\}
 \end_layout
 
 \begin_layout Standard
-where, 
-\begin_inset Formula $N_{A}$
-\end_inset
-
- is the amount of Class A sent to the Custodian contract,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $N_{B}$
-\end_inset
-
- is the amount of Class B sent to the Custodian contract.
-\end_layout
-
-\begin_layout Standard
-The amount 
-\begin_inset Formula $M_{R}$
-\end_inset
-
- returned by the contract is:
-\end_layout
-
-\begin_layout Standard
+Note that at inception, above simply reduces to 
 \begin_inset Formula 
 \[
-M_{R}=\frac{N_{R}\cdot\left(1-c\right)\cdot2}{P_{0}}
+L_{B}^{0}=1+\alpha
 \]
 
 \end_inset
@@ -703,6 +787,7 @@ Simply put, the holders of Class B tokens borrow capital from the holders
  ratios.
  To reduce risk of both classes, a set of upward and downward reset clauses
  is imposed.
+ Resets preserves total value in the system.
 \end_layout
 
 \begin_layout Paragraph
@@ -710,15 +795,18 @@ Contingent Upward
 \end_layout
 
 \begin_layout Standard
-When ETH/USD price rises, the Class B token's leverage ratio reduces.
+When underlying token price rises, the Class B token's leverage ratio reduces.
  An Upward Reset is triggered when the Net Value of Class B token reaches
- upper limit 
+ upper limit
 \begin_inset Formula $\mathcal{H}_{B}$
 \end_inset
 
 .
- The reset will restore the leverage ratio to 200%, and the Net Value of
- both classes to 1 USD.
+ The reset will restore the leverage ratio to 
+\begin_inset Formula $1+\alpha$
+\end_inset
+
+, and the Net Value of both classes to 1 USD.
  By increasing Class B's leverage ratio, the structure retains attraction
  to leverage-seeking users.
 \end_layout
@@ -729,12 +817,12 @@ Upon Upward Reset, both classes' holders will receive certain amount of
 \end_layout
 
 \begin_layout Standard
-The ETH amount 
-\begin_inset Formula $E_{A}$
+The underlying token amount 
+\begin_inset Formula $U_{A}$
 \end_inset
 
  for each Class A token and 
-\begin_inset Formula $E_{B}$
+\begin_inset Formula $U_{B}$
 \end_inset
 
  for each Class B token:
@@ -743,8 +831,12 @@ The ETH amount
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-E_{A} & =\frac{\left(NV_{A}-1\right)}{P_{t}}\\
-E_{B} & =\frac{\left(NV_{B}-1\right)}{P_{t}}
+U_{A} & =\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}\\
+U_{B} & =\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}\\
+V_{A}^{t+} & =V_{A}^{0}=1\\
+V_{B}^{t+} & =V_{B}^{0}=1\\
+Q_{B}^{t+} & =Q_{B}^{t-}\\
+Q_{A}^{t+} & =Q_{A}^{t-}
 \end{align*}
 
 \end_inset
@@ -753,32 +845,20 @@ E_{B} & =\frac{\left(NV_{B}-1\right)}{P_{t}}
 \end_layout
 
 \begin_layout Standard
-where, 
-\begin_inset Formula $NV_{A}$
-\end_inset
-
- is the Net Value of Class A token at current reset time,
+Total value in the system is unchanged after reset:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $NV_{B}$
+\begin_inset Formula 
+\begin{align*}
+ & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+U_{B}\cdot P_{t}\cdot Q_{B}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left(V_{A}^{t-}-1\right)\cdot Q_{A}^{t-}+\left(V_{B}^{t-}-1\right)\cdot Q_{B}^{t-}+Q_{A}^{t-}\cdot1+Q_{B}^{t-}\cdot1\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
+\end{align*}
+
 \end_inset
 
- is the Net Value of Class B token at current reset time,
-\end_layout
 
-\begin_layout Standard
-\begin_inset Formula $P_{0}$
-\end_inset
-
- is the ETH/USD price at last reset point.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $P_{t}$
-\end_inset
-
- is the ETH/USD price at current reset point.
 \end_layout
 
 \begin_layout Paragraph
@@ -786,7 +866,7 @@ Contingent Downward
 \end_layout
 
 \begin_layout Standard
-When ETH/USD price falls, the Class B token's leverage ratio increases.
+When underlying token price falls, the Class B token's leverage ratio increases.
  A Downward Reset is triggered when the Net Value of Class B token reaches
  lower limit 
 \begin_inset Formula $h$
@@ -800,8 +880,9 @@ When ETH/USD price falls, the Class B token's leverage ratio increases.
 \end_layout
 
 \begin_layout Standard
-Class A holder will receive certain amount of ETH from the Custodian contract.
- Additionally, A Downward Reset will reduce the total supply of Class A
+Class A holder will receive certain amount of underlying token from the
+ Custodian contract.
+ Additionally, a Downward Reset will reduce the total supply of Class A
  and Class B tokens by roughly 
 \begin_inset Formula $1-h$
 \end_inset
@@ -811,14 +892,22 @@ Class A holder will receive certain amount of ETH from the Custodian contract.
 \end_layout
 
 \begin_layout Standard
-The ETH amount E(A) of each Class A token is:
+The underlying token amount 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+ of each Class A token is:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-E_{A}=\frac{\left(NV_{A}-NV_{B}\right)}{P_{t}}
-\]
+\begin{align*}
+D_{A} & =\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}\\
+Q_{B}^{t+} & =Q_{B}^{t-}\cdot V_{B}^{t-}\\
+Q_{A}^{t+} & =Q_{B}^{t+}\cdot\alpha\\
+V_{A}^{t+} & =V_{A}^{0}=1\\
+V_{B}^{t+} & =V_{B}^{0}=1
+\end{align*}
 
 \end_inset
 
@@ -826,14 +915,17 @@ E_{A}=\frac{\left(NV_{A}-NV_{B}\right)}{P_{t}}
 \end_layout
 
 \begin_layout Standard
-The post-reset amount of Class A and Class B tokens will be calculated as:
+Total value in the system is unchanged after reset:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-Q_{t}^{+}=Q_{t}^{-}\cdot NV_{B}
-\]
+\begin{align*}
+ & D_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left(V_{A}^{t-}-V_{B}^{t-}\right)\cdot Q_{A}^{t-}+Q_{B}^{t+}\cdot\alpha\cdot1+Q_{B}^{t+}\cdot1\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}-V_{B}^{t-}\cdot Q_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
+\end{align*}
 
 \end_inset
 
@@ -841,18 +933,11 @@ Q_{t}^{+}=Q_{t}^{-}\cdot NV_{B}
 \end_layout
 
 \begin_layout Standard
-where, 
-\begin_inset Formula $Q_{t}^{+}$
+Note above used the fact 
+\begin_inset Formula $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$
 \end_inset
 
-is the amount of Class A and Class B tokens right after the Downward Reset,
-\end_layout
 
-\begin_layout Standard
-\begin_inset Formula $Q_{t}^{-}$
-\end_inset
-
-is the amount of Class A and Class B tokens right before the Downward Reset.
 \end_layout
 
 \begin_layout Paragraph
@@ -861,7 +946,7 @@ Periodic
 
 \begin_layout Standard
 When a given time period has passed from the last reset time, 
-\begin_inset Formula $NV_{A}$
+\begin_inset Formula $V_{A}^{t-}$
 \end_inset
 
  grows to upper limit 
@@ -871,7 +956,7 @@ When a given time period has passed from the last reset time,
 , a periodic reset is triggered to restore the leverage ratio and net value
  of both classes.
  If 
-\begin_inset Formula $NV_{B}$
+\begin_inset Formula $V_{B}^{t-}$
 \end_inset
 
  is less than 1, reset will be the same as the Contingent Downward reset.
@@ -886,8 +971,89 @@ Market Mechanism
 Premium and Discount
 \end_layout
 
+\begin_layout Standard
+Like all fixed income products, Class A is expected to trade on premium
+ or at discount with respect to its net values, depending on market condition.
+ When Class A trades on premium, that generally indicates market has a higher
+ demand for fixed income and less for leverage and thus investor is actually
+ paying extra for Class A.
+ On the contrary, when Class A trades at discount, that generally means
+ market has higher demand for leverage and less for fixed income and thus
+ investor need to be given more incentives to buy and hold CLass A.
+ Whether Class A trades on premium or at discount has less to do with market
+ sentiment but more to do with cost of funding or required rate of return,
+ as for all fixed income products.
+ Class A reflects market cost of funding in its price premium or discount.
+ As time draws closer to period resets or market level is approaching contigent
+ resets, Claass A would trade close to its net value as that is what investors
+ will receive after resets.
+ 
+\end_layout
+
 \begin_layout Subsection
 Arbitrage and Market Equilibrium
+\end_layout
+
+\begin_layout Standard
+By definition, DUO is equivalent to the underlying, ETH in this case.
+ Thus, its price SHOULD be the same as ETH.
+ On the other hand, DUO is not traded directly in the market but split as
+ equal amounts of Class A and Class B.
+ As discussed in previous section, Class A can trade on premium or at discount
+ depending on market condition.
+ The same applies for Class B as market fluctates.
+ When the combined value of Class A and Class B does not equal ETH, arbitrage
+ opportunity exists.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Arbitrage via Creation
+\end_layout
+
+\begin_layout Standard
+When both Class A and Class B trades on premium, 
+\end_layout
+
+\begin_layout Enumerate
+Sell 1 unit of Class A and 1 unit of Class B and Buy 1 unit of underlying
+ token
+\end_layout
+
+\begin_layout Enumerate
+Send 1 unit of underlying token to smart contract and receive 1 unit of
+ Class A and 1 unit of Class B
+\end_layout
+
+\begin_layout Paragraph
+Arbitrage via Redemption
+\end_layout
+
+\begin_layout Standard
+When both Class A and Class B trades at discount, 
+\end_layout
+
+\begin_layout Enumerate
+Buy 1 unit of Class A and 1 unit of Class B and Sell 1 unit of underlying
+ token
+\end_layout
+
+\begin_layout Enumerate
+Send 1 unit of Class A and 1 unit of Class B to smart contract and receive
+ 1 unit of underlying token
+\end_layout
+
+\begin_layout Standard
+Many other factors also determine whether above arbtrage strategy can be
+ successfully exeucted, such as bid ask spread of all the 3 components,
+ Creation and Redemption cost as mentioned in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Creation-and-Redemption"
+
+\end_inset
+
+, abilility to short sell the required components.
 \end_layout
 
 \begin_layout Subsection
@@ -898,16 +1064,48 @@ Scenario Analysis
 Further Development
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+This paper has outlined the main design and market mechanism for the structure.
+ Further study is still requred for below aspects.
+\end_layout
+
+\begin_layout Paragraph
 Base Rate Discovery
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+Arbitrary rate can be used for Class A coupon and it will be traded on premiumn
+ or at discount based on the market required rate of return, However, it
+ is desirable that Class A trades close to its net value, which means the
+ coupon rate for Class A should be chosen close to market required rate
+ of return.
+ Currently there are a few rates in the market, such as USD borrowing cost
+ in a few centralized exchanges ranging from 20% to over 40% per annun.
+\end_layout
+
+\begin_layout Paragraph
 Optimal Reset Threshold and Frequency
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+It is important to keep leverage for Class B within certain range: not too
+ high so as to protect Class A holders from sudden price drop and not too
+ low so as to keep Class B attractive to leveraged investors.
+ However, it is undesirable that resets happen too frequent.
+ 
+\end_layout
+
+\begin_layout Paragraph
 Other Coin Based Structure
+\end_layout
+
+\begin_layout Standard
+While the structure discussed in this paper is indepenent to the underlying
+ cryptocurrency, the liquidity and popularity of the underlying does impact
+ the viability of the structure as market arbitrage is important to ensure
+ the structure trades as designed.
+ In this paper, ETH is used as example, but other popular ERC20 coins such
+ as EOS, QTUM can also be considered.
 \end_layout
 
 \begin_layout Standard
