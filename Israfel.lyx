@@ -26,7 +26,7 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize a4paper
@@ -305,70 +305,6 @@ Keywords:
 \shape default
 stablecoin, dual-class token, fixed income crypto asset, leveraged return
  crypto asset, smart contract, Ethereum, decentralized asset management
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -546,10 +482,12 @@ Dual-class tokens can be created by depositing underlying tokens to the
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-C_{B} & =\frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
-C_{A} & =C_{B}\cdot\alpha
-\end{align*}
+\begin{equation}
+\begin{array}{cc}
+C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
+C_{A}= & C_{B}\cdot\alpha
+\end{array}\label{eq:creation}
+\end{equation}
 
 \end_inset
 
@@ -664,9 +602,9 @@ The amount
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}
-\]
+\begin{equation}
+M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\label{eq:redemption}
+\end{equation}
 
 \end_inset
 
@@ -995,16 +933,77 @@ Arbitrage and Market Equilibrium
 \end_layout
 
 \begin_layout Standard
-By definition, DUO is equivalent to the underlying, ETH in this case.
- Thus, its price SHOULD be the same as ETH.
- On the other hand, DUO is not traded directly in the market but split as
- equal amounts of Class A and Class B.
- As discussed in previous section, Class A can trade on premium or at discount
- depending on market condition.
- The same applies for Class B as market fluctates.
- When the combined value of Class A and Class B does not equal ETH, arbitrage
- opportunity exists.
- 
+The dual class tokens are two-way fungible to the underlying token (i.e.
+ ETH).
+ Thus, a price parity shall hold as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $P_{A}^{t}$
+\end_inset
+
+ is the current price of Class A in USD,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{B}^{t}$
+\end_inset
+
+ is the current price of Class B in USD.
+\end_layout
+
+\begin_layout Standard
+Along with equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:creation"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:redemption"
+
+\end_inset
+
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Creation-and-Redemption"
+
+\end_inset
+
+, below should hold:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On open market, arbitrage opportunity exists when Class A and Class B tokens
+ trade away from their net values and above equation is violated on either
+ side.
 \end_layout
 
 \begin_layout Paragraph
@@ -1012,17 +1011,83 @@ Arbitrage via Creation
 \end_layout
 
 \begin_layout Standard
-When both Class A and Class B trades on premium, 
+when combined market price of Class A and Class B tokens are higher than
+ their combined net values, i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+an user can exploit the profit by creating more DUO tokens:
 \end_layout
 
 \begin_layout Enumerate
-Sell 1 unit of Class A and 1 unit of Class B and Buy 1 unit of underlying
- token
+Buy 
+\begin_inset Formula $\frac{1}{1-c}$
+\end_inset
+
+ underlying tokens from open market for 
+\begin_inset Formula $P_{t}\cdot\frac{1}{1-c}$
+\end_inset
+
+ USD equavilent.
 \end_layout
 
 \begin_layout Enumerate
-Send 1 unit of underlying token to smart contract and receive 1 unit of
- Class A and 1 unit of Class B
+Send the underlying tokens to the Custodian contract.
+\end_layout
+
+\begin_layout Enumerate
+Based on equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:creation"
+
+\end_inset
+
+, receive 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
+\end_inset
+
+ Class A and 
+\begin_inset Formula $P_{0}\cdot\frac{1}{1+\alpha}$
+\end_inset
+
+ Class B tokens.
+\end_layout
+
+\begin_layout Enumerate
+Sell Class A and Class B tokens on open market for 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
+\end_inset
+
+ USD equavilent.
+\end_layout
+
+\begin_layout Standard
+The expected payoff of above operations is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}\\
+= & P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)\\
+> & 0
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -1030,30 +1095,89 @@ Arbitrage via Redemption
 \end_layout
 
 \begin_layout Standard
-When both Class A and Class B trades at discount, 
+when combined market price of Class A and Class B tokens are lower than
+ their combined net values, i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+similar arbitrage profit can be expoited by perform redemptions:
 \end_layout
 
 \begin_layout Enumerate
-Buy 1 unit of Class A and 1 unit of Class B and Sell 1 unit of underlying
- token
+Buy 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
+\end_inset
+
+ Class A and 
+\begin_inset Formula $P_{0}\cdot\frac{1}{1+\alpha}$
+\end_inset
+
+ Class B tokens from open market for 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
+\end_inset
+
+ USD equavilent.
 \end_layout
 
 \begin_layout Enumerate
-Send 1 unit of Class A and 1 unit of Class B to smart contract and receive
- 1 unit of underlying token
+Send Class A and Class B tokens to the Custodian contract
+\end_layout
+
+\begin_layout Enumerate
+Based on equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:redemption"
+
+\end_inset
+
+, receive 
+\begin_inset Formula $1-c$
+\end_inset
+
+ undelrying tokens.
+\end_layout
+
+\begin_layout Enumerate
+Sell underlying tokens on open market for 
+\begin_inset Formula $P_{t}\cdot\left(1-c\right)$
+\end_inset
+
+ USD equavilent.
+\end_layout
+
+\begin_layout Standard
+The expected payoff of above operations is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}\\
+= & P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)\\
+> & 0
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Many other factors also determine whether above arbtrage strategy can be
- successfully exeucted, such as bid ask spread of all the 3 components,
- Creation and Redemption cost as mentioned in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Creation-and-Redemption"
-
-\end_inset
-
-, abilility to short sell the required components.
+ successfully exeucted, such as bid ask spread of all the 3 components and
+ abilility to short sell the required components.
 \end_layout
 
 \begin_layout Subsection
