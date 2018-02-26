@@ -254,7 +254,7 @@ FinBook
 \begin_inset Text
 
 \begin_layout Plain Layout
-National University of Sinagpore
+National University of Singapore
 \end_layout
 
 \end_inset
@@ -369,7 +369,7 @@ In fiat market, risk segmentation exists in every level of market.
 Although most of crypto assets are considered highly speculative, there
  still exist different segments of risk appetites.
  The existence of margin trading in exchanges like BitFinex and Huobi Pro
- demostrates the need of leverage from aggresive crypto investors.
+ demonstrates the need of leverage from aggressive crypto investors.
  Similarly, safe haven assets providing low volatility and stable income
  will be appealing to institutional players, short-term pessimistic investors
  and ICO project teams.
@@ -383,7 +383,7 @@ The price volatility cannot be eliminated, but can be transferred.
  leverage with limited assets, while a risk-averse user can avoid unwanted
  price fluctuations by entering the other side of the contract.
  The financial market has created many products satisfying different risk
- segements, some of which can be very practical for crypto market participants.
+ segments, some of which can be very practical for crypto market participants.
 \end_layout
 
 \begin_layout Subsection
@@ -440,7 +440,7 @@ key "DM2018"
 
 \begin_layout Standard
 We are attracted by Chinese dual-purpose fund for three reasons: (i) both
- the income and leveraged shares answer unfufiled demands of cryptocurrency
+ the income and leveraged shares answer unfulfilled demands of cryptocurrency
  users; (ii) the market mechanism, pricing formula and arbitrage method
  are proven working in real market; and (iii) the structure can be efficiently
  implemented by Smart Contracts.
@@ -859,7 +859,7 @@ When underlying token price falls, the Class B token's leverage ratio increases.
 .
  Similar to an Upward Reset, a Downward Reset restores the leverage ratio
  and Net Value of both classes.
- By reducing leverage ratio and restoring Net Value, the structure strengtherns
+ By reducing leverage ratio and restoring Net Value, the structure strengthens
  principal protection to Class A holders.
 \end_layout
 
@@ -947,6 +947,363 @@ When a given time period has passed from the last reset time,
  Otherwise, reset will be the same as Contingent Upward reset.
 \end_layout
 
+\begin_layout Subsection
+ETH Examples
+\end_layout
+
+\begin_layout Standard
+In all examples in this section, we will use below parameters:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\alpha & =1\\
+r & =0.05\%\\
+h & =0.25\\
+\mathcal{H}_{A} & =1.05\\
+\mathcal{H}_{B} & =2
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we will also use below assumptions:
+\end_layout
+
+\begin_layout Enumerate
+The structure starts with 100 ETH.
+\end_layout
+
+\begin_layout Enumerate
+Resets are only done daily based on the daily price in example.
+\end_layout
+
+\begin_layout Enumerate
+Reinvestment of ETH payout from resets are not considered.
+\end_layout
+
+\begin_layout Paragraph
+1 Sep 2017 to 31 Jan 2018 
+\end_layout
+
+\begin_layout Standard
+In this period, ETH started from 391.42 USD to low of 223.14 USD and high
+ of 1359.48 and ended at 1111.31.
+\end_layout
+
+\begin_layout Standard
+At inception, 19571 
+\begin_inset Formula $\left(Q_{A}\right)$
+\end_inset
+
+ Class A and 19571 
+\begin_inset Formula $\left(Q_{B}\right)$
+\end_inset
+
+ Class B are issued from the 100 ETH, total value in the system is at 39142
+ USD.
+\end_layout
+
+\begin_layout Standard
+Following resets are triggered:
+\end_layout
+
+\begin_layout Enumerate
+14 Sep 2017, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 0.133656 and triggered 
+\series bold
+Contingent Downward
+\series default
+ reset.
+ 76.55473245 ETH is paid out to Class A holders.
+ 
+\begin_inset Formula $Q_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{B}$
+\end_inset
+
+ are reduced to 2615.7885.
+ Remaining System value is at 5231.58 USD.
+\end_layout
+
+\begin_layout Enumerate
+13 Oct 2017, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.004502 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.11260557 ETH is paid out to Class A holders and 7.80085959 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 5231.58 USD.
+\end_layout
+
+\begin_layout Enumerate
+11 Dec 2017, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.018269 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.15033560 ETH is paid out to Class A holders and 5.18922264 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 5231.58 USD.
+\end_layout
+
+\begin_layout Enumerate
+18 Dec 2017, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.059057 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.01164806 ETH is paid out to Class A holders and 3.52456103 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 5231.58 USD.
+\end_layout
+
+\begin_layout Enumerate
+9 Jan 2018, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.269551 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.02231832 ETH is paid out to Class A holders and 2.57584001 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 5231.58 USD.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_Contingent_TotalValue.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Total Values
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_Contingent_NetValue.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Net Values
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Periodic Reset
+\end_layout
+
+\begin_layout Standard
+Due to the huge price volatility in ETH, we are unable to find a recent
+ time period where 
+\series bold
+Periodic
+\series default
+ reset can be triggered, based on the parameter we have set, i.e.
+ 100 days without any 
+\series bold
+Contingent
+\series default
+ resets being triggered.
+\end_layout
+
+\begin_layout Standard
+Thus, to illustrate Periodic reset, we will use a fictitious example where
+ ETH price is kept constant at 391.42 in above period.
+ In such case, Class A continue to get daily income while Class B pays out
+ interest without getting any return from the underlying.
+\end_layout
+
+\begin_layout Standard
+At inception, 19571 
+\begin_inset Formula $\left(Q_{A}\right)$
+\end_inset
+
+ Class A and 19571 
+\begin_inset Formula $\left(Q_{B}\right)$
+\end_inset
+
+ Class B are issued from the 100 ETH, total value in the system is at 39142
+ USD.
+\end_layout
+
+\begin_layout Standard
+Only one reset is triggered:
+\end_layout
+
+\begin_layout Enumerate
+10 Dec 2017, 
+\begin_inset Formula $V_{A}$
+\end_inset
+
+ is 1.05 and triggered 
+\series bold
+Period
+\series default
+ reset.
+ 5 ETH (valued at 1957.1 USD fictitiously) is paid out to Class A holders.
+ 
+\begin_inset Formula $Q_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{B}$
+\end_inset
+
+ are reduced to 18592.45.
+ Remaining System value is at 37184.9 USD.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_Periodic_TotalValue.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Total Values
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_Periodic_NetValue.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Net Values
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Market Mechanism
 \end_layout
@@ -973,7 +1330,7 @@ Like all fixed income products, Class A is expected to trade on premium
  In an orderly market, Class A's market price can be used to derive the
  current market cost of funding.
  As net values draws closer to resets, Class A might trade closer to its
- net value as trader start exploiting arbitrage oppournities.
+ net value as trader start exploiting arbitrage opportunities.
 \end_layout
 
 \begin_layout Subsection
@@ -1087,7 +1444,7 @@ Buy
 \begin_inset Formula $P_{t}\cdot\frac{1}{1-c}$
 \end_inset
 
- USD equavilent.
+ USD equivalent.
 \end_layout
 
 \begin_layout Enumerate
@@ -1118,7 +1475,7 @@ Sell Class A and Class B tokens on open market for
 \begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
 \end_inset
 
- USD equavilent.
+ USD equivalent.
 \end_layout
 
 \begin_layout Standard
@@ -1159,7 +1516,7 @@ when combined market price of Class A and Class B tokens are lower than
 \end_layout
 
 \begin_layout Standard
-similar arbitrage profit can be expoited by perform redemptions:
+similar arbitrage profit can be exploited by perform redemption:
 \end_layout
 
 \begin_layout Enumerate
@@ -1175,7 +1532,7 @@ Buy
 \begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
 \end_inset
 
- USD equavilent.
+ USD equivalent.
 \end_layout
 
 \begin_layout Enumerate
@@ -1194,7 +1551,7 @@ reference "eq:redemption"
 \begin_inset Formula $1-c$
 \end_inset
 
- undelrying tokens.
+ underlying tokens.
 \end_layout
 
 \begin_layout Enumerate
@@ -1202,7 +1559,7 @@ Sell underlying tokens on open market for
 \begin_inset Formula $P_{t}\cdot\left(1-c\right)$
 \end_inset
 
- USD equavilent.
+ USD equivalent.
 \end_layout
 
 \begin_layout Standard
@@ -1223,9 +1580,9 @@ The expected payoff of above operations is:
 \end_layout
 
 \begin_layout Standard
-Many other factors also determine whether above arbtrage strategy can be
- successfully exeucted, such as bid ask spread of all the 3 components and
- abilility to short sell the required components.
+Many other factors also determine whether above arbitrage strategy can be
+ successfully executed, such as bid ask spread of all the 3 components and
+ ability to short sell the required components.
 \end_layout
 
 \begin_layout Subsection
@@ -1247,7 +1604,7 @@ Base Rate Discovery
 \end_layout
 
 \begin_layout Standard
-Arbitrary rate can be used for Class A coupon and it will be traded on premiumn
+Arbitrary rate can be used for Class A coupon and it will be traded on premium
  or at discount based on the market required rate of return.
  However, it is desirable that Class A trades close to its net value, which
  means the coupon rate for Class A should be chosen close to the market
@@ -1314,13 +1671,13 @@ There are two main parameters to be determined, the ratio between Class
 \begin_layout Standard
 We observed that cryptocurrencies have considerably higher volatility than
  stock market indices.
- A series of backtestings and Monte Carlo simulations will be performed
+ A series of back testings and Monte Carlo simulations will be performed
  to investigate the optimal parameters for dual class token structures.
  
 \end_layout
 
 \begin_layout Subsubsection*
-Other Coin Underlyings
+Other Coin Underlying
 \end_layout
 
 \begin_layout Standard
@@ -1330,6 +1687,17 @@ While the structure discussed in this paper is independent to the underlying
  the structure trades as designed.
  In this paper, ETH is used as example, but other popular ERC20 coins such
  as EOS, ADA can also be considered.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
 \end_layout
 
 \begin_layout Standard
