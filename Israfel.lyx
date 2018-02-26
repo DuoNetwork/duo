@@ -986,25 +986,25 @@ Resets are only done daily based on the daily price in example.
 Reinvestment of ETH payout from resets are not considered.
 \end_layout
 
-\begin_layout Paragraph
-1 Sep 2017 to 31 Jan 2018 
+\begin_layout Subsubsection
+1 Oct 2017 to 25 Feb 2018 Overall
 \end_layout
 
 \begin_layout Standard
-In this period, ETH started from 391.42 USD to low of 223.14 USD and high
- of 1359.48 and ended at 1111.31.
+In this period, ETH started from 303.95 USD to low of 284.92 USD and high
+ of 1359.48 and ended at 840.28.
 \end_layout
 
 \begin_layout Standard
-At inception, 19571 
+At inception, 15197.5 
 \begin_inset Formula $\left(Q_{A}\right)$
 \end_inset
 
- Class A and 19571 
+ Class A and 15197.5 
 \begin_inset Formula $\left(Q_{B}\right)$
 \end_inset
 
- Class B are issued from the 100 ETH, total value in the system is at 39142
+ Class B are issued from the 100 ETH, total value in the system is at 30395
  USD.
 \end_layout
 
@@ -1013,16 +1013,58 @@ Following resets are triggered:
 \end_layout
 
 \begin_layout Enumerate
-14 Sep 2017, 
+24 Nov 2017, 
 \begin_inset Formula $V_{B}$
 \end_inset
 
- is 0.133656 and triggered 
+ is 2.0684 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.87224986 ETH is paid out to Class A holders and 34.51664966 ETH
+ is paid out to Class B holders .
+ Remaining System value is at 30395 USD.
+\end_layout
+
+\begin_layout Enumerate
+17 Dec 2017, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.0398 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.24351235 ETH is paid out to Class A holders and 22.01761391 ETH
+ is paid out to Class B holders .
+ Remaining System value is at 30395 USD.
+\end_layout
+
+\begin_layout Enumerate
+7 Jan 2018, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.1043 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 0.14276336 ETH is paid out to Class A holders and 15.01418916 ETH
+ is paid out to Class B holders .
+ Remaining System value is at 30395 USD.
+\end_layout
+
+\begin_layout Enumerate
+5 Feb 2018, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 0.2292 and triggered 
 \series bold
 Contingent Downward
 \series default
  reset.
- 76.55473245 ETH is paid out to Class A holders.
+ 17.16982503 ETH is paid out to Class A holders.
  
 \begin_inset Formula $Q_{A}$
 \end_inset
@@ -1031,64 +1073,8 @@ Contingent Downward
 \begin_inset Formula $Q_{B}$
 \end_inset
 
- are reduced to 2615.7885.
- Remaining System value is at 5231.58 USD.
-\end_layout
-
-\begin_layout Enumerate
-13 Oct 2017, 
-\begin_inset Formula $V_{B}$
-\end_inset
-
- is 2.004502 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 0.11260557 ETH is paid out to Class A holders and 7.80085959 ETH is
- paid out to Class B holders .
- Remaining System value is at 5231.58 USD.
-\end_layout
-
-\begin_layout Enumerate
-11 Dec 2017, 
-\begin_inset Formula $V_{B}$
-\end_inset
-
- is 2.018269 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 0.15033560 ETH is paid out to Class A holders and 5.18922264 ETH is
- paid out to Class B holders .
- Remaining System value is at 5231.58 USD.
-\end_layout
-
-\begin_layout Enumerate
-18 Dec 2017, 
-\begin_inset Formula $V_{B}$
-\end_inset
-
- is 2.059057 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 0.01164806 ETH is paid out to Class A holders and 3.52456103 ETH is
- paid out to Class B holders .
- Remaining System value is at 5231.58 USD.
-\end_layout
-
-\begin_layout Enumerate
-9 Jan 2018, 
-\begin_inset Formula $V_{B}$
-\end_inset
-
- is 2.269551 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 0.02231832 ETH is paid out to Class A holders and 2.57584001 ETH is
- paid out to Class B holders .
- Remaining System value is at 5231.58 USD.
+ are reduced to 3843.46177002.
+ Remaining System value is at 6966.92 USD.
 \end_layout
 
 \begin_layout Standard
@@ -1102,7 +1088,7 @@ status collapsed
 \noindent
 \align center
 \begin_inset Graphics
-	filename 2.4_Contingent_TotalValue.png
+	filename 2.4_TotalValue.png
 	scale 90
 
 \end_inset
@@ -1142,7 +1128,7 @@ status collapsed
 \noindent
 \align center
 \begin_inset Graphics
-	filename 2.4_Contingent_NetValue.png
+	filename 2.4_NetValue.png
 	scale 90
 
 \end_inset
@@ -1167,69 +1153,8 @@ Net Values
 
 \end_layout
 
-\begin_layout Paragraph
-Periodic Reset
-\end_layout
-
-\begin_layout Standard
-Due to the huge price volatility in ETH, we are unable to find a recent
- time period where 
-\series bold
-Periodic
-\series default
- reset can be triggered, based on the parameter we have set, i.e.
- 100 days without any 
-\series bold
-Contingent
-\series default
- resets being triggered.
-\end_layout
-
-\begin_layout Standard
-Thus, to illustrate Periodic reset, we will use a fictitious example where
- ETH price is kept constant at 391.42 in above period.
- In such case, Class A continue to get daily income while Class B pays out
- interest without getting any return from the underlying.
-\end_layout
-
-\begin_layout Standard
-At inception, 19571 
-\begin_inset Formula $\left(Q_{A}\right)$
-\end_inset
-
- Class A and 19571 
-\begin_inset Formula $\left(Q_{B}\right)$
-\end_inset
-
- Class B are issued from the 100 ETH, total value in the system is at 39142
- USD.
-\end_layout
-
-\begin_layout Standard
-Only one reset is triggered:
-\end_layout
-
-\begin_layout Enumerate
-10 Dec 2017, 
-\begin_inset Formula $V_{A}$
-\end_inset
-
- is 1.05 and triggered 
-\series bold
-Period
-\series default
- reset.
- 5 ETH (valued at 1957.1 USD fictitiously) is paid out to Class A holders.
- 
-\begin_inset Formula $Q_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $Q_{B}$
-\end_inset
-
- are reduced to 18592.45.
- Remaining System value is at 37184.9 USD.
+\begin_layout Subsubsection
+1 Oct 2017 - 23 Nov 2017 No Reset
 \end_layout
 
 \begin_layout Standard
@@ -1243,7 +1168,7 @@ status collapsed
 \noindent
 \align center
 \begin_inset Graphics
-	filename 2.4_Periodic_TotalValue.png
+	filename 2.4_No_Reset_TotalValue.png
 	scale 90
 
 \end_inset
@@ -1268,6 +1193,10 @@ Total Values
 
 \end_layout
 
+\begin_layout Subsubsection
+24 Nov 2017 - 6 Jan 2017 Contingent Upward
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement H
@@ -1279,7 +1208,7 @@ status collapsed
 \noindent
 \align center
 \begin_inset Graphics
-	filename 2.4_Periodic_NetValue.png
+	filename 2.4_Upward_TotalValue.png
 	scale 90
 
 \end_inset
@@ -1291,7 +1220,47 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Net Values
+Total Values
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+7 Jan Nov 2017 - 25 Feb 2017 Contingent Downward
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_Downward_TotalValue.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Total Values
 \end_layout
 
 \end_inset
@@ -1583,10 +1552,6 @@ The expected payoff of above operations is:
 Many other factors also determine whether above arbitrage strategy can be
  successfully executed, such as bid ask spread of all the 3 components and
  ability to short sell the required components.
-\end_layout
-
-\begin_layout Subsection
-Scenario Analysis
 \end_layout
 
 \begin_layout Section
