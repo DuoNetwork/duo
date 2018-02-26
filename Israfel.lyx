@@ -971,41 +971,44 @@ h & =0.25\\
 \end_layout
 
 \begin_layout Standard
-we will also use below assumptions:
-\end_layout
-
-\begin_layout Enumerate
-The structure starts with 100 ETH.
-\end_layout
-
-\begin_layout Enumerate
-Resets are only done daily based on the daily price in example.
-\end_layout
-
-\begin_layout Enumerate
-Reinvestment of ETH payout from resets are not considered.
+ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
+ In this period, ETH started from 303.95 USD to low of 284.92 USD and high
+ of 1359.48 and ended at 840.28.
+ It is assumed resets are only done 
+\series bold
+daily
+\series default
+.
 \end_layout
 
 \begin_layout Subsubsection
-1 Oct 2017 to 25 Feb 2018 Overall
+Overall Market
 \end_layout
 
 \begin_layout Standard
-In this period, ETH started from 303.95 USD to low of 284.92 USD and high
- of 1359.48 and ended at 840.28.
+In this section, we will examine market total value in the system.
+ Additional assumption for this section: 
+\end_layout
+
+\begin_layout Itemize
+The structure starts with 100000 ETH for entire market.
+\end_layout
+
+\begin_layout Itemize
+Reinvestment of ETH payout from resets are not considered.
 \end_layout
 
 \begin_layout Standard
-At inception, 15197.5 
+At inception, 15197500 
 \begin_inset Formula $\left(Q_{A}\right)$
 \end_inset
 
- Class A and 15197.5 
+ Class A and 15197500 
 \begin_inset Formula $\left(Q_{B}\right)$
 \end_inset
 
- Class B are issued from the 100 ETH, total value in the system is at 30395
- USD.
+ Class B are issued from the 100000 ETH, total value in the system is at
+ 30395000 USD.
 \end_layout
 
 \begin_layout Standard
@@ -1021,9 +1024,9 @@ Following resets are triggered:
 \series bold
 Contingent Upward
 \series default
- reset, 0.87224986 ETH is paid out to Class A holders and 34.51664966 ETH
- is paid out to Class B holders .
- Remaining System value is at 30395 USD.
+ reset, 872.2499 ETH is paid out to Class A holders and 34516.6497 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 30395000 USD.
 \end_layout
 
 \begin_layout Enumerate
@@ -1035,9 +1038,9 @@ Contingent Upward
 \series bold
 Contingent Upward
 \series default
- reset, 0.24351235 ETH is paid out to Class A holders and 22.01761391 ETH
- is paid out to Class B holders .
- Remaining System value is at 30395 USD.
+ reset, 243.5124 ETH is paid out to Class A holders and 22017.6139 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 30395000 USD.
 \end_layout
 
 \begin_layout Enumerate
@@ -1049,9 +1052,9 @@ Contingent Upward
 \series bold
 Contingent Upward
 \series default
- reset, 0.14276336 ETH is paid out to Class A holders and 15.01418916 ETH
- is paid out to Class B holders .
- Remaining System value is at 30395 USD.
+ reset, 142.7634 ETH is paid out to Class A holders and 15014.1892 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 30395000 USD.
 \end_layout
 
 \begin_layout Enumerate
@@ -1064,7 +1067,7 @@ Contingent Upward
 Contingent Downward
 \series default
  reset.
- 17.16982503 ETH is paid out to Class A holders.
+ 17169.8250 ETH is paid out to Class A holders.
  
 \begin_inset Formula $Q_{A}$
 \end_inset
@@ -1073,8 +1076,8 @@ Contingent Downward
 \begin_inset Formula $Q_{B}$
 \end_inset
 
- are reduced to 3843.46177002.
- Remaining System value is at 6966.92 USD.
+ are reduced to 3483461.77.
+ Remaining System value is at 6966923.54USD.
 \end_layout
 
 \begin_layout Standard
@@ -1153,8 +1156,8 @@ Net Values
 
 \end_layout
 
-\begin_layout Subsubsection
-1 Oct 2017 - 23 Nov 2017 No Reset
+\begin_layout Paragraph
+No Reset Period
 \end_layout
 
 \begin_layout Standard
@@ -1180,7 +1183,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Total Values
+1 Oct 2017 - 23 Nov 2017 Total Values
 \end_layout
 
 \end_inset
@@ -1193,8 +1196,8 @@ Total Values
 
 \end_layout
 
-\begin_layout Subsubsection
-24 Nov 2017 - 6 Jan 2017 Contingent Upward
+\begin_layout Paragraph
+Contingent Upward Period
 \end_layout
 
 \begin_layout Standard
@@ -1220,7 +1223,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Total Values
+24 Nov 2017 - 6 Jan 2017 Total Values
 \end_layout
 
 \end_inset
@@ -1233,8 +1236,8 @@ Total Values
 
 \end_layout
 
-\begin_layout Subsubsection
-7 Jan Nov 2017 - 25 Feb 2017 Contingent Downward
+\begin_layout Paragraph
+Contingent Downward Period
 \end_layout
 
 \begin_layout Standard
@@ -1260,7 +1263,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Total Values
+7 Jan Nov 2017 - 25 Feb 2017 Total Values
 \end_layout
 
 \end_inset
@@ -1271,6 +1274,105 @@ Total Values
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Individual Class Return
+\end_layout
+
+\begin_layout Paragraph
+Class A
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_A_Return.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Class A Return
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Class B
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2.4_B_Return.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Class B Return
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Note
+\end_layout
+
+\begin_layout Standard
+In order to archieve above return, ETH payout from resets need to be fully
+ converted back to the correct class token.
+ For example, during 24 Nov 2017 
+\series bold
+Contingent Upward
+\series default
+ reset, all ETH received by Class A holder need to convert all their ETH
+ into Class A token.
 \end_layout
 
 \begin_layout Section
