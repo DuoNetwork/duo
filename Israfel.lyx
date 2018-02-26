@@ -1096,7 +1096,7 @@ Contingent Upward
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1136,7 +1136,7 @@ Total Values
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1237,7 +1237,7 @@ Period
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1273,7 +1273,7 @@ Total Values
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1687,17 +1687,6 @@ While the structure discussed in this paper is independent to the underlying
  the structure trades as designed.
  In this paper, ETH is used as example, but other popular ERC20 coins such
  as EOS, ADA can also be considered.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section*
-Appendix
 \end_layout
 
 \begin_layout Standard
