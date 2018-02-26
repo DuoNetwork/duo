@@ -344,11 +344,11 @@ A Stable token, also known as stablecoin, is a crypto-token that keeps stable
 \end_layout
 
 \begin_layout Standard
-All current stable token designs share a common problem: their holders bear
- variable levels of counter-party risks, but there is little incentive or
- even costly to hold these tokens.
- We believe a crypto-token with stable and increasing value is a superior
- long-term asset and can improve the robustness of the crypto market.
+Most stable token designs to date share a common problem: their holders
+ bear variable levels of counter-party risks, but there is little incentive
+ or even additional cost to hold these tokens.
+ We believe a crypto-token with low price volatility and stable income is
+ a superior safe haven asset and is essential for a more robust crypto market.
 \end_layout
 
 \begin_layout Subsection
@@ -362,19 +362,28 @@ In fiat market, risk segmentation exists in every level of market.
  Within fixed income market, conservative investors choose safe haven assets
  such as government bonds while aggressive players choose high yield bonds,
  or otherwise known as junk bonds.
- Although most of crypto investors could be classified as aggresive or risk
- seeking investors, there still exists different segments of investors among
- this group.
- The existence of margin trading in a few crypto exchanges demostrates the
- need of those extremely aggressive crypto investors.
- Similarly, conservative crypto investors should be satisfied with a crypto
- based fixed income product that provides stable returns that is lower than
- the price appreciation but much higher than traditional fixed income products.
- However, to our best knowledge, there is no such product in the market
- at the moment.
- We believe a crypto investment product that can satisfy the need of both
- conservative and aggressive crypto investor will have huge potential and
- market.
+ 
+\end_layout
+
+\begin_layout Standard
+Although most of crypto assets are considered highly speculative, there
+ still exist different segments of risk appetites.
+ The existence of margin trading in exchanges like BitFinex and Huobi Pro
+ demostrates the need of leverage from aggresive crypto investors.
+ Similarly, safe haven assets providing low volatility and stable income
+ will be appealing to institutional players, short-term pessimistic investors
+ and ICO project teams.
+ However, to our best knowledge, there is no viable product at the moment.
+ 
+\end_layout
+
+\begin_layout Standard
+The price volatility cannot be eliminated, but can be transferred.
+ Through a structured contract, a risk-seeking user can get exposed to higher
+ leverage with limited assets, while a risk-averse user can avoid unwanted
+ price fluctuations by entering the other side of the contract.
+ The financial market has created many products satisfying different risk
+ segements, some of which can be very practical for crypto market participants.
 \end_layout
 
 \begin_layout Subsection
@@ -944,6 +953,13 @@ Market Mechanism
 
 \begin_layout Subsection
 Premium and Discount
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Premium-and-Discount"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1221,25 +1237,41 @@ Further Development
 \end_layout
 
 \begin_layout Standard
-This paper has outlined the main design and market mechanism for the structure.
- Further study is still requred for below aspects.
+This paper has outlined the main design and market mechanism for the dual-class
+ token structure.
+ Further studies can be done in below aspects.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection*
 Base Rate Discovery
 \end_layout
 
 \begin_layout Standard
 Arbitrary rate can be used for Class A coupon and it will be traded on premiumn
- or at discount based on the market required rate of return, However, it
- is desirable that Class A trades close to its net value, which means the
- coupon rate for Class A should be chosen close to market required rate
- of return.
- Currently there are a few rates in the market, such as USD borrowing cost
- in a few centralized exchanges ranging from 20% to over 40% per annun.
+ or at discount based on the market required rate of return.
+ However, it is desirable that Class A trades close to its net value, which
+ means the coupon rate for Class A should be chosen close to the market
+ rate.
+ Currently there are few observable proxies in the market.
+ Several centralized exchanges allowing margin trading are charging USD
+ borrow rates in the range of 20% to 40% per annum.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
+As discussed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Premium-and-Discount"
+
+\end_inset
+
+, the market premium or discount of Class A token may imply USD's borrow
+ rate in this market.
+ As the structure gain attractions, its implied rate could serve as an indicatio
+n for other USD borrow practice in crypto market.
+\end_layout
+
+\begin_layout Subsubsection*
 Optimal Reset Threshold and Frequency
 \end_layout
 
@@ -1247,21 +1279,57 @@ Optimal Reset Threshold and Frequency
 It is important to keep leverage for Class B within certain range: not too
  high so as to protect Class A holders from sudden price drop and not too
  low so as to keep Class B attractive to leveraged investors.
- However, it is undesirable that resets happen too frequent.
- 
-\end_layout
-
-\begin_layout Paragraph
-Other Coin Based Structure
+ However, it is undesirable that resets, especially downward resets, happen
+ too frequent.
 \end_layout
 
 \begin_layout Standard
-While the structure discussed in this paper is indepenent to the underlying
+There are two main parameters to be determined, the ratio between Class
+ A and Class B shares, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+; and the lower limit of Class B net value, 
+\begin_inset Formula $h$
+\end_inset
+
+, that triggers downward resets.
+ The Chinese market over the years has concluded a broadly accepted set
+ of parameters: 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is set to 1, meaning the quantities of Class A versus Class B is 1:1; 
+\begin_inset Formula $h$
+\end_inset
+
+ being 0.25, meaning a downward reset will be triggered if the underlying
+ price dropped approximately 37% from last reset.
+ This setup has been tested in extreme market events such as the mid-2015
+ market crash and the early-2016 circuit breaker turmoil, where the reset
+ clauses were all successfully implemented and protected the interests of
+ Class A holders.
+\end_layout
+
+\begin_layout Standard
+We observed that cryptocurrencies have considerably higher volatility than
+ stock market indices.
+ A series of backtestings and Monte Carlo simulations will be performed
+ to investigate the optimal parameters for dual class token structures.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Other Coin Underlyings
+\end_layout
+
+\begin_layout Standard
+While the structure discussed in this paper is independent to the underlying
  cryptocurrency, the liquidity and popularity of the underlying does impact
  the viability of the structure as market arbitrage is important to ensure
  the structure trades as designed.
  In this paper, ETH is used as example, but other popular ERC20 coins such
- as EOS, QTUM can also be considered.
+ as EOS, ADA can also be considered.
 \end_layout
 
 \begin_layout Standard
