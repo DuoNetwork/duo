@@ -1075,7 +1075,7 @@ Three upward resets were triggered on 24 Nov 2017 (
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1245,7 +1245,7 @@ Contingent Upward
  Remaining System value is at 30,395,000 USD.
  
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Chart and numbers are similar for the other two upward resets and thus omitted
@@ -1471,7 +1471,7 @@ Market Mechanism
 
 \size small
 Arbitrage human nature.
- It's not going to change any time soon..
+ It's not going to change any time soon.
  
 \begin_inset Newline newline
 \end_inset
