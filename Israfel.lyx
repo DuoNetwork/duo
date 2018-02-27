@@ -473,6 +473,26 @@ Smart Contract
 \end_layout
 
 \begin_layout Standard
+Smart contract
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -1154,7 +1174,7 @@ No Reset Period
 The total value of Class A and Class B tokens moves in line with the underlying
  ETH/USD price.
  Class B tokens get exposed to full price fluctuations of underlying ETH,
- while Class A token value is stable and slow appreciating.
+ while Class A token value is stable and slowly appreciating.
 \end_layout
 
 \begin_layout Standard
@@ -1195,6 +1215,17 @@ status collapsed
 
 \begin_layout Paragraph
 Contingent Upward Period
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Chart and numbers are similar for the other two upward resets and thus omitted
+ here.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1243,18 +1274,8 @@ Contingent Upward
  243.5124 ETH is paid out to Class A holders and 22,017.6139 ETH is paid out
  to Class B holders.
  Remaining System value is at 30,395,000 USD.
- 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Chart and numbers are similar for the other two upward resets and thus omitted
- here.
-\end_layout
-
-\end_inset
-
-
+ The total value of Class A, Class B and ETH payout is consistent with the
+ underlying ETH/USD price movement.
 \end_layout
 
 \begin_layout Standard
@@ -1314,6 +1335,8 @@ Contingent Downward Period
 
  are reduced to 3,483,461.77.
  Remaining System value is at 6,966,923.54USD.
+ The total value of Class A, Class B and ETH payout is consistent with the
+ underlying ETH/USD price movement.
 \end_layout
 
 \begin_layout Standard
@@ -1321,7 +1344,7 @@ Contingent Downward Period
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -1361,7 +1384,12 @@ Class A
 \end_layout
 
 \begin_layout Standard
-Constant return
+stable return from daily coupon and not affected by ETH price movement at
+ all.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1405,7 +1433,8 @@ Class B
 \end_layout
 
 \begin_layout Standard
-Leveraged return
+magnified return from ETH price movement due to the embedded leverage in
+ the design.
 \end_layout
 
 \begin_layout Standard
@@ -1453,6 +1482,98 @@ In order to achieve above return, ETH payout from resets need to be fully
  converted back to the corresponding class token.
  For example, after 24 Nov 2017 upward reset, all ETH received by Class
  A holder need to be converted into Class A token.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
