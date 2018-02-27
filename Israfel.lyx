@@ -26,7 +26,7 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 12
+\paperfontsize 11
 \spacing single
 \use_hyperref false
 \papersize a4paper
@@ -64,7 +64,7 @@
 \secnumdepth 3
 \tocdepth 2
 \paragraph_separation skip
-\defskip medskip
+\defskip bigskip
 \quotes_language english
 \papercolumns 1
 \papersides 2
@@ -320,15 +320,11 @@ A wise man ought always to follow the paths beaten by great men,
 \begin_inset Newline newline
 \end_inset
 
-and to imitate those who have been supreme, 
+and to imitate those who have been supreme, so that 
 \begin_inset Newline newline
 \end_inset
 
-so that if his ability does not equal theirs, 
-\begin_inset Newline newline
-\end_inset
-
-at least it will savour of it.
+if his ability does not equal theirs, at least it will savour of it.
 \begin_inset Newline newline
 \end_inset
 
@@ -415,6 +411,12 @@ Leveraged Funds
 \begin_layout Standard
 Leverage is the strategy of using borrowed capital to increase the potential
  return of an investment.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Leverage"
+
+\end_inset
+
  Retail investors have less access to leverage methods such as margin loans
  and financial derivatives, which promoted the creation of leveraged fund
  products.
@@ -430,7 +432,6 @@ A interesting class of leveraged funds is the dual-purpose funds, also known
  Dual-purpose funds first appeared in U.S.
  in 1965, but faded out in early 1990s due to a change in the tax code that
  resulted in double taxation.
- 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DM2018"
@@ -443,7 +444,7 @@ key "DM2018"
 \begin_layout Standard
 The dual-purpose fund was introduced in China in 2010 and it quickly became
  the most popular leveraged product there, reaching market size of 500 billion
- CNY (80 Billion USD) at its peak.
+ CNY (80 billion USD) at its peak.
  A Chinese dual-purpose fund usually takes an open-end index-tracking fund
  as underlying and has two classes of shares: the low risk A shares behave
  like a perpetual bond with periodical coupon payments, and the high risk
@@ -473,23 +474,47 @@ Smart Contract
 \end_layout
 
 \begin_layout Standard
-Smart contract
-\begin_inset Newline newline
+Smart Contract was first proposed by Nick Szabo in 1994, who described it
+ as “a set of promises, specified in digital form, including protocols within
+ which the parties perform on these promises”.
+\end_layout
+
+\begin_layout Standard
+The idea hasn't received commercial adoption due to lack of trustworthy
+ execution environment, until the appearance of blockchain technology.
+ Released in 2015, Ethereum implements a nearly Turing-complete language
+ on its blockchain, a prominent smart contract framework.
+ The Ethereum white paper describes smart contracts as “cryptographic boxes
+ contain value and only unlock it if certain conditions are met".
+ It also lists financial derivatives as the most common application of a
+ smart contract, and introduces a rough idea about creating stable-value
+ currencies through a hedging contract.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ETH"
+
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
+Up until now, the most popular stablecoin solution has been issuer-backed
+ assets.
+ And it is almost a market consensus that such issuers are not always trustworth
+y.
+ We agree with Ethereum authors' argument that, a decentralized market of
+ speculators and arbitragers powered by smart contract, could be an alternative
+ solution.
+\end_layout
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
+\begin_layout Standard
+The intent of this paper is to propose an alternative approach of creating
+ stable value tokens, providing a different set of trade offs between price
+ stability, holder incentive and supply flexibility.
+ We believe the solution will be very useful for broader adoption of the
+ crypto market.
 \end_layout
 
 \begin_layout Standard
@@ -569,7 +594,7 @@ name "subsec:Creation-and-Redemption"
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Creation
 \end_layout
 
@@ -647,7 +672,7 @@ target "etherscan.io"
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Redemption
 \end_layout
 
@@ -720,7 +745,7 @@ M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\label{eq:re
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Net Value
 \end_layout
 
@@ -765,7 +790,7 @@ where,
  is the current price of underlying token in USD.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Quantity
 \end_layout
 
@@ -796,7 +821,7 @@ where,
  are the total amount of Class A and Class B tokens.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Implied Leverage Ratio
 \end_layout
 
@@ -812,7 +837,7 @@ L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
 \end_layout
 
 \begin_layout Standard
-Note that at inception, above simply reduces to 
+Note that at inception or after resets, above simply reduces to 
 \begin_inset Formula 
 \[
 L_{B}^{0}=1+\alpha
@@ -837,8 +862,8 @@ Simply put, the holders of Class B tokens borrow capital from the holders
  Resets preserves total value in the system.
 \end_layout
 
-\begin_layout Paragraph
-Contingent Upward 
+\begin_layout Subsubsection
+Contingent Upward Reset
 \end_layout
 
 \begin_layout Standard
@@ -880,10 +905,10 @@ The underlying token amount
 \begin{align*}
 U_{A} & =\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}\\
 U_{B} & =\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}\\
-V_{A}^{t+} & =V_{A}^{0}=1\\
-V_{B}^{t+} & =V_{B}^{0}=1\\
 Q_{B}^{t+} & =Q_{B}^{t-}\\
-Q_{A}^{t+} & =Q_{A}^{t-}
+Q_{A}^{t+} & =Q_{A}^{t-}\\
+V_{A}^{t+} & =1\\
+V_{B}^{t+} & =1
 \end{align*}
 
 \end_inset
@@ -908,8 +933,8 @@ Total value in the system is unchanged after reset:
 
 \end_layout
 
-\begin_layout Paragraph
-Contingent Downward
+\begin_layout Subsubsection
+Contingent Downward Reset
 \end_layout
 
 \begin_layout Standard
@@ -952,8 +977,8 @@ The underlying token amount
 D_{A} & =\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}\\
 Q_{B}^{t+} & =Q_{B}^{t-}\cdot V_{B}^{t-}\\
 Q_{A}^{t+} & =Q_{B}^{t+}\cdot\alpha\\
-V_{A}^{t+} & =V_{A}^{0}=1\\
-V_{B}^{t+} & =V_{B}^{0}=1
+V_{A}^{t+} & =1\\
+V_{B}^{t+} & =1
 \end{align*}
 
 \end_inset
@@ -987,8 +1012,8 @@ Note above used the fact
 
 \end_layout
 
-\begin_layout Paragraph
-Periodic
+\begin_layout Subsubsection
+Periodic Reset
 \end_layout
 
 \begin_layout Standard
@@ -1010,6 +1035,13 @@ When a given time period has passed from the last reset time,
  Otherwise, reset will be the same as the Contingent Upward reset.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 ETH Examples
 \end_layout
@@ -1024,6 +1056,7 @@ For illustration, we hereby uses Ether (ETH) as the underlying token and
 \begin{align*}
 \alpha & =1\\
 r & =0.05\%\\
+c & =0\\
 h & =0.25\\
 \mathcal{H}_{A} & =1.05\\
 \mathcal{H}_{B} & =2
@@ -1035,14 +1068,28 @@ h & =0.25\\
 \end_layout
 
 \begin_layout Standard
-ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
- In this period, ETH started from 303.95 USD to low of 284.92 USD and high
- of 1359.48 and ended at 840.28.
- It is assumed that price observation are done on 
+we will also use below assumptions:
+\end_layout
+
+\begin_layout Enumerate
+Price observation are done on 
 \series bold
 daily
 \series default
- basis and resets are performed according to end-of-day prices.
+ basis.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Resets are performed according to end-of-day prices.
+\end_layout
+
+\begin_layout Enumerate
+The structure starts with 100,000 ETH with no further capital injection.
+\end_layout
+
+\begin_layout Enumerate
+Reinvestment of ETH payout from resets are not considered.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1050,9 +1097,10 @@ Overall Market
 \end_layout
 
 \begin_layout Standard
-In this section, we will examine total market value in the system by assuming
- starting with 100,000 ETH as initial capital with no further capital injection.
- Reinvestment of ETH payout from resets are not considered.
+ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
+ In this period, ETH started from 303.95 USD to low of 284.92 USD and high
+ of 1,359.48 and ended at 840.28.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1067,27 +1115,10 @@ At inception, 15,197,500
  Class B are issued from the 100,000 ETH, total value in the system is 30,395,00
 0 USD.
  
-\end_layout
-
-\begin_layout Standard
-Three upward resets were triggered on 24 Nov 2017 (
-\begin_inset Formula $V_{B}=2.0684$
+\begin_inset Newline newline
 \end_inset
 
-), 17 Dec 2017 (
-\begin_inset Formula $V_{B}=2.0398$
-\end_inset
 
-) and 7 Jan 2018 (
-\begin_inset Formula $V_{B}=2.1043$
-\end_inset
-
-) while only one downward reset was triggered on 5 Feb 2018 (
-\begin_inset Formula $V_{B}=0.2292$
-\end_inset
-
-.).
- No periodic reset was triggered.
 \end_layout
 
 \begin_layout Standard
@@ -1166,6 +1197,27 @@ Net Values
 
 \end_layout
 
+\begin_layout Standard
+Three upward resets were triggered on 24 Nov 2017 (
+\begin_inset Formula $V_{B}=2.0684$
+\end_inset
+
+), 17 Dec 2017 (
+\begin_inset Formula $V_{B}=2.0398$
+\end_inset
+
+) and 7 Jan 2018 (
+\begin_inset Formula $V_{B}=2.1043$
+\end_inset
+
+) while only one downward reset was triggered on 5 Feb 2018 (
+\begin_inset Formula $V_{B}=0.2292$
+\end_inset
+
+.).
+ No periodic reset was triggered.
+\end_layout
+
 \begin_layout Paragraph
 No Reset Period
 \end_layout
@@ -1175,6 +1227,10 @@ The total value of Class A and Class B tokens moves in line with the underlying
  ETH/USD price.
  Class B tokens get exposed to full price fluctuations of underlying ETH,
  while Class A token value is stable and slowly appreciating.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1208,6 +1264,13 @@ status collapsed
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -1276,6 +1339,10 @@ Contingent Upward
  Remaining System value is at 30,395,000 USD.
  The total value of Class A, Class B and ETH payout is consistent with the
  underlying ETH/USD price movement.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1337,6 +1404,10 @@ Contingent Downward Period
  Remaining System value is at 6,966,923.54USD.
  The total value of Class A, Class B and ETH payout is consistent with the
  underlying ETH/USD price movement.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1344,7 +1415,7 @@ Contingent Downward Period
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1375,6 +1446,13 @@ status open
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Individual Class Return
 \end_layout
@@ -1384,8 +1462,7 @@ Class A
 \end_layout
 
 \begin_layout Standard
-stable return from daily coupon and not affected by ETH price movement at
- all.
+stable return from daily coupon and not affected by ETH price movement.
 \begin_inset Newline newline
 \end_inset
 
@@ -1433,8 +1510,11 @@ Class B
 \end_layout
 
 \begin_layout Standard
-magnified return from ETH price movement due to the embedded leverage in
- the design.
+magnified return from ETH price movement due to the embedded leverage.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1482,98 +1562,6 @@ In order to achieve above return, ETH payout from resets need to be fully
  converted back to the corresponding class token.
  For example, after 24 Nov 2017 upward reset, all ETH received by Class
  A holder need to be converted into Class A token.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2011,6 +1999,48 @@ Working Paper
 \shape default
 .
  
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "2"
+key "Leverage"
+
+\end_inset
+
+
+\shape italic
+
+\begin_inset CommandInset href
+LatexCommand href
+name "https://www.investopedia.com/terms/l/leverage.asp"
+target "https://www.investopedia.com/terms/l/leverage.asp"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "3"
+key "ETH"
+
+\end_inset
+
+
+\shape italic
+
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/ethereum/wiki/wiki/White-Paper"
+target "https://github.com/ethereum/wiki/wiki/White-Paper"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
