@@ -279,13 +279,12 @@ Major crypto-currencies are subject to massive volatility, which makes them
 
 \begin_layout Abstract
 \noindent
-We propose, for the first time to our best knowledge, a dual-class ERC-20
- token structure that offers entitlements to either fixed income or leveraged
- capital appreciation: the income token receives periodical coupon payments
- with principle protection; the leverage token provides leveraged returns
- without dealing with centralized exchanges.
- The whole mechanism was executed and recorded by smart contracts run on
- Ethereum blockchain.
+We propose, for the first time to our best knowledge, a dual-class token
+ structure that offers entitlements to either fixed income or leveraged capital
+ appreciation: the income token receives periodical coupon payments with principal
+ protection; the leverage token provides leveraged participation in underlying
+ crypto assets. The whole mechanism is governed by smart contracts run on
+ Ethereum blockchain, without dealing with centralized counterparties.
  
 \end_layout
 
@@ -944,7 +943,7 @@ When a given time period has passed from the last reset time,
 \end_inset
 
  is less than 1, reset will be the same as the Contingent Downward reset.
- Otherwise, reset will be the same as Contingent Upward reset.
+ Otherwise, reset will be the same as the Contingent Upward reset.
 \end_layout
 
 \begin_layout Subsection
@@ -952,7 +951,8 @@ ETH Examples
 \end_layout
 
 \begin_layout Standard
-In all examples in this section, we will use below parameters:
+For illustration, we hereby uses Ether (ETH) as the underlying token and
+ apply below parameters:
 \end_layout
 
 \begin_layout Standard
@@ -974,11 +974,11 @@ h & =0.25\\
 ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
  In this period, ETH started from 303.95 USD to low of 284.92 USD and high
  of 1359.48 and ended at 840.28.
- It is assumed resets are only done 
+ It is assumed that price observation are done on 
 \series bold
 daily
 \series default
-.
+ basis and resets are performed according to end-of-day prices.
 \end_layout
 
 \begin_layout Subsubsection
@@ -986,29 +986,34 @@ Overall Market
 \end_layout
 
 \begin_layout Standard
-In this section, we will examine market total value in the system.
+In this section, we will examine total market value in the system.
  Additional assumption for this section: 
 \end_layout
 
 \begin_layout Itemize
-The structure starts with 100000 ETH for entire market.
+The structure starts with 100,000 ETH as initial capital.
 \end_layout
+
+\begin_layout Itemize
+There is no further capital injection.
+\end_layout
+
 
 \begin_layout Itemize
 Reinvestment of ETH payout from resets are not considered.
 \end_layout
 
 \begin_layout Standard
-At inception, 15197500 
+At inception, 15,197,500 
 \begin_inset Formula $\left(Q_{A}\right)$
 \end_inset
 
- Class A and 15197500 
+ Class A and 15,197,500 
 \begin_inset Formula $\left(Q_{B}\right)$
 \end_inset
 
- Class B are issued from the 100000 ETH, total value in the system is at
- 30395000 USD.
+ Class B are issued from the 100,000 ETH, total value in the system is
+ 30,395,000 USD.
 \end_layout
 
 \begin_layout Standard
@@ -1161,6 +1166,10 @@ No Reset Period
 \end_layout
 
 \begin_layout Standard
+The total value of Class A and Class B tokens moves in line with the underlying ETH/USD price. Class B tokens get exposed to full price fluctuations of underlying ETH, while Class A token value is stable and slow appreciating.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1201,6 +1210,20 @@ Contingent Upward Period
 \end_layout
 
 \begin_layout Standard
+17 Dec 2017, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ reached 2.0398 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 243.5124 ETH is paid out to Class A holders and 22,017.6139 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 30,395,000 USD.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1238,6 +1261,29 @@ status collapsed
 
 \begin_layout Paragraph
 Contingent Downward Period
+\end_layout
+
+\begin_layout Standard
+5 Feb 2018, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ reached 0.2292 and triggered 
+\series bold
+Contingent Downward
+\series default
+ reset.
+ 17,169.8250 ETH is paid out to Class A holders.
+ 
+\begin_inset Formula $Q_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{B}$
+\end_inset
+
+ are reduced to 3,483,461.77.
+ Remaining System value is at 6,966,923.54USD.
 \end_layout
 
 \begin_layout Standard
