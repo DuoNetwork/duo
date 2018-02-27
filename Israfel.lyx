@@ -1289,7 +1289,7 @@ Class A
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1329,7 +1329,7 @@ Class B
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1365,14 +1365,14 @@ Note
 \end_layout
 
 \begin_layout Standard
-In order to archieve above return, ETH payout from resets need to be fully
- converted back to the correct class token.
- For example, during 24 Nov 2017 
+In order to achieve above return, ETH payout from resets need to be fully
+ converted back to the corresponding class token.
+ For example, after 24 Nov 2017 
 \series bold
 Contingent Upward
 \series default
- reset, all ETH received by Class A holder need to convert all their ETH
- into Class A token.
+ reset, all ETH received by Class A holder need to be converted into Class
+ A token.
 \end_layout
 
 \begin_layout Section
