@@ -274,27 +274,25 @@ Major crypto-currencies are subject to massive volatility, which makes them
  There has been several attempts on implementing 'stablecoins'.
  But most of them fail to provide steady returns that's appealing to regular
  investors.
- 
 \end_layout
 
 \begin_layout Abstract
 \noindent
 We propose, for the first time to our best knowledge, a dual-class token
- structure that offers entitlements to either fixed income or leveraged capital
- appreciation: the income token receives periodical coupon payments with principal
- protection; the leverage token provides leveraged participation in underlying
- crypto assets. The whole mechanism is governed by smart contracts run on
- Ethereum blockchain, without dealing with centralized counterparties.
- 
+ structure that offers entitlements to either fixed income or leveraged
+ capital appreciation: the income token receives periodical coupon payments
+ with principal protection; the leverage token provides leveraged participation
+ in underlying crypto assets.
+ The whole mechanism is governed by smart contracts run on Ethereum blockchain,
+ without dealing with centralized counterparties.
 \end_layout
 
 \begin_layout Abstract
 \noindent
-We further explain on: 1) why fixed income crypto-currencies are essential
- to crypto asset allocation; 2) how similar dual purpose products were implement
-ed in mature financial markets in US and China; 3) how market equilibrium
- can be achieved through arbitrage activities; and 4) how we will implement
- this structure through KINE, a decentralized asset management platform.
+We further explain on: 1) why fixed income tokens are essential to crypto
+ asset allocation; 2) how similar dual purpose products were developed and
+ accepted in mature financial markets; and 3) how market equilibrium can
+ be achieved through arbitrage activities.
 \end_layout
 
 \begin_layout Standard
@@ -312,6 +310,31 @@ stablecoin, dual-class token, fixed income crypto asset, leveraged return
 
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+\align right
+
+\size small
+A wise man ought always to follow the paths beaten by great men, 
+\begin_inset Newline newline
+\end_inset
+
+and to imitate those who have been supreme, 
+\begin_inset Newline newline
+\end_inset
+
+so that if his ability does not equal theirs, 
+\begin_inset Newline newline
+\end_inset
+
+at least it will savour of it.
+\begin_inset Newline newline
+\end_inset
+
+– 
+\emph on
+Niccolo Machiavelli: The Prince
 \end_layout
 
 \begin_layout Subsection
@@ -449,8 +472,29 @@ We are attracted by Chinese dual-purpose fund for three reasons: (i) both
 Smart Contract
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Product Design
+\end_layout
+
+\begin_layout Standard
+\align right
+
+\size small
+Everything should be made as simple as possible, but no simpler.
+ 
+\begin_inset Newline newline
+\end_inset
+
+– 
+\emph on
+Albert Einstein
 \end_layout
 
 \begin_layout Subsection
@@ -986,21 +1030,9 @@ Overall Market
 \end_layout
 
 \begin_layout Standard
-In this section, we will examine total market value in the system.
- Additional assumption for this section: 
-\end_layout
-
-\begin_layout Itemize
-The structure starts with 100,000 ETH as initial capital.
-\end_layout
-
-\begin_layout Itemize
-There is no further capital injection.
-\end_layout
-
-
-\begin_layout Itemize
-Reinvestment of ETH payout from resets are not considered.
+In this section, we will examine total market value in the system by assuming
+ starting with 100,000 ETH as initial capital with no further capital injection.
+ Reinvestment of ETH payout from resets are not considered.
 \end_layout
 
 \begin_layout Standard
@@ -1012,77 +1044,30 @@ At inception, 15,197,500
 \begin_inset Formula $\left(Q_{B}\right)$
 \end_inset
 
- Class B are issued from the 100,000 ETH, total value in the system is
- 30,395,000 USD.
+ Class B are issued from the 100,000 ETH, total value in the system is 30,395,00
+0 USD.
+ 
 \end_layout
 
 \begin_layout Standard
-Following resets are triggered:
-\end_layout
-
-\begin_layout Enumerate
-24 Nov 2017, 
-\begin_inset Formula $V_{B}$
+Three upward resets were triggered on 24 Nov 2017 (
+\begin_inset Formula $V_{B}=2.0684$
 \end_inset
 
- is 2.0684 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 872.2499 ETH is paid out to Class A holders and 34516.6497 ETH is
- paid out to Class B holders .
- Remaining System value is at 30395000 USD.
-\end_layout
-
-\begin_layout Enumerate
-17 Dec 2017, 
-\begin_inset Formula $V_{B}$
+), 17 Dec 2017 (
+\begin_inset Formula $V_{B}=2.0398$
 \end_inset
 
- is 2.0398 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 243.5124 ETH is paid out to Class A holders and 22017.6139 ETH is
- paid out to Class B holders .
- Remaining System value is at 30395000 USD.
-\end_layout
-
-\begin_layout Enumerate
-7 Jan 2018, 
-\begin_inset Formula $V_{B}$
+) and 7 Jan 2018 (
+\begin_inset Formula $V_{B}=2.1043$
 \end_inset
 
- is 2.1043 and triggered 
-\series bold
-Contingent Upward
-\series default
- reset, 142.7634 ETH is paid out to Class A holders and 15014.1892 ETH is
- paid out to Class B holders .
- Remaining System value is at 30395000 USD.
-\end_layout
-
-\begin_layout Enumerate
-5 Feb 2018, 
-\begin_inset Formula $V_{B}$
+) while only one downward reset was triggered on 5 Feb 2018 (
+\begin_inset Formula $V_{B}=0.2292$
 \end_inset
 
- is 0.2292 and triggered 
-\series bold
-Contingent Downward
-\series default
- reset.
- 17169.8250 ETH is paid out to Class A holders.
- 
-\begin_inset Formula $Q_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $Q_{B}$
-\end_inset
-
- are reduced to 3483461.77.
- Remaining System value is at 6966923.54USD.
+.).
+ No periodic reset was triggered.
 \end_layout
 
 \begin_layout Standard
@@ -1090,7 +1075,7 @@ Contingent Downward
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -1166,7 +1151,10 @@ No Reset Period
 \end_layout
 
 \begin_layout Standard
-The total value of Class A and Class B tokens moves in line with the underlying ETH/USD price. Class B tokens get exposed to full price fluctuations of underlying ETH, while Class A token value is stable and slow appreciating.
+The total value of Class A and Class B tokens moves in line with the underlying
+ ETH/USD price.
+ Class B tokens get exposed to full price fluctuations of underlying ETH,
+ while Class A token value is stable and slow appreciating.
 \end_layout
 
 \begin_layout Standard
@@ -1210,17 +1198,63 @@ Contingent Upward Period
 \end_layout
 
 \begin_layout Standard
-17 Dec 2017, 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Enumerate
+24 Nov 2017, 
 \begin_inset Formula $V_{B}$
 \end_inset
 
- reached 2.0398 and triggered 
+ is 2.0684 and triggered 
 \series bold
 Contingent Upward
 \series default
- reset, 243.5124 ETH is paid out to Class A holders and 22,017.6139 ETH is
+ reset, 872.2499 ETH is paid out to Class A holders and 34516.6497 ETH is
  paid out to Class B holders .
+ Remaining System value is at 30395000 USD.
+\end_layout
+
+\begin_layout Enumerate
+7 Jan 2018, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+ is 2.1043 and triggered 
+\series bold
+Contingent Upward
+\series default
+ reset, 142.7634 ETH is paid out to Class A holders and 15014.1892 ETH is
+ paid out to Class B holders .
+ Remaining System value is at 30395000 USD.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+17 Dec 2017, 
+\begin_inset Formula $V_{B}=2.0398$
+\end_inset
+
+.
+ 243.5124 ETH is paid out to Class A holders and 22,017.6139 ETH is paid out
+ to Class B holders.
  Remaining System value is at 30,395,000 USD.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Chart and numbers are similar for the other two upward resets and thus omitted
+ here.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1265,14 +1299,10 @@ Contingent Downward Period
 
 \begin_layout Standard
 5 Feb 2018, 
-\begin_inset Formula $V_{B}$
+\begin_inset Formula $V_{B}=0.2292$
 \end_inset
 
- reached 0.2292 and triggered 
-\series bold
-Contingent Downward
-\series default
- reset.
+.
  17,169.8250 ETH is paid out to Class A holders.
  
 \begin_inset Formula $Q_{A}$
@@ -1331,6 +1361,10 @@ Class A
 \end_layout
 
 \begin_layout Standard
+Constant return
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1368,6 +1402,10 @@ Class A Return
 
 \begin_layout Paragraph
 Class B
+\end_layout
+
+\begin_layout Standard
+Leveraged return
 \end_layout
 
 \begin_layout Standard
@@ -1413,16 +1451,34 @@ Note
 \begin_layout Standard
 In order to achieve above return, ETH payout from resets need to be fully
  converted back to the corresponding class token.
- For example, after 24 Nov 2017 
-\series bold
-Contingent Upward
-\series default
- reset, all ETH received by Class A holder need to be converted into Class
- A token.
+ For example, after 24 Nov 2017 upward reset, all ETH received by Class
+ A holder need to be converted into Class A token.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
 Market Mechanism
+\end_layout
+
+\begin_layout Standard
+\align right
+
+\size small
+Arbitrage human nature.
+ It's not going to change any time soon..
+ 
+\begin_inset Newline newline
+\end_inset
+
+– 
+\emph on
+James O'Shaughnessy
 \end_layout
 
 \begin_layout Subsection
@@ -1700,6 +1756,13 @@ The expected payoff of above operations is:
 Many other factors also determine whether above arbitrage strategy can be
  successfully executed, such as bid ask spread of all the 3 components and
  ability to short sell the required components.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
