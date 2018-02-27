@@ -79,27 +79,10 @@
 \begin_body
 
 \begin_layout Title
-A Token Structure for Both Fixed Income
-\begin_inset Newline newline
-\end_inset
-
-and Leveraged Investments
+A Dual Token Structure for Stable and Leveraged Returns
 \end_layout
 
 \begin_layout Author
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="5">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 LI Lewei
 \begin_inset Foot
 status collapsed
@@ -118,30 +101,16 @@ type "mailto:"
 
 \end_inset
 
-
+, CEO and Co-founder of FinBook
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
+\begin_inset Formula $\;,$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-CAO Yizhou
+ CAO Yizhou
 \begin_inset Foot
 status collapsed
 
@@ -159,30 +128,16 @@ type "mailto:"
 
 \end_inset
 
-
+, CTO and Co-founder of FinBook
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
+\begin_inset Formula $\;,$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Prof.
+ Prof.
  DAI Min
 \begin_inset Foot
 status collapsed
@@ -210,61 +165,12 @@ type "mailto:"
 
 \end_layout
 
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-FinBook
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-FinBook
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-National University of Singapore
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
+\begin_layout Date
+Version 0.1.0
+\begin_inset Newline newline
 \end_inset
 
- 
+27 Feb 2018
 \end_layout
 
 \begin_layout Abstract
@@ -300,8 +206,48 @@ We further explain on: 1) why fixed income tokens are essential to crypto
 \shape italic
 Keywords: 
 \shape default
-stablecoin, dual-class token, fixed income crypto asset, leveraged return
- crypto asset, smart contract, Ethereum, decentralized asset management
+stablecoin, dual-class token, fixed income, leveraged product, smart contract,
+ Ethereum
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -1097,31 +1043,6 @@ Overall Market
 \end_layout
 
 \begin_layout Standard
-ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
- In this period, ETH started from 303.95 USD to low of 284.92 USD and high
- of 1,359.48 and ended at 840.28.
- 
-\end_layout
-
-\begin_layout Standard
-At inception, 15,197,500 
-\begin_inset Formula $\left(Q_{A}\right)$
-\end_inset
-
- Class A and 15,197,500 
-\begin_inset Formula $\left(Q_{B}\right)$
-\end_inset
-
- Class B are issued from the 100,000 ETH, total value in the system is 30,395,00
-0 USD.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1162,6 +1083,43 @@ Total Values
 \end_layout
 
 \begin_layout Standard
+ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
+ In this period, ETH started from 303.95 USD to low of 284.92 USD and high
+ of 1,359.48 and ended at 840.28.
+ At inception, 15,197,500 
+\begin_inset Formula $\left(Q_{A}\right)$
+\end_inset
+
+ Class A and 15,197,500 
+\begin_inset Formula $\left(Q_{B}\right)$
+\end_inset
+
+ Class B are issued from the 100,000 ETH, total value in the system is 30,395,00
+0 USD.
+\end_layout
+
+\begin_layout Standard
+Three upward resets were triggered on 24 Nov 2017 (
+\begin_inset Formula $V_{B}=2.0684$
+\end_inset
+
+), 17 Dec 2017 (
+\begin_inset Formula $V_{B}=2.0398$
+\end_inset
+
+) and 7 Jan 2018 (
+\begin_inset Formula $V_{B}=2.1043$
+\end_inset
+
+) while one downward reset was triggered on 5 Feb 2018 (
+\begin_inset Formula $V_{B}=0.2292$
+\end_inset
+
+.).
+ No periodic reset was triggered during the sampling period.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1197,29 +1155,8 @@ Net Values
 
 \end_layout
 
-\begin_layout Standard
-Three upward resets were triggered on 24 Nov 2017 (
-\begin_inset Formula $V_{B}=2.0684$
-\end_inset
-
-), 17 Dec 2017 (
-\begin_inset Formula $V_{B}=2.0398$
-\end_inset
-
-) and 7 Jan 2018 (
-\begin_inset Formula $V_{B}=2.1043$
-\end_inset
-
-) while only one downward reset was triggered on 5 Feb 2018 (
-\begin_inset Formula $V_{B}=0.2292$
-\end_inset
-
-.).
- No periodic reset was triggered.
-\end_layout
-
 \begin_layout Paragraph
-No Reset Period
+Period without Reset
 \end_layout
 
 \begin_layout Standard
@@ -1277,7 +1214,7 @@ status collapsed
 \end_layout
 
 \begin_layout Paragraph
-Contingent Upward Period
+Period with Contingent Upward Reset
 \begin_inset Foot
 status collapsed
 
@@ -1382,7 +1319,7 @@ status collapsed
 \end_layout
 
 \begin_layout Paragraph
-Contingent Downward Period
+Period with Contingent Downward Reset
 \end_layout
 
 \begin_layout Standard
