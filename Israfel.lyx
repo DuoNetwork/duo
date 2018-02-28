@@ -79,7 +79,7 @@
 \begin_body
 
 \begin_layout Title
-A Fiat Stable Token Structure with Fixed Income
+A Dual Token Structure Providing Price Stability with Fixed Income
 \end_layout
 
 \begin_layout Author
@@ -656,10 +656,12 @@ The net value of tokens are calculated based on the coupon rate, the elapsed
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-V_{A}^{t} & =1+r\cdot t\\
-V_{B}^{t} & =2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}
-\end{align*}
+\begin{equation}
+\begin{array}{cc}
+V_{A}^{t}= & 1+r\cdot t\\
+V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}
+\end{array}\label{eq:netvalue}
+\end{equation}
 
 \end_inset
 
@@ -1460,7 +1462,7 @@ where,
 Along with equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:creation"
+reference "eq:netvalue"
 
 \end_inset
 
@@ -1909,10 +1911,12 @@ The net value of tokens are calculated based on the coupon rate, the elapsed
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-V_{A}^{t} & =1+r\cdot t\\
-V_{B}^{t} & =\left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
-\end{align*}
+\begin{equation}
+\begin{array}{cc}
+V_{A}^{t}= & 1+r\cdot t\\
+V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
+\end{array}\label{eq:netvalue-1}
+\end{equation}
 
 \end_inset
 
@@ -2203,10 +2207,17 @@ reference "eq:creation-1"
 
 \end_inset
 
- and 
+, 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:redemption-1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:netvalue-1"
 
 \end_inset
 
