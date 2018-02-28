@@ -79,7 +79,7 @@
 \begin_body
 
 \begin_layout Title
-A Dual Token Structure for Stable and Leveraged Returns
+A Fiat Stable Token Structure with Fixed Income
 \end_layout
 
 \begin_layout Author
@@ -184,8 +184,17 @@ Major crypto-currencies are subject to massive volatility, which makes them
 
 \begin_layout Abstract
 \noindent
-We propose, for the first time to our best knowledge, a dual-class token
- structure that offers entitlements to either fixed income or leveraged
+Dual purpose fund is a leverage investment product that has gained popularity
+ in the US and China.
+ It provides a practical risk segregation design based on a single underlying
+ asset, which is especially suitable for creating fixed income assets in
+ crypto market.
+\end_layout
+
+\begin_layout Abstract
+\noindent
+We propose, for the first time to our best knowledge, a dual-class crypto
+ token structure that offers entitlements to either fixed income or leveraged
  capital appreciation: the income token receives periodical coupon payments
  with principal protection; the leverage token provides leveraged participation
  in underlying crypto assets.
@@ -195,10 +204,10 @@ We propose, for the first time to our best knowledge, a dual-class token
 
 \begin_layout Abstract
 \noindent
-We further explain on: 1) why fixed income tokens are essential to crypto
- asset allocation; 2) how similar dual purpose products were developed and
- accepted in mature financial markets; and 3) how market equilibrium can
- be achieved through arbitrage activities.
+We take Ether (ETH) as undelrying asset and use historical prices to illustrate
+ the product's performance in real world scenarios.
+ And we further explain on how arbitrage activities take place and help
+ maintain price stability of the income tokens.
 \end_layout
 
 \begin_layout Standard
@@ -206,8 +215,8 @@ We further explain on: 1) why fixed income tokens are essential to crypto
 \shape italic
 Keywords: 
 \shape default
-stablecoin, dual-class token, fixed income, leveraged product, smart contract,
- Ethereum
+stablecoin, dual-class token, fixed income crypto asset, leveraged return
+ crypto asset, smart contract, Ethereum, decentralized asset management
 \begin_inset Newline newline
 \end_inset
 
@@ -472,6 +481,13 @@ The intent of this paper is to propose an alternative approach of creating
 
 \begin_layout Section
 Product Design
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Product-Design"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -547,14 +563,14 @@ Creation
 \begin_layout Standard
 Dual-class tokens can be created by depositing underlying tokens to the
  Custodian contract.
- Upon receiving underlying tokens, the Custodian contract will return to
- the sender certain amount of Class A and Class B tokens.
- Such amount 
-\begin_inset Formula $C_{A}$
+ Upon receiving underlying tokens of amount 
+\begin_inset Formula $M_{C}$
 \end_inset
 
- and 
-\begin_inset Formula $C_{B}$
+, the Custodian contract will return to the sender equal amount of Class
+ A and Class B tokens.
+ Such amount 
+\begin_inset Formula $C$
 \end_inset
 
  can be calculated by:
@@ -563,10 +579,8 @@ Dual-class tokens can be created by depositing underlying tokens to the
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\begin{array}{cc}
-C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
-C_{A}= & C_{B}\cdot\alpha
-\end{array}\label{eq:creation}
+\begin{array}{c}
+C=\frac{M_{C}\cdot P_{0}}{2}\end{array}\label{eq:creation}
 \end{equation}
 
 \end_inset
@@ -576,31 +590,10 @@ C_{A}= & C_{B}\cdot\alpha
 
 \begin_layout Standard
 where, 
-\begin_inset Formula $M_{C}$
-\end_inset
-
- is the amount of underlying tokens sent to the Custodian contract,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $c$
-\end_inset
-
- is the processing fee of the smart contract,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\alpha$
-\end_inset
-
- is a positive number for determine the ratio of A and B
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula $P_{0}$
 \end_inset
 
- is the recorded price of underlying token in USD at last Reset event.
+ is the recorded price of underlying token in USD at last reset event.
 \end_layout
 
 \begin_layout Standard
@@ -625,65 +618,24 @@ Redemption
 \begin_layout Standard
 Holders of Class A and Class B tokens can withdraw deposited underlying
  tokens at any time by performing a redemption.
- To do this, the user will send certain amount of Class A and Class B tokens
- to the Custodian contract.
- The contract will deduct Class A and Class B tokens, and return return
- to the sender certain amount of underlying tokens.
- 
-\end_layout
-
-\begin_layout Standard
-The amount 
-\begin_inset Formula $R_{A}$
+ To do this, the user will send equal amount 
+\begin_inset Formula $R$
 \end_inset
 
- and 
-\begin_inset Formula $R_{B}$
-\end_inset
-
- deducted by the contract is:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-R & =\min\left\{ \frac{M_{A}}{\alpha},M_{B}\right\} \\
-R_{A} & =R\cdot\alpha\\
-R_{B} & =R
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where, 
-\begin_inset Formula $M_{A}$
-\end_inset
-
- is the amount of Class A sent to the Custodian contract,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $M_{B}$
-\end_inset
-
- is the amount of Class B sent to the Custodian contract.
-\end_layout
-
-\begin_layout Standard
-The amount 
+ of Class A and Class B tokens to the Custodian contract.
+ The contract will deduct Class A and Class B tokens, and return to the
+ sender certain amount of underlying tokens.
+ Such amount 
 \begin_inset Formula $M_{R}$
 \end_inset
 
- returned by the contract is:
+ can be calculated by:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\label{eq:redemption}
+M_{R}=\frac{2R}{P_{0}}\label{eq:redemption}
 \end{equation}
 
 \end_inset
@@ -706,7 +658,7 @@ The net value of tokens are calculated based on the coupon rate, the elapsed
 \begin_inset Formula 
 \begin{align*}
 V_{A}^{t} & =1+r\cdot t\\
-V_{B}^{t} & =\left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
+V_{B}^{t} & =2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}
 \end{align*}
 
 \end_inset
@@ -726,7 +678,7 @@ where,
 \begin_inset Formula $t$
 \end_inset
 
- is the number of days from last Reset event,
+ is the number of days from last reset event,
 \end_layout
 
 \begin_layout Standard
@@ -737,44 +689,13 @@ where,
 \end_layout
 
 \begin_layout Subsubsection
-Quantity
-\end_layout
-
-\begin_layout Standard
-Below holds in the system at all time
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-Q_{A}^{t}=Q_{B}^{t}\cdot\alpha
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where, 
-\begin_inset Formula $Q_{A}^{t}$
-\end_inset
-
- and 
-\begin_inset Formula $Q_{B}^{t}$
-\end_inset
-
- are the total amount of Class A and Class B tokens.
-\end_layout
-
-\begin_layout Subsubsection
 Implied Leverage Ratio
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
+L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{2}{V_{B}^{t}}
 \end{align*}
 
 \end_inset
@@ -786,7 +707,7 @@ L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
 Note that at inception or after resets, above simply reduces to 
 \begin_inset Formula 
 \[
-L_{B}^{0}=1+\alpha
+L_{B}^{0}=2
 \]
 
 \end_inset
@@ -814,69 +735,53 @@ Contingent Upward Reset
 
 \begin_layout Standard
 When underlying token price rises, the Class B token's leverage ratio reduces.
- An Upward Reset is triggered when the Net Value of Class B token reaches
- upper limit
-\begin_inset Formula $\mathcal{H}_{B}$
+ An upward reset is triggered when the Net Value of Class B token reaches
+ upper limit 
+\begin_inset Formula $\mathcal{H}_{u}$
 \end_inset
 
 .
- The reset will restore the leverage ratio to 
-\begin_inset Formula $1+\alpha$
-\end_inset
-
-, and the Net Value of both classes to 1 USD.
+ The reset will restore the leverage ratio to 2.
  By increasing Class B's leverage ratio, the structure retains attraction
  to leverage-seeking users.
 \end_layout
 
 \begin_layout Standard
-Upon Upward Reset, both classes' holders will receive certain amount of
- ETH from the Custodian contract.
+Upon upward reset:
 \end_layout
 
-\begin_layout Standard
-The underlying token amount 
-\begin_inset Formula $U_{A}$
-\end_inset
-
- for each Class A token and 
-\begin_inset Formula $U_{B}$
-\end_inset
-
- for each Class B token:
+\begin_layout Enumerate
+Total amount of both classes token remain unchanged
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-U_{A} & =\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}\\
-U_{B} & =\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}\\
-Q_{B}^{t+} & =Q_{B}^{t-}\\
-Q_{A}^{t+} & =Q_{A}^{t-}\\
-V_{A}^{t+} & =1\\
-V_{B}^{t+} & =1
-\end{align*}
+\begin_layout Enumerate
+Net Value of both classes reset to 1 USD
+\end_layout
 
+\begin_layout Enumerate
+Both classes' holders will receive certain amount of underlying token from
+ the Custodian contract.
+ Such amount for each Class A token is 
+\begin_inset Formula $\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}$
+\end_inset
+
+ and for each Class B token is 
+\begin_inset Formula $\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Total value in the system is unchanged after reset:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+U_{B}\cdot P_{t}\cdot Q_{B}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
-= & \left(V_{A}^{t-}-1\right)\cdot Q_{A}^{t-}+\left(V_{B}^{t-}-1\right)\cdot Q_{B}^{t-}+Q_{A}^{t-}\cdot1+Q_{B}^{t-}\cdot1\\
-= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
-\end{align*}
+Total value in the system is unchanged after reset.
+ Please refer to appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Contingent-Upward-Reset"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -887,22 +792,16 @@ Contingent Downward Reset
 When underlying token price falls, the Class B token's leverage ratio increases.
  A Downward Reset is triggered when the Net Value of Class B token reaches
  lower limit 
-\begin_inset Formula $h$
+\begin_inset Formula $\mathcal{H}_{d}$
 \end_inset
 
 .
- Similar to an Upward Reset, a Downward Reset restores the leverage ratio
- and Net Value of both classes.
+ Similar to an Upward Reset, a Downward Reset restores the leverage ratio.
  By reducing leverage ratio and restoring Net Value, the structure strengthens
  principal protection to Class A holders.
-\end_layout
-
-\begin_layout Standard
-Class A holder will receive certain amount of underlying token from the
- Custodian contract.
  Additionally, a Downward Reset will reduce the total supply of Class A
  and Class B tokens by roughly 
-\begin_inset Formula $1-h$
+\begin_inset Formula $1-\mathcal{H}_{d}$
 \end_inset
 
 .
@@ -910,52 +809,41 @@ Class A holder will receive certain amount of underlying token from the
 \end_layout
 
 \begin_layout Standard
-The underlying token amount 
-\begin_inset Formula $D_{A}$
-\end_inset
-
- of each Class A token is:
+Upon downward reset:
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-D_{A} & =\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}\\
-Q_{B}^{t+} & =Q_{B}^{t-}\cdot V_{B}^{t-}\\
-Q_{A}^{t+} & =Q_{B}^{t+}\cdot\alpha\\
-V_{A}^{t+} & =1\\
-V_{B}^{t+} & =1
-\end{align*}
-
+\begin_layout Enumerate
+Total amount of both classes token are reduced to 
+\begin_inset Formula $Q^{t+}=Q^{t-}\cdot V_{B}^{t-}$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-Total value in the system is unchanged after reset:
+\begin_layout Enumerate
+Net Value of both classes reset to 1 USD
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & D_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
-= & \left(V_{A}^{t-}-V_{B}^{t-}\right)\cdot Q_{A}^{t-}+Q_{B}^{t+}\cdot\alpha\cdot1+Q_{B}^{t+}\cdot1\\
-= & V_{A}^{t-}\cdot Q_{A}^{t-}-V_{B}^{t-}\cdot Q_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\\
-= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
-\end{align*}
-
+\begin_layout Enumerate
+Class A holders will receive certain amount of underlying token from the
+ Custodian contract.
+ Such amount of each Class A token is: 
+\begin_inset Formula $\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Note above used the fact 
-\begin_inset Formula $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$
+Total value in the system is unchanged after reset.
+ Please refer to appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Contingent-Downward-Reset"
+
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -968,7 +856,7 @@ When a given time period has passed from the last reset time,
 \end_inset
 
  grows to upper limit 
-\begin_inset Formula $\mathcal{H}_{A}$
+\begin_inset Formula $\mathcal{H}_{p}$
 \end_inset
 
 , a periodic reset is triggered to restore the leverage ratio and net value
@@ -1000,12 +888,10 @@ For illustration, we hereby uses Ether (ETH) as the underlying token and
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\alpha & =1\\
-r & =0.05\%\\
-c & =0\\
-h & =0.25\\
-\mathcal{H}_{A} & =1.05\\
-\mathcal{H}_{B} & =2
+r\;\; & =0.05\%\\
+\mathcal{H}_{d} & =0.25\\
+\mathcal{H}_{u} & =2\\
+\mathcal{H}_{p} & =1.05
 \end{align*}
 
 \end_inset
@@ -1022,20 +908,19 @@ Price observation are done on
 \series bold
 daily
 \series default
- basis.
- 
+ basis
 \end_layout
 
 \begin_layout Enumerate
-Resets are performed according to end-of-day prices.
+Resets are performed according to end-of-day prices
 \end_layout
 
 \begin_layout Enumerate
-The structure starts with 100,000 ETH with no further capital injection.
+The structure starts with 100,000 ETH with no further capital injection
 \end_layout
 
 \begin_layout Enumerate
-Reinvestment of ETH payout from resets are not considered.
+Reinvestment of ETH payout from resets are not considered
 \end_layout
 
 \begin_layout Subsubsection
@@ -1086,16 +971,8 @@ Total Values
 ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
  In this period, ETH started from 303.95 USD to low of 284.92 USD and high
  of 1,359.48 and ended at 840.28.
- At inception, 15,197,500 
-\begin_inset Formula $\left(Q_{A}\right)$
-\end_inset
-
- Class A and 15,197,500 
-\begin_inset Formula $\left(Q_{B}\right)$
-\end_inset
-
- Class B are issued from the 100,000 ETH, total value in the system is 30,395,00
-0 USD.
+ At inception, 15,197,500 Class A and 15,197,500 Class B are issued from
+ the 100,000 ETH, total value in the system is 30,395,000 USD.
 \end_layout
 
 \begin_layout Standard
@@ -1116,7 +993,7 @@ Three upward resets were triggered on 24 Nov 2017 (
 \end_inset
 
 .).
- No periodic reset was triggered during the sampling period.
+ No periodic reset was triggered in the sampling period.
 \end_layout
 
 \begin_layout Standard
@@ -1160,10 +1037,9 @@ Period without Reset
 \end_layout
 
 \begin_layout Standard
-The total value of Class A and Class B tokens moves in line with the underlying
- ETH/USD price.
- Class B tokens get exposed to full price fluctuations of underlying ETH,
- while Class A token value is stable and slowly appreciating.
+The total value of Class A and Class B tokens moves in line with ETH price.
+ Class B tokens get exposed to full price fluctuations of ETH, while Class
+ A token value is stable and slowly appreciating.
 \begin_inset Newline newline
 \end_inset
 
@@ -1274,8 +1150,8 @@ Contingent Upward
  243.5124 ETH is paid out to Class A holders and 22,017.6139 ETH is paid out
  to Class B holders.
  Remaining System value is at 30,395,000 USD.
- The total value of Class A, Class B and ETH payout is consistent with the
- underlying ETH/USD price movement.
+ The total value of Class A, Class B and ETH payout is consistent with ETH
+ price movement.
 \begin_inset Newline newline
 \end_inset
 
@@ -1329,18 +1205,10 @@ Period with Contingent Downward Reset
 
 .
  17,169.8250 ETH is paid out to Class A holders.
- 
-\begin_inset Formula $Q_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $Q_{B}$
-\end_inset
-
- are reduced to 3,483,461.77.
+ total amount of both classes is reduced to 3,483,461.77.
  Remaining System value is at 6,966,923.54USD.
- The total value of Class A, Class B and ETH payout is consistent with the
- underlying ETH/USD price movement.
+ The total value of Class A, Class B and ETH payout is consistent with ETH
+ price movement.
 \begin_inset Newline newline
 \end_inset
 
@@ -1553,7 +1421,7 @@ Like all fixed income products, Class A is expected to trade on premium
 \end_layout
 
 \begin_layout Subsection
-Arbitrage and Market Equilibrium
+Market Arbitrage 
 \end_layout
 
 \begin_layout Standard
@@ -1565,7 +1433,7 @@ The dual class tokens are two-way fungible to the underlying token (i.e.
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}
+P_{A}^{t}+P_{B}^{t}=V_{A}^{t}+V_{B}^{t}
 \]
 
 \end_inset
@@ -1596,13 +1464,6 @@ reference "eq:creation"
 
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:redemption"
-
-\end_inset
-
  in section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1616,7 +1477,7 @@ reference "subsec:Creation-and-Redemption"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}
 \]
 
 \end_inset
@@ -1642,7 +1503,7 @@ when combined market price of Class A and Class B tokens are higher than
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}
 \]
 
 \end_inset
@@ -1655,19 +1516,15 @@ an user can exploit the profit by creating more DUO tokens:
 \end_layout
 
 \begin_layout Enumerate
-Buy 
-\begin_inset Formula $\frac{1}{1-c}$
+Buy 1 underlying tokens from open market for 
+\begin_inset Formula $P_{t}$
 \end_inset
 
- underlying tokens from open market for 
-\begin_inset Formula $P_{t}\cdot\frac{1}{1-c}$
-\end_inset
-
- USD equivalent.
+ USD equivalent
 \end_layout
 
 \begin_layout Enumerate
-Send the underlying tokens to the Custodian contract.
+Send the underlying tokens to the Custodian contract
 \end_layout
 
 \begin_layout Enumerate
@@ -1679,22 +1536,22 @@ reference "eq:creation"
 \end_inset
 
 , receive 
-\begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
+\begin_inset Formula $\frac{P_{0}}{2}$
 \end_inset
 
  Class A and 
-\begin_inset Formula $P_{0}\cdot\frac{1}{1+\alpha}$
+\begin_inset Formula $\frac{P_{0}}{2}$
 \end_inset
 
- Class B tokens.
+ Class B tokens
 \end_layout
 
 \begin_layout Enumerate
 Sell Class A and Class B tokens on open market for 
-\begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
+\begin_inset Formula $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$
 \end_inset
 
- USD equivalent.
+ USD equivalent
 \end_layout
 
 \begin_layout Standard
@@ -1703,11 +1560,9 @@ The expected payoff of above operations is:
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
- & P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}\\
-= & P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)\\
-> & 0
-\end{align*}
+\[
+P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}}{2}\cdot\left(P_{A}^{t}+P_{B}^{t}-2\cdot\frac{P_{t}}{P_{0}}\right)>0
+\]
 
 \end_inset
 
@@ -1726,7 +1581,7 @@ when combined market price of Class A and Class B tokens are lower than
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}
+P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}
 \]
 
 \end_inset
@@ -1740,18 +1595,18 @@ similar arbitrage profit can be exploited by perform redemption:
 
 \begin_layout Enumerate
 Buy 
-\begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
+\begin_inset Formula $\frac{P_{0}}{2}$
 \end_inset
 
  Class A and 
-\begin_inset Formula $P_{0}\cdot\frac{1}{1+\alpha}$
+\begin_inset Formula $\frac{P_{0}}{2}$
 \end_inset
 
  Class B tokens from open market for 
-\begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
+\begin_inset Formula $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$
 \end_inset
 
- USD equivalent.
+ USD equivalent
 \end_layout
 
 \begin_layout Enumerate
@@ -1766,19 +1621,15 @@ reference "eq:redemption"
 
 \end_inset
 
-, receive 
-\begin_inset Formula $1-c$
-\end_inset
-
- underlying tokens.
+, receive 1 underlying tokens
 \end_layout
 
 \begin_layout Enumerate
 Sell underlying tokens on open market for 
-\begin_inset Formula $P_{t}\cdot\left(1-c\right)$
+\begin_inset Formula $P_{t}$
 \end_inset
 
- USD equivalent.
+ USD equivalent
 \end_layout
 
 \begin_layout Standard
@@ -1787,11 +1638,9 @@ The expected payoff of above operations is:
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
- & P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}\\
-= & P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)\\
-> & 0
-\end{align*}
+\[
+P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0
+\]
 
 \end_inset
 
@@ -1800,8 +1649,10 @@ The expected payoff of above operations is:
 
 \begin_layout Standard
 Many other factors also determine whether above arbitrage strategy can be
- successfully executed, such as bid ask spread of all the 3 components and
- ability to short sell the required components.
+ successfully executed, such as bid ask spread of all the 3 components,
+ cost in creation and redemption, and ability to short sell the required
+ components.
+ Please refer to appendix for discussion of a more general case.
 \end_layout
 
 \begin_layout Standard
@@ -1918,6 +1769,645 @@ While the structure discussed in this paper is independent to the underlying
 
 \end_layout
 
+\begin_layout Section
+\start_of_appendix
+Appendix
+\end_layout
+
+\begin_layout Subsection
+General Product Design
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:General-Product-Design"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Product-Design"
+
+\end_inset
+
+, we have described a specific product design where Class A is stable relative
+ to USD as target fiat currency and Class B has initial leverage as 2.
+ In addition, transaction cost in creation and redemption is omitted.
+ In this section, a general case is discussed.
+\end_layout
+
+\begin_layout Subsubsection
+Creation
+\end_layout
+
+\begin_layout Standard
+Dual-class tokens can be created by depositing underlying tokens to the
+ Custodian contract.
+ Upon receiving underlying tokens of amount 
+\begin_inset Formula $M_{C}$
+\end_inset
+
+, the Custodian contract will return to the sender certain amount of Class
+ A and Class B tokens.
+ Such amount 
+\begin_inset Formula $C_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{B}$
+\end_inset
+
+ can be calculated by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{cc}
+C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
+C_{A}= & C_{B}\cdot\alpha
+\end{array}\label{eq:creation-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $c$
+\end_inset
+
+ is the processing fee of the smart contract,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a positive number to determine the ratio of A and B
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ is the recorded price of underlying token in target fiat currency at last
+ reset event.
+\end_layout
+
+\begin_layout Subsubsection
+Redemption
+\end_layout
+
+\begin_layout Standard
+Holders of Class A and Class B tokens can withdraw deposited underlying
+ tokens at any time by performing a redemption.
+ To do this, the user will send amount of 
+\begin_inset Formula $R\cdot\alpha$
+\end_inset
+
+ Class A and amount of 
+\begin_inset Formula $R$
+\end_inset
+
+ Class B tokens to the Custodian contract.
+ The contract will deduct Class A and Class B tokens, and return to the
+ sender certain amount of underlying tokens.
+ Such amount 
+\begin_inset Formula $M_{R}$
+\end_inset
+
+ can be calculated by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\label{eq:redemption-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Net Value
+\end_layout
+
+\begin_layout Standard
+The net value of tokens are calculated based on the coupon rate, the elapsed
+ time from last reset event, and the latest underlying token price in target
+ fiat currency fed to the system.
+ In particular:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+V_{A}^{t} & =1+r\cdot t\\
+V_{B}^{t} & =\left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $r$
+\end_inset
+
+ is the daily coupon rate,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $t$
+\end_inset
+
+ is the number of days from last reset event,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ is the current price of underlying token in target fiat currency.
+\end_layout
+
+\begin_layout Subsubsection
+Quantity
+\end_layout
+
+\begin_layout Standard
+Below holds in the system at all time
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q_{A}^{t}=Q_{B}^{t}\cdot\alpha
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $Q_{A}^{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{B}^{t}$
+\end_inset
+
+ are the total amount of Class A and Class B tokens.
+\end_layout
+
+\begin_layout Subsubsection
+Implied Leverage Ratio
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that at inception or after resets, above simply reduces to 
+\begin_inset Formula 
+\[
+L_{B}^{0}=1+\alpha
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Contingent Upward Reset
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Contingent-Upward-Reset"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An upward reset is triggered when 
+\begin_inset Formula $V_{B}^{t}\geqslant\mathcal{H}_{u}$
+\end_inset
+
+.
+ Upon upward reset:
+\end_layout
+
+\begin_layout Enumerate
+Total amount of both classes token remain unchanged, 
+\begin_inset Formula $Q_{A}^{t+}=Q_{A}^{t-}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{B}^{t+}=Q_{B}^{t-}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Net Value of both classes reset to 1 target fiat currency
+\end_layout
+
+\begin_layout Enumerate
+Both classes' holders will receive certain amount of underlying token from
+ the Custodian contract.
+ Such amount for each Class A token is 
+\begin_inset Formula $U_{A}=\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}$
+\end_inset
+
+ and for each Class B token is 
+\begin_inset Formula $U_{B}=\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Total value in the system is unchanged after reset:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+U_{B}\cdot P_{t}\cdot Q_{B}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left(V_{A}^{t-}-1\right)\cdot Q_{A}^{t-}+\left(V_{B}^{t-}-1\right)\cdot Q_{B}^{t-}+Q_{A}^{t-}\cdot1+Q_{B}^{t-}\cdot1\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Contingent Downward Reset
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Contingent-Downward-Reset"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A downward reset is triggered when 
+\begin_inset Formula $V_{B}^{t}\leqslant\mathcal{H}_{d}$
+\end_inset
+
+.
+ Upon downward reset:
+\end_layout
+
+\begin_layout Enumerate
+Total amount of Class B token is reduced to 
+\begin_inset Formula $Q_{B}^{t+}=Q_{B}^{t-}\cdot V_{B}^{t-}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Total amount of Class A token is reduced to 
+\begin_inset Formula $Q_{A}^{t+}=Q_{B}^{t+}\cdot\alpha$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Net Value of both classes reset to 1 target fiat currency.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Class A holders will receive certain amount of underlying token from the
+ Custodian contract.
+ Such amount of each Class A token is: 
+\begin_inset Formula $D_{A}=\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Total value in the system is unchanged after reset:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & D_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left(V_{A}^{t-}-V_{B}^{t-}\right)\cdot Q_{A}^{t-}+Q_{B}^{t+}\cdot\alpha\cdot1+Q_{B}^{t+}\cdot1\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}-V_{B}^{t-}\cdot Q_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note above used the fact 
+\begin_inset Formula $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Periodic Reset
+\end_layout
+
+\begin_layout Standard
+A periodic reset is triggered when 
+\begin_inset Formula $V_{A}^{t}\geqslant\mathcal{H}_{p}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $V_{B}^{t-}$
+\end_inset
+
+ is less than 1, reset will be the same as the Contingent Downward reset.
+ Otherwise, reset will be the same as the Contingent Upward reset.
+\end_layout
+
+\begin_layout Subsection
+General Market Arbitrage
+\end_layout
+
+\begin_layout Standard
+The price parity shall hold as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where, 
+\begin_inset Formula $P_{A}^{t}$
+\end_inset
+
+ is the current price of Class A in target fiat currency,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{B}^{t}$
+\end_inset
+
+ is the current price of Class B in target fiat currency.
+\end_layout
+
+\begin_layout Standard
+Along with equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:creation-1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:redemption-1"
+
+\end_inset
+
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:General-Product-Design"
+
+\end_inset
+
+, below should hold:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On open market, arbitrage opportunity exists when Class A and Class B tokens
+ trade away from their net values and above equation is violated on either
+ side.
+\end_layout
+
+\begin_layout Paragraph
+Arbitrage via Creation
+\end_layout
+
+\begin_layout Standard
+when combined market price of Class A and Class B tokens are higher than
+ their combined net values, i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+an user can exploit the profit by creating more DUO tokens:
+\end_layout
+
+\begin_layout Enumerate
+Buy 
+\begin_inset Formula $\frac{1}{1-c}$
+\end_inset
+
+ underlying tokens from open market for 
+\begin_inset Formula $P_{t}\cdot\frac{1}{1-c}$
+\end_inset
+
+ target fiat currency equivalent.
+\end_layout
+
+\begin_layout Enumerate
+Send the underlying tokens to the Custodian contract.
+\end_layout
+
+\begin_layout Enumerate
+Based on equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:creation-1"
+
+\end_inset
+
+, receive 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
+\end_inset
+
+ Class A and 
+\begin_inset Formula $P_{0}\cdot\frac{1}{1+\alpha}$
+\end_inset
+
+ Class B tokens.
+\end_layout
+
+\begin_layout Enumerate
+Sell Class A and Class B tokens on open market for 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
+\end_inset
+
+ target fiat currency equivalent.
+\end_layout
+
+\begin_layout Standard
+The expected payoff of above operations is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)>0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Arbitrage via Redemption
+\end_layout
+
+\begin_layout Standard
+when combined market price of Class A and Class B tokens are lower than
+ their combined net values, i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+similar arbitrage profit can be exploited by perform redemption:
+\end_layout
+
+\begin_layout Enumerate
+Buy 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
+\end_inset
+
+ Class A and 
+\begin_inset Formula $P_{0}\cdot\frac{1}{1+\alpha}$
+\end_inset
+
+ Class B tokens from open market for 
+\begin_inset Formula $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
+\end_inset
+
+ target fiat currency equivalent.
+\end_layout
+
+\begin_layout Enumerate
+Send Class A and Class B tokens to the Custodian contract
+\end_layout
+
+\begin_layout Enumerate
+Based on equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:redemption-1"
+
+\end_inset
+
+, receive 
+\begin_inset Formula $1-c$
+\end_inset
+
+ underlying tokens.
+\end_layout
+
+\begin_layout Enumerate
+Sell underlying tokens on open market for 
+\begin_inset Formula $P_{t}\cdot\left(1-c\right)$
+\end_inset
+
+ target fiat currency equivalent.
+\end_layout
+
+\begin_layout Standard
+The expected payoff of above operations is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}=P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)>0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
@@ -1945,6 +2435,26 @@ Working Paper
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 label "2"
+key "Ingersoll1976"
+
+\end_inset
+
+Ingersoll, J.
+ E.
+ 1976.
+ A theoretical and empirical investigation of the dual purpose funds: an
+ application of contingent-claims analysis.
+ 
+\shape italic
+Journal of Financial Economics
+\shape default
+ 3:83-123.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "3"
 key "Leverage"
 
 \end_inset
@@ -1965,7 +2475,7 @@ target "https://www.investopedia.com/terms/l/leverage.asp"
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-label "3"
+label "4"
 key "ETH"
 
 \end_inset
