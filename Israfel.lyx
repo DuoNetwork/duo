@@ -165,7 +165,7 @@ type "mailto:"
 \end_layout
 
 \begin_layout Date
-Version 0.2.0
+Version 0.3.0
 \begin_inset Newline newline
 \end_inset
 
@@ -181,28 +181,23 @@ Major crypto-currencies are subject to massive volatility, which makes them
 \end_layout
 
 \begin_layout Abstract
-Dual purpose fund is a leverage investment product that has gained popularity
- in the US and China.
- It provides a practical risk segregation design based on a single underlying
- asset, which is especially suitable for creating fixed income assets in
- crypto market.
-\end_layout
-
-\begin_layout Abstract
-We propose, for the first time to our best knowledge, a dual-class crypto
- token structure that offers entitlements to either fixed income or leveraged
- capital appreciation: the income token receives periodical coupon payments
- with principal protection; the leverage token provides leveraged participation
- in underlying crypto assets.
+Inspired by the dual purpose fund that has gained popularity in the US and
+ China, we propose, for the first time to our best knowledge, a dual-class
+ crypto token structure that offers entitlements to either fixed income
+ or leveraged capital appreciation: the income token receives periodical
+ coupon payments with principal protection; the leverage token provides
+ leveraged participation in underlying crypto assets.
  The whole mechanism is governed by smart contracts run on Ethereum blockchain,
  without dealing with centralized counterparties.
+ In theory, we justify the income token as an ideal stable token.
 \end_layout
 
 \begin_layout Abstract
-We take Ether (ETH) as underlying asset and use historical prices to illustrate
- the product's performance in real world scenarios.
- And we further explain on how arbitrage activities take place and help
- maintain price stability of the income tokens.
+For illustration, we employ Ether (ETH) as underlying asset and use its
+ historical prices to demonstrate  the performance of our stable token in
+ real world scenarios.
+ We also show how arbitrage activities take place and help maintain price
+ stability of this stable token.
 \end_layout
 
 \begin_layout Standard
@@ -573,12 +568,12 @@ Dual-class tokens can be created by depositing underlying tokens to the
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{c}
-C=\frac{M_{C}\cdot P_{0}}{2}\end{array}\label{eq:creation}
+C=\frac{M_{C}\cdot P_{0}}{2}\ ,\end{array}\label{eq:creation}
 \end{equation}
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $P_{0}$
 \end_inset
 
@@ -624,7 +619,7 @@ Holders of Class A and Class B tokens can withdraw deposited underlying
  can be calculated by:
 \begin_inset Formula 
 \begin{equation}
-M_{R}=\frac{2R}{P_{0}}\label{eq:redemption}
+M_{R}=\frac{2R}{P_{0}}\ .\label{eq:redemption}
 \end{equation}
 
 \end_inset
@@ -645,13 +640,13 @@ The net values of tokens are calculated based on the coupon rate, the elapsed
 \begin{equation}
 \begin{array}{cc}
 V_{A}^{t}= & 1+r\cdot t\\
-V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}
+V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue}
 \end{equation}
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $r$
 \end_inset
 
@@ -863,12 +858,12 @@ For illustration, we hereby uses Ether (ETH) as the underlying token and
 r\;\; & =0.05\%\\
 \mathcal{H}_{d} & =0.25\\
 \mathcal{H}_{u} & =2\\
-\mathcal{H}_{p} & =1.05
+\mathcal{H}_{p} & =1.05\ ,
 \end{align*}
 
 \end_inset
 
-, and below assumptions are used:
+and below assumptions are used:
 \end_layout
 
 \begin_layout Enumerate
@@ -1492,12 +1487,12 @@ The dual class tokens are two-way fungible to the underlying token (i.e.
  Thus, a price parity shall hold as below:
 \begin_inset Formula 
 \[
-P_{A}^{t}+P_{B}^{t}=V_{A}^{t}+V_{B}^{t}
+P_{A}^{t}+P_{B}^{t}=V_{A}^{t}+V_{B}^{t}\ ,
 \]
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $P_{A}^{t}$
 \end_inset
 
@@ -1530,7 +1525,7 @@ reference "subsec:Creation-and-Redemption"
 , below should hold:
 \begin_inset Formula 
 \[
-P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}
+P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}\ .
 \]
 
 \end_inset
@@ -1549,12 +1544,12 @@ When combined market price of Class A and Class B tokens are higher than
  their combined net values, i.e.
 \begin_inset Formula 
 \[
-P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}
+P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}\ ,
 \]
 
 \end_inset
 
-, arbitrage profit can be exploited by perform DUO token creation:
+arbitrage profit can be exploited by perform DUO token creation:
 \end_layout
 
 \begin_layout Enumerate
@@ -1600,7 +1595,7 @@ Sell Class A and Class B tokens on open market for
 The expected payoff of above operations is:
 \begin_inset Formula 
 \[
-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}}{2}\cdot\left(P_{A}^{t}+P_{B}^{t}-2\cdot\frac{P_{t}}{P_{0}}\right)>0
+P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}}{2}\cdot\left(P_{A}^{t}+P_{B}^{t}-2\cdot\frac{P_{t}}{P_{0}}\right)>0\ .
 \]
 
 \end_inset
@@ -1617,12 +1612,12 @@ When combined market price of Class A and Class B tokens are lower than
  their combined net values, i.e.
 \begin_inset Formula 
 \[
-P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}
+P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}\ ,
 \]
 
 \end_inset
 
-, arbitrage profit can be exploited by perform DUO token redemption:
+arbitrage profit can be exploited by perform DUO token redemption:
 \end_layout
 
 \begin_layout Enumerate
@@ -1668,7 +1663,7 @@ Sell underlying tokens on open market for
 The expected payoff of above operations is:
 \begin_inset Formula 
 \[
-P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0
+P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0\ .
 \]
 
 \end_inset
@@ -1978,13 +1973,13 @@ Dual-class tokens can be created by depositing underlying tokens to the
 \begin{equation}
 \begin{array}{cc}
 C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
-C_{A}= & C_{B}\cdot\alpha
+C_{A}= & C_{B}\cdot\alpha\ ,
 \end{array}\label{eq:creation-1}
 \end{equation}
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $c$
 \end_inset
 
@@ -2035,7 +2030,7 @@ Holders of Class A and Class B tokens can withdraw deposited underlying
  can be calculated by:
 \begin_inset Formula 
 \begin{equation}
-M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\label{eq:redemption-1}
+M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\ .\label{eq:redemption-1}
 \end{equation}
 
 \end_inset
@@ -2056,13 +2051,13 @@ The net value of tokens are calculated based on the coupon rate, the elapsed
 \begin{equation}
 \begin{array}{cc}
 V_{A}^{t}= & 1+r\cdot t\\
-V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
+V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue-1}
 \end{equation}
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $r$
 \end_inset
 
@@ -2092,12 +2087,12 @@ Quantity
 Below holds in the system at all time
 \begin_inset Formula 
 \[
-Q_{A}^{t}=Q_{B}^{t}\cdot\alpha
+Q_{A}^{t}=Q_{B}^{t}\cdot\alpha\ ,
 \]
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $Q_{A}^{t}$
 \end_inset
 
@@ -2183,7 +2178,7 @@ Total value in the system is unchanged after reset:
 \begin{align*}
  & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+U_{B}\cdot P_{t}\cdot Q_{B}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
 = & \left(V_{A}^{t-}-1\right)\cdot Q_{A}^{t-}+\left(V_{B}^{t-}-1\right)\cdot Q_{B}^{t-}+Q_{A}^{t-}\cdot1+Q_{B}^{t-}\cdot1\\
-= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}\ .
 \end{align*}
 
 \end_inset
@@ -2248,7 +2243,7 @@ Total value in the system is unchanged after reset:
  & D_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
 = & \left(V_{A}^{t-}-V_{B}^{t-}\right)\cdot Q_{A}^{t-}+Q_{B}^{t+}\cdot\alpha\cdot1+Q_{B}^{t+}\cdot1\\
 = & V_{A}^{t-}\cdot Q_{A}^{t-}-V_{B}^{t-}\cdot Q_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\cdot\alpha+Q_{B}^{t-}\cdot V_{B}^{t-}\\
-= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}\ .
 \end{align*}
 
 \end_inset
@@ -2286,12 +2281,12 @@ General Market Arbitrage
 The price parity shall hold as below:
 \begin_inset Formula 
 \[
-\alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}
+\alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}\ ,
 \]
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $P_{A}^{t}$
 \end_inset
 
@@ -2338,7 +2333,7 @@ reference "subsec:General-Product-Design"
 , below should hold:
 \begin_inset Formula 
 \[
-\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\ .
 \]
 
 \end_inset
@@ -2357,12 +2352,12 @@ When combined market price of Class A and Class B tokens are higher than
  their combined net values, i.e.
 \begin_inset Formula 
 \[
-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
+\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\ ,
 \]
 
 \end_inset
 
-, arbitrage profit can be exploited by perform DUO token creation:
+arbitrage profit can be exploited by perform DUO token creation:
 \end_layout
 
 \begin_layout Enumerate
@@ -2412,7 +2407,7 @@ Sell Class A and Class B tokens on open market for
 The expected payoff of above operations is:
 \begin_inset Formula 
 \[
-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)>0
+P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)>0\ .
 \]
 
 \end_inset
@@ -2429,12 +2424,12 @@ When combined market price of Class A and Class B tokens are lower than
  their combined net values, i.e.
 \begin_inset Formula 
 \[
-\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}
+\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\ ,
 \]
 
 \end_inset
 
-, similar arbitrage profit can be exploited by perform DUO token redemption:
+similar arbitrage profit can be exploited by perform DUO token redemption:
 \end_layout
 
 \begin_layout Enumerate
@@ -2484,7 +2479,7 @@ Sell underlying tokens on open market for
 The expected payoff of above operations is:
 \begin_inset Formula 
 \[
-P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}=P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)>0
+P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}=P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)>0\ .
 \]
 
 \end_inset
