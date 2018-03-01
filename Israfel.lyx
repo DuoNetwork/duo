@@ -79,11 +79,11 @@
 \begin_body
 
 \begin_layout Title
-A Dual Token Structure Providing Price Stability with Fixed Income
+A Stable Token Based on Dual-Class Structure
 \end_layout
 
 \begin_layout Author
-LI Lewei
+Lewei LI
 \begin_inset Foot
 status collapsed
 
@@ -110,7 +110,7 @@ type "mailto:"
 \begin_inset Formula $\;,$
 \end_inset
 
- CAO Yizhou
+Yizhou CAO
 \begin_inset Foot
 status collapsed
 
@@ -137,8 +137,7 @@ type "mailto:"
 \begin_inset Formula $\;,$
 \end_inset
 
- Prof.
- DAI Min
+Min DAI
 \begin_inset Foot
 status collapsed
 
@@ -166,24 +165,22 @@ type "mailto:"
 \end_layout
 
 \begin_layout Date
-Version 0.1.0
+Version 0.2.0
 \begin_inset Newline newline
 \end_inset
 
-28 Feb 2018
+1 Mar 2018
 \end_layout
 
 \begin_layout Abstract
-\noindent
 Major crypto-currencies are subject to massive volatility, which makes them
- attractive to speculators but unsuited for mainstream use.
- There has been several attempts on implementing 'stablecoins'.
+ attractive to speculators but unsuitable for mainstream use.
+ There have been several attempts on implementing 'stablecoins'.
  But most of them fail to provide steady returns that's appealing to regular
  investors.
 \end_layout
 
 \begin_layout Abstract
-\noindent
 Dual purpose fund is a leverage investment product that has gained popularity
  in the US and China.
  It provides a practical risk segregation design based on a single underlying
@@ -192,7 +189,6 @@ Dual purpose fund is a leverage investment product that has gained popularity
 \end_layout
 
 \begin_layout Abstract
-\noindent
 We propose, for the first time to our best knowledge, a dual-class crypto
  token structure that offers entitlements to either fixed income or leveraged
  capital appreciation: the income token receives periodical coupon payments
@@ -203,8 +199,7 @@ We propose, for the first time to our best knowledge, a dual-class crypto
 \end_layout
 
 \begin_layout Abstract
-\noindent
-We take Ether (ETH) as undelrying asset and use historical prices to illustrate
+We take Ether (ETH) as underlying asset and use historical prices to illustrate
  the product's performance in real world scenarios.
  And we further explain on how arbitrage activities take place and help
  maintain price stability of the income tokens.
@@ -294,21 +289,21 @@ Stablecoins and Fixed Income Assets
 
 \begin_layout Standard
 Since their inception, crypto currencies aim to create an alternative financial
- system comparable to fiat financial system.
- In fiat system, money or credits exist in a few different forms: actual
+ system comparable to fiat financial systems.
+ In a fiat system, money or credit exists in a few different forms: actual
  currency in circulation and fixed income assets such as time deposits and
  money market funds, which are the foundation for rest of the financial
  market to build on.
  The crypto market is at primitive stage as it lacks coins or tokens comparable
- to fiat money due to their huge price volatility and thus there is no establish
-ed fixed income assets either.
+ to fiat money due to their huge price volatility and thus there are no
+ established fixed income assets either.
  
 \end_layout
 
 \begin_layout Standard
 A Stable token, also known as stablecoin, is a crypto-token that keeps stable
  market value against a specific index, most noticeably US Dollar.
- There has been a few attempts to create stable tokens: Tether claims to
+ There have been a few attempts to create stable tokens: Tether claims to
  have 1:1 USD collateral in its centralized bank accounts; Basecoin tries
  to control money supply by playing an algorithmic version of central bank;
  MakerDAO uses decentralized over-collateralization to maintain confidence
@@ -317,9 +312,9 @@ A Stable token, also known as stablecoin, is a crypto-token that keeps stable
 \end_layout
 
 \begin_layout Standard
-Most stable token designs to date share a common problem: their holders
- bear variable levels of counter-party risks, but there is little incentive
- or even additional cost to hold these tokens.
+Most stable token designs to date face a common problem: their holders bear
+ variable levels of counter-party risks, but there is little incentive or
+ even additional cost to hold these tokens.
  We believe a crypto-token with low price volatility and stable income is
  a superior safe haven asset and is essential for a more robust crypto market.
 \end_layout
@@ -329,12 +324,12 @@ Risk Segmentation
 \end_layout
 
 \begin_layout Standard
-In fiat market, risk segmentation exists in every level of market.
+In the fiat market, risk segmentation exists in every level of market.
  At asset class level, risk averse investors choose fixed income products
  while risk seeking investors choose equity or commodity.
- Within fixed income market, conservative investors choose safe haven assets
- such as government bonds while aggressive players choose high yield bonds,
- or otherwise known as junk bonds.
+ Within the fixed income market, conservative investors choose safe haven
+ assets such as government bonds while aggressive players choose high yield
+ bonds, or otherwise known as junk bonds.
  
 \end_layout
 
@@ -352,9 +347,9 @@ Although most of crypto assets are considered highly speculative, there
 
 \begin_layout Standard
 The price volatility cannot be eliminated, but can be transferred.
- Through a structured contract, a risk-seeking user can get exposed to higher
- leverage with limited assets, while a risk-averse user can avoid unwanted
- price fluctuations by entering the other side of the contract.
+ Through a structured contract, a risk-seeking investor can get exposed
+ to higher leverage with limited assets, while a risk-averse investor can
+ avoid unwanted price fluctuations by entering the other side of the contract.
  The financial market has created many products satisfying different risk
  segments, some of which can be very practical for crypto market participants.
 \end_layout
@@ -365,23 +360,24 @@ Leveraged Funds
 
 \begin_layout Standard
 Leverage is the strategy of using borrowed capital to increase the potential
- return of an investment.
+ return of an investment
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Leverage"
 
 \end_inset
 
+.
  Retail investors have less access to leverage methods such as margin loans
- and financial derivatives, which promoted the creation of leveraged fund
+ and financial derivatives, which promotes the creation of leveraged fund
  products.
  
 \end_layout
 
 \begin_layout Standard
-A interesting class of leveraged funds is the dual-purpose funds, also known
- as primes and scores, which are mutual funds that are split into two classes
- of shares by design: low risk shares and high risk shares.
+An interesting class of leveraged funds is the dual-purpose funds, also
+ known as primes and scores, which are mutual funds that are split into
+ two classes of shares by design: low risk shares and high risk shares.
  They were designed to provide investors with the opportunity of repackaging
  their investment incomes and capital flow in accordance with their preferences.
  Dual-purpose funds first appeared in U.S.
@@ -398,8 +394,8 @@ key "DM2018"
 
 \begin_layout Standard
 The dual-purpose fund was introduced in China in 2010 and it quickly became
- the most popular leveraged product there, reaching market size of 500 billion
- CNY (80 billion USD) at its peak.
+ one of the most popular leveraged products there, reaching market size
+ of 500 billion CNY (80 billion USD) at its peak.
  A Chinese dual-purpose fund usually takes an open-end index-tracking fund
  as underlying and has two classes of shares: the low risk A shares behave
  like a perpetual bond with periodical coupon payments, and the high risk
@@ -417,10 +413,10 @@ key "DM2018"
 \end_layout
 
 \begin_layout Standard
-We are attracted by Chinese dual-purpose fund for three reasons: (i) both
+We are inspired by Chinese dual-purpose fund for three reasons: (i) both
  the income and leveraged shares answer unfulfilled demands of cryptocurrency
- users; (ii) the market mechanism, pricing formula and arbitrage method
- are proven working in real market; and (iii) the structure can be efficiently
+ investors; (ii) the market mechanism, pricing formula, and arbitrage method
+ prove to work in real market; and (iii) the structure can be efficiently
  implemented by Smart Contracts.
 \end_layout
 
@@ -435,7 +431,7 @@ Smart Contract was first proposed by Nick Szabo in 1994, who described it
 \end_layout
 
 \begin_layout Standard
-The idea hasn't received commercial adoption due to lack of trustworthy
+The idea has not received commercial adoption due to lack of trustworthy
  execution environment, until the appearance of blockchain technology.
  Released in 2015, Ethereum implements a nearly Turing-complete language
  on its blockchain, a prominent smart contract framework.
@@ -465,9 +461,9 @@ y.
 \end_layout
 
 \begin_layout Standard
-The intent of this paper is to propose an alternative approach of creating
- stable value tokens, providing a different set of trade offs between price
- stability, holder incentive and supply flexibility.
+This paper aims to propose an alternative approach of creating stable value
+ tokens, providing a different set of trade offs between price stability,
+ holder incentive and supply flexibility.
  We believe the solution will be very useful for broader adoption of the
  crypto market.
 \end_layout
@@ -515,7 +511,7 @@ DUO
 \begin_layout Standard
 a dual-class token structure that, combined with smart contract governed
  rules and market arbitrage mechanism, provides principal-guaranteed fixed
- incomes and leveraged capital gains for holders of each class.
+ incomes and leveraged capital gains for holders of each class, respectively.
 \end_layout
 
 \begin_layout Paragraph
@@ -525,7 +521,7 @@ Class A Token
 \begin_layout Standard
 also known as the Income Token, continuously accumulates interests based
  on its original net value at last Reset event.
- It will receive token payments at each Reset event.
+ It will also receive token payments at each Reset event.
 \end_layout
 
 \begin_layout Paragraph
@@ -574,9 +570,6 @@ Dual-class tokens can be created by depositing underlying tokens to the
 \end_inset
 
  can be calculated by:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{c}
@@ -585,11 +578,7 @@ C=\frac{M_{C}\cdot P_{0}}{2}\end{array}\label{eq:creation}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $P_{0}$
 \end_inset
 
@@ -624,15 +613,15 @@ Holders of Class A and Class B tokens can withdraw deposited underlying
 
  of Class A and Class B tokens to the Custodian contract.
  The contract will deduct Class A and Class B tokens, and return to the
- sender certain amount of underlying tokens.
- Such amount 
+ sender 
+\begin_inset Formula $M_{R}$
+\end_inset
+
+ underlying tokens, where
 \begin_inset Formula $M_{R}$
 \end_inset
 
  can be calculated by:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 M_{R}=\frac{2R}{P_{0}}\label{eq:redemption}
@@ -648,13 +637,10 @@ Net Value
 \end_layout
 
 \begin_layout Standard
-The net value of tokens are calculated based on the coupon rate, the elapsed
+The net values of tokens are calculated based on the coupon rate, the elapsed
  time from last Reset event, and the latest underlying token price in USD
  fed to the system.
- In particular:
-\end_layout
-
-\begin_layout Standard
+ In particular,
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{cc}
@@ -665,15 +651,15 @@ V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $r$
 \end_inset
 
- is the daily coupon rate,
+ is the 
+\series bold
+daily
+\series default
+ coupon rate,
 \end_layout
 
 \begin_layout Standard
@@ -684,6 +670,7 @@ where,
 \end_layout
 
 \begin_layout Standard
+and 
 \begin_inset Formula $P_{t}$
 \end_inset
 
@@ -702,19 +689,11 @@ L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{2}{V_{B}^{t}}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Note that at inception or after resets, above simply reduces to 
-\begin_inset Formula 
-\[
-L_{B}^{0}=2
-\]
-
+\begin_inset Formula $L_{B}^{0}=2$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsection
@@ -764,11 +743,11 @@ Net Value of both classes reset to 1 USD
 Both classes' holders will receive certain amount of underlying token from
  the Custodian contract.
  Such amount for each Class A token is 
-\begin_inset Formula $\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}$
+\begin_inset Formula $\frac{V_{A}^{t-}-1}{P_{t}}$
 \end_inset
 
  and for each Class B token is 
-\begin_inset Formula $\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}$
+\begin_inset Formula $\frac{V_{B}^{t-}-1}{P_{t}}$
 \end_inset
 
 
@@ -776,7 +755,7 @@ Both classes' holders will receive certain amount of underlying token from
 
 \begin_layout Standard
 Total value in the system is unchanged after reset.
- Please refer to appendix 
+ For details, see Appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Contingent-Upward-Reset"
@@ -791,7 +770,8 @@ Contingent Downward Reset
 \end_layout
 
 \begin_layout Standard
-When underlying token price falls, the Class B token's leverage ratio increases.
+When the underlying token price falls, the Class B token's leverage ratio
+ increases.
  A Downward Reset is triggered when the Net Value of Class B token reaches
  lower limit 
 \begin_inset Formula $\mathcal{H}_{d}$
@@ -830,7 +810,7 @@ Net Value of both classes reset to 1 USD
 Class A holders will receive certain amount of underlying token from the
  Custodian contract.
  Such amount of each Class A token is: 
-\begin_inset Formula $\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}$
+\begin_inset Formula $\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$
 \end_inset
 
 
@@ -838,7 +818,7 @@ Class A holders will receive certain amount of underlying token from the
 
 \begin_layout Standard
 Total value in the system is unchanged after reset.
- Please refer to appendix 
+ For details, see Appendix  
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Contingent-Downward-Reset"
@@ -871,23 +851,13 @@ When a given time period has passed from the last reset time,
  Otherwise, reset will be the same as the Contingent Upward reset.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 ETH Examples
 \end_layout
 
 \begin_layout Standard
 For illustration, we hereby uses Ether (ETH) as the underlying token and
- apply below parameters:
-\end_layout
-
-\begin_layout Standard
+ apply below parameter values:
 \begin_inset Formula 
 \begin{align*}
 r\;\; & =0.05\%\\
@@ -898,15 +868,11 @@ r\;\; & =0.05\%\\
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-we will also use below assumptions:
+, and below assumptions are used:
 \end_layout
 
 \begin_layout Enumerate
-Price observation are done on 
+Price is monitored on 
 \series bold
 daily
 \series default
@@ -922,11 +888,48 @@ The structure starts with 100,000 ETH with no further capital injection
 \end_layout
 
 \begin_layout Enumerate
-Reinvestment of ETH payout from resets are not considered
+Reinvestment of ETH payout from resets is not considered
 \end_layout
 
 \begin_layout Subsubsection
 Overall Market
+\end_layout
+
+\begin_layout Standard
+ETH/USD price data from 1 Oct 2017 to 28 Feb 2018 is used.
+ In this period, ETH started from 303.95 USD to low of 284.92 USD and high
+ of 1,359.48 and ended at 851.5.
+ 
+\end_layout
+
+\begin_layout Standard
+At inception, 15,197,500 Class A and 15,197,500 Class B are issued from
+ the 100,000 ETH, total value in the system is 30,395,000 USD.
+\end_layout
+
+\begin_layout Standard
+Three upward resets were triggered on 24 Nov 2017 (
+\begin_inset Formula $V_{B}=2.0684$
+\end_inset
+
+), 17 Dec 2017 (
+\begin_inset Formula $V_{B}=2.0398$
+\end_inset
+
+) and 7 Jan 2018 (
+\begin_inset Formula $V_{B}=2.1043$
+\end_inset
+
+) while one downward reset was triggered on 5 Feb 2018 (
+\begin_inset Formula $V_{B}=0.2292$
+\end_inset
+
+.).
+ No periodic reset was triggered in the sampling period.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -967,35 +970,6 @@ Total Values
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-ETH/USD price data from 1 Oct 2017 to 25 Feb 2018 is used.
- In this period, ETH started from 303.95 USD to low of 284.92 USD and high
- of 1,359.48 and ended at 840.28.
- At inception, 15,197,500 Class A and 15,197,500 Class B are issued from
- the 100,000 ETH, total value in the system is 30,395,000 USD.
-\end_layout
-
-\begin_layout Standard
-Three upward resets were triggered on 24 Nov 2017 (
-\begin_inset Formula $V_{B}=2.0684$
-\end_inset
-
-), 17 Dec 2017 (
-\begin_inset Formula $V_{B}=2.0398$
-\end_inset
-
-) and 7 Jan 2018 (
-\begin_inset Formula $V_{B}=2.1043$
-\end_inset
-
-) while one downward reset was triggered on 5 Feb 2018 (
-\begin_inset Formula $V_{B}=0.2292$
-\end_inset
-
-.).
- No periodic reset was triggered in the sampling period.
 \end_layout
 
 \begin_layout Standard
@@ -1079,13 +1053,6 @@ status collapsed
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -1240,7 +1207,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-7 Jan Nov 2017 - 25 Feb 2017 Total Values
+7 Jan Nov 2017 - 28 Feb 2017 Total Values
 \end_layout
 
 \end_inset
@@ -1248,13 +1215,6 @@ status collapsed
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -1369,6 +1329,106 @@ In order to achieve above return, ETH payout from resets need to be fully
  converted back to the corresponding class token.
  For example, after 24 Nov 2017 upward reset, all ETH received by Class
  A holder need to be converted into Class A token.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1418,8 +1478,8 @@ Like all fixed income products, Class A is expected to trade on premium
  and getting higher yield.
  In an orderly market, Class A's market price can be used to derive the
  current market cost of funding.
- As net values draws closer to resets, Class A might trade closer to its
- net value as trader start exploiting arbitrage opportunities.
+ As net values draw closer to resets, Class A might trade closer to its
+ net value as traders start exploiting arbitrage opportunities.
 \end_layout
 
 \begin_layout Subsection
@@ -1430,9 +1490,6 @@ Market Arbitrage
 The dual class tokens are two-way fungible to the underlying token (i.e.
  ETH).
  Thus, a price parity shall hold as below:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{A}^{t}+P_{B}^{t}=V_{A}^{t}+V_{B}^{t}
@@ -1440,11 +1497,7 @@ P_{A}^{t}+P_{B}^{t}=V_{A}^{t}+V_{B}^{t}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $P_{A}^{t}$
 \end_inset
 
@@ -1452,6 +1505,7 @@ where,
 \end_layout
 
 \begin_layout Standard
+and 
 \begin_inset Formula $P_{B}^{t}$
 \end_inset
 
@@ -1459,14 +1513,14 @@ where,
 \end_layout
 
 \begin_layout Standard
-Along with equation 
+Along with Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:netvalue"
 
 \end_inset
 
- in section 
+) in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Creation-and-Redemption"
@@ -1474,9 +1528,6 @@ reference "subsec:Creation-and-Redemption"
 \end_inset
 
 , below should hold:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}
@@ -1484,13 +1535,9 @@ P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 On open market, arbitrage opportunity exists when Class A and Class B tokens
- trade away from their net values and above equation is violated on either
- side.
+ trade away from their net values and the above equation is likely violated
+ on either side.
 \end_layout
 
 \begin_layout Paragraph
@@ -1498,11 +1545,8 @@ Arbitrage via Creation
 \end_layout
 
 \begin_layout Standard
-when combined market price of Class A and Class B tokens are higher than
+When combined market price of Class A and Class B tokens are higher than
  their combined net values, i.e.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}
@@ -1510,11 +1554,7 @@ P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-an user can exploit the profit by creating more DUO tokens:
+, arbitrage profit can be exploited by perform DUO token creation:
 \end_layout
 
 \begin_layout Enumerate
@@ -1522,22 +1562,22 @@ Buy 1 underlying tokens from open market for
 \begin_inset Formula $P_{t}$
 \end_inset
 
- USD equivalent
+ USD equivalent.
 \end_layout
 
 \begin_layout Enumerate
-Send the underlying tokens to the Custodian contract
+Send the underlying tokens to the Custodian contract.
 \end_layout
 
 \begin_layout Enumerate
-Based on equation 
+Based on Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:creation"
 
 \end_inset
 
-, receive 
+), receive 
 \begin_inset Formula $\frac{P_{0}}{2}$
 \end_inset
 
@@ -1545,7 +1585,7 @@ reference "eq:creation"
 \begin_inset Formula $\frac{P_{0}}{2}$
 \end_inset
 
- Class B tokens
+ Class B tokens.
 \end_layout
 
 \begin_layout Enumerate
@@ -1553,14 +1593,11 @@ Sell Class A and Class B tokens on open market for
 \begin_inset Formula $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$
 \end_inset
 
- USD equivalent
+ USD equivalent.
 \end_layout
 
 \begin_layout Standard
 The expected payoff of above operations is:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}}{2}\cdot\left(P_{A}^{t}+P_{B}^{t}-2\cdot\frac{P_{t}}{P_{0}}\right)>0
@@ -1576,11 +1613,8 @@ Arbitrage via Redemption
 \end_layout
 
 \begin_layout Standard
-when combined market price of Class A and Class B tokens are lower than
+When combined market price of Class A and Class B tokens are lower than
  their combined net values, i.e.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}
@@ -1588,11 +1622,7 @@ P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-similar arbitrage profit can be exploited by perform redemption:
+, arbitrage profit can be exploited by perform DUO token redemption:
 \end_layout
 
 \begin_layout Enumerate
@@ -1608,22 +1638,22 @@ Buy
 \begin_inset Formula $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$
 \end_inset
 
- USD equivalent
+ USD equivalent.
 \end_layout
 
 \begin_layout Enumerate
-Send Class A and Class B tokens to the Custodian contract
+Send Class A and Class B tokens to the Custodian contract.
 \end_layout
 
 \begin_layout Enumerate
-Based on equation 
+Based on Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:redemption"
 
 \end_inset
 
-, receive 1 underlying tokens
+), receive 1 underlying tokens.
 \end_layout
 
 \begin_layout Enumerate
@@ -1631,14 +1661,11 @@ Sell underlying tokens on open market for
 \begin_inset Formula $P_{t}$
 \end_inset
 
- USD equivalent
+ USD equivalent.
 \end_layout
 
 \begin_layout Standard
 The expected payoff of above operations is:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0
@@ -1646,15 +1673,131 @@ P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\f
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Many other factors also determine whether above arbitrage strategy can be
  successfully executed, such as bid ask spread of all the 3 components,
  cost in creation and redemption, and ability to short sell the required
  components.
  Please refer to appendix for discussion of a more general case.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1690,7 +1833,7 @@ Arbitrary rate can be used for Class A coupon and it will be traded on premium
 \end_layout
 
 \begin_layout Standard
-As discussed in section 
+As discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Premium-and-Discount"
@@ -1699,8 +1842,8 @@ reference "subsec:Premium-and-Discount"
 
 , the market premium or discount of Class A token may imply USD's borrow
  rate in this market.
- As the structure gain attractions, its implied rate could serve as an indicatio
-n for other USD borrow practice in crypto market.
+ As the structure gains attractions, its implied rate could serve as an
+ indication for other USD borrow practice in crypto market.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1710,9 +1853,9 @@ Optimal Reset Threshold and Frequency
 \begin_layout Standard
 It is important to keep leverage for Class B within certain range: not too
  high so as to protect Class A holders from sudden price drop and not too
- low so as to keep Class B attractive to leveraged investors.
+ low so as to keep Class B attractive to leveraged users.
  However, it is undesirable that resets, especially downward resets, happen
- too frequent.
+ too frequently.
 \end_layout
 
 \begin_layout Standard
@@ -1721,8 +1864,16 @@ There are two main parameters to be determined, the ratio between Class
 \begin_inset Formula $\alpha$
 \end_inset
 
-; and the lower limit of Class B net value, 
-\begin_inset Formula $h$
+ (see Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:General-Product-Design"
+
+\end_inset
+
+); and the lower limit of Class B net value, 
+\begin_inset Formula $\mathcal{H}_{d}$ 
+
 \end_inset
 
 , that triggers downward resets.
@@ -1732,11 +1883,11 @@ There are two main parameters to be determined, the ratio between Class
 \end_inset
 
  is set to 1, meaning the quantities of Class A versus Class B is 1:1; 
-\begin_inset Formula $h$
+\begin_inset Formula $\mathcal{H}_{d}$
 \end_inset
 
  being 0.25, meaning a downward reset will be triggered if the underlying
- price dropped approximately 37% from last reset.
+ price dropped approximately 37.5% from last reset.
  This setup has been tested in extreme market events such as the mid-2015
  market crash and the early-2016 circuit breaker turmoil, where the reset
  clauses were all successfully implemented and protected the interests of
@@ -1744,7 +1895,7 @@ There are two main parameters to be determined, the ratio between Class
 \end_layout
 
 \begin_layout Standard
-We observed that cryptocurrencies have considerably higher volatility than
+We witness that cryptocurrencies have considerably higher volatility than
  stock market indices.
  A series of back testings and Monte Carlo simulations will be performed
  to investigate the optimal parameters for dual class token structures.
@@ -1756,8 +1907,8 @@ Other Coin Underlying
 \end_layout
 
 \begin_layout Standard
-While the structure discussed in this paper is independent to the underlying
- cryptocurrency, the liquidity and popularity of the underlying does impact
+While the structure discussed in this paper is independent of the underlying
+ cryptocurrency, the liquidity and popularity of the underlying do impact
  the viability of the structure as market arbitrage is important to ensure
  the structure trades as designed.
  In this paper, ETH is used as example, but other popular ERC20 coins such
@@ -1788,7 +1939,7 @@ name "subsec:General-Product-Design"
 \end_layout
 
 \begin_layout Standard
-In section 
+In Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Product-Design"
@@ -1823,9 +1974,6 @@ Dual-class tokens can be created by depositing underlying tokens to the
 \end_inset
 
  can be calculated by:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{cc}
@@ -1836,11 +1984,7 @@ C_{A}= & C_{B}\cdot\alpha
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $c$
 \end_inset
 
@@ -1851,10 +1995,11 @@ where,
 \begin_inset Formula $\alpha$
 \end_inset
 
- is a positive number to determine the ratio of A and B
+ is a positive number to determine the ratio of A and B,
 \end_layout
 
 \begin_layout Standard
+and 
 \begin_inset Formula $P_{0}$
 \end_inset
 
@@ -1879,15 +2024,15 @@ Holders of Class A and Class B tokens can withdraw deposited underlying
 
  Class B tokens to the Custodian contract.
  The contract will deduct Class A and Class B tokens, and return to the
- sender certain amount of underlying tokens.
- Such amount 
+ sender 
+\begin_inset Formula $M_{R}$
+\end_inset
+
+ underlying tokens, where
 \begin_inset Formula $M_{R}$
 \end_inset
 
  can be calculated by:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\label{eq:redemption-1}
@@ -1907,9 +2052,6 @@ The net value of tokens are calculated based on the coupon rate, the elapsed
  time from last reset event, and the latest underlying token price in target
  fiat currency fed to the system.
  In particular:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 \begin{array}{cc}
@@ -1920,11 +2062,7 @@ V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $r$
 \end_inset
 
@@ -1939,6 +2077,7 @@ where,
 \end_layout
 
 \begin_layout Standard
+and 
 \begin_inset Formula $P_{t}$
 \end_inset
 
@@ -1951,9 +2090,6 @@ Quantity
 
 \begin_layout Standard
 Below holds in the system at all time
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 Q_{A}^{t}=Q_{B}^{t}\cdot\alpha
@@ -1961,11 +2097,7 @@ Q_{A}^{t}=Q_{B}^{t}\cdot\alpha
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $Q_{A}^{t}$
 \end_inset
 
@@ -1988,19 +2120,11 @@ L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Note that at inception or after resets, above simply reduces to 
-\begin_inset Formula 
-\[
-L_{B}^{0}=1+\alpha
-\]
-
+\begin_inset Formula $L_{B}^{0}=1+\alpha$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2032,32 +2156,29 @@ Total amount of both classes token remain unchanged,
 \begin_inset Formula $Q_{B}^{t+}=Q_{B}^{t-}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
-Net Value of both classes reset to 1 target fiat currency
+Net Value of both classes reset to 1 target fiat currency.
 \end_layout
 
 \begin_layout Enumerate
 Both classes' holders will receive certain amount of underlying token from
  the Custodian contract.
  Such amount for each Class A token is 
-\begin_inset Formula $U_{A}=\frac{\left(V_{A}^{t-}-1\right)}{P_{t}}$
+\begin_inset Formula $U_{A}=\frac{V_{A}^{t-}-1}{P_{t}}$
 \end_inset
 
  and for each Class B token is 
-\begin_inset Formula $U_{B}=\frac{\left(V_{B}^{t-}-1\right)}{P_{t}}$
+\begin_inset Formula $U_{B}=\frac{V_{B}^{t-}-1}{P_{t}}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 Total value in the system is unchanged after reset:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+U_{B}\cdot P_{t}\cdot Q_{B}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
@@ -2095,7 +2216,7 @@ Total amount of Class B token is reduced to
 \begin_inset Formula $Q_{B}^{t+}=Q_{B}^{t-}\cdot V_{B}^{t-}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -2103,29 +2224,25 @@ Total amount of Class A token is reduced to
 \begin_inset Formula $Q_{A}^{t+}=Q_{B}^{t+}\cdot\alpha$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
 Net Value of both classes reset to 1 target fiat currency.
- 
 \end_layout
 
 \begin_layout Enumerate
 Class A holders will receive certain amount of underlying token from the
  Custodian contract.
  Such amount of each Class A token is: 
-\begin_inset Formula $D_{A}=\frac{\left(V_{A}^{t-}-V_{B}^{t-}\right)}{P_{t}}$
+\begin_inset Formula $D_{A}=\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 Total value in the system is unchanged after reset:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & D_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
@@ -2136,15 +2253,11 @@ Total value in the system is unchanged after reset:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Note above used the fact 
 \begin_inset Formula $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2171,9 +2284,6 @@ General Market Arbitrage
 
 \begin_layout Standard
 The price parity shall hold as below:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 \alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}
@@ -2181,11 +2291,7 @@ The price parity shall hold as below:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-where, 
+, where 
 \begin_inset Formula $P_{A}^{t}$
 \end_inset
 
@@ -2193,6 +2299,7 @@ where,
 \end_layout
 
 \begin_layout Standard
+and 
 \begin_inset Formula $P_{B}^{t}$
 \end_inset
 
@@ -2200,28 +2307,28 @@ where,
 \end_layout
 
 \begin_layout Standard
-Along with equation 
+Along with Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:creation-1"
 
 \end_inset
 
-, 
+), (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:redemption-1"
 
 \end_inset
 
- and 
+) and (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:netvalue-1"
 
 \end_inset
 
- in section 
+) in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:General-Product-Design"
@@ -2229,9 +2336,6 @@ reference "subsec:General-Product-Design"
 \end_inset
 
 , below should hold:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 \frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
@@ -2239,10 +2343,6 @@ reference "subsec:General-Product-Design"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 On open market, arbitrage opportunity exists when Class A and Class B tokens
  trade away from their net values and above equation is violated on either
  side.
@@ -2253,11 +2353,8 @@ Arbitrage via Creation
 \end_layout
 
 \begin_layout Standard
-when combined market price of Class A and Class B tokens are higher than
+When combined market price of Class A and Class B tokens are higher than
  their combined net values, i.e.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 \frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}
@@ -2265,11 +2362,7 @@ when combined market price of Class A and Class B tokens are higher than
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-an user can exploit the profit by creating more DUO tokens:
+, arbitrage profit can be exploited by perform DUO token creation:
 \end_layout
 
 \begin_layout Enumerate
@@ -2289,14 +2382,14 @@ Send the underlying tokens to the Custodian contract.
 \end_layout
 
 \begin_layout Enumerate
-Based on equation 
+Based on Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:creation-1"
 
 \end_inset
 
-, receive 
+), receive 
 \begin_inset Formula $P_{0}\cdot\frac{\alpha}{1+\alpha}$
 \end_inset
 
@@ -2317,9 +2410,6 @@ Sell Class A and Class B tokens on open market for
 
 \begin_layout Standard
 The expected payoff of above operations is:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)>0
@@ -2335,11 +2425,8 @@ Arbitrage via Redemption
 \end_layout
 
 \begin_layout Standard
-when combined market price of Class A and Class B tokens are lower than
+When combined market price of Class A and Class B tokens are lower than
  their combined net values, i.e.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 \frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}
@@ -2347,11 +2434,7 @@ when combined market price of Class A and Class B tokens are lower than
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-similar arbitrage profit can be exploited by perform redemption:
+, similar arbitrage profit can be exploited by perform DUO token redemption:
 \end_layout
 
 \begin_layout Enumerate
@@ -2371,18 +2454,18 @@ Buy
 \end_layout
 
 \begin_layout Enumerate
-Send Class A and Class B tokens to the Custodian contract
+Send Class A and Class B tokens to the Custodian contract.
 \end_layout
 
 \begin_layout Enumerate
-Based on equation 
+Based on Equation (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:redemption-1"
 
 \end_inset
 
-, receive 
+), receive 
 \begin_inset Formula $1-c$
 \end_inset
 
@@ -2399,14 +2482,111 @@ Sell underlying tokens on open market for
 
 \begin_layout Standard
 The expected payoff of above operations is:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}=P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)>0
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -2453,8 +2633,8 @@ key "Ingersoll1976"
 Ingersoll, J.
  E.
  1976.
- A theoretical and empirical investigation of the dual purpose funds: an
- application of contingent-claims analysis.
+ A Theoretical and Empirical Investigation of the Dual Purpose Funds: an
+ Application of Contingent-claims Analysis.
  
 \shape italic
 Journal of Financial Economics

@@ -4,7 +4,7 @@ Dual purpose fund is a leverage investment product that has gained popularity in
 
 We propose, for the first time to our best knowledge, a dual-class crypto token structure that offers entitlements to either fixed income or leveraged capital appreciation: the income token receives periodical coupon payments with principal protection; the leverage token provides leveraged participation in underlying crypto assets. The whole mechanism is governed by smart contracts run on Ethereum blockchain, without dealing with centralized counterparties.
 
-We take Ether (ETH) as undelrying asset and use historical prices to illustrate the product's performance in real world scenarios. And we further explain on how arbitrage activities take place and help maintain price stability of the income tokens.
+We take Ether (ETH) as underlying asset and use historical prices to illustrate the product's performance in real world scenarios. And we further explain on how arbitrage activities take place and help maintain price stability of the income tokens.
 
 Keywords: 
 
