@@ -1,3 +1,6 @@
+A Stable Token Based on Dual-Class Structure
+Lewei LI, Yizhou CAO, Min Dai
+
 Major crypto-currencies are subject to massive volatility, which makes them attractive to speculators but unsuitable for mainstream use. There have been several attempts on implementing 'stablecoins'. But most of them fail to provide steady returns that's appealing to regular investors.
 
 Inspired by the dual purpose fund that has gained popularity in the US and China, we propose, for the first time to our best knowledge, a dual-class crypto token structure that offers entitlements to either fixed income or leveraged capital appreciation: the income token receives periodical coupon payments with principal protection; the leverage token provides leveraged participation in underlying crypto assets. The whole mechanism is governed by smart contracts run on Ethereum blockchain, without dealing with centralized counterparties. In theory, we justify the income token as an ideal stable token.

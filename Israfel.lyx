@@ -165,11 +165,11 @@ type "mailto:"
 \end_layout
 
 \begin_layout Date
-Version 0.3.0
+Version 0.4.0
 \begin_inset Newline newline
 \end_inset
 
-1 Mar 2018
+2 Mar 2018
 \end_layout
 
 \begin_layout Abstract
@@ -1424,6 +1424,10 @@ In order to achieve above return, ETH payout from resets need to be fully
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1807,9 +1811,48 @@ Further Development
 \end_layout
 
 \begin_layout Standard
+\align right
+
+\size small
+Patience, persistence and perspiration make an unbeatable combination for
+ success.
+\begin_inset Newline newline
+\end_inset
+
+– 
+\emph on
+Napoleon Hill
+\end_layout
+
+\begin_layout Standard
 This paper has outlined the main design and market mechanism for the dual-class
  token structure.
  Further studies can be done in below aspects.
+\end_layout
+
+\begin_layout Subsubsection*
+Underlying Price Pair
+\end_layout
+
+\begin_layout Standard
+While the dual class structure is independent of the underlying crypto fiat
+ price pair, the liquidity and popularity of the underlying price pair do
+ impact the viability of the structure as market arbitrage is important
+ to ensure the structure trades as designed.
+ In this paper, ETH/USD is used as the underlying price pair, but other
+ popular ERC20 tokens, such as EOS, ADA, paired with major fiat other than
+ USD, can also be considered.
+\end_layout
+
+\begin_layout Subsubsection*
+Theoretical Pricing Model 
+\end_layout
+
+\begin_layout Standard
+We have illustrated the net values for the dual structure.
+ As market evolves and observable price data becomes available, a theoretical
+ model based on Black-Scholes pricing framework can be developed to derive
+ fair price for the dual structure and explain deviations from net values.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1825,6 +1868,7 @@ Arbitrary rate can be used for Class A coupon and it will be traded on premium
  Currently there are few observable proxies in the market.
  Several centralized exchanges allowing margin trading are charging USD
  borrow rates in the range of 20% to 40% per annum.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1842,7 +1886,7 @@ reference "subsec:Premium-and-Discount"
 \end_layout
 
 \begin_layout Subsubsection*
-Optimal Reset Threshold and Frequency
+Optimal Reset Thresholds
 \end_layout
 
 \begin_layout Standard
@@ -1895,19 +1939,170 @@ We witness that cryptocurrencies have considerably higher volatility than
  A series of back testings and Monte Carlo simulations will be performed
  to investigate the optimal parameters for dual class token structures.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Subsubsection*
-Other Coin Underlying
-\end_layout
 
-\begin_layout Standard
-While the structure discussed in this paper is independent of the underlying
- cryptocurrency, the liquidity and popularity of the underlying do impact
- the viability of the structure as market arbitrage is important to ensure
- the structure trades as designed.
- In this paper, ETH is used as example, but other popular ERC20 coins such
- as EOS, ADA can also be considered.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2641,6 +2836,25 @@ Journal of Financial Economics
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
 label "3"
+key "BS"
+
+\end_inset
+
+Black, F., and M.
+ Scholes.
+ 1973.
+ The Pricing of Options and Corporate Liabilities.
+ 
+\shape italic
+Journal of Political Economy
+\shape default
+ 81:637-654.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "4"
 key "Leverage"
 
 \end_inset
@@ -2661,7 +2875,7 @@ target "https://www.investopedia.com/terms/l/leverage.asp"
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-label "4"
+label "5"
 key "ETH"
 
 \end_inset
