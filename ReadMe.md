@@ -1,5 +1,5 @@
 # A Stable Token Based on Dual-Class Structure
-### [Lewei LI](mailto:lewei.li@finbook.co "lewei.li@finbook.co"), [Yizhou CAO](mailto:yizhou.cao@finbook.co "yizhou.cao@finbook.co"), [Min DAI](mailto:matdm@nus.edu.sg "matdm@nus.edu.sg")
+### [Yizhou CAO](mailto:yizhou.cao@finbook.co "yizhou.cao@finbook.co"), [Min DAI](mailto:matdm@nus.edu.sg "matdm@nus.edu.sg"), [Steven KOU](mailto:matsteve@nus.edu.sg "matsteve@nus.edu.sg"), [Lewei LI](mailto:lewei.li@finbook.co "lewei.li@finbook.co")
 
 Major crypto-currencies are subject to massive volatility, which makes them attractive to speculators but unsuitable for mainstream use. There have been several attempts on implementing 'stablecoins'. But most of them fail to provide steady returns that's appealing to regular investors.
 
