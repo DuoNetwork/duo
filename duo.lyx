@@ -83,36 +83,9 @@ A Stable Token Based on Dual-Class Structure
 \end_layout
 
 \begin_layout Author
-Lewei LI
+Yizhou CAO
 \begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\shape italic
-Email
-\shape default
-: 
-\begin_inset CommandInset href
-LatexCommand href
-name "lewei.li@finbook.co"
-target "lewei.li@finbook.co"
-type "mailto:"
-
-\end_inset
-
-, CEO and Co-founder of FinBook
-\end_layout
-
-\end_inset
-
-
-\begin_inset Formula $\;,$
-\end_inset
-
- Yizhou CAO
-\begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -139,7 +112,7 @@ type "mailto:"
 
  Min DAI
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -162,14 +135,69 @@ type "mailto:"
 \end_inset
 
 
+\begin_inset Formula $\;,$
+\end_inset
+
+ Steven Kou
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\shape italic
+Email
+\shape default
+: 
+\begin_inset CommandInset href
+LatexCommand href
+name "matsteve@nus.edu.sg"
+target "matsteve@nus.edu.sg"
+type "mailto:"
+
+\end_inset
+
+.
+ Director, Risk Management Institute, National University of Singapore
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\ $
+\end_inset
+
+, Lewei LI
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\shape italic
+Email
+\shape default
+: 
+\begin_inset CommandInset href
+LatexCommand href
+name "lewei.li@finbook.co"
+target "lewei.li@finbook.co"
+type "mailto:"
+
+\end_inset
+
+, CEO and Co-founder of FinBook
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Date
-Version 0.4.0
+Version 0.5.0
 \begin_inset Newline newline
 \end_inset
 
-2 Mar 2018
+7 Mar 2018
 \end_layout
 
 \begin_layout Abstract
