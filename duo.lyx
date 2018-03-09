@@ -6,6 +6,10 @@
 \origin unavailable
 \textclass article
 \use_default_options true
+\begin_modules
+theorems-std
+theorems-sec
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -107,7 +111,7 @@ type "mailto:"
 \end_inset
 
 
-\begin_inset Formula $\;,$
+\begin_inset Formula $\:,$
 \end_inset
 
  Min DAI
@@ -135,7 +139,7 @@ type "mailto:"
 \end_inset
 
 
-\begin_inset Formula $\;,$
+\begin_inset Formula $\:,$
 \end_inset
 
  Steven KOU
@@ -163,7 +167,7 @@ type "mailto:"
 \end_inset
 
 
-\begin_inset Formula $\ $
+\begin_inset Formula $\:$
 \end_inset
 
 , Lewei LI
@@ -190,14 +194,41 @@ type "mailto:"
 \end_inset
 
 
+\begin_inset Formula $\:$
+\end_inset
+
+, Chen YANG
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\shape italic
+Email
+\shape default
+: 
+\begin_inset CommandInset href
+LatexCommand href
+name "chen.yang@math.ethz.ch"
+target "chen.yang@math.ethz.ch"
+type "mailto:"
+
+\end_inset
+
+, Department of Mathematics, ETH Zurich
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Date
-Version 0.6.0
+Version 0.7.0
 \begin_inset Newline newline
 \end_inset
 
-8 Mar 2018
+9 Mar 2018
 \end_layout
 
 \begin_layout Abstract
@@ -235,47 +266,10 @@ Keywords:
 \shape default
 stablecoin, dual-class token, fixed income crypto asset, leveraged return
  crypto asset, smart contract, Ethereum, decentralized asset management
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newpage pagebreak
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -512,7 +506,7 @@ This paper aims to propose an alternative approach of creating stable value
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -894,7 +888,475 @@ When a given time period has passed from the last reset time,
  Otherwise, reset will be the same as the Contingent Upward reset.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Valuation
+\end_layout
+
+\begin_layout Standard
+Denote 
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $W_{B}$
+\end_inset
+
+ as the market value of Class A and Class B, respectively.
+ We assume that 
+\begin_inset Formula $P$
+\end_inset
+
+ follows a geometric Brownian motion under the risk neutral measure: 
+\begin_inset Formula 
+\[
+dP_{t}=\rho Pdt+\sigma P_{t}dW_{t},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is a one-dimensional standard Brownian motion.
+ Also denote
+\begin_inset Formula $S_{t}=P_{t}/P_{0}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+dS_{t}=\rho S_{t}dt+\sigma S_{t}dW_{t},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho$
+\end_inset
+
+ denotes the risk-free rate.
+ Note that 
+\begin_inset Formula $S_{\theta}=1$
+\end_inset
+
+ at any reset time 
+\begin_inset Formula $\theta$
+\end_inset
+
+, when 
+\begin_inset Formula $P_{0}$
+\end_inset
+
+ is reset to 
+\begin_inset Formula $P_{\theta}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Based on the above specifications, the current market value of A shares
+ under the risk-neutral pricing framework is given recursively as 
+\begin_inset Formula 
+\begin{align}
+\begin{split}W_{A}(t,S) & =E_{t}^{*}\Bigg[e^{-\rho(\zeta-t)}[rT+g(S_{\zeta-})+(1-g(S_{\zeta-}))W_{A}(0,1)]\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}\\
+ & \quad+e^{-\rho(\tau-t)}(r\tau+W_{A}(0,1))\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}\\
+ & \quad+e^{-\rho(\eta-t)}(r\eta+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1))\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
+\end{split}
+\label{VAL2}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $E_{t}^{*}$
+\end_inset
+
+ is the 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-expectation computed under the initial condition 
+\begin_inset Formula $S_{t-}=S$
+\end_inset
+
+, random times 
+\begin_inset Formula $\zeta$
+\end_inset
+
+, 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta$
+\end_inset
+
+ represent the first periodic, upward and downward reset date from 
+\begin_inset Formula $t$
+\end_inset
+
+, respectively, and 
+\begin_inset Formula $g(s)=((1+\alpha)(1-s)+\alpha rT)^{+}$
+\end_inset
+
+.
+ Here 
+\begin_inset Formula $W_{A}(t,S)$
+\end_inset
+
+ denotes the market value of A share with time from last interest payment
+ 
+\begin_inset Formula $0\le t\le1$
+\end_inset
+
+, and underlying fund value 
+\begin_inset Formula $H_{d}(t)\le S\le H_{u}(t)$
+\end_inset
+
+, where 
+\begin_inset Formula $H_{d}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{d}$
+\end_inset
+
+, and 
+\begin_inset Formula $H_{u}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{u}$
+\end_inset
+
+ Note that by labeling the last interest payment date as time 0, 
+\begin_inset Formula $t$
+\end_inset
+
+ can also be interpreted as the current time.
+\end_layout
+
+\begin_layout Standard
+Since after either an upward or downward reset, investors still get Class
+ A shares in addition to the payments, the right hand side of 
+\begin_inset Formula $\eqref{VAL2}$
+\end_inset
+
+ depends on 
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ which makes 
+\begin_inset Formula $\eqref{VAL2}$
+\end_inset
+
+ recursive.
+ On the right hand side of (
+\begin_inset Formula $\ref{VAL2}$
+\end_inset
+
+), the second and third terms describe the cash flow on upward and downward
+ resets.
+ The second term shows that, if an upward reset comes first, investors get
+ early payment, and the time from last reset changes to 0 and 
+\begin_inset Formula $S$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ The third term shows that, if a downward reset comes first, investors receive
+ payment of value 
+\begin_inset Formula $V_{A}^{\eta-}-V_{B}^{\eta-}$
+\end_inset
+
+, each share of Class A reduces to 
+\begin_inset Formula $\mathcal{H}_{d}$
+\end_inset
+
+ share, and the time from last reset changes to 0 and 
+\begin_inset Formula $S$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Finally, the first term is value of the cash flow on the periodic reset
+ date.
+ Specifically, when 
+\begin_inset Formula $V_{B}^{\zeta-}\ge1$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $(1+\alpha)-\alpha(1+rT)\ge1$
+\end_inset
+
+ (so that 
+\begin_inset Formula $g(S_{\zeta-})=0$
+\end_inset
+
+), the cash flow follows that of an upward reset where Class A receives
+ payment of value 
+\begin_inset Formula $rT$
+\end_inset
+
+, and the number of Class A remains unchanged; when 
+\begin_inset Formula $V_{B}^{\zeta-}<1$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $(1+\alpha)-\alpha(1+rT)<1$
+\end_inset
+
+, the cash flow follows that of a downward reset, where Class A receives
+ payment of value 
+\begin_inset Formula $V_{A}^{\zeta-}-V_{B}^{\zeta-}=1+rT-(1+\alpha)S_{\zeta-}-\alpha(1+rT)=rT+g(S_{\zeta-})$
+\end_inset
+
+, and each one share of Class A is reduced to 
+\begin_inset Formula $V_{B}^{\zeta-}=(1+\alpha)S_{\zeta-}-\alpha(1+rT)=1-g(S_{\zeta-})$
+\end_inset
+
+ share.
+\end_layout
+
+\begin_layout Standard
+The following theorem characterizes 
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ in terms of a partial differential equation.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ is the unique classical solution
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+By classical solution we mean 
+\begin_inset Formula $W_{A}\in C^{1,2}(Q)\cap C(\overline{Q}\backslash D)$
+\end_inset
+
+, where 
+\begin_inset Formula $Q=\{(t,S):0\le t<1,H_{d}(t)<S<H_{u}(t)\}$
+\end_inset
+
+ and 
+\begin_inset Formula $D=\{T\}\times\{H_{d}(T),H_{u}(T)\}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ to the following partial differential equation on 
+\begin_inset Formula $\{(t,S):0\le t<T,H_{d}(t)<S<H_{u}(t)\}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{align}
+\backslash
+label{eqn:PDEstart} -
+\backslash
+frac{
+\backslash
+partial W_{A}}{
+\backslash
+partial t} & =
+\backslash
+frac{1}{2}
+\backslash
+sigma^{2}S^{2}
+\backslash
+frac{
+\backslash
+partial^{2}W_{A}}{
+\backslash
+partial S^{2}}+
+\backslash
+rho S
+\backslash
+frac{
+\backslash
+partial W_{A}}{
+\backslash
+partial S}-
+\backslash
+rho W_{A}
+\backslash
+
+\backslash
+ 
+\backslash
+label{eqn:ter} W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1)
+\backslash
+
+\backslash
+ 
+\backslash
+label{eqn:bound1} W_{A}(t,H_{u}(t)) & =rt+W_{A}(0,1)
+\backslash
+
+\backslash
+
+\backslash
+label{eqn:PDEend} W_{A}(t,H_d(t)) & =rt+1-
+\backslash
+mathcal{H}_{d}+
+\backslash
+mathcal{H}_{d}W_{A}(0,1).
+ 
+\backslash
+end{align} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The proof follows that of Theorem 4.1 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DM2018"
+
+\end_inset
+
+ by adopting the change in the terminal condition.
+ The main feature of the above PDE problem is the nonlocal terminal and
+ boundary conditions 
+\begin_inset Formula $\eqref{eqn:ter}$
+\end_inset
+
+ – 
+\begin_inset Formula $\eqref{eqn:PDEend}$
+\end_inset
+
+, where the given data also depend on the solution 
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ itself.
+ Although 
+\begin_inset Formula $\eqref{eqn:PDEstart}$
+\end_inset
+
+ involves the standard Black-Scholes operator (due to our geometric Brownian
+ motion assumption), the presence of the solution 
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ in terminal and boundary data makes the PDE significantly different from
+ the classical Black-Scholes PDE, leading to challenges in both theoretical
+ and numerical aspects.
+ On the theoretical aspect, the existing stochastic representation result
+ is not applicable to PDE 
+\begin_inset Formula $\eqref{eqn:ter}$
+\end_inset
+
+ – 
+\begin_inset Formula $\eqref{eqn:PDEend}$
+\end_inset
+
+ due to the nonlocalness of the terminal and boundary conditions.
+ On the numerical aspect, the nonlocalness in the terminal and boundary
+ data also causes problem since a numerical solution in the interior region
+ depends on the boundary and terminal data, which in turns depends on the
+ numerical solution in the interior region.
+ To solve this, we propose an iterative procedure presented in Appendix
+ 
+\begin_inset Formula $\ref{subsec:Numerical-Procedure-for}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The nonlocal terminal and boundary conditions in 
+\begin_inset Formula $\eqref{eqn:ter}$
+\end_inset
+
+ – 
+\begin_inset Formula $\eqref{eqn:PDEend}$
+\end_inset
+
+ are directly related with the cash flow of A shares.
+ The upper boundary condition (
+\begin_inset Formula $\ref{eqn:bound1}$
+\end_inset
+
+) at 
+\begin_inset Formula $S=H_{u}(t)$
+\end_inset
+
+ corresponds to the upward reset, when early payment 
+\begin_inset Formula $Rt$
+\end_inset
+
+ is delivered and 
+\begin_inset Formula $S$
+\end_inset
+
+ resets to 1; the lower boundary condition (
+\begin_inset Formula $\ref{eqn:PDEend}$
+\end_inset
+
+) at 
+\begin_inset Formula $S=H(t)$
+\end_inset
+
+ corresponds downward reset, when early payment 
+\begin_inset Formula $V_{B}-V_{A}$
+\end_inset
+
+ is delivered, each one A share shrinks to 
+\begin_inset Formula $H_{d}$
+\end_inset
+
+ share, and 
+\begin_inset Formula $S$
+\end_inset
+
+ resets to 1.
+ Finally, the terminal condition (
+\begin_inset Formula $\ref{eqn:ter}$
+\end_inset
+
+) corresponds to the periodic reset, where the payment follows either the
+ upward or downward reset based on whether 
+\begin_inset Formula $V_{B}\le1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 ETH Examples
 \end_layout
 
@@ -903,10 +1365,10 @@ For illustration, we hereby uses Ether (ETH) as the underlying token and
  apply below parameter values:
 \begin_inset Formula 
 \begin{align*}
-r\;\; & =0.05\%\\
+r\;\; & =0.02\%\\
 \mathcal{H}_{d} & =0.25\\
 \mathcal{H}_{u} & =2\\
-\mathcal{H}_{p} & =1.05\ ,
+\mathcal{H}_{p} & =1.02\ ,
 \end{align*}
 
 \end_inset
@@ -934,7 +1396,7 @@ The structure starts with 100,000 ETH with no further capital injection
 Reinvestment of ETH payout from resets is not considered
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Overall Market
 \end_layout
 
@@ -952,19 +1414,19 @@ At inception, 15,197,500 Class A and 15,197,500 Class B are issued from
 
 \begin_layout Standard
 Three upward resets were triggered on 24 Nov 2017 (
-\begin_inset Formula $V_{B}=2.0684$
+\begin_inset Formula $V_{B}=2.0846$
 \end_inset
 
 ), 17 Dec 2017 (
-\begin_inset Formula $V_{B}=2.0398$
+\begin_inset Formula $V_{B}=2.0467$
 \end_inset
 
 ) and 7 Jan 2018 (
-\begin_inset Formula $V_{B}=2.1043$
+\begin_inset Formula $V_{B}=2.1106$
 \end_inset
 
 ) while one downward reset was triggered on 5 Feb 2018 (
-\begin_inset Formula $V_{B}=0.2292$
+\begin_inset Formula $V_{B}=0.2379$
 \end_inset
 
 .).
@@ -1155,11 +1617,11 @@ Contingent Upward
 
 \begin_layout Standard
 17 Dec 2017, 
-\begin_inset Formula $V_{B}=2.0398$
+\begin_inset Formula $V_{B}=2.0467$
 \end_inset
 
 .
- 243.5124 ETH is paid out to Class A holders and 22,017.6139 ETH is paid out
+ 97.4049 ETH is paid out to Class A holders and 22,163.7213 ETH is paid out
  to Class B holders.
  Remaining System value is at 30,395,000 USD.
  The total value of Class A, Class B and ETH payout is consistent with ETH
@@ -1212,13 +1674,13 @@ Period with Contingent Downward Reset
 
 \begin_layout Standard
 5 Feb 2018, 
-\begin_inset Formula $V_{B}=0.2292$
+\begin_inset Formula $V_{B}=0.2379$
 \end_inset
 
 .
- 17,169.8250 ETH is paid out to Class A holders.
- total amount of both classes is reduced to 3,483,461.77.
- Remaining System value is at 6,966,923.54USD.
+ 16,789.3847 ETH is paid out to Class A holders.
+ total amount of both classes is reduced to 3,615,680.02.
+ Remaining System value is at 7,231,360.04 USD.
  The total value of Class A, Class B and ETH payout is consistent with ETH
  price movement.
 \begin_inset Newline newline
@@ -1263,7 +1725,7 @@ status collapsed
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Individual Class Return
 \end_layout
 
@@ -1372,114 +1834,86 @@ In order to achieve above return, ETH payout from resets need to be fully
  converted back to the corresponding class token.
  For example, after 24 Nov 2017 upward reset, all ETH received by Class
  A holder need to be converted into Class A token.
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Subsection
+Market Value
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename WA-eps-converted-to.pdf
+	scale 60
+
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Class A Market Value
+\end_layout
+
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename WB-eps-converted-to.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Class B Market Value
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -1725,130 +2159,10 @@ Many other factors also determine whether above arbitrage strategy can be
  cost in creation and redemption, and ability to short sell the required
  components.
  Please refer to appendix for discussion of a more general case.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -1987,174 +2301,10 @@ We witness that cryptocurrencies have considerably higher volatility than
  A series of back testings and Monte Carlo simulations will be performed
  to investigate the optimal parameters for dual class token structures.
  
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -2728,110 +2878,129 @@ P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Subsection
+Derivation of the Pricing Equation
+\end_layout
+
+\begin_layout Subsection
+Numerical Procedure for the Pricing Equation 
+\begin_inset Formula $\eqref{eqn:PDEstart}$
+\end_inset
+
+ – 
+\begin_inset Formula $\eqref{eqn:PDEend}$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Numerical-Procedure-for"
 
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
 \end_inset
 
 
 \end_layout
 
+\begin_layout Standard
+We propose an iterative algorithm to obtain a numerical solution of the
+ periodic parabolic terminal-boundary value problem (
+\begin_inset Formula $\ref{eqn:PDEstart}$
+\end_inset
+
+) – (
+\begin_inset Formula $\ref{eqn:PDEend}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection*
+Algorithm 1
+\end_layout
+
+\begin_layout Enumerate
+
+\shape italic
+Set the initial guess 
+\begin_inset Formula $W_{A}^{(0)}=0$
+\end_inset
+
+; 
+\end_layout
+
+\begin_layout Enumerate
+
+\shape italic
+For 
+\begin_inset Formula $i=1,2,\cdots$
+\end_inset
+
+: Given 
+\begin_inset Formula $V_{A}^{(i-1)}$
+\end_inset
+
+, solve for 
+\begin_inset Formula $W_{A}^{(i)}$
+\end_inset
+
+, the solution to the equation 
+\begin_inset Formula 
+\[
+\begin{array}{cccc}
+-\frac{\partial W_{A}}{\partial t}= & \frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A} &  & 0\le t<T,H_{d}(t)<S<H_{u}(t)\\
+W_{A}(1,S)= & rT+g(S)+(1-g(S))W_{A}^{(i-1)}(0,1) &  & H_{d}(t)<S<H_{u}(t)\\
+W_{A}(t,H_{u}(t))= & rt+W_{A}^{(i-1)}(0,1) &  & 0\le t\le T\\
+W_{A}(t,H_{d}(t))= & rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}^{(i-1)}(0,1) &  & 0\le t\le T.
+\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\shape italic
+If 
+\begin_inset Formula $||W_{A}^{(i)}-W_{A}^{(i-1)}||<$
+\end_inset
+
+ tolerance, stop and return 
+\begin_inset Formula $W_{A}^{(i)}$
+\end_inset
+
+; otherwise set 
+\begin_inset Formula $i=i+1$
+\end_inset
+
+ and go to step 2.
+ 
+\end_layout
+
+\begin_layout Standard
+By using a similar proof as Theorem C.1 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DM2018"
+
+\end_inset
+
+, one can show that the sequence
+\begin_inset Formula $(W_{A}^{(i)})_{i\ge1}$
+\end_inset
+
+ defined in Algorithm 1 is monotonically increasing and converges to 
+\begin_inset Formula $W_{A}$
+\end_inset
+
+ uniformly.
+\end_layout
+
 \begin_layout Section*
-\begin_inset Newpage pagebreak
+\begin_inset Newpage clearpage
 \end_inset
 
 
