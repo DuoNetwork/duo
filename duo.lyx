@@ -2207,17 +2207,6 @@ While the dual class structure is independent of the underlying crypto fiat
 \end_layout
 
 \begin_layout Subsubsection*
-Theoretical Pricing Model 
-\end_layout
-
-\begin_layout Standard
-We have illustrated the net values for the dual structure.
- As market evolves and observable price data becomes available, a theoretical
- model based on Black-Scholes pricing framework can be developed to derive
- fair price for the dual structure and explain deviations from net values.
-\end_layout
-
-\begin_layout Subsubsection*
 Base Rate Discovery
 \end_layout
 
