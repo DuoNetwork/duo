@@ -13,6 +13,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage[shortlabels]{enumitem}
 \usepackage{graphicx}
 \usepackage[unicode=true]
  {hyperref}
@@ -319,7 +320,7 @@ the leverage ratio to 2. By increasing Class B's leverage ratio, the
 structure retains attraction to leverage-seeking users.
 
 Upon upward reset:
-\begin{enumerate}
+\begin{enumerate}[1)]
 \item Total amount of both classes token remain unchanged
 \item Net Value of both classes reset to 1 USD
 \item Both classes' holders will receive certain amount of underlying token
@@ -341,7 +342,7 @@ Reset will reduce the total supply of Class A and Class B tokens by
 roughly $1-\mathcal{H}_{d}$. 
 
 Upon downward reset:
-\begin{enumerate}
+\begin{enumerate}[1)]
 \item Total amount of both classes token are reduced to $Q^{t+}=Q^{t-}\cdot V_{B}^{t-}$
 \item Net Value of both classes reset to 1 USD
 \item Class A holders will receive certain amount of underlying token from
@@ -359,7 +360,6 @@ is less than 1, reset will be the same as the Contingent Downward
 reset. Otherwise, reset will be the same as the Contingent Upward
 reset.
 
-\clearpage{}
 
 \section{Valuation}
 
@@ -455,7 +455,38 @@ to $H_{d}$ share, and $S$ resets to 1. Finally, the terminal condition
 ($\ref{eqn:ter}$) corresponds to the periodic reset, where the payment
 follows either the upward or downward reset based on whether $V_{B}\le1$.
 
-\clearpage{}
+
+\section{Extensions}
+To make the stable token even more stable, we consider two extensions on the DUO contract.
+
+\subsection{A=A0+A1}
+This extension splits Class A further into two sub-classes: A0 and A1. At the creation of DUO, each Class A share is split into one Class A0 share and one Class A1 share. On the next reset date, Class A1 receives a payment that is equal in amount to the payment of Class A specified in Section 2, and then Class A1 is terminated. In the meantime, Class A0 is again split into one Class A0 and one Class A1 share, until the next reset when Class A1 receives payment and A0 is split again, so on and so forth. At any time, the quantity of Class A0 and A1 maintains 1:1. Based on this construction, at any time, the value of Class A1 equals the expected discounted value of Class A's next payment on the next reset date, and the value of Class A0 equals the difference between values of Class A and A1, or the expected present value of all future payments except the first one.
+
+
+\subsection{A=A'+B'}
+After split, the value of Class A is significantly less volatile than the underlying. Therefore, one would expect that, by building a DUO' with Class A' and B' where the underlying is Class A, the value of Class A' will be even more stable. Following this idea, we define Class A' and B' as follows.
+
+\begin{enumerate}[1)]
+	\item Class A' and B' together invest in an investment pool consisting of one share of Class A;
+	\item All coupon payments of Class A is given to Class B', and is deducted from the pool;
+	\item The compensations (i.e. payment with an amount of $1-\mathcal{H}_d$ on downward reset, or $g(S)$ on periodic reset) is reinvested in Class A (purchasing price equals face value 1). Therefore, after downward or periodic reset, there is still one share of Class A, but its value drops accordingly due to the coupon payment.
+	\item The net asset value of Class A' grows at an annual rate of 3\% (so 0.0082\% daily);
+	\item The resets of DUO' follow the rule of DUO, where the reference value is the value of investment pool.
+\end{enumerate}
+
+Class A' can be viewed as a compound derivative on the underlying $S$, and it can be priced based on a Monte Carlo simulation approach described as follows.
+
+\paragraph{Monte Carlo Algorithm for Estimating Value of Class A'}
+\begin{enumerate}[1)]
+	\item Simulate one sample path of $P$ under the risk-neutral measure;
+	\item Calculate $V_A$, $V_B$ and $S$ for each date on the sample path, and derive the reset dates;
+	\item Based on 2), calculate $W_A$ using the PDE \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} for each date on the sample path;
+	\item Calculate $V_{A'}$, $V_{B'}$ and $S'$ based on the sample path of $W_A$, and derive the reset dates;
+	\item Calculate the total discounted value of payments to Class A' on this path;
+	\item Repeat the previous for $M$ times, and define the Monte Carlo estimator for $W_{A'}$ as the average of the $M$ values in 5).
+\end{enumerate}
+
+\clearpage
 
 \section{ETH Examples}
 
@@ -577,23 +608,41 @@ fully converted back to the corresponding class token. For example,
 after 24 Nov 2017 upward reset, all ETH received by Class A holder
 need to be converted into Class A token.
 
-\subsection{Market Value}
+\subsection{Market Value of Class A and B}
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.6]{WA-eps-converted-to}
+\includegraphics[width=0.7\textwidth]{WA}
 \par\end{centering}
 \caption{Class A Market Value}
 \end{figure}
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.6]{WB-eps-converted-to}
+\includegraphics[width=0.7\textwidth]{WB}
 \par\end{centering}
 \caption{Class B Market Value}
 \end{figure}
 
-\clearpage{}
+
+\subsection{Market Value of Class A0}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{WA0.eps}
+\caption{Market Value of Class A0. Annualized volatility is 0.0302.}
+\end{figure}
+
+\subsection{Market Value of Class A' and B'}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{WAp.eps}
+\includegraphics[width=0.7\textwidth]{WBp.eps}
+\caption{Market Value of Class A' and B'. Annualized volatility of Class A' and B' are 0.0130 and 0.0595, respectively.}
+\end{figure}
+
+
+\clearpage
 
 \section{Market Mechanism}
 \begin{flushright}
@@ -951,16 +1000,14 @@ the periodic parabolic terminal-boundary value problem ($\ref{eqn:PDEstart}$)
 \subsection*{Algorithm 1}
 \begin{enumerate}
 \item \textit{Set the initial guess $W_{A}^{(0)}=0$; }
-\item \textit{For $i=1,2,\cdots$: Given $V_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$,
+\item \textit{For $i=1,2,\cdots$: Given $W_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$,
 the solution to the equation 
-\[
-\begin{array}{cccc}
+\begin{align*}
 -\frac{\partial W_{A}}{\partial t}= & \frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A} &  & 0\le t<T,H_{d}(t)<S<H_{u}(t)\\
 W_{A}(1,S)= & rT+g(S)+(1-g(S))W_{A}^{(i-1)}(0,1) &  & H_{d}(t)<S<H_{u}(t)\\
 W_{A}(t,H_{u}(t))= & rt+W_{A}^{(i-1)}(0,1) &  & 0\le t\le T\\
 W_{A}(t,H_{d}(t))= & rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}^{(i-1)}(0,1) &  & 0\le t\le T.
-\end{array}
-\]
+\end{align*}
 }
 \item \textit{If $||W_{A}^{(i)}-W_{A}^{(i-1)}||<$ tolerance, stop and return
 $W_{A}^{(i)}$; otherwise set $i=i+1$ and go to step 2. }
