@@ -15,8 +15,8 @@
 \usepackage{amssymb}
 \usepackage[shortlabels]{enumitem}
 \usepackage{graphicx}
-\usepackage[unicode=true]
- {hyperref}
+\usepackage[unicode=true]{hyperref}
+% \PassOptionsToPackage{unicode}{hyperref}
 
 \makeatletter
 
@@ -156,7 +156,7 @@ market participants.
 \subsection{Leveraged Funds}
 
 Leverage is the strategy of using borrowed capital to increase the
-potential return of an investment\cite{Leverage}. Retail investors
+potential return of an investment.\cite{Leverage} Retail investors
 have less access to leverage methods such as margin loans and financial
 derivatives, which promotes the creation of leveraged fund products. 
 
@@ -167,7 +167,7 @@ shares. They were designed to provide investors with the opportunity
 of repackaging their investment incomes and capital flow in accordance
 with their preferences. Dual-purpose funds first appeared in U.S.
 in 1965, but faded out in early 1990s due to a change in the tax code
-that resulted in double taxation.\cite{DM2018}
+that resulted in double taxation.\cite{DM2018} The valuation of dual-purpose funds in U.S. were investigated theoretically and empirically in \cite{Ingersoll1976}, \cite{JO} and 
 
 The dual-purpose fund was introduced in China in 2010 and it quickly
 became one of the most popular leveraged products there, reaching
@@ -353,13 +353,21 @@ Appendix  \ref{subsec:Contingent-Downward-Reset}.
 
 \subsubsection{Periodic Reset}
 
-When a given time period has passed from the last reset time, $V_{A}^{t-}$
+When a given time period ($N$ days) has passed from the last reset time, or equivalently, $V_{A}^{t-}$
 grows to upper limit $\mathcal{H}_{p}$, a periodic reset is triggered
 to restore the leverage ratio and net value of both classes. If $V_{B}^{t-}$
 is less than 1, reset will be the same as the Contingent Downward
 reset. Otherwise, reset will be the same as the Contingent Upward
 reset.
 
+
+\subsection{Differences from Dual-Purpose Fund Contract}
+Although the contract of DUO is inspired by dual-purpose funds, it is different from dual-purpose funds in the following aspects. 
+\paragraph{Periodic Reset} For dual-purpose funds, only Class A receives interest payment on periodic reset; Class B receives nothing. Therefore, even if Class B has leverage profit, it can only be realized on upward resets. In contrast, on periodic reset dates, the payment scheme follows that on either upward or downward reset. Therefore, Class B in DUO has the opportunity of receiving dividend payments more often than that in dual-purpose funds.
+\paragraph{Upward Reset Triggering Condition} For dual-purpose funds, the upward reset is triggered by the underlying up-crossing $\mathcal{H}_u$, while the downward reset is triggered by the Net Value of Class B down-crossing $\mathcal{H}_d$. For DUO, the triggering conditions of both upward and downward resets are all based on the Net Value of Class B. This brings about symmetry and simplicity to the triggering condition.
+
+
+\clearpage
 
 \section{Valuation}
 
@@ -369,8 +377,8 @@ motion under the risk neutral measure:
 \[
 dP_{t}=\rho Pdt+\sigma P_{t}dW_{t},
 \]
-where $W_{t}$ is a one-dimensional standard Brownian motion. Also
-denote$S_{t}=P_{t}/P_{0}$, then 
+where $W_{t}$ is a one-dimensional standard Brownian motion. Also,
+denote $S_{t}=P_{t}/P_{0}$, then 
 \[
 dS_{t}=\rho S_{t}dt+\sigma S_{t}dW_{t},
 \]
@@ -390,7 +398,7 @@ where $E_{t}^{*}$ is the $\mathbb{Q}$-expectation computed under
 the initial condition $S_{t-}=S$, random times $\zeta$, $\tau$
 and $\eta$ represent the first periodic, upward and downward reset
 date from $t$, respectively, and $g(s)=((1+\alpha)(1-s)+\alpha rT)^{+}$.
-Here $W_{A}(t,S)$ denotes the market value of A share with time from
+Here $W_{A}(t,S)$ denotes the market value of Class A token with time from
 last interest payment $0\le t\le1$, and underlying fund value $H_{d}(t)\le S\le H_{u}(t)$,
 where $H_{d}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{d}$,
 and $H_{u}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{u}$
@@ -405,8 +413,8 @@ describe the cash flow on upward and downward resets. The second term
 shows that, if an upward reset comes first, investors get early payment,
 and the time from last reset changes to 0 and $S$ to $1$. The third
 term shows that, if a downward reset comes first, investors receive
-payment of value $V_{A}^{\eta-}-V_{B}^{\eta-}$, each share of Class
-A reduces to $\mathcal{H}_{d}$ share, and the time from last reset
+payment of value $V_{A}^{\eta-}-V_{B}^{\eta-}$, each Class
+A token reduces to $\mathcal{H}_{d}$ token, and the time from last reset
 changes to 0 and $S$ to $1$. Finally, the first term is value of
 the cash flow on the periodic reset date. Specifically, when $V_{B}^{\zeta-}\ge1$,
 or equivalently, $(1+\alpha)-\alpha(1+rT)\ge1$ (so that $g(S_{\zeta-})=0$),
@@ -415,12 +423,12 @@ payment of value $rT$, and the number of Class A remains unchanged;
 when $V_{B}^{\zeta-}<1$, or equivalently, $(1+\alpha)-\alpha(1+rT)<1$,
 the cash flow follows that of a downward reset, where Class A receives
 payment of value $V_{A}^{\zeta-}-V_{B}^{\zeta-}=1+rT-(1+\alpha)S_{\zeta-}-\alpha(1+rT)=rT+g(S_{\zeta-})$,
-and each one share of Class A is reduced to $V_{B}^{\zeta-}=(1+\alpha)S_{\zeta-}-\alpha(1+rT)=1-g(S_{\zeta-})$
-share.
+and each token of Class A is reduced to $V_{B}^{\zeta-}=(1+\alpha)S_{\zeta-}-\alpha(1+rT)=1-g(S_{\zeta-})$
+token.
 
 The following theorem characterizes $W_{A}$ in terms of a partial
 differential equation.
-\begin{thm}
+\begin{thm}\label{thm:main}
 $W_{A}$ is the unique classical solution\footnote{By classical solution we mean $W_{A}\in C^{1,2}(Q)\cap C(\overline{Q}\backslash D)$,
 where $Q=\{(t,S):0\le t<1,H_{d}(t)<S<H_{u}(t)\}$ and $D=\{T\}\times\{H_{d}(T),H_{u}(T)\}$.} to the following partial differential equation on $\{(t,S):0\le t<T,H_{d}(t)<S<H_{u}(t)\}$
 \begin{align}\label{eqn:PDEstart} -\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A}\\ \label{eqn:ter} W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1)\\ \label{eqn:bound1} W_{A}(t,H_{u}(t)) & =rt+W_{A}(0,1)\\\label{eqn:PDEend} W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1). \end{align} 
@@ -450,8 +458,8 @@ cash flow of A shares. The upper boundary condition ($\ref{eqn:bound1}$)
 at $S=H_{u}(t)$ corresponds to the upward reset, when early payment
 $Rt$ is delivered and $S$ resets to 1; the lower boundary condition
 ($\ref{eqn:PDEend}$) at $S=H(t)$ corresponds downward reset, when
-early payment $V_{B}-V_{A}$ is delivered, each one A share shrinks
-to $H_{d}$ share, and $S$ resets to 1. Finally, the terminal condition
+early payment $V_{B}-V_{A}$ is delivered, each Class A token shrinks
+to $H_{d}$ token, and $S$ resets to 1. Finally, the terminal condition
 ($\ref{eqn:ter}$) corresponds to the periodic reset, where the payment
 follows either the upward or downward reset based on whether $V_{B}\le1$.
 
@@ -460,30 +468,32 @@ follows either the upward or downward reset based on whether $V_{B}\le1$.
 To make the stable token even more stable, we consider two extensions on the DUO contract.
 
 \subsection{A=A0+A1}
-This extension splits Class A further into two sub-classes: A0 and A1. At the creation of DUO, each Class A share is split into one Class A0 share and one Class A1 share. On the next reset date, Class A1 receives a payment that is equal in amount to the payment of Class A specified in Section 2, and then Class A1 is terminated. In the meantime, Class A0 is again split into one Class A0 and one Class A1 share, until the next reset when Class A1 receives payment and A0 is split again, so on and so forth. At any time, the quantity of Class A0 and A1 maintains 1:1. Based on this construction, at any time, the value of Class A1 equals the expected discounted value of Class A's next payment on the next reset date, and the value of Class A0 equals the difference between values of Class A and A1, or the expected present value of all future payments except the first one.
+This extension splits Class A further into two sub-classes: A0 and A1. At the creation of DUO, each Class A token is split into one Class A0 token and one Class A1 token. On the next reset date, Class A1 receives a payment that is equal in amount to the payment of Class A specified in Section 2, and then Class A1 is terminated. In the meantime, Class A0 is again split into one Class A0 token and one Class A1 token, until the next reset when Class A1 receives payment and A0 is split again, so on and so forth. At any time, the quantity of Class A0 and A1 maintains 1:1. Based on this construction, at any time, the value of Class A1 equals the expected discounted value of Class A's next payment on the next reset date, and the value of Class A0 equals the difference between values of Class A and A1, or the expected present value of all future payments except the first one.
+
+By contract design, the coupon of Class A1 is delivered in the form of the underlying token, whose value in USD may subject to volatile changes due to the high volatility of ETH. In contrast, the coupon of Class A0 is Class A1 token, whose value in USD is much less volatile compared to ETH. Therefore, Class A0 is more suitable for investors with lower risk tolerance or are less active on the market; upon receiving Class A1 tokens as coupon, they have a relatively longer period of time to liquidate the token before its value changes noticeably. In contrast, Class A1 is more suitable for investors who are willing to take certain degree of risk and are more active on the market; so that upon receiving the underlying token, they can monitor the market actively and spot a good opportunity to liquidate the underlying token.
 
 
-\subsection{A=A'+B'}
-After split, the value of Class A is significantly less volatile than the underlying. Therefore, one would expect that, by building a DUO' with Class A' and B' where the underlying is Class A, the value of Class A' will be even more stable. Following this idea, we define Class A' and B' as follows.
+\subsection{A=A$^\prime$+B$^\prime$}
+After split, the value of Class A is significantly less volatile than the underlying. Therefore, one would expect that, by building a DUO$^\prime$ with Class A$^\prime$ and B$^\prime$ where the underlying is Class A, the value of Class A$^\prime$ will be even more stable. Following this idea, we define Class A$^\prime$ and B$^\prime$ as follows.
 
 \begin{enumerate}[1)]
-	\item Class A' and B' together invest in an investment pool consisting of one share of Class A;
-	\item All coupon payments of Class A is given to Class B', and is deducted from the pool;
-	\item The compensations (i.e. payment with an amount of $1-\mathcal{H}_d$ on downward reset, or $g(S)$ on periodic reset) is reinvested in Class A (purchasing price equals face value 1). Therefore, after downward or periodic reset, there is still one share of Class A, but its value drops accordingly due to the coupon payment.
-	\item The net asset value of Class A' grows at an annual rate of 3\% (so 0.0082\% daily);
-	\item The resets of DUO' follow the rule of DUO, where the reference value is the value of investment pool.
+	\item Class A$^\prime$ and B$^\prime$ together invest in an investment pool consisting of one Class A token;
+	\item All coupon payments of Class A is given to Class B$^\prime$, and is deducted from the pool;
+	\item The compensations (i.e. payment with an amount of $1-\mathcal{H}_d$ on downward reset, or $g(S)$ on periodic reset) is reinvested in Class A (purchasing price equals face value 1). Therefore, after downward or periodic reset, there is still one  Class A token, but its value drops accordingly due to the coupon payment.
+	\item The net asset value of Class A$^\prime$ grows at a daily rate of $r^\prime$;
+	\item The resets of DUO$^\prime$ follow the rule of DUO (with the same $\mathcal{H}_u$ and $\mathcal{H}_d$, while the upper limit for periodic reset $\mathcal{H}_p^\prime=1+rN$), where the reference value is the value of investment pool.
 \end{enumerate}
 
-Class A' can be viewed as a compound derivative on the underlying $S$, and it can be priced based on a Monte Carlo simulation approach described as follows.
+Class A$^\prime$ can be viewed as a compound derivative on the underlying $S$, and it can be priced based on a Monte Carlo simulation approach described as follows.
 
-\paragraph{Monte Carlo Algorithm for Estimating Value of Class A'}
+\paragraph{Monte Carlo Algorithm for Estimating Value of Class A$^\prime$ and B$^\prime$}
 \begin{enumerate}[1)]
 	\item Simulate one sample path of $P$ under the risk-neutral measure;
 	\item Calculate $V_A$, $V_B$ and $S$ for each date on the sample path, and derive the reset dates;
 	\item Based on 2), calculate $W_A$ using the PDE \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} for each date on the sample path;
 	\item Calculate $V_{A'}$, $V_{B'}$ and $S'$ based on the sample path of $W_A$, and derive the reset dates;
-	\item Calculate the total discounted value of payments to Class A' on this path;
-	\item Repeat the previous for $M$ times, and define the Monte Carlo estimator for $W_{A'}$ as the average of the $M$ values in 5).
+	\item Calculate the total discounted value of payments to Class A$^\prime$ and B$^\prime$ on this path;
+	\item Repeat the previous for $M$ times, and define the Monte Carlo estimator for $W_{A'}$ and $W_{B'}$ as the average of the $M$ values in 5), respectively.
 \end{enumerate}
 
 \clearpage
@@ -493,10 +503,12 @@ Class A' can be viewed as a compound derivative on the underlying $S$, and it ca
 For illustration, we hereby uses Ether (ETH) as the underlying token
 and apply below parameter values:
 \begin{align*}
-r\;\; & =0.02\%\\
+r& =0.02\%\\
+N&=100\\
 \mathcal{H}_{d} & =0.25\\
 \mathcal{H}_{u} & =2\\
-\mathcal{H}_{p} & =1.02\ ,
+\mathcal{H}_{p} & =1.02\\\
+r^\prime & = 0.009\%,
 \end{align*}
 and below assumptions are used:
 \begin{enumerate}
@@ -614,14 +626,14 @@ need to be converted into Class A token.
 \begin{centering}
 \includegraphics[width=0.7\textwidth]{WA}
 \par\end{centering}
-\caption{Class A Market Value}
+\caption{Class A Market Value. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100$.}
 \end{figure}
 
 \begin{figure}[H]
 \begin{centering}
 \includegraphics[width=0.7\textwidth]{WB}
 \par\end{centering}
-\caption{Class B Market Value}
+\caption{Class B Market Value. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100$.}
 \end{figure}
 
 
@@ -629,17 +641,19 @@ need to be converted into Class A token.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{WA0.eps}
-\caption{Market Value of Class A0. Annualized volatility is 0.0302.}
+\caption{Market Value of Class A0. Annualized volatility is 0.0253. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100$.}
 \end{figure}
 
-\subsection{Market Value of Class A' and B'}
+\subsection{Market Value of Class A$^\prime$ and B$^\prime$}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{WAp.eps}
-\includegraphics[width=0.7\textwidth]{WBp.eps}
-\caption{Market Value of Class A' and B'. Annualized volatility of Class A' and B' are 0.0130 and 0.0595, respectively.}
+\includegraphics[width=0.7\textwidth]{WApn.eps}
+\includegraphics[width=0.7\textwidth]{WBpn.eps}
+\caption{Market Value of Class A$^\prime$ and B$^\prime$. Annualized volatility of Class A$^\prime$ and B$^\prime$ are 0.0133 and 0.0232, respectively. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,r^\prime = 0.009\%$,$\mathcal{H}_{p}^\prime=1.009,N=100$.}
 \end{figure}
+
+We can see that the market value of Class A$^\prime$ token is very stable during our sample period, with a value close to 1.
 
 
 \clearpage
@@ -731,7 +745,7 @@ components, cost in creation and redemption, and ability to short
 sell the required components. Please refer to appendix for discussion
 of a more general case.
 
-\clearpage{}
+\clearpage
 
 \section{Further Development}
 \begin{flushright}
@@ -989,6 +1003,27 @@ P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}
 \]
 
 \subsection{Derivation of the Pricing Equation}
+In this section we show that \eqref{VAL2} defines a unique bounded function $W_A$, which is exactly the solution to the PDE problem \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}. We denote $v_s$ and $Y_s$ as the time from last interest payment and the number of A shares at time $s$, respectively. Starting from an initial value 1, $Y$ is reduced by a factor of $\mathcal{H}_d$(resp. $1-g(S)$) on every downward (resp. periodic) reset dates, reflecting the partial payback of Class A principal. Further denote $\zeta_i$, $\tau_i$, and $\eta_i$ as the $i$-th pre-specified payment date, upward reset date, and downward reset date after $t$, respectively. From the construction of contract,
+\begin{align*}
+S_{\zeta_i}=S_{\tau_i}=S_{\eta_i}=1, ~~v_{\tau_i}=v_{\eta_i}=v_{\zeta_i}=0.
+\end{align*}
+
+The following theorem from \cite{DM2018} (Theorem E1.1) shows that the recursive formula \eqref{VAL2} can be rewritten in a non-recursive form.
+\begin{thm}\label{prop:nonrecur}
+	Equation \eqref{VAL2} defines a unique solution $W_A(t,S)$ for $0\le t\le 1$, $H_d(t)\le S\le H_u(t)$, which can be written as
+	\begin{align}\label{VALnonrecur}
+	\begin{split}
+	W_A(t,S)&=E_t^{(t,S,1)}\Bigg[\sum_{\zeta_i\ge t}e^{-r(\zeta_i-t)}Y_{\zeta_i-}(rT+g(S_{\zeta-}))+\sum_{\tau_i\ge t}e^{-r(\tau_i-t)}Y_{\tau_i-}rv_{\tau_i-}\\
+	&\quad+\sum_{\eta_i\ge t}e^{-r(\eta_i-t)}Y_{\eta_i-}(rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg],
+	\end{split}
+	\end{align}
+	where $E^{(u,s,y)}_t$ is the $\mathbb{Q}$-expectation computed under the initial condition $v_{t-}=u$, $S_{t-}=s$, and $Y_{t-}=y$.
+\end{thm}
+
+Using Theorem \ref{prop:nonrecur}, we can now prove Theorem \ref{thm:main}.
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+	Following the proof in Section 4.1 in \cite{Dai:2016vj} shows that \eqref{VALnonrecur} is the unique classical solution to the PDE problem \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}. Therefore, Theorem \ref{prop:nonrecur} implies that $W_A$ defined in \eqref{VAL2} is the unique classical solution to \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}.
+\end{proof}
 
 \subsection{Numerical Procedure for the Pricing Equation $\eqref{eqn:PDEstart}$
 \textendash{} $\eqref{eqn:PDEend}$\label{subsec:Numerical-Procedure-for}}
@@ -1018,27 +1053,37 @@ show that the sequence$(W_{A}^{(i)})_{i\ge1}$ defined in Algorithm
 
 \section*{\clearpage{}}
 \begin{thebibliography}{1}
-\bibitem[1]{DM2018}Dai, M., S. Kou, C. Yang, and Z. Ye. 2018. The
+
+\bibitem[1]{AC}Adams, A. T., and J. B. Clunie. 2006. Risk Assessment Techniques for Split Capital Investment Trusts. \textit{Annals of Actuarial Science} 1:7-36.
+
+
+\bibitem[2]{DM2018}Dai, M., S. Kou, C. Yang, and Z. Ye. 2018. The
 Overpricing of Leveraged Products: A Case Study of Dual-Purpose Funds
 in China. \textit{Working Paper}. 
 
-\bibitem[2]{Ingersoll1976}Ingersoll, J. E. 1976. A Theoretical and
+\bibitem[3]{Dai:2016vj}Dai, M., S. Kou, and C. Yang. 2017. A Stochastic Representation for Nonlocal Parabolic PDEs with Applications. \textit{Working Paper}.
+
+
+\bibitem[4]{Ingersoll1976}Ingersoll, J. E. 1976. A Theoretical and
 Empirical Investigation of the Dual Purpose Funds: an Application
 of Contingent-claims Analysis. \textit{Journal of Financial Economics}
 3:83-123.
 
-\bibitem[3]{BS}Black, F., and M. Scholes. 1973. The Pricing of Options
+\bibitem[5]{JO}Jarrow, R. A., and M. O'Hara. 1989. Primes and Scores: An Essay on Market Imperfections. \textit{The Journal of Finance} 44:1263-1287.
+
+\bibitem[6]{BS}Black, F., and M. Scholes. 1973. The Pricing of Options
 and Corporate Liabilities. \textit{Journal of Political Economy} 81:637-654.
 
-\bibitem[4]{Leverage}\textit{\href{https://www.investopedia.com/terms/l/leverage.asp}{https://www.investopedia.com/terms/l/leverage.asp}}
+\bibitem[7]{Leverage}Leverage. \textit{\href{https://www.investopedia.com/terms/l/leverage.asp}{https://www.investopedia.com/terms/l/leverage.asp}}
 
-\bibitem[5]{ETH}\textit{\href{https://github.com/ethereum/wiki/wiki/White-Paper}{https://github.com/ethereum/wiki/wiki/White-Paper}}
+\bibitem[8]{ETH}White Paper: A Next-Generation Smart Contract and Decentralized Application Platform. \textit{\href{https://github.com/ethereum/wiki/wiki/White-Paper}{https://github.com/ethereum/wiki/wiki/White-Paper}}
 
-\bibitem[6]{USDT}\textit{\href{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}}
+\bibitem[9]{USDT}Tether: Fiat currencies on the Bitcoin blockchain. 
+\textit{\href{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}}
 
-\bibitem[7]{Basecoin}\textit{\href{http://www.getbasecoin.com/basecoin_whitepaper_0_99.pdf}{http://www.getbasecoin.com/basecoin\_{}whitepaper\_{}0\_{}99.pdf}}
+\bibitem[10]{Basecoin}Basecoin: A Price-Stable Cryptocurrency with an Algorithmic Central Bank. \textit{\href{http://www.getbasecoin.com/basecoin_whitepaper_0_99.pdf}{http://www.getbasecoin.com/basecoin\_{}whitepaper\_{}0\_{}99.pdf}}
 
-\bibitem[8]{MAKERDAO}\textit{\href{https://makerdao.com/whitepaper/DaiDec17WP.pdf}{https://makerdao.com/whitepaper/DaiDec17WP.pdf}}
+\bibitem[11]{MAKERDAO}The Dai Stablecoin System. \textit{\href{https://makerdao.com/whitepaper/DaiDec17WP.pdf}{https://makerdao.com/whitepaper/DaiDec17WP.pdf}}
 \end{thebibliography}
 
 \end{document}
