@@ -54,250 +54,123 @@
 \title{A Stable Token Based on Dual-Class Structure}
 
 \author{Yizhou CAO\thanks{\textit{Email}: \protect\href{mailto:yizhou.cao@finbook.co}{yizhou.cao@finbook.co},
-CTO and Co-founder of FinBook}$\:,$ Min DAI\thanks{\textit{Email}: \protect\href{mailto:matdm@nus.edu.sg}{matdm@nus.edu.sg}.
-Director, Centre for Quantitative Finance, National University of
-Singapore}$\:,$ Steven KOU\thanks{\textit{Email}: \protect\href{mailto:matsteve@nus.edu.sg}{matsteve@nus.edu.sg}.
-Director, Risk Management Institute, National University of Singapore}$\:$, Lewei LI\thanks{\textit{Email}: \protect\href{mailto:lewei.li@finbook.co}{lewei.li@finbook.co},
-CEO and Co-founder of FinBook}$\:$, Chen YANG\thanks{\textit{Email}: \protect\href{mailto:chen.yang@math.ethz.ch}{chen.yang@math.ethz.ch},
-Department of Mathematics, ETH Zurich}}
+CTO and Co-founder of FinBook}$\:,$ Min DAI\thanks{\textit{Email}: \protect\href{mailto:matdm@nus.edu.sg}{matdm@nus.edu.sg}. Director, Centre for Quantitative Finance, National University of Singapore}$\:,$ Steven KOU\thanks{\textit{Email}: \protect\href{mailto:matsteve@nus.edu.sg}{matsteve@nus.edu.sg}. Director, Risk Management Institute, National University of Singapore}$\:$, Lewei LI\thanks{\textit{Email}: \protect\href{mailto:lewei.li@finbook.co}{lewei.li@finbook.co}, CEO and Co-founder of FinBook}$\:$, Chen YANG\thanks{\textit{Email}: \protect\href{mailto:chen.yang@math.ethz.ch}{chen.yang@math.ethz.ch}, Department of Mathematics, ETH Zurich}}
 
 \date{Version 0.8.0\\
 13 Mar 2018}
 \maketitle
 \begin{abstract}
-Major crypto-currencies are subject to massive volatility, which makes
-them attractive to speculators but unsuitable for mainstream use.
-There have been several attempts on implementing 'stablecoins'. But
-most of them fail to provide steady returns that's appealing to regular
-investors.
+Major crypto-currencies are subject to massive volatility, which makes them attractive to speculators but unsuitable for mainstream use. There have been several attempts on implementing ``stablecoins". But most of them fail to provide steady returns that are appealing to regular investors.
 
-Inspired by the dual purpose fund that has gained popularity in the
-US and China, we propose, for the first time to our best knowledge,
-a dual-class crypto token structure that offers entitlements to either
-fixed income or leveraged capital appreciation: the income token receives
-periodical coupon payments with principal protection; the leverage
-token provides leveraged participation in underlying crypto assets.
-The whole mechanism is governed by smart contracts run on Ethereum
-blockchain, without dealing with centralized counterparties. In theory,
-we justify the income token as an ideal stable token.
+Inspired by the dual purpose fund that has gained popularity in the US and China, we propose, for the first time to our best knowledge, a dual-class crypto token structure that offers entitlements to either fixed income or leveraged capital appreciation: the income token receives periodical coupon payments with principal protection; the leverage token provides leveraged participation in underlying crypto-currencies. The whole mechanism is governed by smart contracts run on Ethereum blockchain, without dealing with centralized counterparties. In theory, we justify the income token as an ideal stable token.
 
-For illustration, we employ Ether (ETH) as underlying asset and use
-its historical prices to demonstrate  the performance of our stable
-token in real world scenarios. We also show how arbitrage activities
-take place and help maintain price stability of this stable token.
+For illustration, we employ Ether (ETH) as underlying currency and use its historical prices to demonstrate  the performance of our stable token in real world scenarios. We also show how arbitrage activities take place and help maintain price stability of this stable token.
 \end{abstract}
-\textit{Keywords: }stablecoin, dual-class token, fixed income crypto
-asset, leveraged return crypto asset, smart contract, Ethereum, decentralized
-asset management
+\textit{Keywords: }stablecoin, dual-class token, fixed income crypto asset, leveraged return crypto asset, smart contract, Ethereum, decentralized asset management
 
 \clearpage
 
 \section{Introduction}
-\begin{flushright}
-{\small{}A wise man ought always to follow the paths beaten by great
-men, }\\
-{\small{}and to imitate those who have been supreme, so that }\\
-{\small{}if his ability does not equal theirs, at least it will savour
-of it.}\\
-{\small{}\textendash{} }\emph{\small{}Niccolo Machiavelli: The Prince}
-\par\end{flushright}{\small \par}
+%\begin{flushright}
+%{\small{}A wise man ought always to follow the paths beaten by great
+%men, }\\
+%{\small{}and to imitate those who have been supreme, so that }\\
+%{\small{}if his ability does not equal theirs, at least it will savour
+%of it.}\\
+%{\small{}\textendash{} }\emph{\small{}Niccolo Machiavelli: The Prince}
+%\par\end{flushright}{\small \par}
 
 \subsection{Stablecoins and Fixed Income Assets}
 
-Since their inception, crypto currencies aim to create an alternative
-financial system comparable to fiat financial systems. In a fiat system,
-money or credit exists in a few different forms: actual currency in
-circulation and fixed income assets such as time deposits and money
-market funds, which are the foundation for rest of the financial market
-to build on. The crypto market is at primitive stage as it lacks coins
-or tokens comparable to fiat money due to their huge price volatility
-and thus there are no established fixed income assets either. 
+Since their inception, crypto currencies aim to create an alternative financial system comparable to fiat financial systems. In a fiat system, money or credit exists in a few different forms: actual currency in circulation and fixed income assets such as time deposits and money market funds, which are the foundation for the rest of the financial market to build on. The crypto market is at primitive stage as it lacks coins or tokens comparable to fiat money due to their huge price volatility,  and thus there are no established fixed income assets either.
 
-A Stable token, also known as stablecoin, is a crypto-token that keeps
-stable market value against a specific index, most noticeably US Dollar.
-There have been a few attempts to create stable tokens: Tether claims
-to have 1:1 USD collateral in its centralized bank accounts\cite{USDT};
-Basecoin tries to control money supply by playing an algorithmic version
-of central bank\cite{Basecoin}; MakerDAO uses decentralized over-collateralization
-to maintain confidence of its Dai stablecoin\cite{MAKERDAO}. 
+A Stable token, also known as stablecoin, is a crypto-token that keeps stable market value against a specific index, most noticeably US Dollar. There have been a few attempts to create stable tokens: Tether claims to have 1:1 USD collateral in its centralized bank accounts \cite{USDT}; Basecoin tries to control money supply by playing an algorithmic version of central bank \cite{Basecoin}; MakerDAO uses decentralized over-collateralization to maintain confidence of its Dai stablecoin \cite{MAKERDAO}.
 
-Most stable token designs to date face a common problem: their holders
-bear variable levels of counter-party risks, but there is little incentive
-or even additional cost to hold these tokens. We believe a crypto-token
-with low price volatility and stable income is a superior safe haven
-asset and is essential for a more robust crypto market.
+Most stable token designs to date face a common problem: their holders bear variable levels of counter-party risks, but there is little incentive or even additional cost to hold these tokens. We believe a crypto-token with low price volatility and stable income is a superior safe haven asset and is essential for a more robust crypto market.
 
 \subsection{Risk Segmentation}
 
-In the fiat market, risk segmentation exists in every level of market.
-At asset class level, risk averse investors choose fixed income products
-while risk seeking investors choose equity or commodity. Within the
-fixed income market, conservative investors choose safe haven assets
-such as government bonds while aggressive players choose high yield
-bonds, or otherwise known as junk bonds. 
+In the fiat market, risk segmentation exists in every level of market. At asset class level, risk averse investors choose fixed income products while risk seeking investors choose equity or commodity. Within the fixed income market, conservative investors choose safe haven assets such as government bonds while aggressive players choose high yield bonds, or otherwise known as junk bonds.
 
-Although most of crypto assets are considered highly speculative,
-there still exist different segments of risk appetites. The existence
-of margin trading in exchanges like BitFinex and Huobi Pro demonstrates
-the need of leverage from aggressive crypto investors. Similarly,
-safe haven assets providing low volatility and stable income will
-be appealing to institutional players, short-term pessimistic investors
-and ICO project teams. However, to our best knowledge, there is no
-viable product at the moment. 
+Although most of crypto assets are considered highly speculative, there still exist different segments of risk appetites. The existence of margin trading in exchanges like BitFinex and Huobi Pro demonstrates the need of leverage from aggressive crypto investors. Similarly, safe haven assets providing low volatility and stable income will be appealing to institutional players, short-term pessimistic investors and ICO project teams. However, to our best knowledge, there is no viable product at the moment.
 
-The price volatility cannot be eliminated, but can be transferred.
-Through a structured contract, a risk-seeking investor can get exposed
-to higher leverage with limited assets, while a risk-averse investor
-can avoid unwanted price fluctuations by entering the other side of
-the contract. The financial market has created many products satisfying
-different risk segments, some of which can be very practical for crypto
-market participants.
+The price volatility cannot be eliminated, but can be transferred. Through a structured contract, a risk-seeking investor can get exposed to higher leverage with limited assets, while a risk-averse investor can avoid unwanted price fluctuations by entering the other side of the contract. The financial market has created many products satisfying different risk segments, some of which can be very practical for crypto market participants.
 
 \subsection{Leveraged Funds}
 
-Leverage is the strategy of using borrowed capital to increase the
-potential return of an investment.\cite{Leverage} Retail investors
-have less access to leverage methods such as margin loans and financial
-derivatives, which promotes the creation of leveraged fund products. 
+Leverage is the strategy of using borrowed capital to increase the potential return of an investment \cite{Leverage}. Retail investors have less access to leverage methods such as margin loans and financial derivatives, which promotes the creation of leveraged fund products.
 
-An interesting class of leveraged funds is the dual-purpose funds,
-also known as primes and scores, which are mutual funds that are split
-into two classes of shares by design: low risk shares and high risk
-shares. They were designed to provide investors with the opportunity
-of repackaging their investment incomes and capital flow in accordance
-with their preferences. Dual-purpose funds first appeared in U.S.
-in 1965, but faded out in early 1990s due to a change in the tax code
-that resulted in double taxation.\cite{DM2018} The valuation of dual-purpose funds in U.S. were investigated theoretically and empirically in \cite{Ingersoll1976}, \cite{JO} and 
+An interesting class of leveraged funds is the dual-purpose funds, also known as primes and scores, which are mutual funds that are split into two classes of shares by design: low risk shares and high risk shares. They were designed to provide investors with the opportunity of repackaging their investment incomes and capital flow in accordance with their preferences. Dual-purpose funds first appeared in U.S. in 1965, but faded out in early 1990s due to a change in the tax code that resulted in double taxation \cite{DM2018}. The valuation of dual-purpose funds in U.S. was investigated theoretically and empirically in \cite{Ingersoll1976} and \cite{JO}.
 
-The dual-purpose fund was introduced in China in 2010 and it quickly
-became one of the most popular leveraged products there, reaching
-market size of 500 billion CNY (80 billion USD) at its peak. A Chinese
-dual-purpose fund usually takes an open-end index-tracking fund as
-underlying and has two classes of shares: the low risk A shares behave
-like a perpetual bond with periodical coupon payments, and the high
-risk B shares are essentially a closed-end fund magnifying the exposure
-of the underlying index. A set of upward and downward reset clauses
-is imposed to reduce the risk of both shares.\cite{DM2018}
+The dual-purpose fund was introduced in China in 2010 and it quickly became one of the most popular leveraged products there, reaching market size of 500 billion CNY (80 billion USD) at its peak. A Chinese dual-purpose fund usually takes an open-end index-tracking fund as underlying and has two classes of shares: the low risk A shares behave like a perpetual bond with periodical coupon payments, and the high risk B shares are essentially a closed-end fund magnifying the exposure of the underlying index. A set of upward and downward reset clauses is imposed to reduce the risk of both shares \cite{DM2018}.
 
-We are inspired by Chinese dual-purpose fund for three reasons: (i)
-both the income and leveraged shares answer unfulfilled demands of
-cryptocurrency investors; (ii) the market mechanism, pricing formula,
-and arbitrage method prove to work in real market; and (iii) the structure
-can be efficiently implemented by Smart Contracts.
+We are inspired by the Chinese dual-purpose fund for three reasons: (i) both the income and leveraged shares answer unfulfilled demands of crypto-currency investors; (ii) the market mechanism, pricing formula, and arbitrage method prove to work in real market; and (iii) the structure can be efficiently implemented by Smart Contracts.
 
 \subsection{Smart Contract}
 
-Smart Contract was first proposed by Nick Szabo in 1994, who described
-it as \textquotedblleft a set of promises, specified in digital form,
-including protocols within which the parties perform on these promises\textquotedblright .
+Smart Contract was first proposed by Nick Szabo in 1994, who described it as \textquotedblleft a set of promises, specified in digital form, including protocols within which the parties perform on these promises\textquotedblright .
 
-The idea has not received commercial adoption due to lack of trustworthy
-execution environment, until the appearance of blockchain technology.
-Released in 2015, Ethereum implements a nearly Turing-complete language
-on its blockchain, a prominent smart contract framework. The Ethereum
-white paper describes smart contracts as \textquotedblleft cryptographic
-boxes contain value and only unlock it if certain conditions are met\textquotedbl{}.
-It also lists financial derivatives as the most common application
-of a smart contract, and introduces a rough idea about creating stable-value
-currencies through a hedging contract. \cite{ETH}
+The idea has not received commercial adoption due to lack of trustworthy execution environment, until the appearance of blockchain technology. Released in 2015, Ethereum implements a nearly Turing-complete language on its blockchain, a prominent smart contract framework. The Ethereum white paper describes smart contracts as \textquotedblleft cryptographic boxes contain value and only unlock it if certain conditions are met". It also lists financial derivatives as the most common application of a smart contract, and introduces a rough idea about creating stable-value currencies through a hedging contract \cite{ETH}.
 
-Up until now, the most popular stablecoin solution has been issuer-backed
-assets. And it is almost a market consensus that such issuers are
-not always trustworthy. We agree with Ethereum authors' argument that,
-a decentralized market of speculators and arbitragers powered by smart
-contract, could be an alternative solution.
+Up until now, the most popular stablecoin solution has been issuer-backed assets. And it is almost a market consensus that such issuers are not always trustworthy. We agree with Ethereum authors' argument that, a decentralized market of speculators and arbitragers powered by smart contract, could be an alternative solution.
 
-This paper aims to propose an alternative approach of creating stable
-value tokens, providing a different set of trade offs between price
-stability, holder incentive and supply flexibility. We believe the
-solution will be very useful for broader adoption of the crypto market.
+This paper aims to propose an alternative approach of creating stable value tokens, providing a different set of trade offs between price stability, holder incentive and supply flexibility. We believe the solution will be very useful for broader adoption of the crypto market.
 
 \clearpage{}
 
 \section{Product Design\label{sec:Product-Design}}
-\begin{flushright}
-{\small{}Everything should be made as simple as possible, but no simpler.
-}\\
-{\small{}\textendash{} }\emph{\small{}Albert Einstein}
-\par\end{flushright}{\small \par}
+%\begin{flushright}
+%{\small{}Everything should be made as simple as possible, but no simpler.
+%}\\
+%{\small{}\textendash{} }\emph{\small{}Albert Einstein}
+%\par\end{flushright}{\small \par}
 
 \subsection{Overview}
 
 \paragraph{DUO }
-
-a dual-class token structure that, combined with smart contract governed
-rules and market arbitrage mechanism, provides principal-guaranteed
-fixed incomes and leveraged capital gains for holders of each class,
-respectively.
+a dual-class token structure that, combined with smart contract governed rules and market arbitrage mechanism, provides principal-guaranteed fixed incomes and leveraged capital gains for holders of each class, respectively.
 
 \paragraph{Class A Token}
-
-also known as the Income Token, continuously accumulates interests
-based on its original net value at last Reset event. It will also
-receive token payments at each Reset event.
+also known as the Income Token, continuously accumulates interests based on its original net value at last Reset event. It will also receive token payments at each Reset event.
 
 \paragraph{Class B Token}
+also known as the Leverage Token, entitles leveraged participation of the underlying digital assets.
 
-also known as the Leverage Token, entitles leveraged participation
-of the underlying digital assets.
-
-The Custodian smart contract performs multiple tasks that facilitate
-key mechanism of the system, including: creation and redemption of
-DUO tokens, safekeeping the underlying digital assets (e.g. ETH),
-calculation of tokens' net values, and execution of Reset events. 
+The Custodian smart contract performs multiple tasks that facilitate key mechanism of the system, including: creation and redemption of DUO tokens, safekeeping the underlying digital assets (e.g. ETH), calculation of tokens' net values, and execution of Reset events.
 
 \subsection{Creation and Redemption\label{subsec:Creation-and-Redemption}}
 
 \subsubsection{Creation}
 
-Dual-class tokens can be created by depositing underlying tokens to
-the Custodian contract. Upon receiving underlying tokens of amount
-$M_{C}$, the Custodian contract will return to the sender equal amount
-of Class A and Class B tokens. Such amount $C$ can be calculated
-by:
+Dual-class tokens can be created by depositing underlying tokens to the Custodian contract. Upon receiving underlying tokens of amount $M_{C}$, the Custodian contract will return to the sender equal amount of Class A and Class B tokens. Such amount $C$ can be calculated by:
 \begin{equation}
 \begin{array}{c}
 C=\frac{M_{C}\cdot P_{0}}{2}\ ,\end{array}\label{eq:creation}
 \end{equation}
-where $P_{0}$ is the recorded price of underlying token in USD at
-last reset event.
+where $P_{0}$ is the recorded price of underlying token in USD at last reset event.
 
-The deposited underlying tokens are kept by the Custodian contract,
-as collateral of the Class A and Class B tokens issued by the contract.
-Any user or member of the public can verify the collateral and tokens
-issued through third party applications such as \href{http://etherscan.io}{Etherscan.io}.
+The deposited underlying tokens are kept by the Custodian contract, as collateral of the Class A and Class B tokens issued by the contract. Any user or member of the public can verify the collateral and tokens issued through third party applications such as \href{http://etherscan.io}{Etherscan.io}.
 
 \subsubsection{Redemption}
 
-Holders of Class A and Class B tokens can withdraw deposited underlying
-tokens at any time by performing a redemption. To do this, the user
-will send equal amount $R$ of Class A and Class B tokens to the Custodian
-contract. The contract will deduct Class A and Class B tokens, and
-return to the sender $M_{R}$ underlying tokens, where$M_{R}$ can
-be calculated by:
+Holders of Class A and Class B tokens can withdraw deposited underlying tokens at any time by performing a redemption. To do this, the user will send equal amount $R$ of Class A and Class B tokens to the Custodian contract. The contract will deduct Class A and Class B tokens, and return to the sender $M_{R}$ underlying tokens, where$M_{R}$ can be calculated by:
 \begin{equation}
 M_{R}=\frac{2R}{P_{0}}\ .\label{eq:redemption}
 \end{equation}
 
 \subsubsection{Net Value}
 
-The net values of tokens are calculated based on the coupon rate,
-the elapsed time from last Reset event, and the latest underlying
-token price in USD fed to the system. In particular,
+The net values of tokens are calculated based on the coupon rate, the elapsed time from last Reset event, and the latest underlying token price in USD fed to the system. In particular,
 \begin{equation}
-\begin{array}{cc}
-V_{A}^{t}= & 1+r\cdot t\\
+\begin{array}{ll}
+V_{A}^{t}= & 1+r\cdot t,\\
 V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue}
 \end{equation}
-where $r$ is the \textbf{daily} coupon rate,
-
-$t$ is the number of days from last reset event,
-
-and $P_{t}$ is the current price of underlying token in USD.
+where $r$ is the \textbf{daily} coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in USD.
 
 \subsubsection{Implied Leverage Ratio}
-
+Class B has the following leverage ratio:
 \begin{align*}
 L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{2}{V_{B}^{t}}
 \end{align*}
@@ -305,60 +178,36 @@ Note that at inception or after resets, above simply reduces to $L_{B}^{0}=2$.
 
 \subsection{Resets}
 
-Simply put, the holders of Class B tokens borrow capital from the
-holders of Class A tokens and invest in a volatile asset (i.e. ETH),
-which leads the Class B token to possess a continuum of leverage ratios.
-To reduce risk of both classes, a set of upward and downward reset
-clauses is imposed. Resets preserves total value in the system.
+Simply put, the holders of Class B tokens borrow capital from the holders of Class A tokens and invest in a volatile asset (i.e. ETH), which leads the Class B token to possess a continuum of leverage ratios. To reduce risk of both classes, a set of upward and downward reset clauses is imposed. Resets preserve total value in the system.
 
 \subsubsection{Contingent Upward Reset}
 
-When underlying token price rises, the Class B token's leverage ratio
-reduces. An upward reset is triggered when the Net Value of Class
-B token reaches upper limit $\mathcal{H}_{u}$. The reset will restore
-the leverage ratio to 2. By increasing Class B's leverage ratio, the
-structure retains attraction to leverage-seeking users.
+When underlying token price rises, the Class B token's leverage ratio reduces. An upward reset is triggered when the Net Value of Class B token reaches upper limit $\mathcal{H}_{u}$. The reset will restore the leverage ratio to 2. By increasing Class B's leverage ratio, the structure retains attraction to leverage-seeking users.
 
 Upon upward reset:
 \begin{enumerate}[1)]
-\item Total amount of both classes token remain unchanged
-\item Net Value of both classes reset to 1 USD
-\item Both classes' holders will receive certain amount of underlying token
-from the Custodian contract. Such amount for each Class A token is
+\item Total amount of both classes token remains unchanged.
+\item Net Value of both classes resets to 1 USD.
+\item Both classes' holders will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is
 $\frac{V_{A}^{t-}-1}{P_{t}}$ and for each Class B token is $\frac{V_{B}^{t-}-1}{P_{t}}$
 \end{enumerate}
-Total value in the system is unchanged after reset. For details, see
-Appendix \ref{subsec:Contingent-Upward-Reset}.
+Total value in the system is unchanged after reset. For details, see Appendix \ref{subsec:Contingent-Upward-Reset}.
 
 \subsubsection{Contingent Downward Reset}
 
-When the underlying token price falls, the Class B token's leverage
-ratio increases. A Downward Reset is triggered when the Net Value
-of Class B token reaches lower limit $\mathcal{H}_{d}$. Similar to
-an Upward Reset, a Downward Reset restores the leverage ratio. By
-reducing leverage ratio and restoring Net Value, the structure strengthens
-principal protection to Class A holders. Additionally, a Downward
-Reset will reduce the total supply of Class A and Class B tokens by
-roughly $1-\mathcal{H}_{d}$. 
+When the underlying token price falls, the Class B token's leverage ratio increases. A Downward Reset is triggered when the Net Value of Class B token reaches lower limit $\mathcal{H}_{d}$. Similar to an Upward Reset, a Downward Reset restores the leverage ratio. By reducing leverage ratio and restoring Net Value, the structure strengthens principal protection to Class A holders. Additionally, a Downward Reset will reduce the total supply of Class A and Class B tokens by roughly $1-\mathcal{H}_{d}$.
 
 Upon downward reset:
 \begin{enumerate}[1)]
-\item Total amount of both classes token are reduced to $Q^{t+}=Q^{t-}\cdot V_{B}^{t-}$
-\item Net Value of both classes reset to 1 USD
-\item Class A holders will receive certain amount of underlying token from
-the Custodian contract. Such amount of each Class A token is: $\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$
+\item Total amount of both classes token is reduced to $Q^{t+}=Q^{t-}\cdot V_{B}^{t-}$.
+\item Net Value of both classes resets to 1 USD.
+\item Class A holders will receive certain amount of underlying token from the Custodian contract. Such amount of each Class A token is: $\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$
 \end{enumerate}
-Total value in the system is unchanged after reset. For details, see
-Appendix  \ref{subsec:Contingent-Downward-Reset}.
+Total value in the system is unchanged after reset. For details, see Appendix  \ref{subsec:Contingent-Downward-Reset}.
 
 \subsubsection{Periodic Reset}
 
-When a given time period ($N$ days) has passed from the last reset time, or equivalently, $V_{A}^{t-}$
-grows to upper limit $\mathcal{H}_{p}$, a periodic reset is triggered
-to restore the leverage ratio and net value of both classes. If $V_{B}^{t-}$
-is less than 1, reset will be the same as the Contingent Downward
-reset. Otherwise, reset will be the same as the Contingent Upward
-reset.
+When a given time period ($N$ days) has passed from the last reset time, or equivalently, $V_{A}^{t-}$ grows to upper limit $\mathcal{H}_{p}$, a periodic reset is triggered to restore the leverage ratio and net value of both classes. If $V_{B}^{t-}$ is less than 1, reset will be the same as the Contingent Downward reset. Otherwise, reset will be the same as the Contingent Upward reset.
 
 
 \subsection{Market Mechanism}
@@ -370,41 +219,25 @@ reset.
 
 \subsubsection{Premium and Discount\label{subsec:Premium-and-Discount}}
 
-Like all fixed income products, Class A is expected to trade on premium
-or at discount with respect to its net value, depending on market
-condition. When Class A trades on premium, that generally indicates
-a higher demand for income over leverage and thus Class A buyers are
-getting lower yield. On the contrary, when Class A trades at discount,
-that implies a higher demand for leverage over income and thus Class
-A buyers are paying less and getting higher yield. In an orderly market,
-Class A's market price can be used to derive the current market cost
-of funding. As net values draw closer to resets, Class A might trade
-closer to its net value as traders start exploiting arbitrage opportunities.
+Like all fixed income products, Class A is expected to trade on premium or at discount with respect to its net value, depending on market condition. When Class A trades on premium, that generally indicates a higher demand for income over leverage and thus Class A buyers are getting lower yield. On the contrary, when Class A trades at discount, that implies a higher demand for leverage over income and thus Class A buyers are paying less and getting higher yield. In an orderly market, Class A's market price can be used to derive the current market cost of funding. As net values draw closer to resets, Class A might trade closer to its net value as traders start exploiting arbitrage opportunities.
 
 \subsubsection{Market Arbitrage }
 
-The dual class tokens are two-way fungible to the underlying token
-(i.e. ETH). Thus, a price parity shall hold as below:
+The dual class tokens are two-way fungible to the underlying token (i.e. ETH). Thus, a price parity shall hold as below:
 \[
 P_{A}^{t}+P_{B}^{t}=V_{A}^{t}+V_{B}^{t}\ ,
 \]
-where $P_{A}^{t}$ is the current price of Class A in USD,
+where $P_{A}^{t}$ is the current price of Class A in USD, and $P_{B}^{t}$ is the current price of Class B in USD.
 
-and $P_{B}^{t}$ is the current price of Class B in USD.
-
-Along with Equation (\ref{eq:netvalue}) in Section \ref{subsec:Creation-and-Redemption},
-below should hold:
+Along with Equation (\ref{eq:netvalue}) in Section \ref{subsec:Creation-and-Redemption}, the following relation should hold:
 \[
 P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}\ .
 \]
-On open market, arbitrage opportunity exists when Class A and Class
-B tokens trade away from their net values and the above equation is
-likely violated on either side.
+On open market, arbitrage opportunity exists when Class A and Class B tokens trade away from their net values and the above equation is likely violated on either side.
 
 \paragraph{Arbitrage via Creation}
 
-When combined market price of Class A and Class B tokens are higher
-than their combined net values, i.e.
+When combined market price of Class A and Class B tokens are higher than their combined net values, i.e.
 \[
 P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}\ ,
 \]
@@ -412,10 +245,8 @@ arbitrage profit can be exploited by perform DUO token creation:
 \begin{enumerate}
 \item Buy 1 underlying tokens from open market for $P_{t}$ USD equivalent.
 \item Send the underlying tokens to the Custodian contract.
-\item Based on Equation (\ref{eq:creation}), receive $\frac{P_{0}}{2}$
-Class A and $\frac{P_{0}}{2}$ Class B tokens.
-\item Sell Class A and Class B tokens on open market for $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$
-USD equivalent.
+\item Based on Equation (\ref{eq:creation}), receive $\frac{P_{0}}{2}$ Class A and $\frac{P_{0}}{2}$ Class B tokens.
+\item Sell Class A and Class B tokens on open market for $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
@@ -424,16 +255,13 @@ P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}}{2}\cdot\left(P_{A}^{t
 
 \paragraph{Arbitrage via Redemption}
 
-When combined market price of Class A and Class B tokens are lower
-than their combined net values, i.e.
+When combined market price of Class A and Class B tokens are lower than their combined net values, i.e.
 \[
 P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}\ ,
 \]
 arbitrage profit can be exploited by perform DUO token redemption:
 \begin{enumerate}
-\item Buy $\frac{P_{0}}{2}$ Class A and $\frac{P_{0}}{2}$ Class B tokens
-from open market for $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD
-equivalent.
+\item Buy $\frac{P_{0}}{2}$ Class A and $\frac{P_{0}}{2}$ Class B tokens from open market for $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD equivalent.
 \item Send Class A and Class B tokens to the Custodian contract.
 \item Based on Equation (\ref{eq:redemption}), receive 1 underlying tokens.
 \item Sell underlying tokens on open market for $P_{t}$ USD equivalent.
@@ -442,15 +270,11 @@ The expected payoff of above operations is:
 \[
 P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0\ .
 \]
-Many other factors also determine whether above arbitrage strategy
-can be successfully executed, such as bid ask spread of all the 3
-components, cost in creation and redemption, and ability to short
-sell the required components. Please refer to appendix for discussion
-of a more general case.
+Many other factors also determine whether above arbitrage strategy can be successfully executed, such as bid ask spread of all the 3 components, cost in creation and redemption, and ability to short sell the required components. Please refer to appendix for discussion of a more general case.
 
 
 \subsection{Differences from Dual-Purpose Fund Contract}
-Although the contract of DUO is inspired by dual-purpose funds, it is different from dual-purpose funds in the following aspects. 
+Although the contract of DUO is inspired by dual-purpose funds, it is different from dual-purpose funds in the following aspects.
 \paragraph{Periodic Reset} For dual-purpose funds, only Class A receives interest payment on periodic reset; Class B receives nothing. Therefore, even if Class B has leverage profit, it can only be realized on upward resets. In contrast, on periodic reset dates, the payment scheme follows that on either upward or downward reset. Therefore, Class B in DUO has the opportunity of receiving dividend payments more often than that in dual-purpose funds.
 \paragraph{Upward Reset Triggering Condition} For dual-purpose funds, the upward reset is triggered by the underlying up-crossing $\mathcal{H}_u$, while the downward reset is triggered by the Net Value of Class B down-crossing $\mathcal{H}_d$. For DUO, the triggering conditions of both upward and downward resets are all based on the Net Value of Class B. This brings about symmetry and simplicity to the triggering condition.
 
@@ -459,10 +283,9 @@ Although the contract of DUO is inspired by dual-purpose funds, it is different 
 
 \section{Valuation}
 
-Denote $W_{A}$ and $W_{B}$ as the market value of Class A and Class
-B, respectively. Denote $S_t=P_t/P_0$ as the relative price of the underlying token. By contract, $S$ changes to 1 at every reset date.
+Denote $W_{A}$ and $W_{B}$ as the market value of Class A and Class B, respectively. Denote $S_t=P_t/P_0$ as the relative price of the underlying token. By contract, $S$ changes to 1 at every reset date.
 
-Under the risk-neutral pricing framework, the current market value of Class A token is given recursively as 
+Under the risk-neutral pricing framework, the current market value of Class A token is given recursively as
 \begin{align}
 \begin{split}W_{A}(t,S) & =E_{t}\Bigg[e^{-\rho(\zeta-t)}[rT+g(S_{\zeta-})+(1-g(S_{\zeta-}))W_{A}(0,1)]\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}\\
  & \quad+e^{-\rho(\tau-t)}(r\tau+W_{A}(0,1))\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}\\
@@ -470,81 +293,29 @@ Under the risk-neutral pricing framework, the current market value of Class A to
 \end{split}
 \label{VAL2}
 \end{align}
-where $E_{t}$ is the expectation computed under the risk-neutral measure and under
-the initial condition $S_{t-}=S$, random times $\zeta$, $\tau$
-and $\eta$ represent the first periodic, upward and downward reset
-date from $t$, respectively, and $g(s)=((1+\alpha)(1-s)+\alpha rT)^{+}$.
-$W_{A}(t,S)$ denotes the market value of Class A token with time from
-last interest payment $0\le t\le1$, and the relative price of underlying token satisfies $H_{d}(t)\le S\le H_{u}(t)$,
-where $H_{d}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{d}$,
-and $H_{u}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{u}$. Once we calculate $W_A$, the value of Class B token can be calculated as $W_B=(1+\alpha)S-\alpha W_A$.
+where $E_{t}$ is the expectation computed under the risk-neutral measure and under the initial condition $S_{t-}=S$, random times $\zeta$, $\tau$ and $\eta$ represent the first periodic, upward and downward reset date from $t$, respectively, and $g(s)=((1+\alpha)(1-s)+\alpha rT)^{+}$. $W_{A}(t,S)$ denotes the market value of Class A token with time from last interest payment $0\le t\le1$, and the relative price of underlying token satisfies $H_{d}(t)\le S\le H_{u}(t)$, where $H_{d}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{d}$, and $H_{u}(t)=\frac{\alpha}{1+\alpha}(1+rt)+\frac{1}{1+\alpha}\mathcal{H}_{u}$. Once we calculate $W_A$, the value of Class B token can be calculated as $W_B=(1+\alpha)S-\alpha W_A$.
 
-Since after either an upward or downward reset, investors still get
-Class A token in addition to the payments, the right hand side of
-$\eqref{VAL2}$ depends on $W_{A}$, which makes $\eqref{VAL2}$ recursive.
-On the right hand side, the second and third terms
-describe the cash flow on upward and downward resets. The second term
-shows that, if the reset is an upward reset, investors get early payment,
-and the time from last reset changes to 0 and $S$ to $1$. The third
-term shows that, if a downward reset comes first, investors receive
-payment of value $V_{A}^{\eta-}-V_{B}^{\eta-}$, each Class
-A token reduces to $\mathcal{H}_{d}$ token, and the time from last reset
-changes to 0 and $S$ to $1$. Finally, the first term is value of
-the cash flow on the periodic reset date. Specifically, when $V_{B}^{\zeta-}\ge1$,
-or equivalently, $(1+\alpha)-\alpha(1+rT)\ge1$ (so that $g(S_{\zeta-})=0$),
-the cash flow follows that of an upward reset where Class A receives
-payment of value $rT$, and the number of Class A remains unchanged;
-when $V_{B}^{\zeta-}<1$, or equivalently, $(1+\alpha)-\alpha(1+rT)<1$,
-the cash flow follows that of a downward reset, where Class A receives
-payment of value $V_{A}^{\zeta-}-V_{B}^{\zeta-}=1+rT-(1+\alpha)S_{\zeta-}-\alpha(1+rT)=rT+g(S_{\zeta-})$,
-and each token of Class A is reduced to $V_{B}^{\zeta-}=(1+\alpha)S_{\zeta-}-\alpha(1+rT)=1-g(S_{\zeta-})$
-token.
+Since after either an upward or downward reset, investors still get Class A token in addition to the payments, the right hand side of $\eqref{VAL2}$ depends on $W_{A}$, which makes $\eqref{VAL2}$ recursive. On the right hand side, the second and third terms describe the cash flow on upward and downward resets. The second term shows that, if the reset is an upward reset, investors get early payment, and the time from last reset changes to 0 and $S$ to $1$. The third term shows that, if a downward reset comes first, investors receive payment of value $V_{A}^{\eta-}-V_{B}^{\eta-}$, each Class A token reduces to $\mathcal{H}_{d}$ token, and the time from last reset changes to 0 and $S$ to $1$. Finally, the first term is value of the cash flow on the periodic reset date. Specifically, when $V_{B}^{\zeta-}\ge1$, or equivalently, $(1+\alpha)-\alpha(1+rT)\ge1$ (so that $g(S_{\zeta-})=0$), the cash flow follows that of an upward reset where Class A receives payment of value $rT$, and the number of Class A remains unchanged; when $V_{B}^{\zeta-}<1$, or equivalently, $(1+\alpha)-\alpha(1+rT)<1$, the cash flow follows that of a downward reset, where Class A receives payment of value $V_{A}^{\zeta-}-V_{B}^{\zeta-}=1+rT-(1+\alpha)S_{\zeta-}-\alpha(1+rT)=rT+g(S_{\zeta-})$, and each token of Class A is reduced to $V_{B}^{\zeta-}=(1+\alpha)S_{\zeta-}-\alpha(1+rT)=1-g(S_{\zeta-})$ token.
 
 One can estimate $W_A$ via \eqref{VAL2} using Monte Carlo simulation, which is also proposed by \cite{AC} to deal with the complexities in the fund contract. Due to the high volatility of the underlying token, it is desirable to achieve real-time calculation of $W_A$. However, the efficiency of the simulation-based method is not high enough for this purpose, since the cash flow of Class A token has an infinite horizon and a weakly path-dependent nature. Therefore, in the following we propose an efficient PDE-based estimation method.
 
-We assume that $P$ follows a geometric Brownian
-motion under the risk neutral measure: 
+We assume that $P$ follows a geometric Brownian motion under the risk neutral measure:
 \[
 dP_{t}=\rho Pdt+\sigma P_{t}dW_{t},
 \]
 where $W_{t}$ is a one-dimensional standard Brownian motion. Then, $W_{A}$ can be characterized in terms of a partial
 differential equation:
 
-\begin{align}\label{eqn:PDEstart} 
--\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A}\\\label{eqn:ter} 
-W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1)\\\label{eqn:bound1} 
-W_{A}(t,H_{u}(t)) & =rt+W_{A}(0,1)\\\label{eqn:PDEend} 
-W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1). 
-\end{align} 
+\begin{align}\label{eqn:PDEstart}
+-\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A}\\\label{eqn:ter}
+W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1)\\\label{eqn:bound1}
+W_{A}(t,H_{u}(t)) & =rt+W_{A}(0,1)\\\label{eqn:PDEend}
+W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
+\end{align}
 
-The main feature of the above
-PDE problem is the nonlocal terminal and boundary conditions $\eqref{eqn:ter}$
-\textendash{} $\eqref{eqn:PDEend}$, where the given data also depend
-on the solution $W_{A}$ itself. Although $\eqref{eqn:PDEstart}$
-involves the standard Black-Scholes operator (due to our geometric
-Brownian motion assumption), the presence of the solution $W_{A}$
-in terminal and boundary data makes the PDE significantly different
-from the classical Black-Scholes PDE, leading to challenges in both
-theoretical and numerical aspects. On the theoretical aspect, the
-existing stochastic representation result is not applicable to PDE
-$\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ due to the
-nonlocalness of the terminal and boundary conditions. On the numerical
-aspect, the nonlocalness in the terminal and boundary data also causes
-problem since a numerical solution in the interior region depends
-on the boundary and terminal data, which in turns depends on the numerical
-solution in the interior region. To solve this, we propose an iterative
-procedure presented in Appendix $\ref{subsec:Numerical-Procedure-for}$. 
+The main feature of the above PDE problem is the nonlocal terminal and boundary conditions $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$, where the given data also depend on the solution $W_{A}$ itself. Although $\eqref{eqn:PDEstart}$ involves the standard Black-Scholes operator (due to our geometric Brownian motion assumption), the presence of the solution $W_{A}$ in terminal and boundary data makes the PDE significantly different from the classical Black-Scholes PDE, leading to challenges in both theoretical and numerical aspects. On the theoretical aspect, the existing stochastic representation result is not applicable to PDE $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ due to the nonlocalness of the terminal and boundary conditions. On the numerical aspect, the nonlocalness in the terminal and boundary data also causes problem since a numerical solution in the interior region depends on the boundary and terminal data, which in turns depends on the numerical solution in the interior region. To solve this, we propose an iterative procedure presented in Appendix $\ref{subsec:Numerical-Procedure-for}$.
 
-The nonlocal terminal and boundary conditions in $\eqref{eqn:ter}$
-\textendash{} $\eqref{eqn:PDEend}$ are directly related with the
-cash flow of Class A token. The upper boundary condition ($\ref{eqn:bound1}$)
-at $S=H_{u}(t)$ corresponds to the upward reset, when early payment
-$Rt$ is delivered and $S$ resets to 1; the lower boundary condition
-($\ref{eqn:PDEend}$) at $S=H_d(t)$ corresponds downward reset, when
-early payment $V_{B}-V_{A}$ is delivered, each Class A token shrinks
-to $\mathcal{H}_{d}$ token, and $S$ resets to 1. Finally, the terminal condition
-($\ref{eqn:ter}$) corresponds to the periodic reset, where the payment
-follows either the upward or downward reset based on whether $V_{B}\le1$.
+The nonlocal terminal and boundary conditions in $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ are directly related with the cash flow of Class A token. The upper boundary condition ($\ref{eqn:bound1}$) at $S=H_{u}(t)$ corresponds to the upward reset, when early payment $Rt$ is delivered and $S$ resets to 1; the lower boundary condition ($\ref{eqn:PDEend}$) at $S=H_d(t)$ corresponds downward reset, when early payment $V_{B}-V_{A}$ is delivered, each Class A token shrinks to $\mathcal{H}_{d}$ token, and $S$ resets to 1. Finally, the terminal condition ($\ref{eqn:ter}$) corresponds to the periodic reset, where the payment follows either the upward or downward reset based on whether $V_{B}\le1$.
 
 
 \section{Extensions}
@@ -554,7 +325,6 @@ To make the stable token even more stable, we consider two extensions on the DUO
 This extension splits Class A further into two sub-classes: A0 and A1. At the creation of DUO, each Class A token is split into one Class A0 token and one Class A1 token. On the next reset date $t$, Class A1 receives the coupon payment $V_A^{t-}-1$ for Class A, and then Class A1 is terminated. Class A0 receives ETH token with value $(1-V_B^{t-})^+$ as liquidation payment, and is then split into $1-(1-V_B^{t-})^+$ Class A0 token and $1-(1-V_B^{t-})^+$ Class A1 token, until the next reset when Class A1 receives payment and A0 is split again, so on and so forth.\footnote{Note that when $V_B^{t-}\ge 1$, Class A0 does not receive any ETH token and maintains the same quantity.} At any time, the quantity of Class A0 and A1 maintains 1:1. Based on this construction, at any time, the value of Class A1 equals the expected discounted value of Class A's next payment on the next reset date, and the value of Class A0 equals the difference between values of Class A and A1, or the expected present value of all future payments except the first one.
 
 By contract design, the coupon of Class A1 is delivered in the form of the underlying token, whose value in USD may subject to volatile changes due to the high volatility of ETH. In contrast, the coupon of Class A0 is Class A1 token, whose value in USD is much less volatile compared to ETH. Therefore, Class A0 is more suitable for investors with lower risk tolerance or are less active on the market; upon receiving Class A1 tokens as coupon, they have a relatively longer period of time to liquidate the token before its value changes noticeably. In contrast, Class A1 is more suitable for investors who are willing to take certain degree of risk and are more active on the market; so that upon receiving the underlying token, they can monitor the market actively and spot a good opportunity to liquidate the underlying token.
-
 
 \subsection{A=A$^\prime$+B$^\prime$}
 Since after the split, the value of Class A is significantly less volatile than the underlying token, one would expect that, by building a DUO$^\prime$ with Class A$^\prime$ and B$^\prime$ using the Class A token as underlying, the value of Class A$^\prime$ will be even more stable. Following this idea, we define Class A$^\prime$ and B$^\prime$ of DUO$^\prime$ as follows.
@@ -605,17 +375,11 @@ and the following assumptions are used:
 
 \subsection{Overall Market}
 
-ETH/USD price data from 1 Oct 2017 to 28 Feb 2018 is used. In this
-period, ETH started from 303.95 USD to low of 284.92 USD and high
-of 1,359.48 and ended at 851.5. 
+ETH/USD price data from 1 Oct 2017 to 28 Feb 2018 is used. In this period, ETH started from 303.95 USD to low of 284.92 USD and high of 1,359.48 and ended at 851.5.
 
-At inception, 15,197,500 Class A and 15,197,500 Class B are issued
-from the 100,000 ETH, total value in the system is 30,395,000 USD.
+At inception, 15,197,500 Class A and 15,197,500 Class B are issued from the 100,000 ETH, total value in the system is 30,395,000 USD.
 
-Three upward resets were triggered on 24 Nov 2017 ($V_{B}=2.0846$),
-17 Dec 2017 ($V_{B}=2.0467$) and 7 Jan 2018 ($V_{B}=2.1106$) while
-one downward reset was triggered on 5 Feb 2018 ($V_{B}=0.2379$.).
-No periodic reset was triggered in the sampling period.\\
+Three upward resets were triggered on 24 Nov 2017 ($V_{B}=2.0846$), 17 Dec 2017 ($V_{B}=2.0467$) and 7 Jan 2018 ($V_{B}=2.1106$) while one downward reset was triggered on 5 Feb 2018 ($V_{B}=0.2379$.). No periodic reset was triggered in the sampling period.\\
 
 \begin{figure}[H]
 \begin{centering}
@@ -634,9 +398,7 @@ No periodic reset was triggered in the sampling period.\\
 
 \paragraph{Period without Reset}
 
-The total value of Class A and Class B tokens moves in line with ETH
-price. Class B tokens get exposed to full price fluctuations of ETH,
-while Class A token value is stable and slowly appreciating.\\
+The total value of Class A and Class B tokens moves in line with ETH price. Class B tokens get exposed to full price fluctuations of ETH, while Class A token value is stable and slowly appreciating.\\
 
 \begin{figure}[H]
 \begin{centering}
@@ -645,13 +407,9 @@ while Class A token value is stable and slowly appreciating.\\
 \caption{1 Oct 2017 - 23 Nov 2017 Total Values}
 \end{figure}
 
-\paragraph{Period with Contingent Upward Reset\protect\footnote{Chart and numbers are similar for the other two upward resets and
-thus omitted here.}}
+\paragraph{Period with Contingent Upward Reset\protect\footnote{Chart and numbers are similar for the other two upward resets and thus omitted here.}}
 
-17 Dec 2017, $V_{B}=2.0467$. 97.4049 ETH is paid out to Class A holders
-and 22,163.7213 ETH is paid out to Class B holders. Remaining System
-value is at 30,395,000 USD. The total value of Class A, Class B and
-ETH payout is consistent with ETH price movement.\\
+17 Dec 2017, $V_{B}=2.0467$. 97.4049 ETH is paid out to Class A holders and 22,163.7213 ETH is paid out to Class B holders. Remaining System value is at 30,395,000 USD. The total value of Class A, Class B and ETH payout is consistent with ETH price movement.\\
 
 \begin{figure}[H]
 \begin{centering}
@@ -662,10 +420,7 @@ ETH payout is consistent with ETH price movement.\\
 
 \paragraph{Period with Contingent Downward Reset}
 
-5 Feb 2018, $V_{B}=0.2379$. 16,789.3847 ETH is paid out to Class
-A holders. total amount of both classes is reduced to 3,615,680.02.
-Remaining System value is at 7,231,360.04 USD. The total value of
-Class A, Class B and ETH payout is consistent with ETH price movement.\\
+5 Feb 2018, $V_{B}=0.2379$. 16,789.3847 ETH is paid out to Class A holders. total amount of both classes is reduced to 3,615,680.02. Remaining System value is at 7,231,360.04 USD. The total value of Class A, Class B and ETH payout is consistent with ETH price movement.\\
 
 \begin{figure}[H]
 \begin{centering}
@@ -700,16 +455,13 @@ magnified return from ETH price movement due to the embedded leverage.\\
 
 \paragraph{Note}
 
-In order to achieve above return, ETH payout from resets need to be
-fully converted back to the corresponding class token. For example,
-after 24 Nov 2017 upward reset, all ETH received by Class A holder
-need to be converted into Class A token.
+In order to achieve above return, ETH payout from resets need to be fully converted back to the corresponding class token. For example, after 24 Nov 2017 upward reset, all ETH received by Class A holder need to be converted into Class A token.
 
 \subsection{Market Value of Class A and Class B}
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[width=0.7\textwidth]{WA}
+\includegraphics[width=0.7\textwidth]{WA.eps}
 \par\end{centering}
 \caption{Class A Market Value. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=1$.}
 \end{figure}
@@ -756,60 +508,25 @@ combination for success.}\\
 {\small{}\textendash{} }\emph{\small{}Napoleon Hill}
 \par\end{flushright}{\small \par}
 
-This paper has outlined the main design and market mechanism for the
-dual-class token structure. Further studies can be done in below aspects.
+This paper has outlined the main design and market mechanism for the dual-class token structure. Further studies can be done in below aspects.
 
 \subsubsection*{Underlying Price Pair}
 
-While the dual class structure is independent of the underlying crypto
-fiat price pair, the liquidity and popularity of the underlying price
-pair do impact the viability of the structure as market arbitrage
-is important to ensure the structure trades as designed. In this paper,
-ETH/USD is used as the underlying price pair, but other popular ERC20
-tokens, such as EOS, ADA, paired with major fiat other than USD, can
-also be considered.
+While the dual class structure is independent of the underlying crypto fiat price pair, the liquidity and popularity of the underlying price pair do impact the viability of the structure as market arbitrage is important to ensure the structure trades as designed. In this paper, ETH/USD is used as the underlying price pair, but other popular ERC20 tokens, such as EOS, ADA, paired with major fiat other than USD, can also be considered.
 
 \subsubsection*{Base Rate Discovery}
 
-Arbitrary rate can be used for Class A coupon and it will be traded
-on premium or at discount based on the market required rate of return.
-However, it is desirable that Class A trades close to its net value,
-which means the coupon rate for Class A should be chosen close to
-the market rate. Currently there are few observable proxies in the
-market. Several centralized exchanges allowing margin trading are
-charging USD borrow rates in the range of 20\% to 40\% per annum. 
+Arbitrary rate can be used for Class A coupon and it will be traded on premium or at discount based on the market required rate of return. However, it is desirable that Class A trades close to its net value, which means the coupon rate for Class A should be chosen close to the market rate. Currently there are few observable proxies in the market. Several centralized exchanges allowing margin trading are charging USD borrow rates in the range of 20\% to 40\% per annum.
 
-As discussed in Section \ref{subsec:Premium-and-Discount}, the market
-premium or discount of Class A token may imply USD's borrow rate in
-this market. As the structure gains attractions, its implied rate
-could serve as an indication for other USD borrow practice in crypto
-market.
+As discussed in Section \ref{subsec:Premium-and-Discount}, the market premium or discount of Class A token may imply USD's borrow rate in this market. As the structure gains attractions, its implied rate could serve as an indication for other USD borrow practice in crypto market.
 
 \subsubsection*{Optimal Reset Thresholds}
 
-It is important to keep leverage for Class B within certain range:
-not too high so as to protect Class A holders from sudden price drop
-and not too low so as to keep Class B attractive to leveraged users.
-However, it is undesirable that resets, especially downward resets,
-happen too frequently.
+It is important to keep leverage for Class B within certain range: not too high so as to protect Class A holders from sudden price drop and not too low so as to keep Class B attractive to leveraged users. However, it is undesirable that resets, especially downward resets, happen too frequently.
 
-There are two main parameters to be determined, the ratio between
-Class A and Class B shares, $\alpha$ (see Appendix \ref{subsec:General-Product-Design});
-and the lower limit of Class B net value, $\mathcal{H}_{d}$ 
-, that triggers downward resets. The Chinese market over the years
-has concluded a broadly accepted set of parameters: $\alpha$ is set
-to 1, meaning the quantities of Class A versus Class B is 1:1; $\mathcal{H}_{d}$
-being 0.25, meaning a downward reset will be triggered if the underlying
-price dropped approximately 37.5\% from last reset. This setup has
-been tested in extreme market events such as the mid-2015 market crash
-and the early-2016 circuit breaker turmoil, where the reset clauses
-were all successfully implemented and protected the interests of Class
-A holders.
+There are two main parameters to be determined, the ratio between Class A and Class B shares, $\alpha$ (see Appendix \ref{subsec:General-Product-Design}); and the lower limit of Class B net value, $\mathcal{H}_{d}$ , that triggers downward resets. The Chinese market over the years has concluded a broadly accepted set of parameters: $\alpha$ is set to 1, meaning the quantities of Class A versus Class B is 1:1; $\mathcal{H}_{d}$ being 0.25, meaning a downward reset will be triggered if the underlying price dropped approximately 37.5\% from last reset. This setup has been tested in extreme market events such as the mid-2015 market crash and the early-2016 circuit breaker turmoil, where the reset clauses were all successfully implemented and protected the interests of Class A holders.
 
-We witness that cryptocurrencies have considerably higher volatility
-than stock market indices. A series of back testings and Monte Carlo
-simulations will be performed to investigate the optimal parameters
-for dual class token structures. 
+We witness that cryptocurrencies have considerably higher volatility than stock market indices. A series of back testings and Monte Carlo simulations will be performed to investigate the optimal parameters for dual class token structures.
 
 \clearpage{}
 
@@ -819,61 +536,36 @@ for dual class token structures.
 
 \subsection{General Product Design\label{subsec:General-Product-Design}}
 
-In Section \ref{sec:Product-Design}, we have described a specific
-product design where Class A is stable relative to USD as target fiat
-currency and Class B has initial leverage as 2. In addition, transaction
-cost in creation and redemption is omitted. In this section, a general
-case is discussed.
+In Section \ref{sec:Product-Design}, we have described a specific product design where Class A is stable relative to USD as target fiat currency and Class B has initial leverage as 2. In addition, transaction cost in creation and redemption is omitted. In this section, a general case is discussed.
 
 \subsubsection{Creation}
 
-Dual-class tokens can be created by depositing underlying tokens to
-the Custodian contract. Upon receiving underlying tokens of amount
-$M_{C}$, the Custodian contract will return to the sender certain
-amount of Class A and Class B tokens. Such amount $C_{A}$ and $C_{B}$
-can be calculated by:
+Dual-class tokens can be created by depositing underlying tokens to the Custodian contract. Upon receiving underlying tokens of amount $M_{C}$, the Custodian contract will return to the sender certain amount of Class A and Class B tokens. Such amount $C_{A}$ and $C_{B}$ can be calculated by:
 \begin{equation}
 \begin{array}{cc}
 C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
 C_{A}= & C_{B}\cdot\alpha\ ,
 \end{array}\label{eq:creation-1}
 \end{equation}
-where $c$ is the processing fee of the smart contract,
-
-$\alpha$ is a positive number to determine the ratio of A and B,
-
-and $P_{0}$ is the recorded price of underlying token in target fiat
-currency at last reset event.
+where $c$ is the processing fee of the smart contract, $\alpha$ is a positive number to determine the ratio of A and B, and $P_{0}$ is the recorded price of underlying token in target fiat currency at last reset event.
 
 \subsubsection{Redemption}
 
-Holders of Class A and Class B tokens can withdraw deposited underlying
-tokens at any time by performing a redemption. To do this, the user
-will send amount of $R\cdot\alpha$ Class A and amount of $R$ Class
-B tokens to the Custodian contract. The contract will deduct Class
-A and Class B tokens, and return to the sender $M_{R}$ underlying
-tokens, where$M_{R}$ can be calculated by:
+Holders of Class A and Class B tokens can withdraw deposited underlying tokens at any time by performing a redemption. To do this, the user will send amount of $R\cdot\alpha$ Class A and amount of $R$ Class B tokens to the Custodian contract. The contract will deduct Class A and Class B tokens, and return to the sender $M_{R}$ underlying tokens, where$M_{R}$ can be calculated by:
 \begin{equation}
 M_{R}=\frac{R\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\ .\label{eq:redemption-1}
 \end{equation}
 
 \subsubsection{Net Value}
 
-The net value of tokens are calculated based on the coupon rate, the
-elapsed time from last reset event, and the latest underlying token
-price in target fiat currency fed to the system. In particular:
+The net value of tokens are calculated based on the coupon rate, the elapsed time from last reset event, and the latest underlying token price in target fiat currency fed to the system. In particular:
 \begin{equation}
 \begin{array}{cc}
 V_{A}^{t}= & 1+r\cdot t\\
 V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue-1}
 \end{equation}
-where $r$ is the daily coupon rate,
-
-$t$ is the number of days from last reset event,
-
-and $P_{t}$ is the current price of underlying token in target fiat
-currency.
+where $r$ is the daily coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in target fiat currency.
 
 \subsubsection{Quantity}
 
@@ -881,8 +573,7 @@ Below holds in the system at all time
 \[
 Q_{A}^{t}=Q_{B}^{t}\cdot\alpha\ ,
 \]
-where $Q_{A}^{t}$ and $Q_{B}^{t}$ are the total amount of Class
-A and Class B tokens.
+where $Q_{A}^{t}$ and $Q_{B}^{t}$ are the total amount of Class A and Class B tokens.
 
 \subsubsection{Implied Leverage Ratio}
 
@@ -893,11 +584,9 @@ Note that at inception or after resets, above simply reduces to $L_{B}^{0}=1+\al
 
 \subsubsection{Contingent Upward Reset\label{subsec:Contingent-Upward-Reset}}
 
-An upward reset is triggered when $V_{B}^{t}\geqslant\mathcal{H}_{u}$.
-Upon upward reset:
+An upward reset is triggered when $V_{B}^{t}\geqslant\mathcal{H}_{u}$. Upon upward reset:
 \begin{enumerate}
-\item Total amount of both classes token remain unchanged, $Q_{A}^{t+}=Q_{A}^{t-}$
-and $Q_{B}^{t+}=Q_{B}^{t-}$.
+\item Total amount of both classes token remain unchanged, $Q_{A}^{t+}=Q_{A}^{t-}$ and $Q_{B}^{t+}=Q_{B}^{t-}$.
 \item Net Value of both classes reset to 1 target fiat currency.
 \item Both classes' holders will receive certain amount of underlying token
 from the Custodian contract. Such amount for each Class A token is
@@ -913,14 +602,12 @@ Total value in the system is unchanged after reset:
 
 \subsubsection{Contingent Downward Reset\label{subsec:Contingent-Downward-Reset}}
 
-A downward reset is triggered when $V_{B}^{t}\leqslant\mathcal{H}_{d}$.
-Upon downward reset:
+A downward reset is triggered when $V_{B}^{t}\leqslant\mathcal{H}_{d}$. Upon downward reset:
 \begin{enumerate}
 \item Total amount of Class B token is reduced to $Q_{B}^{t+}=Q_{B}^{t-}\cdot V_{B}^{t-}$.
 \item Total amount of Class A token is reduced to $Q_{A}^{t+}=Q_{B}^{t+}\cdot\alpha$.
 \item Net Value of both classes reset to 1 target fiat currency.
-\item Class A holders will receive certain amount of underlying token from
-the Custodian contract. Such amount of each Class A token is: $D_{A}=\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$.
+\item Class A holders will receive certain amount of underlying token from the Custodian contract. Such amount of each Class A token is: $D_{A}=\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$.
 \end{enumerate}
 Total value in the system is unchanged after reset:
 \begin{align*}
@@ -933,10 +620,7 @@ Note above used the fact $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$.
 
 \subsubsection{Periodic Reset}
 
-A periodic reset is triggered when $V_{A}^{t}\geqslant\mathcal{H}_{p}$.
-If $V_{B}^{t-}$ is less than 1, reset will be the same as the Contingent
-Downward reset. Otherwise, reset will be the same as the Contingent
-Upward reset.
+A periodic reset is triggered when $V_{A}^{t}\geqslant\mathcal{H}_{p}$. If $V_{B}^{t-}$ is less than 1, reset will be the same as the Contingent Downward reset. Otherwise, reset will be the same as the Contingent Upward reset.
 
 \subsection{General Market Arbitrage}
 
@@ -944,37 +628,26 @@ The price parity shall hold as below:
 \[
 \alpha\cdot P_{A}^{t}+P_{B}^{t}=\alpha\cdot V_{A}^{t}+V_{B}^{t}\ ,
 \]
-where $P_{A}^{t}$ is the current price of Class A in target fiat
-currency,
+where $P_{A}^{t}$ is the current price of Class A in target fiat currency, and $P_{B}^{t}$ is the current price of Class B in target fiat currency.
 
-and $P_{B}^{t}$ is the current price of Class B in target fiat currency.
-
-Along with Equation (\ref{eq:creation-1}), (\ref{eq:redemption-1})
-and (\ref{eq:netvalue-1}) in Section \ref{subsec:General-Product-Design},
-below should hold:
+Along with Equation (\ref{eq:creation-1}), (\ref{eq:redemption-1}) and (\ref{eq:netvalue-1}) in Section \ref{subsec:General-Product-Design}, below should hold:
 \[
 \frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\ .
 \]
-On open market, arbitrage opportunity exists when Class A and Class
-B tokens trade away from their net values and above equation is violated
-on either side.
+On open market, arbitrage opportunity exists when Class A and Class B tokens trade away from their net values and above equation is violated on either side.
 
 \paragraph{Arbitrage via Creation}
 
-When combined market price of Class A and Class B tokens are higher
-than their combined net values, i.e.
+When combined market price of Class A and Class B tokens are higher than their combined net values, i.e.
 \[
 \frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\ ,
 \]
 arbitrage profit can be exploited by perform DUO token creation:
 \begin{enumerate}
-\item Buy $\frac{1}{1-c}$ underlying tokens from open market for $P_{t}\cdot\frac{1}{1-c}$
-target fiat currency equivalent.
+\item Buy $\frac{1}{1-c}$ underlying tokens from open market for $P_{t}\cdot\frac{1}{1-c}$ target fiat currency equivalent.
 \item Send the underlying tokens to the Custodian contract.
-\item Based on Equation (\ref{eq:creation-1}), receive $P_{0}\cdot\frac{\alpha}{1+\alpha}$
-Class A and $P_{0}\cdot\frac{1}{1+\alpha}$ Class B tokens.
-\item Sell Class A and Class B tokens on open market for $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
-target fiat currency equivalent.
+\item Based on Equation (\ref{eq:creation-1}), receive $P_{0}\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\frac{1}{1+\alpha}$ Class B tokens.
+\item Sell Class A and Class B tokens on open market for $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$ target fiat currency equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
@@ -983,21 +656,16 @@ P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cd
 
 \paragraph{Arbitrage via Redemption}
 
-When combined market price of Class A and Class B tokens are lower
-than their combined net values, i.e.
+When combined market price of Class A and Class B tokens are lower than their combined net values, i.e.
 \[
 \frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\ ,
 \]
 similar arbitrage profit can be exploited by perform DUO token redemption:
 \begin{enumerate}
-\item Buy $P_{0}\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\frac{1}{1+\alpha}$
-Class B tokens from open market for $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$
-target fiat currency equivalent.
+\item Buy $P_{0}\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\frac{1}{1+\alpha}$ Class B tokens from open market for $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$ target fiat currency equivalent.
 \item Send Class A and Class B tokens to the Custodian contract.
-\item Based on Equation (\ref{eq:redemption-1}), receive $1-c$ underlying
-tokens.
-\item Sell underlying tokens on open market for $P_{t}\cdot\left(1-c\right)$
-target fiat currency equivalent.
+\item Based on Equation (\ref{eq:redemption-1}), receive $1-c$ underlying tokens.
+\item Sell underlying tokens on open market for $P_{t}\cdot\left(1-c\right)$ target fiat currency equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
@@ -1011,14 +679,13 @@ S_{\zeta_i}=S_{\tau_i}=S_{\eta_i}=1, ~~v_{\tau_i}=v_{\eta_i}=v_{\zeta_i}=0.
 \end{align*}
 
 \begin{thm}\label{thm:main}
-$W_{A}$ is the unique classical solution\footnote{By classical solution we mean $W_{A}\in C^{1,2}(Q)\cap C(\overline{Q}\backslash D)$,
-where $Q=\{(t,S):0\le t<1,H_{d}(t)<S<H_{u}(t)\}$ and $D=\{T\}\times\{H_{d}(T),H_{u}(T)\}$.} to the following partial differential equation on $\{(t,S):0\le t<T,H_{d}(t)<S<H_{u}(t)\}$
+$W_{A}$ is the unique classical solution\footnote{By classical solution we mean $W_{A}\in C^{1,2}(Q)\cap C(\overline{Q}\backslash D)$, where $Q=\{(t,S):0\le t<1,H_{d}(t)<S<H_{u}(t)\}$ and $D=\{T\}\times\{H_{d}(T),H_{u}(T)\}$.} to the following partial differential equation on $\{(t,S):0\le t<T,H_{d}(t)<S<H_{u}(t)\}$
 \begin{align}
 -\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A}\\
 W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1)\\
 W_{A}(t,H_{u}(t)) & =rt+W_{A}(0,1)\\
-W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1). 
-\end{align} 
+W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
+\end{align}
 \end{thm}
 
 \begin{proof}[Proof of Theorem \ref{thm:main}]
@@ -1032,18 +699,14 @@ W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
 	where $E^{(u,s,y)}_t$ is the $\mathbb{Q}$-expectation computed under the initial condition $v_{t-}=u$, $S_{t-}=s$, and $Y_{t-}=y$. Following the proof in Section 4.1 in \cite{Dai:2016vj} shows that \eqref{VALnonrecur} is the unique classical solution to the PDE problem \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}. Therefore, $W_A$ defined in \eqref{VAL2} is the unique classical solution to \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}.
 \end{proof}
 
-\subsection{Numerical Procedure for the Pricing Equation $\eqref{eqn:PDEstart}$
-\textendash{} $\eqref{eqn:PDEend}$\label{subsec:Numerical-Procedure-for}}
+\subsection{Numerical Procedure for the Pricing Equation $\eqref{eqn:PDEstart}$ \textendash{} $\eqref{eqn:PDEend}$\label{subsec:Numerical-Procedure-for}}
 
-We propose an iterative algorithm to obtain a numerical solution of
-the periodic parabolic terminal-boundary value problem ($\ref{eqn:PDEstart}$)
-\textendash{} ($\ref{eqn:PDEend}$).
+We propose an iterative algorithm to obtain a numerical solution of the periodic parabolic terminal-boundary value problem ($\ref{eqn:PDEstart}$) \textendash{} ($\ref{eqn:PDEend}$).
 
 \subsection*{Algorithm 1}
 \begin{enumerate}
 \item \textit{Set the initial guess $W_{A}^{(0)}=0$; }
-\item \textit{For $i=1,2,\cdots$: Given $W_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$,
-the solution to the equation 
+\item \textit{For $i=1,2,\cdots$: Given $W_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$, the solution to the equation
 \begin{align*}
 -\frac{\partial W_{A}}{\partial t}= & \frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A} &  & 0\le t<T,H_{d}(t)<S<H_{u}(t)\\
 W_{A}(1,S)= & rT+g(S)+(1-g(S))W_{A}^{(i-1)}(0,1) &  & H_{d}(t)<S<H_{u}(t)\\
@@ -1051,12 +714,9 @@ W_{A}(t,H_{u}(t))= & rt+W_{A}^{(i-1)}(0,1) &  & 0\le t\le T\\
 W_{A}(t,H_{d}(t))= & rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}^{(i-1)}(0,1) &  & 0\le t\le T.
 \end{align*}
 }
-\item \textit{If $||W_{A}^{(i)}-W_{A}^{(i-1)}||<$ tolerance, stop and return
-$W_{A}^{(i)}$; otherwise set $i=i+1$ and go to step 2. }
+\item \textit{If $||W_{A}^{(i)}-W_{A}^{(i-1)}||<$ tolerance, stop and return $W_{A}^{(i)}$; otherwise set $i=i+1$ and go to step 2. }
 \end{enumerate}
-By using a similar proof as Theorem C.1 in \cite{DM2018}, one can
-show that the sequence$(W_{A}^{(i)})_{i\ge1}$ defined in Algorithm
-1 is monotonically increasing and converges to $W_{A}$ uniformly.
+By using a similar proof as Theorem C.1 in \cite{DM2018}, one can show that the sequence$(W_{A}^{(i)})_{i\ge1}$ defined in Algorithm 1 is monotonically increasing and converges to $W_{A}$ uniformly.
 
 \section*{\clearpage{}}
 \begin{thebibliography}{1}
@@ -1064,29 +724,22 @@ show that the sequence$(W_{A}^{(i)})_{i\ge1}$ defined in Algorithm
 \bibitem[1]{AC}Adams, A. T., and J. B. Clunie. 2006. Risk Assessment Techniques for Split Capital Investment Trusts. \textit{Annals of Actuarial Science} 1:7-36.
 
 
-\bibitem[2]{DM2018}Dai, M., S. Kou, C. Yang, and Z. Ye. 2018. The
-Overpricing of Leveraged Products: A Case Study of Dual-Purpose Funds
-in China. \textit{Working Paper}. 
+\bibitem[2]{DM2018}Dai, M., S. Kou, C. Yang, and Z. Ye. 2018. The Overpricing of Leveraged Products: A Case Study of Dual-Purpose Funds in China. \textit{Working Paper}.
 
 \bibitem[3]{Dai:2016vj}Dai, M., S. Kou, and C. Yang. 2017. A Stochastic Representation for Nonlocal Parabolic PDEs with Applications. \textit{Working Paper}.
 
 
-\bibitem[4]{Ingersoll1976}Ingersoll, J. E. 1976. A Theoretical and
-Empirical Investigation of the Dual Purpose Funds: an Application
-of Contingent-claims Analysis. \textit{Journal of Financial Economics}
-3:83-123.
+\bibitem[4]{Ingersoll1976}Ingersoll, J. E. 1976. A Theoretical and Empirical Investigation of the Dual Purpose Funds: an Application of Contingent-claims Analysis. \textit{Journal of Financial Economics} 3:83-123.
 
 \bibitem[5]{JO}Jarrow, R. A., and M. O'Hara. 1989. Primes and Scores: An Essay on Market Imperfections. \textit{The Journal of Finance} 44:1263-1287.
 
-\bibitem[6]{BS}Black, F., and M. Scholes. 1973. The Pricing of Options
-and Corporate Liabilities. \textit{Journal of Political Economy} 81:637-654.
+\bibitem[6]{BS}Black, F., and M. Scholes. 1973. The Pricing of Options and Corporate Liabilities. \textit{Journal of Political Economy} 81:637-654.
 
 \bibitem[7]{Leverage}Leverage. \textit{\href{https://www.investopedia.com/terms/l/leverage.asp}{https://www.investopedia.com/terms/l/leverage.asp}}
 
 \bibitem[8]{ETH}White Paper: A Next-Generation Smart Contract and Decentralized Application Platform. \textit{\href{https://github.com/ethereum/wiki/wiki/White-Paper}{https://github.com/ethereum/wiki/wiki/White-Paper}}
 
-\bibitem[9]{USDT}Tether: Fiat currencies on the Bitcoin blockchain. 
-\textit{\href{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}}
+\bibitem[9]{USDT}Tether: Fiat currencies on the Bitcoin blockchain. \textit{\href{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}{https://tether.to/wp-content/uploads/2016/06/TetherWhitePaper.pdf}}
 
 \bibitem[10]{Basecoin}Basecoin: A Price-Stable Cryptocurrency with an Algorithmic Central Bank. \textit{\href{http://www.getbasecoin.com/basecoin_whitepaper_0_99.pdf}{http://www.getbasecoin.com/basecoin\_{}whitepaper\_{}0\_{}99.pdf}}
 
