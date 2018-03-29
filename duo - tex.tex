@@ -2,7 +2,7 @@
 %% Do not edit unless you really know what you are doing.
 \documentclass[11pt,twoside,english]{article}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+%\usepackage[latin9]{inputenc}
 \usepackage[a4paper]{geometry}
 \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in,headheight=1in,headsep=0.3in,footskip=0.8in}
 \setcounter{tocdepth}{2}
@@ -13,6 +13,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage{booktabs}
 \usepackage[shortlabels]{enumitem}
 \usepackage{graphicx}
 \usepackage[unicode=true]{hyperref}
@@ -53,22 +54,18 @@
 
 \begin{document}
 
-\title{A Stable Token Based on Dual-Class Structure}
+\title{Designing Stable Coins}
 
 \author{Yizhou CAO\thanks{\textit{Email}: \protect\href{mailto:yizhou.cao@finbook.co}{yizhou.cao@finbook.co},
 CTO and Co-founder of FinBook}$\:,$ Min DAI\thanks{\textit{Email}: \protect\href{mailto:matdm@nus.edu.sg}{matdm@nus.edu.sg}. Director, Centre for Quantitative Finance, National University of Singapore}$\:,$ Steven KOU\thanks{\textit{Email}: \protect\href{mailto:matsteve@nus.edu.sg}{matsteve@nus.edu.sg}. Director, Risk Management Institute, National University of Singapore}$\:$, Lewei LI\thanks{\textit{Email}: \protect\href{mailto:lewei.li@finbook.co}{lewei.li@finbook.co}, CEO and Co-founder of FinBook}$\:$, Chen YANG\thanks{\textit{Email}: \protect\href{mailto:chen.yang@math.ethz.ch}{chen.yang@math.ethz.ch}, Department of Mathematics, ETH Zurich}}
 
-\date{Version 0.8.0\\
-13 Mar 2018}
+%\date{}
 \maketitle
 \begin{abstract}
-Major crypto-currencies are subject to massive volatility, which makes them attractive to speculators but unsuitable for mainstream use. There have been several attempts on implementing ``stablecoins". But most of them fail to provide steady returns that are appealing to regular investors.
 
-Inspired by the dual purpose fund that has gained popularity in the US and China, we propose, for the first time to our best knowledge, a dual-class crypto token structure that offers entitlements to either fixed income or leveraged capital appreciation: the income token receives periodical coupon payments with principal protection; the leverage token provides leveraged participation in underlying crypto-currencies. The whole mechanism is governed by smart contracts run on Ethereum blockchain, without dealing with centralized counterparties. In theory, we justify the income token as an ideal stable token.
-
-For illustration, we employ Ether (ETH) as underlying currency and use its historical prices to demonstrate  the performance of our stable token in real world scenarios. We also show how arbitrage activities take place and help maintain price stability of this stable token.
+Stable coins, which are cryptocurrencies pegged to other stable financial assets, are desirable for blockchain networks to be used as public accounting ledgers for payment transactions  and as crypto money market accounts for asset allocation involving cryptocurrencies, whereby being often called the ``Holy Grail of cryptocurrency.'' However, existing cryptocurrencies, such as Bitcoins, are too volatile for these purposes. Inspired by the dual purpose funds popular in the US and China, we design, for the first time to our best knowledge, several dual-class structures that offer entitlements to either fixed income stable coins (class A funds) pegged to a traditional currency or leveraged investment opportunities (class B funds). Unlike traditional currencies, the new class A funds record all transactions on a blockchain without centralized counterparties. By using the option pricing theory, we show that proposed stable coins indeed have very low volatility, similar to that of the short term U.S. treasury bonds. When combined with insurance from a government, the design can also serve as a basis for issuing a sovereign cryptocurrency. 
 \end{abstract}
-\textit{Keywords: }stablecoin, dual-class token, fixed income crypto asset, leveraged return crypto asset, smart contract, Ethereum, decentralized asset management
+\textit{Keywords:} stable coins, fixed income crypto asset, leveraged return crypto asset, smart contract, option pricing
 
 \clearpage
 
@@ -174,10 +171,10 @@ V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}\ ,
 where $r$ is the \textbf{daily} coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in USD.
 
 \subsubsection{Implied Leverage Ratio}
+
 Class B has the following leverage ratio:
-\begin{align*}
-L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{2}{V_{B}^{t}}
-\end{align*}
+$$
+L_{B}^{t}  =\frac{P_{t}}{P_{0}}\cdot\frac{2}{V_{B}^{t}}.$$
 Note that at inception or after resets, above simply reduces to $L_{B}^{0}=2$.
 
 \subsection{Resets}
@@ -277,16 +274,44 @@ P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\f
 Many other factors also determine whether above arbitrage strategy can be successfully executed, such as bid ask spread of all the 3 components, cost in creation and redemption, and ability to short sell the required components. Please refer to appendix for discussion of a more general case.
 
 
-\subsection{Differences from Dual-Purpose Fund Contract}
-Although the contract of DUO is inspired by dual-purpose funds, it is different from dual-purpose funds in the following aspects.
-\paragraph{Underlying Asset} The underlying asset of dual-purpose funds is a open-ended index-tracking fund, whose net asset value is used as reference to determine the net asset value of Class A and B. In contrast, the underlying asset of DUO is underlying tokens (e.g. ETH), and the net asset value of Class A and B tokens are based on the \emph{relative} USD price of the underlying token with respect to its USD price at the last reset.
-\paragraph{Periodic Reset} For dual-purpose funds, only Class A receives coupon payment on periodic reset; Class B receives nothing. Therefore, the leverage profit of Class B, if any, can only be realized on upward resets. In contrast, the payment scheme of Class A and B in DUO on periodic resets follows that on either upward or downward reset. Therefore, Class B in DUO has the opportunity of receiving its leverage gains more often than that in dual-purpose funds.
-\paragraph{Upward Reset Triggering Condition} For dual-purpose funds, the upward reset is triggered by the underlying up-crossing $\mathcal{H}_u$ while the downward reset is triggered by the Net Value of Class B down-crossing $\mathcal{H}_d$. For DUO, the triggering conditions of both upward and downward resets are all based on the Net Value of Class B. This brings about symmetry and simplicity to the triggering condition, making it easier to understand.
+\subsection{Differences from the Dual-Purpose Fund Contract}
+Although the contract of DUO is inspired by dual-purpose funds, it is different from dual-purpose funds in U.S. and China in the aspects shown in Table \ref{tbl:difference}.
 
+\begin{table}[h]
+	\caption{Contract Comparison of DUO and Dual-Purpose Fund in U.S. and China}\label{tbl:difference}
+	\vspace{1em}
+	\scriptsize
+	\begin{tabular}{@{}c c c c c c@{}}
+	\toprule
+		& \begin{tabular}{@{}c@{}}Payment Style\\ of A Share\end{tabular} & \begin{tabular}{@{}c@{}}Payment Style\\ of B Share\end{tabular} & \begin{tabular}{@{}c@{}}Leverage Ratio\\ Reset\end{tabular} & Lifespan & \begin{tabular}{@{}c@{}}Reference Asset\end{tabular} \\ \midrule
+	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in U.S.\end{tabular} & Dividend & \begin{tabular}{@{}c@{}}Single payment\\ at wind-up date\end{tabular}  & No & Finite & Stock/ Stock Index\\ \midrule
+	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in China\end{tabular} & Fixed Income &  \begin{tabular}{@{}c@{}}Periodic payments\\ at upward reset dates\end{tabular} & Yes & Infinite & Stock Index\\ \midrule
+	DUO & Fixed Income & \begin{tabular}{@{}c@{}}Periodic payments\\at all reset dates\end{tabular} & Yes & Infinite & \begin{tabular}{@{}c@{}}USD denominated\\ crypto-currency value\end{tabular}\\
+	\bottomrule
+	\end{tabular}
+	\par\flushleft\scriptsize The dual-purpose funds in U.S. include those studied in \cite{Ingersoll1976} and the prime and scores studied in \cite{JO}.
+\end{table}
+
+There is one more (technical) difference between DUO with dual-purpose funds in China. For the dual-purpose funds, the upward reset is triggered by the underlying up-crossing $\mathcal{H}_u$ while the downward reset is triggered by the Net Value of B share down-crossing $\mathcal{H}_d$. In contrast, for DUO, the triggering conditions of both upward and downward resets are all based on the Net Value of Class B token. This brings about symmetry and simplicity to the triggering condition, making it easier to understand.
+
+Both the dual-purpose funds and DUO values can be characterized in terms of partial differential equation (PDE). However, their PDEs differ in the following aspects.
+\begin{table}[h]
+	\caption{Model Comparison of DUO and Dual-Purpose Fund in U.S. and China}\label{tbl:modeldiff}
+	\vspace{1em}
+	\scriptsize
+	\begin{tabular}{@{}c c c@{}}
+	\toprule
+		& Pricing Method & Domain of PDE\\ \midrule
+		\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in U.S.\end{tabular} & Black-Scholes PDE & Half bounded ($S>0$) \\ \midrule
+		\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in China\end{tabular} & \begin{tabular}{@{}c@{}} Periodic PDE with nonlocal terminal\\ and boundary conditions\end{tabular} & \begin{tabular}{@{}c@{}}Bounded, with time-dependent lower bound\\ and time-independent upper bound\end{tabular}\\ \midrule
+		DUO & \begin{tabular}{@{}c@{}} Periodic PDE with nonlocal terminal\\ and boundary conditions\end{tabular} & \begin{tabular}{@{}c@{}}Bounded, with time-dependent\\ lower and upper bound\end{tabular}\\
+	\bottomrule
+	\end{tabular}
+\end{table}
 
 \clearpage
 
-\section{Valuation}
+\section{Valuation}\label{sect:valuation}
 
 Denote $W_{A}$ and $W_{B}$ as the market value of Class A and Class B, respectively. Denote $S_t=P_t/P_0$ as the relative price of the underlying token. By the design of contract, $S$ returns to 1 at every reset date.
 
@@ -312,8 +337,8 @@ where $W_{t}$ is a one-dimensional standard Brownian motion. Then, $W_{A}$ can b
 differential equation:
 
 \begin{align}\label{eqn:PDEstart}
--\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A}\\\label{eqn:ter}
-W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1)\\\label{eqn:bound1}
+-\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+\rho S\frac{\partial W_{A}}{\partial S}-\rho W_{A}, ~~t\in[0,T),~S\in (H_d(t),H_u(t))\\\label{eqn:ter}
+W_{A}(T,S) & =rT+g(S)+(1-g(S))W_{A}(0,1),\\\label{eqn:bound1}
 W_{A}(t,H_{u}(t)) & =rt+W_{A}(0,1)\\\label{eqn:PDEend}
 W_{A}(t,H_d(t)) & =rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
 \end{align}
@@ -333,6 +358,19 @@ This extension splits Class A further into two sub-classes: A0 and A1. At the cr
 
 By contract design, the coupon of Class A1 is delivered in the form of the underlying token, whose value in USD may subject to volatile changes due to the high volatility of ETH. In contrast, the coupon of Class A0 is paid in the form of Class A1 token, whose value in USD is much less volatile compared to ETH. Therefore, Class A0 is more suitable for investors with lower risk tolerance or are less active on the market; upon receiving Class A1 tokens as coupon, they have a relatively longer period of time to liquidate the token before its value changes noticeably. In contrast, Class A1 is more suitable for investors who are willing to take certain degree of risk and are more active on the market; so that upon receiving the underlying token, they can monitor the market actively and spot a good opportunity to liquidate the underlying token.
 
+Under the risk-neutral pricing framework, the market value of Class A1 token is given recursively as
+\begin{align*}
+W_{A}(t,S) & =E_{t}\Bigg[e^{-\rho(\zeta-t)}rT\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}+e^{-\rho(\tau-t)}r\tau\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}+e^{-\rho(\eta-t)}r\eta\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
+\end{align*}
+where the first periodic reset time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined in the same way as \eqref{VAL2}.  $W_{A1}$ corresponds to the following PDE
+\begin{align*}
+-\frac{\partial W_{A1}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A1}}{\partial S^{2}}+\rho S\frac{\partial W_{A1}}{\partial S}-\rho W_{A1},~~t\in[0,T),~S\in (H_d(t),H_u(t))\\
+W_{A1}(T,S) & =rT\\
+W_{A1}(t,H_{u}(t)) & =rt\\
+W_{A1}(t,H_d(t)) & =rt.
+\end{align*}
+Finally, the value of Class A0 token is defined as $W_{A0}=W_A-W_{A1}$.
+
 \subsection{\texorpdfstring{A=A$^\prime$+B$^\prime$}{Lg}}
 Since after the split, the value of Class A is significantly less volatile than the underlying token, one would expect that, by building a DUO$^\prime$ with Class A$^\prime$ and B$^\prime$ using the Class A token as underlying, the value of the resulting Class A$^\prime$ will be even more stable. Following this idea, we define Class A$^\prime$ and B$^\prime$ of DUO$^\prime$ as follows.
 
@@ -343,6 +381,19 @@ Since after the split, the value of Class A is significantly less volatile than 
 	\item The net asset value of Class A$^\prime$ is defined as $V_{A^\prime}^t=1+r^\prime t$, and the net asset value of Class B$^\prime$ is defined as $V_{B^\prime}^t=2\frac{\tilde{P}_t}{\tilde{P}_0}- V_{A^\prime}^t$, where $t$ is the time from last reset of DUO$^\prime$;
 	\item The resets of DUO$^\prime$ follow the rule of DUO (with the same $\mathcal{H}_u$ and $\mathcal{H}_d$, while the upper limit for periodic reset $\mathcal{H}_p^\prime=1+r^\prime N$); any coupon of DUO$^\prime$ is paid in forms of Class A token at its value on the reset date.
 \end{enumerate}
+
+Under the risk-neutral pricing framework, the current market value of Class A$^\prime$ token is given recursively as
+\begin{align}
+\begin{split}W_{A^\prime}(t,u,S,w) & =E_{t}\Bigg[e^{-\rho(\zeta^\prime-t)}[rT+g(\hat{W}_{\zeta^\prime-})+(1-g(\hat{W}_{\zeta^\prime-}))W_{A^\prime}(0,u+\zeta^\prime-t,S_{\zeta^\prime},1)]\cdot\mathbf{1}_{\{\zeta^\prime\le\tau^\prime,\eta^\prime,\zeta,\eta\}}\\
+ & \quad+e^{-\rho(\tau^\prime-t)}(r\tau^\prime+W_{A^\prime}(0,u+\tau^\prime-t,1,\hat{W}_{\tau^\prime}))\cdot\mathbf{1}_{\{\tau^\prime<\eta^\prime,\zeta^\prime,\zeta,\eta\}}\\
+ & \quad+e^{-\rho(\eta^\prime-t)}(r\eta^\prime+1-V_{B}^{\eta^\prime-}+V_{B}^{\eta^\prime-}W_{A^\prime}(0,u+\eta^\prime-t,S_{\zeta^\prime},1))\cdot\mathbf{1}_{\{\eta^\prime<\tau^\prime,\zeta^\prime,\zeta,\eta\}}\\
+ & \quad+e^{-\rho(\tau\land\eta)}(g(S_{\eta\land\zeta-})+(1-g(S_{\eta\land\zeta-}))W_{A^\prime}(\eta\land\zeta,0,1,W_A(0,1)))\cdot\mathbf{1}_{\{\zeta\land\eta<\tau^\prime,\eta^\prime,\zeta^\prime\}}\Bigg].
+\end{split}
+\label{VAL3}
+\end{align}
+Here $\zeta$ and $\eta$ are the first periodic and downward reset of Class A token after $t$, and $\zeta^\prime$, $\tau^\prime$ and $\eta^\prime$ are the first periodic, upward and downward reset of Class A$^\prime$ token after $t$, respectively. 
+$$\hat{W}_t=W_A(h(t),S_t),$$
+where $h(t)$ is time from Class A token's last reset as of $t$.
 
 Class A$^\prime$ can be viewed as a compound derivative on the underlying $S$, and it can be priced based on a Monte Carlo simulation approach described as follows.
 
