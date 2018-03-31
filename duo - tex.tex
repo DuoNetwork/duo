@@ -15,7 +15,7 @@
 \usepackage{amssymb}
 \usepackage{booktabs}
 \usepackage[shortlabels]{enumitem}
-\usepackage{graphicx}
+\usepackage{graphicx,xspace}
 \usepackage[unicode=true]{hyperref}
 \usepackage[titletoc,title]{appendix}
 % \usepackage{showframe} 
@@ -43,6 +43,9 @@
 %% A simple dot to overcome graphicx limitations
 \newcommand{\lyxdot}{.}
 
+%% Self-defined macros
+\newcommand{\Ap}{A\ensuremath{^\prime}\xspace}
+\newcommand{\Bp}{B\ensuremath{^\prime}\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \theoremstyle{plain}
@@ -371,41 +374,38 @@ W_{A1}(t,H_d(t)) & =rt.
 \end{align*}
 Finally, the value of Class A0 token is defined as $W_{A0}=W_A-W_{A1}$.
 
-\subsection{\texorpdfstring{A=A$^\prime$+B$^\prime$}{Lg}}
-Since after the split, the value of Class A is significantly less volatile than the underlying token, one would expect that, by building a DUO$^\prime$ with Class A$^\prime$ and B$^\prime$ using the Class A token as underlying, the value of the resulting Class A$^\prime$ will be even more stable. Following this idea, we define Class A$^\prime$ and B$^\prime$ of DUO$^\prime$ as follows.
+\subsection{\texorpdfstring{A=\Ap+\Bp}{Lg}}
+This second extension splits Class A into two sub-classes: Class \Ap and \Bp. Class \Ap and \Bp invest in Class A token. At any time, a quantity of $\frac{2}{\bar{P}_A}$ Class A token can be split into one Class \Ap and one Class \Bp token, where $\bar{P}_A=W_A(0,1)$. Conversely, one Class \Ap and \Bp token can be merged into $\frac{2}{\bar{P}_A}$ Class A token. The net asset value of Class \Ap is defined as $V_{A^\prime}=1+r^\prime t$, where $t$ is the time since last reset, and the net asset value of Class \Bp is defined as $V_{\Bp}=\frac{2W_A}{\bar{P}_A} - V_{A^\prime}$, where $W_A$ is the price of Class A.
 
-\begin{enumerate}[1)]
-	\item One Class A$^\prime$ token and one Class B$^\prime$ token correspond to two Class A tokens; at any time, one can submit one Class A token in exchange for $\tilde{P}_0/2$ Class A$^\prime$ token and $\tilde{P}_0/2$ Class B$^\prime$ token; one can also surrender one Class A$^\prime$ token and one Class B$^\prime$ token in exchange for $2/\tilde{P}_0$ Class A token. Here $\tilde{P}_0$ is the value of Class A token at the last reset of DUO$^\prime$.
-	\item Coupon payments on upward reset or periodic reset $t$  (in the form of underlying token) of Class A with value $V_A^{t-}-1$ are delivered to Class B$^\prime$;
-	\item On downward reset or periodic reset, if one share of Class A is reduced to $V_B^{t-}$ share, then each one share of Class A$^\prime$ and B$^\prime$ token is reduced to $V_B^{t-}$; Class A$^\prime$ and B$^\prime$ then each receive payment (in the form of underlying token) with dollar amount equal to $1-V_B^{t-}$. The coupon of value value $V_A^{t-}-1$ is delivered to Class B$^\prime$;
-	\item The net asset value of Class A$^\prime$ is defined as $V_{A^\prime}^t=1+r^\prime t$, and the net asset value of Class B$^\prime$ is defined as $V_{B^\prime}^t=2\frac{\tilde{P}_t}{\tilde{P}_0}- V_{A^\prime}^t$, where $t$ is the time from last reset of DUO$^\prime$;
-	\item The resets of DUO$^\prime$ follow the rule of DUO (with the same $\mathcal{H}_u$ and $\mathcal{H}_d$, while the upper limit for periodic reset $\mathcal{H}_p^\prime=1+r^\prime N$); any coupon of DUO$^\prime$ is paid in forms of Class A token at its value on the reset date.
-\end{enumerate}
+Class A$^\prime$ and B$^\prime$ reset \emph{when and only when} Class A resets. All payments to Class \Ap and \Bp (in the form of underlying token) consist of the payments made to the Class A in which \Ap and \Bp invest. Specifically,
+\begin{itemize}
+	\item On periodic reset $\zeta$, Class \Ap and \Bp receive $r^\prime T + g(S_{\zeta-})$ and $2rT-r^\prime T+ g(S_{\zeta-})$, respectively, in the form of underlying token, and each one Class A$^\prime$ and B$^\prime$ becomes $1-g(S_{\zeta-})$ share (if $g(S_{\zeta-})=0$, then no compensation and reduction in share quantity);
+	\item On upward reset $\tau$, Class \Ap and \Bp receive payment with value $r^\prime t$ and $2rt-r^\prime t$, respectively, in the form of underlying token;
+	\item On downward reset $\eta$, Class A$^\prime$ and Class \Bp receive $r^\prime t + g(S_{\eta-})$ and $2rt-r^\prime t+ g(S_{\eta-})$, respectively, in the forms of underlying token, and each one Class A$^\prime$ and B$^\prime$ becomes $1-g(S_{\eta-})$ share.
+\end{itemize}
 
-Under the risk-neutral pricing framework, the current market value of Class A$^\prime$ token is given recursively as
+When Class \Ap and Class A have the same coupon rate, i.e. $r^\prime=r$, then Class A, \Ap and \Bp have the same cash flow and hence the same value, provided no extreme event occurs (the net asset value of Class B does not jump to a negative level). In practice, $r^\prime$ is typically smaller than $r$ and close to the risk-free rate. For instance, $r^\prime = 0.03$ p.a.
+
+Under the risk-neutral pricing framework, the value of Class \Ap is given as
 \begin{align}
-\begin{split}W_{A^\prime}(t,u,S,w) & =E_{t}\Bigg[e^{-\rho(\zeta^\prime-t)}[rT+g(\hat{W}_{\zeta^\prime-})+(1-g(\hat{W}_{\zeta^\prime-}))W_{A^\prime}(0,u+\zeta^\prime-t,S_{\zeta^\prime},1)]\cdot\mathbf{1}_{\{\zeta^\prime\le\tau^\prime,\eta^\prime,\zeta,\eta\}}\\
- & \quad+e^{-\rho(\tau^\prime-t)}(r\tau^\prime+W_{A^\prime}(0,u+\tau^\prime-t,1,\hat{W}_{\tau^\prime}))\cdot\mathbf{1}_{\{\tau^\prime<\eta^\prime,\zeta^\prime,\zeta,\eta\}}\\
- & \quad+e^{-\rho(\eta^\prime-t)}(r\eta^\prime+1-V_{B}^{\eta^\prime-}+V_{B}^{\eta^\prime-}W_{A^\prime}(0,u+\eta^\prime-t,S_{\zeta^\prime},1))\cdot\mathbf{1}_{\{\eta^\prime<\tau^\prime,\zeta^\prime,\zeta,\eta\}}\\
- & \quad+e^{-\rho(\tau\land\eta)}(g(S_{\eta\land\zeta-})+(1-g(S_{\eta\land\zeta-}))W_{A^\prime}(\eta\land\zeta,0,1,W_A(0,1)))\cdot\mathbf{1}_{\{\zeta\land\eta<\tau^\prime,\eta^\prime,\zeta^\prime\}}\Bigg].
+\begin{split}W_{A^\prime}(t,S) & =E_{t}\Bigg[e^{-\rho(\zeta-t)}[r^\prime T+g(S_{\zeta-})+(1-g(S_{\zeta-}))W_{A^\prime}(0,1)]\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}\\
+ & \quad+e^{-\rho(\tau-t)}(r^\prime\tau+W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}\\
+ & \quad+e^{-\rho(\eta-t)}(r^\prime\eta+1-V_{B}^{\eta-}+V_{B}^{\eta-}W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
 \end{split}
-\label{VAL3}
 \end{align}
-Here $\zeta$ and $\eta$ are the first periodic and downward reset of Class A token after $t$, and $\zeta^\prime$, $\tau^\prime$ and $\eta^\prime$ are the first periodic, upward and downward reset of Class A$^\prime$ token after $t$, respectively. 
-$$\hat{W}_t=W_A(h(t),S_t),$$
-where $h(t)$ is time from Class A token's last reset as of $t$.
+where $\zeta,\tau,\eta$ are the first periodic, upward or downward reset (whichever comes first) of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively. 
 
-Class A$^\prime$ can be viewed as a compound derivative on the underlying $S$, and it can be priced based on a Monte Carlo simulation approach described as follows.
+$W_{A^\prime}$ satisfies the following PDE, which is the same to \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} except for changing $r$ to $r^\prime$:
+\begin{align*}
+-\frac{\partial W_{A^\prime}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A^\prime}}{\partial S^{2}}+\rho S\frac{\partial W_{A^\prime}}{\partial S}-\rho W_{A^\prime}, ~~t\in[0,T),~S\in (H_d(t),H_u(t))\\
+W_{A^\prime}(T,S) & =r^\prime T+g(S)+(1-g(S))W_{A^\prime}(0,1),\\
+W_{A^\prime}(t,H_{u}(t)) & =r^\prime t+W_{A^\prime}(0,1)\\
+W_{A^\prime}(t,H_d(t)) & =r^\prime t+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A^\prime}(0,1).
+\end{align*}
 
-\paragraph{Monte Carlo Algorithm for Estimating Value of Class A$^\prime$ and B$^\prime$}
-\begin{enumerate}[1)]
-	\item Simulate one sample path of $P$ under the risk-neutral measure;
-	\item Calculate $V_A$, $V_B$ and $S$ for each date on the sample path, and derive the reset dates of DUO;
-	\item Based on 2), calculate $W_A$ using the PDE \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} for each date on the sample path;
-	\item Calculate $V_{A'}$, $V_{B'}$ and $S'$ based on the sample path of $W_A$, and derive the reset dates of DUO$^\prime$;
-	\item Calculate the total discounted value of payments to Class A$^\prime$ and B$^\prime$ on this path;
-	\item Repeat the previous steps for $M$ times, and define the Monte Carlo estimator for $W_{A'}$ and $W_{B'}$ as the average of the $M$ values in 5), respectively.
-\end{enumerate}
+Given $W_{\Ap}$, the value of Class \Bp is given as $\frac{2W_A(t,S)}{W_A(0,1)}-W_{\Ap}$.
+
+Although Class \Ap and A look similar under normal situations, under extreme scenario in practice, Class \Ap is safer than Class A. Consider the scenario when the underlying value suddenly drops to a level $P_t<\frac{P_0}{2}(1+rt)$. In this case, the net asset value of Class B, $V_B$, becomes negative. A downward reset will be triggered, when Class A gets all the remaining value $\frac{2P_t}{P_0}$, Class B gets nothing, and all Class A and B tokens are liquidated. This means that Class A will suffer a loss (getting a liquidation value $\frac{2P_t}{P_0}$ smaller than its net asset value $1+rt$) if $P_t$ suddenly drops below $P_t<\frac{P_0}{2}(1+rt)$. In comparison, under the same scenario, Class \Ap and \Bp will get $\frac{4P_t}{P_0}$ in the form of underlying token from Class A. Therefore, Class \Ap will have a loss if and only if $\frac{4P_t}{P_0}<1+r^\prime t$, or equivalently, $P_t<\frac{P_0}{4}(1+r^\prime t)$, and when $\frac{P_0}{4}(1+r^\prime t)<P_t<\frac{P_0}{2}(1+rt)$, Class \Ap will get full payment $1+r^\prime t$ while Class A will have a loss.
 
 \clearpage
 
@@ -414,7 +414,7 @@ Class A$^\prime$ can be viewed as a compound derivative on the underlying $S$, a
 For illustration, we hereby uses Ether (ETH) as the underlying token
 and apply below parameter values:
 \begin{align*}
-r& =0.02\% & r^\prime & = 0.0082\% \text{ (annualized rate 3\%)}\\
+r& =0.02\% & r^\prime & = 0.0082\% \text{ (3\% p.a.)}\\
 \mathcal{H}_{u} & =2 & \mathcal{H}_{p} & =1.02\\
 \mathcal{H}_{d} & =0.25 & \alpha &=1\\
 T &= 100/365. &&
@@ -518,8 +518,11 @@ In order to achieve above return, ETH payout from resets need to be fully conver
 \begin{centering}
 \includegraphics[width=0.95\textwidth]{WA.eps}
 \par\end{centering}
-\caption{Class A Market Value. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=1$.}
+\caption{Class A Market Value. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=1$.}\label{fig:valA}
 \end{figure}
+
+Figure \ref{fig:valA} shows that, although Class A has a fixed coupon rate, and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. This behavior is similar to a junk bond, whose value is influenced by its issuer's credit risk. In contrast, the main risk of Class A is not credit risk, but the risk of a downward reset. On a downward reset, a portion of Class A token will be liquidated, so the investor will lose the value of future coupons that would be generated from this portion. Therefore, an approaching downward reset will pull down the value of Class A. This is illustrated in Figure \ref{fig:valA} at the end of January: as the downward reset approaches, the value of Class A also goes down, especially when the model underestimates the market volatility (by setting $\sigma=0.5$).
+
 
 \begin{figure}[H]
 \begin{centering}
@@ -547,11 +550,11 @@ Class A0 token can be made even more stable by setting a high $\alpha$. Doing so
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{WABpnoCI.eps}
-\caption{Market Value of Class A$^\prime$ (red) and B$^\prime$ (blue), compared with Class A (black). Annualized volatility of Class A$^\prime$ and B$^\prime$ are 0.0133 and 0.0232, respectively. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,r^\prime = 0.0082\%$,$\mathcal{H}_{p}^\prime=1.0082,N=100,\alpha=1$. Market values of Class A$^\prime$ and B$^\prime$ are estimated via Monte Carlo simulation, with standard deviation averaged at $1.76\times 10^{-4}$ and 0.0021 over 151 days for Class A and B, respectively.}
+\includegraphics[width=0.95\textwidth]{WABpnoCI4.eps}
+\caption{Market Value of Class A$^\prime$ (red) and B$^\prime$ (blue), compared with Class A (black). Annualized volatility of Class A$^\prime$ and B$^\prime$ are 0.0087 and 0.0397, respectively. Parameters: $r=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,r^\prime = 0.0082\%$ ($3\%$ p.a.), $N=100, \alpha=1$.}
 \end{figure}
 
-We can see that the market value of Class A$^\prime$ token is very stable during our sample period, with a value close to 1. There is a downward jump in the value of Class A$^\prime$ because of the periodic reset. If we de-trend the value of Class A$^\prime$ and consider $W_{A^\prime}-V_{A^\prime}$, it has an annualized standard deviation of 0.0062, which is about one third of that of $W_{A}-V_{A}$ (0.0171).
+We can see that the market value of Class A$^\prime$ token is very stable during our sample period, with a value close to 1, except for four downward jumps. These downward jumps correspond to the coupon payment of Class \Ap on the reset dates of Class A. If we de-trend the value of Class A$^\prime$ by its NAV and consider $W_{A^\prime}-V_{A^\prime}$, it has an annualized standard deviation of $5.4\times 10^{-5}$, which is much smaller than that of $W_{A}-V_{A}$ (0.0175).
 
 
 \clearpage
