@@ -62,7 +62,8 @@
 \author{Yizhou CAO\thanks{\textit{Email}: \protect\href{mailto:yizhou.cao@finbook.co}{yizhou.cao@finbook.co},
 CTO and Co-founder of FinBook}$\:,$ Min DAI\thanks{\textit{Email}: \protect\href{mailto:matdm@nus.edu.sg}{matdm@nus.edu.sg}. Director, Centre for Quantitative Finance, National University of Singapore}$\:,$ Steven KOU\thanks{\textit{Email}: \protect\href{mailto:matsteve@nus.edu.sg}{matsteve@nus.edu.sg}. Director, Risk Management Institute, National University of Singapore}$\:$, Lewei LI\thanks{\textit{Email}: \protect\href{mailto:lewei.li@finbook.co}{lewei.li@finbook.co}, CEO and Co-founder of FinBook}$\:$, Chen YANG\thanks{\textit{Email}: \protect\href{mailto:chen.yang@math.ethz.ch}{chen.yang@math.ethz.ch}, Department of Mathematics, ETH Zurich}}
 
-%\date{}
+\date{Version 0.9.0\\
+\today}
 \maketitle
 \begin{abstract}
 
@@ -149,9 +150,9 @@ The Custodian smart contract performs multiple tasks that facilitate key mechani
 Dual-class tokens can be created by depositing underlying tokens to the Custodian contract. Upon receiving underlying tokens of amount $M_{C}$, the Custodian contract will return to the sender equal amount of Class A and Class B tokens. Such amount $C$ can be calculated by:
 \begin{equation}
 \begin{array}{c}
-C=\frac{M_{C}\cdot P_{0}}{2}\ ,\end{array}\label{eq:creation}
+C=\frac{M_{C}\cdot P_{0}\cdot\beta}{2}\ ,\end{array}\label{eq:creation}
 \end{equation}
-where $P_{0}$ is the recorded price of underlying token in USD at last reset event.
+where $P_{0}$ is the recorded price of underlying token in USD at last contingent reset event, and $\beta$ is the conversion factor set as 1 at inception and its behaviour is detailed later in Section \ref{subsec:Resets}
 
 The deposited underlying tokens are kept by the Custodian contract, as collateral of the Class A and Class B tokens issued by the contract. Any user or member of the public can verify the collateral and tokens issued through third party applications such as \href{http://etherscan.io}{Etherscan.io}.
 
@@ -159,7 +160,7 @@ The deposited underlying tokens are kept by the Custodian contract, as collatera
 
 Holders of Class A and Class B tokens can withdraw deposited underlying tokens at any time by performing a redemption. To do this, the user will send equal amount $C$ of Class A and Class B tokens to the Custodian contract. The contract will deduct Class A and Class B tokens, and return to the sender $M_{C}$ underlying tokens, where $M_{C}$ can be calculated by:
 \begin{equation}
-M_{C}=\frac{2C}{P_{0}}\ .\label{eq:redemption}
+M_{C}=\frac{2C}{P_{0}\cdot\beta}\ .\label{eq:redemption}
 \end{equation}
 
 \subsubsection{Net Value}
@@ -168,7 +169,7 @@ The net values of tokens are calculated based on the coupon rate, the elapsed ti
 \begin{equation}
 \begin{array}{ll}
 V_{A}^{t}= & 1+R\cdot t,\\
-V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}}-V_{A}^{t}\ ,
+V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}\cdot\beta}-V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue}
 \end{equation}
 where $R$ is the \textbf{daily} coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in USD.
@@ -177,10 +178,10 @@ where $R$ is the \textbf{daily} coupon rate, $t$ is the number of days from last
 
 Class B has the following leverage ratio:
 $$
-L_{B}^{t}  =\frac{P_{t}}{P_{0}}\cdot\frac{2}{V_{B}^{t}}.$$
-Note that at inception or after resets, above simply reduces to $L_{B}^{0}=2$.
+L_{B}^{t}  =\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{2}{V_{B}^{t}}.$$
+Note that at inception or after contingent resets, above simply reduces to $L_{B}^{0}=2$.
 
-\subsection{Resets}
+\subsection{Resets}\label{subsec:Resets}
 
 Simply put, the holders of Class B tokens borrow capital from the holders of Class A tokens and invest in a volatile asset (i.e. ETH), which leads the Class B token to possess a continuum of leverage ratios. To reduce risk of both classes, a set of upward and downward reset clauses is imposed. Resets preserve total value in the system.
 
@@ -192,8 +193,8 @@ Upon upward reset:
 \begin{enumerate}[1)]
 \item Total amount of both classes token remains unchanged.
 \item Net Value of both classes resets to 1 USD.
-\item Both classes' holders will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is
-$\frac{V_{A}^{t-}-1}{P_{t}}$ and for each Class B token is $\frac{V_{B}^{t-}-1}{P_{t}}$
+\item Both classes' holders will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is $\frac{V_{A}^{t-}-1}{P_{t}}$ and for each Class B token is $\frac{V_{B}^{t-}-1}{P_{t}}$.
+\item Conversion factor $\beta$ is reset to 1.
 \end{enumerate}
 Total value in the system is unchanged after reset. For details, see Appendix \ref{subsec:Contingent-Upward-Reset}.
 
@@ -205,13 +206,24 @@ Upon downward reset:
 \begin{enumerate}[1)]
 \item Total amount of both classes token is reduced to $Q^{t+}=Q^{t-}\cdot V_{B}^{t-}$.
 \item Net Value of both classes resets to 1 USD.
-\item Class A holders will receive certain amount of underlying token from the Custodian contract. Such amount of each Class A token is: $\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$
+\item Class A holders will receive certain amount of underlying token from the Custodian contract. Such amount of each Class A token is: $\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$.
+\item Conversion factor $\beta$ is reset to 1.
 \end{enumerate}
 Total value in the system is unchanged after reset. For details, see Appendix  \ref{subsec:Contingent-Downward-Reset}.
 
-\subsubsection{Periodic Reset}
+\subsubsection{Regular Payout}
 
-When a given time period $T$ has passed from the last reset time, or equivalently, $V_{A}^{t-}$ grows to upper limit $\mathcal{H}_{p}$, a periodic reset is triggered to restore the leverage ratio and net value of both classes. If $V_{B}^{t-}$ is less than 1, reset will be the same as the Contingent Downward reset. Otherwise, reset will be the same as the Contingent Upward reset.
+When a given time period has passed from the last reset time, $V_{A}^{t-}$ grows to upper limit $\mathcal{H}_{p}$, a regular payout is triggered to reduce the Net Value of Class A to 1, while Net Value of Class B is unchanged.
+
+Regular payout:
+\begin{enumerate}
+\item Total amount of both classes token remain unchanged.
+\item Net Value of Class A reset to 1 USD.
+\item Class A holder will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is $\frac{V_{A}^{t-}-1}{P_{t}}$
+\item Conversion factor $\beta^{+}=\beta^{-}\cdot\frac{2P_{t}}{2P_{t}-P_{0}\cdot\beta^{-}\cdot\left(V_{A}^{t-}-1\right)}$.
+\item Unlike contingent resets, $P_{0}$ does NOT reset to $P_{t}$.
+\end{enumerate}
+Total value in the system is unchanged after reset. For details, see Appendix \ref{subsec:Periodic-Reset}.
 
 
 \subsection{Market Mechanism}
@@ -221,7 +233,7 @@ When a given time period $T$ has passed from the last reset time, or equivalentl
 % {\small{}\textendash{} }\emph{\small{}James O'Shaughnessy}
 % \par\end{flushright}{\small \par}
 
-\subsubsection{Premium and Discount\label{subsec:Premium-and-Discount}}
+\subsubsection{Premium and Discount}\label{subsec:Premium-and-Discount}
 
 Like all fixed income products, Class A is expected to trade on premium or at discount with respect to its net value, depending on market condition. When Class A trades on premium, that generally indicates a higher demand for income over leverage and thus Class A buyers are getting lower yield. On the contrary, when Class A trades at discount, that implies a higher demand for leverage over income and thus Class A buyers are paying less and getting higher yield. In an orderly market, Class A's market price can be used to derive the current market cost of funding. As net values draw closer to resets, Class A might trade closer to its net value as traders start exploiting arbitrage opportunities.
 
@@ -235,7 +247,7 @@ where $P_{A}^{t}$ is the current price of Class A in USD, and $P_{B}^{t}$ is the
 
 Along with Equation (\ref{eq:netvalue}) in Section \ref{subsec:Creation-and-Redemption}, the following relation should hold:
 \[
-P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}}\ .
+P_{A}^{t}+P_{B}^{t}=2\cdot\frac{P_{t}}{P_{0}\cdot\beta}\ .
 \]
 On open market, arbitrage opportunity exists when Class A and Class B tokens trade away from their net values and the above equation is likely violated on either side.
 
@@ -243,36 +255,36 @@ On open market, arbitrage opportunity exists when Class A and Class B tokens tra
 
 When combined market price of Class A and Class B tokens are higher than their combined net values, i.e.
 \[
-P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}}\ ,
+P_{A}^{t}+P_{B}^{t}>2\cdot\frac{P_{t}}{P_{0}\cdot\beta}\ ,
 \]
 arbitrage profit can be exploited by perform DUO token creation:
 \begin{enumerate}[1)]
 \item Buy 1 underlying tokens from open market for $P_{t}$ USD equivalent.
 \item Send the underlying tokens to the Custodian contract.
-\item Based on Equation (\ref{eq:creation}), receive $\frac{P_{0}}{2}$ Class A and $\frac{P_{0}}{2}$ Class B tokens.
-\item Sell Class A and Class B tokens on open market for $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD equivalent.
+\item Based on Equation (\ref{eq:creation}), receive $\frac{P_{0}\cdot\beta}{2}$ Class A and $\frac{P_{0}\cdot\beta}{2}$ Class B tokens.
+\item Sell Class A and Class B tokens on open market for $P_{0}\cdot\beta\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}}{2}\cdot\left(P_{A}^{t}+P_{B}^{t}-2\cdot\frac{P_{t}}{P_{0}}\right)>0\ .
+P_{0}\cdot\beta\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}-P_{t}=\frac{P_{0}\cdot\beta}{2}\cdot\left(P_{A}^{t}+P_{B}^{t}-2\cdot\frac{P_{t}}{P_{0}\cdot\beta}\right)>0\ .
 \]
 
 \paragraph{Arbitrage via Redemption}
 
 When combined market price of Class A and Class B tokens are lower than their combined net values, i.e.
 \[
-P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}}\ ,
+P_{A}^{t}+P_{B}^{t}<2\cdot\frac{P_{t}}{P_{0}\cdot\beta}\ ,
 \]
 arbitrage profit can be exploited by perform DUO token redemption:
 \begin{enumerate}[1)]
-\item Buy $\frac{P_{0}}{2}$ Class A and $\frac{P_{0}}{2}$ Class B tokens from open market for $P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD equivalent.
+\item Buy $\frac{P_{0}\cdot\beta}{2}$ Class A and $\frac{P_{0}\cdot\beta}{2}$ Class B tokens from open market for $P_{0}\cdot\beta\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}$ USD equivalent.
 \item Send Class A and Class B tokens to the Custodian contract.
 \item Based on Equation (\ref{eq:redemption}), receive 1 underlying tokens.
 \item Sell underlying tokens on open market for $P_{t}$ USD equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
-P_{t}-P_{0}\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0\ .
+P_{t}-P_{0}\cdot\beta\cdot\frac{P_{A}^{t}+P_{B}^{t}}{2}=\frac{P_{0}}{2}\cdot\left(2\cdot\frac{P_{t}}{P_{0}\cdot\beta}-\left(P_{A}^{t}+P_{B}^{t}\right)\right)>0\ .
 \]
 Many other factors also determine whether above arbitrage strategy can be successfully executed, such as bid ask spread of all the 3 components, cost in creation and redemption, and ability to short sell the required components. Please refer to appendix for discussion of a more general case.
 
@@ -288,8 +300,8 @@ Although the contract of DUO is inspired by dual-purpose funds, it is different 
 	\toprule
 		& \begin{tabular}{@{}c@{}}Payment Style\\ of A Share\end{tabular} & \begin{tabular}{@{}c@{}}Payment Style\\ of B Share\end{tabular} & \begin{tabular}{@{}c@{}}Leverage Ratio\\ Reset\end{tabular} & Lifespan & \begin{tabular}{@{}c@{}}Reference Asset\end{tabular} \\ \midrule
 	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in U.S.\end{tabular} & Dividend & \begin{tabular}{@{}c@{}}Single payment\\ at wind-up date\end{tabular}  & No & Finite & Stock/ Stock Index\\ \midrule
-	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in China\end{tabular} & Fixed Income &  \begin{tabular}{@{}c@{}}Periodic payments\\ at upward reset dates\end{tabular} & Yes & Infinite & Stock Index\\ \midrule
-	DUO & Fixed Income & \begin{tabular}{@{}c@{}}Periodic payments\\at all reset dates\end{tabular} & Yes & Infinite & \begin{tabular}{@{}c@{}}USD denominated\\ crypto-currency value\end{tabular}\\
+	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in China\end{tabular} & Fixed Income &  \begin{tabular}{@{}c@{}}Periodic payments\\ on upward reset dates\end{tabular} & Yes & Infinite & Stock Index\\ \midrule
+	DUO & Fixed Income & \begin{tabular}{@{}c@{}}Periodic payments\\on upward reset dates\end{tabular} & Yes & Infinite & \begin{tabular}{@{}c@{}}USD denominated\\ crypto-currency value\end{tabular}\\
 	\bottomrule
 	\end{tabular}
 	\par\flushleft\scriptsize The dual-purpose funds in U.S. include those studied in \cite{Ingersoll1976} and the prime and scores studied in \cite{JO}.
@@ -316,19 +328,18 @@ Both the dual-purpose funds and DUO values can be characterized in terms of part
 
 \section{Valuation}\label{sect:valuation}
 
-Denote $W_{A}$ and $W_{B}$ as the market value of Class A and Class B, respectively. Denote $S_t=P_t/P_0$ as the relative price of the underlying token. By the design of contract, $S$ returns to 1 at every reset date.
+Denote $W_{A}$ and $W_{B}$ as the market value of Class A and Class B, respectively. Denote $S_t=P_t/(P_0\cdot\beta)$ as the relative price of the underlying token. By the design of contract, $S$ returns to 1 on every contingent reset date, and is reduced by $\frac{1}{2}RT$ on every regular payout date.
 
 Under the risk-neutral pricing framework, the current market value of Class A token is given recursively as
 \begin{align}
-\begin{split}W_{A}(t,S) & =E_{t}\Bigg[e^{-r(\zeta-t)}[RT+g(S_{\zeta-})+(1-g(S_{\zeta-}))W_{A}(0,1)]\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}\\
- & \quad+e^{-r(\tau-t)}(R\tau+W_{A}(0,1))\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}\\
- & \quad+e^{-r(\eta-t)}(R\eta+1-V_{B}^{\eta-}+V_{B}^{\eta-}W_{A}(0,1))\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
+\begin{split}W_{A}(t,S) & =E_{t}\Bigg[\sum_{1\le i<\tau\land\eta}e^{-r(i-t)}RT+e^{-r(\tau-t)}(R\tau+W_{A}(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}\\
+ & \quad+e^{-r(\eta-t)}(R\eta+1-V_{B}^{\eta-}+V_{B}^{\eta-}W_{A}(0,1))\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg],
 \end{split}
 \label{VAL2}
 \end{align}
-where $E_{t}$ is the expectation computed under the risk-neutral measure and under the initial condition $S_{t-}=S$, random times $\zeta$, $\tau$ and $\eta$ represent the first periodic, upward and downward reset date from $t$, respectively, and $g(s)=((1+\alpha)(1-s)+\alpha RT)^{+}$. $W_{A}(t,S)$ denotes the market value of Class A token with time from last interest payment $0\le t\le1$, with $H_{d}(t)\le S\le H_{u}(t)$ and $0\le t<T$, where $H_{d}(t)=\frac{\alpha}{1+\alpha}(1+Rt)+\frac{1}{1+\alpha}\mathcal{H}_{d}$, and $H_{u}(t)=\frac{\alpha}{1+\alpha}(1+Rt)+\frac{1}{1+\alpha}\mathcal{H}_{u}$. Once we calculate $W_A$, the value of Class B token can be calculated as $W_B=(1+\alpha)S-\alpha W_A$.
+where $E_{t}$ is the expectation computed under the risk-neutral measure and under the initial condition $S_{t-}=S$, random times $\zeta$, $\tau$ and $\eta$ represent the first regular payout, upward and downward reset date from $t$, respectively. $W_{A}(t,S)$ denotes the market value of Class A token with time from last interest payment $0\le t\le1$, with $H_{d}(t)\le S\le H_{u}(t)$ and $0\le t<T$, where $H_{d}(t)=\frac{1}{2}(1+Rt)+\frac{1}{2}\mathcal{H}_{d}$, and $H_{u}(t)=\frac{1}{2}(1+Rt)+\frac{1}{2}\mathcal{H}_{u}$. Once we calculate $W_A$, the value of Class B token can be calculated as $W_B=2S- W_A$.
 
-The value of Class A can be determined as above in a recursive manner, since investors still get Class A token in addition to the payments after a reset. On the right hand side, the second and third terms describe the cash flow on upward and downward resets. The second term shows that, if the reset is an upward reset, investors get coupon payment, and the time from last reset changes to 0 and $S$ to $1$. The third term shows that, if a downward reset comes first, investors receive payment of value $V_{A}^{\eta-}-V_{B}^{\eta-}$ (including coupon payment of value $V_{A}^{\eta-}-1$ and compensation for the quantity reduction $1-V_{B}^{\eta-}$), each Class A token reduces to $V_{B}^{\eta-}$ token, and the time from last reset changes to 0 and $S$ to $1$. Finally, the first term is value of the cash flow on the periodic reset date. Specifically, when $V_{B}^{\zeta-}\ge1$, or equivalently, $(1+\alpha)-\alpha(1+RT)\ge1$ (so that $g(S_{\zeta-})=0$), the cash flow follows that of an upward reset where Class A receives payment of value $RT$, and the number of Class A remains unchanged; when $V_{B}^{\zeta-}<1$, or equivalently, $(1+\alpha)-\alpha(1+RT)<1$, the cash flow follows that of a downward reset, where Class A receives coupon and compensation payment of value $V_{A}^{\zeta-}-V_{B}^{\zeta-}=1+RT-(1+\alpha)S_{\zeta-}-\alpha(1+RT)=RT+g(S_{\zeta-})$, and each token of Class A is reduced to $V_{B}^{\zeta-}=(1+\alpha)S_{\zeta-}-\alpha(1+RT)=1-g(S_{\zeta-})$ token.
+The value of Class A can be determined as above in a recursive manner, since investors still get Class A token in addition to the payments after a reset. On the right hand side, the first term is value of the all coupons on the regular payout dates before the first reset. The second and third terms describe the cash flow on upward and downward resets. The second term shows that, if the reset is an upward reset, investors get coupon payment, and the time from last reset changes to 0 and $S$ to $1$. The third term shows that, if a downward reset comes first, investors receive payment of value $V_{A}^{\eta-}-V_{B}^{\eta-}$ (including coupon payment of value $V_{A}^{\eta-}-1$ and compensation for the quantity reduction $1-V_{B}^{\eta-}$), each Class A token reduces to $V_{B}^{\eta-}$ token, and the time from last reset changes to 0 and $S$ to $1$.
 
 One can estimate $W_A$ via \eqref{VAL2} using Monte Carlo simulation, which is also proposed by \cite{AC} to deal with the complexities in the fund contract. Due to the high volatility of the underlying token price, it is important to achieve real-time calculation of $W_A$. However, the efficiency of the simulation-based method is not high enough for this purpose, since the cash flow of Class A token has an infinite horizon and a weakly path-dependent nature. Therefore, in the following we propose an efficient PDE-based estimation method.
 
@@ -341,14 +352,14 @@ differential equation:
 
 \begin{align}\label{eqn:PDEstart}
 -\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+r S\frac{\partial W_{A}}{\partial S}-r W_{A}, ~~t\in[0,T),~S\in (H_d(t),H_u(t))\\\label{eqn:ter}
-W_{A}(T,S) & =RT+g(S)+(1-g(S))W_{A}(0,1),\\\label{eqn:bound1}
+W_{A}(T,S) & =RT+W_{A}(0,S-\frac{1}{2}RT),\\\label{eqn:bound1}
 W_{A}(t,H_{u}(t)) & =Rt+W_{A}(0,1)\\\label{eqn:PDEend}
 W_{A}(t,H_d(t)) & =Rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
 \end{align}
 
 The main feature of the above PDE problem is the nonlocal terminal and boundary conditions $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$, where the given data also depend on the solution $W_{A}$ itself. Although $\eqref{eqn:PDEstart}$ involves the standard Black-Scholes operator (due to our geometric Brownian motion assumption), the presence of the solution $W_{A}$ in terminal and boundary data makes the PDE significantly different from the classical Black-Scholes PDE, leading to challenges in both theoretical and numerical aspects. On the theoretical aspect, the existing stochastic representation result is not applicable to PDE $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ due to the nonlocalness of the terminal and boundary conditions. On the numerical aspect, the nonlocalness in the terminal and boundary data also causes problem since a numerical solution in the interior region depends on the boundary and terminal data, which in turns depends on the numerical solution in the interior region. To solve this, we propose an iterative procedure presented in Appendix $\ref{subsec:Numerical-Procedure-for}$.
 
-The nonlocal terminal and boundary conditions in $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ are directly related with the cash flow of Class A token. The upper boundary condition ($\ref{eqn:bound1}$) at $S=H_{u}(t)$ corresponds to the upward reset, when early payment $Rt$ is delivered and $S$ resets to 1; the lower boundary condition ($\ref{eqn:PDEend}$) at $S=H_d(t)$ corresponds downward reset, when early payment $V_{B}-V_{A}$ is delivered, each Class A token shrinks to $\mathcal{H}_{d}$ token, and $S$ resets to 1.\footnote{Since $P$ has continuous sample path due to the geometric Brownian motion assumption, we have $V_B^{\eta-}=\mathcal{H}_d$ on downward resets.} Finally, the terminal condition ($\ref{eqn:ter}$) corresponds to the periodic reset, where the payment follows either the upward or downward reset based on whether $V_{B}\le1$.
+The nonlocal terminal and boundary conditions in $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ are directly related with the cash flow of Class A token. The upper boundary condition ($\ref{eqn:bound1}$) at $S=H_{u}(t)$ corresponds to the upward reset, when early payment $Rt$ is delivered and $S$ resets to 1; the lower boundary condition ($\ref{eqn:PDEend}$) at $S=H_d(t)$ corresponds downward reset, when early payment $1-\mathcal{H}_d+Rt$ is delivered to Class A, each Class A token shrinks to $\mathcal{H}_{d}$ token, and $S$ resets to 1.\footnote{Since $P$ has continuous sample path due to the geometric Brownian motion assumption, we have $V_B^{\eta-}=\mathcal{H}_d$ on downward resets.} Finally, the terminal condition ($\ref{eqn:ter}$) corresponds to the regular payout, where Class A receives coupon payment $RT$ and $S$ is reduced by $\frac{1}{2}RT$.
 
 
 \clearpage
@@ -361,11 +372,11 @@ This extension splits Class A further into two sub-classes: A0 and A1. At the cr
 
 By contract design, the coupon of Class A1 is delivered in the form of the underlying token, whose value in USD may subject to volatile changes due to the high volatility of ETH. In contrast, the coupon of Class A0 is paid in the form of Class A1 token, whose value in USD is much less volatile compared to ETH. Therefore, Class A0 is more suitable for investors with lower risk tolerance or are less active on the market; upon receiving Class A1 tokens as coupon, they have a relatively longer period of time to liquidate the token before its value changes noticeably. In contrast, Class A1 is more suitable for investors who are willing to take certain degree of risk and are more active on the market; so that upon receiving the underlying token, they can monitor the market actively and spot a good opportunity to liquidate the underlying token.
 
-Under the risk-neutral pricing framework, the market value of Class A1 token is given recursively as
+Under the risk-neutral pricing framework, the market value of Class A1 token is given as
 \begin{align*}
 W_{A}(t,S) & =E_{t}\Bigg[e^{-r(\zeta-t)}RT\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}+e^{-r(\tau-t)}R\tau\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}+e^{-r(\eta-t)}R\eta\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
 \end{align*}
-where the first periodic reset time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined in the same way as \eqref{VAL2}.  $W_{A1}$ corresponds to the following PDE
+where the first regular payout time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined in the same way as \eqref{VAL2}.  $W_{A1}$ corresponds to the following PDE
 \begin{align*}
 -\frac{\partial W_{A1}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A1}}{\partial S^{2}}+r S\frac{\partial W_{A1}}{\partial S}-r W_{A1},~~t\in[0,T),~S\in (H_d(t),H_u(t))\\
 W_{A1}(T,S) & =RT\\
@@ -375,11 +386,11 @@ W_{A1}(t,H_d(t)) & =Rt.
 Finally, the value of Class A0 token is defined as $W_{A0}=W_A-W_{A1}$.
 
 \subsection{\texorpdfstring{A=\Ap+\Bp}{Lg}}
-This second extension splits Class A into two sub-classes: Class \Ap and \Bp. Class \Ap and \Bp invest in Class A token. At any time, a quantity of $\frac{2}{\bar{P}_A}$ Class A token can be split into one Class \Ap and one Class \Bp token, where $\bar{P}_A=W_A(0,1)$. Conversely, one Class \Ap and \Bp token can be merged into $\frac{2}{\bar{P}_A}$ Class A token. The net asset value of Class \Ap is defined as $V_{A^\prime}=1+R^\prime t$, where $t$ is the time since last reset, and the net asset value of Class \Bp is defined as $V_{\Bp}=\frac{2W_A}{\bar{P}_A} - V_{A^\prime}$, where $W_A$ is the price of Class A.
+This second extension splits Class A into two sub-classes: Class \Ap and \Bp. Class \Ap and \Bp invest in Class A token. At any time, two Class A token can be split into one Class \Ap and one Class \Bp token. Conversely, one Class \Ap and \Bp token can be merged into 2 Class A token. The net asset value of Class \Ap is defined as $V_{A^\prime}=1+R^\prime t$, where $t$ is the time since last reset, and the net asset value of Class \Bp is defined as $V_{\Bp}=1+2Rt-R^\prime t$.
 
 Class A$^\prime$ and B$^\prime$ reset \emph{when and only when} Class A resets. All payments to Class \Ap and \Bp (in the form of underlying token) consist of the payments made to the Class A in which \Ap and \Bp invest. Specifically,
 \begin{itemize}
-	\item On periodic reset $\zeta$, Class \Ap and \Bp receive $R^\prime T + g(S_{\zeta-})$ and $2RT-R^\prime T+ g(S_{\zeta-})$, respectively, in the form of underlying token, and each one Class A$^\prime$ and B$^\prime$ becomes $1-g(S_{\zeta-})$ share (if $g(S_{\zeta-})=0$, then no compensation and reduction in share quantity);
+	\item On regular payout $\zeta$, Class \Ap and \Bp receive $R^\prime T$ and $2RT-R^\prime T$, respectively, in the form of underlying token;
 	\item On upward reset $\tau$, Class \Ap and \Bp receive payment with value $R^\prime t$ and $2Rt-R^\prime t$, respectively, in the form of underlying token;
 	\item On downward reset $\eta$, Class A$^\prime$ and Class \Bp receive $R^\prime t + 1-V_B^{\eta-}$ and $2Rt-R^\prime t+ 1-V_B^{\eta-}$, respectively, in the forms of underlying token, and each one Class A$^\prime$ and B$^\prime$ becomes $V_B^{\eta-}$ share.
 \end{itemize}
@@ -388,24 +399,23 @@ When Class \Ap and Class A have the same coupon rate, i.e. $R^\prime=R$, then Cl
 
 Under the risk-neutral pricing framework, the value of Class \Ap is given as
 \begin{align}
-\begin{split}W_{A^\prime}(t,S) & =E_{t}\Bigg[e^{-r(\zeta-t)}[R^\prime T+g(S_{\zeta-})+(1-g(S_{\zeta-}))W_{A^\prime}(0,1)]\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}\\
- & \quad+e^{-r(\tau-t)}(R^\prime\tau+W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}\\
- & \quad+e^{-r(\eta-t)}(R^\prime\eta+1-V_{B}^{\eta-}+V_{B}^{\eta-}W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
+\begin{split}W_{A^\prime}(t,S) & =E_{t}\Bigg[\sum_{1\le i<\tau\land\eta}e^{-r(i-t)}R^\prime T+e^{-r(\tau-t)}(R^\prime\tau+W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}\\
+ & \quad+e^{-r(\eta-t)}(R^\prime\eta+1-V_{B}^{\eta-}+V_{B}^{\eta-}W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg],
 \end{split}
 \end{align}
-where $\zeta,\tau,\eta$ are the first periodic, upward or downward reset (whichever comes first) of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively. 
+where $\tau,\eta$ are the first upward or downward reset (whichever comes first) of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively. 
 
-$W_{A^\prime}$ satisfies the following PDE, which is the same to \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} except for changing $R$ to $R^\prime$:
+$W_{A^\prime}$ satisfies the following PDE, which is the same to \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} except for changing $R$ to $R^\prime$ for the coupon payment:
 \begin{align*}
 -\frac{\partial W_{A^\prime}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A^\prime}}{\partial S^{2}}+r S\frac{\partial W_{A^\prime}}{\partial S}-r W_{A^\prime}, ~~t\in[0,T),~S\in (H_d(t),H_u(t))\\
-W_{A^\prime}(T,S) & =R^\prime T+g(S)+(1-g(S))W_{A^\prime}(0,1),\\
+W_{A^\prime}(T,S) & =R^\prime T+W_{A^\prime}(0,S-\frac{1}{2}RT),\\
 W_{A^\prime}(t,H_{u}(t)) & =R^\prime t+W_{A^\prime}(0,1)\\
 W_{A^\prime}(t,H_d(t)) & =R^\prime t+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A^\prime}(0,1).
 \end{align*}
 
-Given $W_{\Ap}$, the value of Class \Bp is given as $\frac{2W_A(t,S)}{W_A(0,1)}-W_{\Ap}$.
+Given $W_{\Ap}$, the value of Class \Bp is given as $2W_A(t,S)-W_{\Ap}$.
 
-Although Class \Ap and A look similar under normal situations, under extreme scenario in practice, Class \Ap is safer than Class A. Consider the scenario when the underlying value suddenly drops to a level $P_t<\frac{P_0}{2}(1+Rt)$. In this case, the net asset value of Class B, $V_B$, becomes negative. A downward reset will be triggered, when Class A gets all the remaining value $\frac{2P_t}{P_0}$, Class B gets nothing, and all Class A and B tokens are liquidated. This means that Class A will suffer a loss (getting a liquidation value $\frac{2P_t}{P_0}$ smaller than its net asset value $1+Rt$) if $P_t$ suddenly drops below $P_t<\frac{P_0}{2}(1+Rt)$. In comparison, under the same scenario, Class \Ap and \Bp will get $\frac{4P_t}{P_0}$ in the form of underlying token from Class A. Therefore, Class \Ap will have a loss if and only if $\frac{4P_t}{P_0}<1+R^\prime t$, or equivalently, $P_t<\frac{P_0}{4}(1+R^\prime t)$, and when $\frac{P_0}{4}(1+R^\prime t)<P_t<\frac{P_0}{2}(1+Rt)$, Class \Ap will get full payment $1+R^\prime t$ while Class A will have a loss.
+Although Class \Ap and A look similar under normal situations, under extreme scenario in practice, Class \Ap is safer than Class A. Consider the scenario when the underlying value suddenly drops to a level $P_t<\frac{P_0}{2}(1+Rt)$. In this case, the net asset value of Class B, $V_B$, becomes negative. A downward reset will be triggered, when Class A gets all the remaining value $\frac{2P_t}{P_0}$, Class B gets nothing, and all Class A and B tokens are liquidated. This means that Class A will suffer a loss (getting a liquidation value $\frac{2P_t}{P_0}$ smaller than its net asset value $1+Rt$) if $P_t$ suddenly drops below $P_t<\frac{P_0}{2}(1+Rt)$. In comparison, under the same scenario, Class \Ap and \Bp will get $\frac{4P_t}{P_0}$ in the form of underlying token from Class A. Therefore, Class \Ap will have a loss if and only if $\frac{4P_t}{P_0}<1+R^\prime t$, or equivalently, $P_t<\frac{P_0}{4}(1+R^\prime t)$, and when $\frac{P_0}{4}(1+R^\prime t)<P_t<\frac{P_0}{2}(1+Rt)$, Class \Ap will get full payment $1+R^\prime t$ while Class A will have a loss. 
 
 \clearpage
 
@@ -416,10 +426,9 @@ and apply below parameter values:
 \begin{align*}
 R& =0.02\% & R^\prime & = 0.0082\% \text{ (3\% p.a.)}\\
 \mathcal{H}_{u} & =2 & \mathcal{H}_{p} & =1.02\\
-\mathcal{H}_{d} & =0.25 & \alpha &=1\\
-T &= 100/365. & r&=0.0082\% \text{ (3\% p.a.)}.
+\mathcal{H}_{d} & =0.25 & T &= 100\\
+\sigma &= 0.0628 \text{ (1.2 p.a.)} & r&=0.0082\% \text{ (3\% p.a.)}.
 \end{align*}
-Note that the choice of $T$ means that the length of reset period equals $N=100$ days.
 The following assumptions are used:
 \begin{enumerate}
 \item Price is monitored on \textbf{daily} basis
@@ -434,7 +443,7 @@ ETH/USD price data from 1 Oct 2017 to 28 Feb 2018 is used. In this period, ETH s
 
 At inception, 15,197,500 Class A and 15,197,500 Class B are issued from the 100,000 ETH, total value in the system is 30,395,000 USD.
 
-Three upward resets were triggered on 24 Nov 2017 ($V_{B}=2.0846$), 17 Dec 2017 ($V_{B}=2.0467$) and 7 Jan 2018 ($V_{B}=2.1106$) while one downward reset was triggered on 5 Feb 2018 ($V_{B}=0.2379$.). No periodic reset was triggered in the sampling period.\\
+Three upward resets were triggered on 24 Nov 2017 ($V_{B}=2.0846$), 17 Dec 2017 ($V_{B}=2.0467$) and 7 Jan 2018 ($V_{B}=2.1106$) while one downward reset was triggered on 5 Feb 2018 ($V_{B}=0.2379$.). No regular payout was triggered in the sampling period.\\
 
 \begin{figure}[H]
 \begin{centering}
@@ -518,17 +527,17 @@ In order to achieve above return, ETH payout from resets need to be fully conver
 \begin{centering}
 \includegraphics[width=0.95\textwidth]{WA.eps}
 \par\end{centering}
-\caption{Class A Market Value. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=1$.}\label{fig:valA}
+\caption{Class A Market Value. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,T=100, r=0.0082\%$}\label{fig:valA}
 \end{figure}
 
-Figure \ref{fig:valA} shows that, although Class A has a fixed coupon rate, and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. This behavior is similar to a junk bond, whose value is influenced by its issuer's credit risk. In contrast, the main risk of Class A is not credit risk, but the risk of a downward reset. On a downward reset, a portion of Class A token will be liquidated, so the investor will lose the value of future coupons that would be generated from this portion. Therefore, an approaching downward reset will pull down the value of Class A. This is illustrated in Figure \ref{fig:valA} at the end of January: as the downward reset approaches, the value of Class A also goes down, especially when the model underestimates the market volatility (by setting $\sigma=0.5$).
+Figure \ref{fig:valA} shows that, although Class A has a fixed coupon rate, and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. This behavior is similar to a junk bond, whose value is influenced by its issuer's credit risk. In contrast, the main risk of Class A is not credit risk, but the risk of a downward reset. On a downward reset, a portion of Class A token will be liquidated, so the investor will lose the value of future coupons that would be generated from this portion. Therefore, an approaching downward reset will pull down the value of Class A. This is illustrated in Figure \ref{fig:valA} at the end of January: as the downward reset approaches, the value of Class A also goes down, especially when the model underestimates the market volatility (by setting $\sigma=0.0262$ (annualized 0.5)).
 
 
 \begin{figure}[H]
 \begin{centering}
 \includegraphics[width=0.95\textwidth]{WB}
 \par\end{centering}
-\caption{Class B Market Value. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=1$.}
+\caption{Class B Market Value. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,T=100, r=0.0082\%$.}
 \end{figure}
 
 
@@ -536,14 +545,14 @@ Figure \ref{fig:valA} shows that, although Class A has a fixed coupon rate, and 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{WA0_alpha1.eps}
-\caption{Market Value of Class A0 compared to Class A for $\alpha=1$. Annualized volatility of Class A0 is 0.0253. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=1$.}
+\caption{Market Value of Class A0 compared to Class A. Annualized volatility of Class A0 is 0.0255. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,T=100,\sigma= 0.0628, r=0.0082\%$.}
 \end{figure}
 
-Class A0 token can be made even more stable by setting a high $\alpha$. Doing so results in a lower leverage ratio for Class B token, but also means a lower risk for Class A and Class A0, therefore their values will be less sensitive to the volatility of the underlying token. The following figure illustrates this with $\alpha=2$.
+Up to now, the DUO is split into Class A and B shares with a split ratio 1:1. Class A0 token can be made even more stable by setting a higher split ratio $\alpha:1$ between Class A and B. The product design with $\alpha\neq1$ will be discussion in Appendix A. Doing so results in a lower leverage ratio for Class B token, but also means a lower risk for Class A and Class A0, therefore their values will be less sensitive to the volatility of the underlying token. The following figure illustrates this with $\alpha=2$.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{WA0_alpha2.eps}
-\caption{Market Value of Class A0 compared to Class A for $\alpha=2$. Annualized volatility is 0.0125. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,N=100,\alpha=2$.}
+\caption{Market Value of Class A0 compared to Class A, where DUO is split into Class A and Class B token with a split ratio 2:1. Annualized volatility of Class A is 0.0125. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,T=100,\sigma= 0.0628, r=0.0082\%$.}
 \end{figure}
 
 \subsection{Market Value of Class A\texorpdfstring{$^\prime$}{Lg} and B\texorpdfstring{$^\prime$}{Lg}}
@@ -551,10 +560,10 @@ Class A0 token can be made even more stable by setting a high $\alpha$. Doing so
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{WABpnoCI4.eps}
-\caption{Market Value of Class A$^\prime$ (red) and B$^\prime$ (blue), compared with Class A (black). Annualized volatility of Class A$^\prime$ and B$^\prime$ are 0.0087 and 0.0397, respectively. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,R^\prime = 0.0082\%$ ($3\%$ p.a.), $N=100, \alpha=1$.}
+\caption{Market Value of Class A$^\prime$ (red) and B$^\prime$ (blue), compared with Class A (black). Annualized volatility of Class A$^\prime$ and B$^\prime$ are 0.0087 and 0.0403, respectively. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,R^\prime = 0.0082\%$ ($3\%$ p.a.), $T=100,\sigma= 0.0628, r=0.0082\%$.}
 \end{figure}
 
-We can see that the market value of Class A$^\prime$ token is very stable during our sample period, with a value close to 1, except for four downward jumps. These downward jumps correspond to the coupon payment of Class \Ap on the reset dates of Class A. If we de-trend the value of Class A$^\prime$ by its NAV and consider $W_{A^\prime}-V_{A^\prime}$, it has an annualized standard deviation of $5.4\times 10^{-5}$, which is much smaller than that of $W_{A}-V_{A}$ (0.0175).
+We can see that the market value of Class A$^\prime$ token is very stable during our sample period, with a value close to 1, except for four downward jumps. These downward jumps correspond to the coupon payment of Class \Ap on the reset dates of Class A. If we de-trend the value of Class A$^\prime$ by its NAV and consider $W_{A^\prime}-V_{A^\prime}$, it has an annualized standard deviation of $5.4\times 10^{-5}$, which is much smaller than that of $W_{A}-V_{A}$ (0.0178).
 
 
 \clearpage
@@ -601,17 +610,18 @@ In Section \ref{sec:Product-Design}, we have described a specific product design
 Dual-class tokens can be created by depositing underlying tokens to the Custodian contract. Upon receiving underlying tokens of amount $M_{C}$, the Custodian contract will return to the sender certain amount of Class A and Class B tokens. Such amount $C_{A}$ and $C_{B}$ can be calculated by:
 \begin{equation}
 \begin{array}{cc}
-C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\left(1-c\right)}{1+\alpha}\\
+C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\beta\cdot\left(1-c\right)}{1+\alpha}\\
 C_{A}= & C_{B}\cdot\alpha\ ,
 \end{array}\label{eq:creation-1}
 \end{equation}
-where $c$ is the processing fee of the smart contract, $\alpha$ is a positive number to determine the ratio of A and B, and $P_{0}$ is the recorded price of underlying token in target fiat currency at last reset event.
+where $c$ is the processing fee of the smart contract, $\alpha$ is a positive number to determine the ratio of A and B, and $P_{0}$ is the recorded price of underlying token in target fiat currency at last reset event, and $\beta$ is the conversion factor set as 1 at inception and its behaviour is detailed later in Section \ref{subsec:Contingent-Upward-Reset}
+to \ref{subsec:Periodic-Reset}.
 
 \subsection{Redemption}
 
 Holders of Class A and Class B tokens can withdraw deposited underlying tokens at any time by performing a redemption. To do this, the user will send amount of $C\cdot\alpha$ Class A and amount of $C$ Class B tokens to the Custodian contract. The contract will deduct Class A and Class B tokens, and return to the sender $M_{C}$ underlying tokens, where $M_{C}$ can be calculated by:
 \begin{equation}
-M_{C}=\frac{C\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}}\ .\label{eq:redemption-1}
+M_{C}=\frac{C\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}\cdot\beta}\ .\label{eq:redemption-1}
 \end{equation}
 
 \subsection{Net Value}
@@ -620,7 +630,7 @@ The net value of tokens are calculated based on the coupon rate, the elapsed tim
 \begin{equation}
 \begin{array}{cc}
 V_{A}^{t}= & 1+R\cdot t\\
-V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}}-\alpha\cdot V_{A}^{t}\ ,
+V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}\cdot\beta}-\alpha\cdot V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue-1}
 \end{equation}
 where $R$ is the daily coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in target fiat currency.
@@ -636,9 +646,9 @@ where $Q_{A}^{t}$ and $Q_{B}^{t}$ are the total amount of Class A and Class B to
 \subsection{Implied Leverage Ratio}
 
 \begin{align*}
-L_{B}^{t} & =\frac{P_{t}}{P_{0}}\cdot\frac{\left(1+\alpha\right)}{V_{B}^{t}}
+L_{B}^{t} & =\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{1+\alpha}{V_{B}^{t}}
 \end{align*}
-Note that at inception or after resets, above simply reduces to $L_{B}^{0}=1+\alpha$.
+Note that at inception or after contingent resets, above simply reduces to $L_{B}^{0}=1+\alpha$.
 
 \subsection{Contingent Upward Reset\label{subsec:Contingent-Upward-Reset}}
 
@@ -646,10 +656,8 @@ An upward reset is triggered when $V_{B}^{t}\geqslant\mathcal{H}_{u}$. Upon upwa
 \begin{enumerate}
 \item Total amount of both classes token remain unchanged, $Q_{A}^{t+}=Q_{A}^{t-}$ and $Q_{B}^{t+}=Q_{B}^{t-}$.
 \item Net Value of both classes reset to 1 target fiat currency.
-\item Both classes' holders will receive certain amount of underlying token
-from the Custodian contract. Such amount for each Class A token is
-$U_{A}=\frac{V_{A}^{t-}-1}{P_{t}}$ and for each Class B token is
-$U_{B}=\frac{V_{B}^{t-}-1}{P_{t}}$.
+\item Both classes' holders will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is $U_{A}=\frac{V_{A}^{t-}-1}{P_{t}}$ and for each Class B token is $U_{B}=\frac{V_{B}^{t-}-1}{P_{t}}$.
+\item Conversion factor $\beta$ is reset to 1.
 \end{enumerate}
 Total value in the system is unchanged after reset:
 \begin{align*}
@@ -666,6 +674,7 @@ A downward reset is triggered when $V_{B}^{t}\leqslant\mathcal{H}_{d}$. Upon dow
 \item Total amount of Class A token is reduced to $Q_{A}^{t+}=Q_{B}^{t+}\cdot\alpha$.
 \item Net Value of both classes reset to 1 target fiat currency.
 \item Class A holders will receive certain amount of underlying token from the Custodian contract. Such amount of each Class A token is: $D_{A}=\frac{V_{A}^{t-}-V_{B}^{t-}}{P_{t}}$.
+\item Conversion factor $\beta$ is reset to 1
 \end{enumerate}
 Total value in the system is unchanged after reset:
 \begin{align*}
@@ -676,9 +685,22 @@ Total value in the system is unchanged after reset:
 \end{align*}
 Note above used the fact $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$.
 
-\subsection{Periodic Reset}
+\subsection{Regular Payout}\label{subsec:Periodic-Reset}
 
-A periodic reset is triggered when $V_{A}^{t}\geqslant\mathcal{H}_{p}$. If $V_{B}^{t-}$ is less than 1, reset will be the same as the Contingent Downward reset. Otherwise, reset will be the same as the Contingent Upward reset.
+A regular payout is triggered when $V_{A}^{t}\geqslant\mathcal{H}_{p}$. Upon regular payout:
+\begin{enumerate}
+\item Total amount of both classes token remain unchanged, $Q_{A}^{t+}=Q_{A}^{t-}$ and $Q_{B}^{t+}=Q_{B}^{t-}$
+\item Net Value of Class A reset to 1 USD
+\item Class A holder will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is $U_{A}=\frac{V_{A}^{t-}-1}{P_{t}}$
+\item Conversion factor $\beta^{+}=\beta^{-}\cdot\frac{\left(1+\alpha\right)\cdot P_{t}}{\left(1+\alpha\right)\cdot P_{t}-P_{0}\cdot\alpha\cdot\beta^{-}\cdot\left(V_{A}^{t-}-1\right)}$
+\item Unlike contingent resets, $P_{0}$ does NOT reset to $P_{t}$
+\end{enumerate}
+Total value in the system is unchanged after reset:
+\begin{align*}
+ & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left(V_{A}^{t-}-1\right)\cdot Q_{A}^{t-}+Q_{A}^{t-}\cdot1++V_{B}^{t-}\cdot Q_{B}^{t-}\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}\ .
+\end{align*}
 
 \section{General Market Arbitrage}
 
@@ -690,7 +712,7 @@ where $P_{A}^{t}$ is the current price of Class A in target fiat currency, and $
 
 Along with Equation (\ref{eq:creation-1}), (\ref{eq:redemption-1}) and (\ref{eq:netvalue-1}) in Section \ref{subsec:General-Product-Design}, below should hold:
 \[
-\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\ .
+\frac{P_{t}}{P_{0}\cdot\beta}\cdot\left(1-c\right)\leq\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\leq\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{1}{1-c}\ .
 \]
 On open market, arbitrage opportunity exists when Class A and Class B tokens trade away from their net values and above equation is violated on either side.
 
@@ -698,40 +720,40 @@ On open market, arbitrage opportunity exists when Class A and Class B tokens tra
 
 When combined market price of Class A and Class B tokens are higher than their combined net values, i.e.
 \[
-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\ ,
+\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}>\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{1}{1-c}\ ,
 \]
 arbitrage profit can be exploited by perform DUO token creation:
 \begin{enumerate}
 \item Buy $\frac{1}{1-c}$ underlying tokens from open market for $P_{t}\cdot\frac{1}{1-c}$ target fiat currency equivalent.
 \item Send the underlying tokens to the Custodian contract.
-\item Based on Equation (\ref{eq:creation-1}), receive $P_{0}\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\frac{1}{1+\alpha}$ Class B tokens.
+\item Based on Equation (\ref{eq:creation-1}), receive $P_{0}\cdot\beta\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\beta\cdot\frac{1}{1+\alpha}$ Class B tokens.
 \item Sell Class A and Class B tokens on open market for $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$ target fiat currency equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}}\cdot\frac{1}{1-c}\right)>0\ .
+P_{0}\cdot\beta\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{1-c}=P_{0}\cdot\beta\cdot\left(\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}-\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{1}{1-c}\right)>0\ .
 \]
 
 \paragraph{Arbitrage via Redemption}
 
 When combined market price of Class A and Class B tokens are lower than their combined net values, i.e.
 \[
-\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\ ,
+\frac{P_{t}}{P_{0}\cdot\beta}\cdot\left(1-c\right)>\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\ ,
 \]
 similar arbitrage profit can be exploited by perform DUO token redemption:
 \begin{enumerate}
-\item Buy $P_{0}\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\frac{1}{1+\alpha}$ Class B tokens from open market for $P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$ target fiat currency equivalent.
+\item Buy $P_{0}\cdot\beta\cdot\frac{\alpha}{1+\alpha}$ Class A and $P_{0}\cdot\beta\cdot\frac{1}{1+\alpha}$ Class B tokens from open market for $P_{0}\cdot\beta\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}$ target fiat currency equivalent.
 \item Send Class A and Class B tokens to the Custodian contract.
 \item Based on Equation (\ref{eq:redemption-1}), receive $1-c$ underlying tokens.
 \item Sell underlying tokens on open market for $P_{t}\cdot\left(1-c\right)$ target fiat currency equivalent.
 \end{enumerate}
 The expected payoff of above operations is:
 \[
-P_{t}\cdot\left(1-c\right)-P_{0}\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}=P_{0}\cdot\left(\frac{P_{t}}{P_{0}}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)>0\ .
+P_{t}\cdot\left(1-c\right)-P_{0}\cdot\beta\cdot\frac{\alpha P_{A}^{t}+P_{B}^{t}}{1+\alpha}=P_{0}\cdot\beta\cdot\left(\frac{P_{t}}{P_{0}\cdot\beta}\cdot\left(1-c\right)-\frac{\alpha\cdot P_{A}^{t}+P_{B}^{t}}{1+\alpha}\right)>0\ .
 \]
 
 \section{Derivation of the Pricing Equation}
-In this section we show that \eqref{VAL2} defines a unique bounded function $W_A$, which is exactly the solution to the PDE problem \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}. We denote $v_s$ and $Y_s$ as the time from last interest payment and the number of A shares at time $s$, respectively. Starting from an initial value 1, $Y$ is reduced by a factor of $\mathcal{H}_d$(resp. $1-g(S)$) on every downward (resp. periodic) reset dates, reflecting the partial payback of Class A principal. Further denote $\zeta_i$, $\tau_i$, and $\eta_i$ as the $i$-th pre-specified payment date, upward reset date, and downward reset date after $t$, respectively. From the construction of contract,
+In this section we show that \eqref{VAL2} defines a unique bounded function $W_A$, which is exactly the solution to the PDE problem \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend}. We denote $v_s$ and $Y_s$ as the time from last interest payment and the number of A shares at time $s$, respectively. Starting from an initial value 1, $Y$ is reduced by a factor of $\mathcal{H}_d$ on every downward reset dates, reflecting the partial payback of Class A principal. Further denote $\zeta_i$, $\tau_i$, and $\eta_i$ as the $i$-th regular payout date, upward reset date, and downward reset date after $t$, respectively. From the construction of contract,
 \begin{align*}
 S_{\zeta_i}=S_{\tau_i}=S_{\eta_i}=1, ~~v_{\tau_i}=v_{\eta_i}=v_{\zeta_i}=0.
 \end{align*}
@@ -740,7 +762,7 @@ S_{\zeta_i}=S_{\tau_i}=S_{\eta_i}=1, ~~v_{\tau_i}=v_{\eta_i}=v_{\zeta_i}=0.
 $W_{A}$ is the unique classical solution\footnote{By classical solution we mean $W_{A}\in C^{1,2}(Q)\cap C(\overline{Q}\backslash D)$, where $Q=\{(t,S):0\le t<1,H_{d}(t)<S<H_{u}(t)\}$ and $D=\{T\}\times\{H_{d}(T),H_{u}(T)\}$.} to the following partial differential equation on $\{(t,S):0\le t<T,H_{d}(t)<S<H_{u}(t)\}$
 \begin{align}
 -\frac{\partial W_{A}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+r S\frac{\partial W_{A}}{\partial S}-r W_{A}\\
-W_{A}(T,S) & =RT+g(S)+(1-g(S))W_{A}(0,1)\\
+W_{A}(T,S) & =RT+W_{A}(0,S-\frac{1}{2}RT)\\
 W_{A}(t,H_{u}(t)) & =Rt+W_{A}(0,1)\\
 W_{A}(t,H_d(t)) & =Rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
 \end{align}
@@ -750,7 +772,7 @@ W_{A}(t,H_d(t)) & =Rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1).
 	Using Theorem E1.1 in \cite{DM2018}, we can rewrite \eqref{VAL2} in a non-recursive form as
 	\begin{align}\label{VALnonrecur}
 	\begin{split}
-	W_A(t,S)&=E_t^{(t,S,1)}\Bigg[\sum_{\zeta_i\ge t}e^{-R(\zeta_i-t)}Y_{\zeta_i-}(RT+g(S_{\zeta-}))+\sum_{\tau_i\ge t}e^{-R(\tau_i-t)}Y_{\tau_i-}rv_{\tau_i-}\\
+	W_A(t,S)&=E_t^{(t,S,1)}\Bigg[\sum_{\zeta_i\ge t}e^{-R(\zeta_i-t)}Y_{\zeta_i-}RT+\sum_{\tau_i\ge t}e^{-R(\tau_i-t)}Y_{\tau_i-}rv_{\tau_i-}\\
 	&\quad+\sum_{\eta_i\ge t}e^{-R(\eta_i-t)}Y_{\eta_i-}(rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg],
 	\end{split}
 	\end{align}
@@ -767,7 +789,7 @@ We propose an iterative algorithm to obtain a numerical solution of the periodic
 \item \textit{For $i=1,2,\cdots$: Given $W_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$, the solution to the equation
 \begin{align*}
 -\frac{\partial W_{A}}{\partial t}= & \frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+r S\frac{\partial W_{A}}{\partial S}-r W_{A} &  & 0\le t<T,H_{d}(t)<S<H_{u}(t)\\
-W_{A}(1,S)= & RT+g(S)+(1-g(S))W_{A}^{(i-1)}(0,1) &  & H_{d}(t)<S<H_{u}(t)\\
+W_{A}(1,S)= & RT+W_{A}^{(i-1)}(0,S-\frac{1}{2}RT) &  & H_{d}(t)<S<H_{u}(t)\\
 W_{A}(t,H_{u}(t))= & Rt+W_{A}^{(i-1)}(0,1) &  & 0\le t\le T\\
 W_{A}(t,H_{d}(t))= & Rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}^{(i-1)}(0,1) &  & 0\le t\le T.
 \end{align*}
