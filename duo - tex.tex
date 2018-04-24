@@ -1,48 +1,66 @@
-\documentclass[final,pdftex]{ectaart}
-% \usepackage[T1]{fontenc}
-%\usepackage[latin9]{inputenc}
-% \usepackage[a4paper]{geometry}
-% \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in,headheight=1in,headsep=0.3in,footskip=0.8in}
-% \setcounter{tocdepth}{2}
-% \setlength{\parskip}{\bigskipamount}
-% \setlength{\parindent}{0pt}
-\RequirePackage[OT1]{fontenc}
-\RequirePackage{amsthm,amssymb}
-\RequirePackage[cmex10]{amsmath}
-\RequirePackage{natbib}
-\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
-\RequirePackage{hypernat}
-% \usepackage{babel}
+%\documentclass[final]{ectaart}
+\documentclass[draft, noinfoline]{ectaart}
+%draft = [12pt, titlepage, doublespacing, linenumbers, infoline];
+
+\usepackage{color}
+%\usepackage{pifont}
+\usepackage{epsfig}
+%\usepackage{stmaryrd}
+%\usepackage{latexsym}
+\usepackage{appendix}
+\usepackage{epstopdf}
+\usepackage{amsmath,amsfonts,amssymb,amscd,amsthm,mathrsfs,natbib,tabularx}
+\usepackage{enumerate}
+%\usepackage{lscape}
+\usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{float}
-\usepackage{booktabs,tabularx}
-% \usepackage{cite}
-\usepackage[shortlabels]{enumitem}
-\usepackage{graphicx,xspace}
-% \usepackage[unicode=true]{hyperref}
-\usepackage[titletoc,title]{appendix}
+
+
+%% load additional packages:
+\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+
+% use this package if hyperref and natbib is used:
+
+%\RequirePackage{hypernat}
+
+\startlocaldefs
+
+% \usepackage{babel}
+% \usepackage{float}
+% \usepackage{booktabs,tabularx}
+% % \usepackage{cite}
+% \usepackage[shortlabels]{enumitem}
+% \usepackage{graphicx,xspace}
+% % \usepackage[unicode=true]{hyperref}
+% \usepackage[titletoc,title]{appendix}
+%\usepackage{natbib}
+
 \usepackage[font=scriptsize]{caption}
-% \usepackage{showframe} 
+
+
+% \usepackage{showframe}
 % \PassOptionsToPackage{unicode}{hyperref}
 
 \graphicspath{{./figures/}}
 
-\makeatletter
+% \makeatletter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
 %% Special footnote code from the package 'stblftnt.sty'
 %% Author: Robin Fairbairns -- Last revised Dec 13 1996
 % \newcommand\citess[1]{\textsuperscript{[#1]}}
 
-\startlocaldefs
+%\startlocaldefs
 %% Self-defined macros
-\newcommand{\Ap}{A\ensuremath{^\prime}\xspace}
-\newcommand{\Bp}{B\ensuremath{^\prime}\xspace}
-\newcommand{\der}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
-\newcommand{\dder}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+
+\numberwithin{equation}{section}
 \theoremstyle{plain}
-\makeatother
+
+% \makeatother
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{assumption}{Assumption}
@@ -54,6 +72,13 @@
 
 \newtheorem{algorithm}{Algorithm}
 
+
+\newcommand{\Ap}{A\ensuremath{^\prime}~}
+\newcommand{\Bp}{B\ensuremath{^\prime}~}
+\newcommand{\der}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dder}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}}
+
+
 \endlocaldefs
 
 \begin{document}
@@ -61,33 +86,47 @@
 \begin{frontmatter}
 
 \title{Designing Stable Coins}
+%\runtitle{Designing Stable Coins}
 
-% \begin{aug}
-% \author{\fnms{Yizhou} \snm{Cao}\thanksref{t1}\ead[label=e1]{yizhou.cao@finbook.co}}
-% \author{\fnms{Min} \snm{Dai}\ead[label=e2]{matdm@nus.edu.sg}}
-% \author{\fnms{Steven} \snm{Kou}}\ead[label=e3]{matsteve@nus.edu.sg}
-% \author{\fnms{Lewei} \snm{Li}\ead[label=e4]{lewei.li@finbook.co}}
-% \author{\fnms{Chen} \snm{Yang}\ead[label=e5]{chen.yang@math.ethz.ch}}
+\begin{aug}
+\author{\fnms{Yizhou} \snm{Cao}\thanksref{t1}\ead[label=e1]{yizhou.cao@finbook.co}}
+\author{\fnms{Min} \snm{Dai}\thanksref{t2}\ead[label=e2]{matdm@nus.edu.sg}}
+\author{\fnms{Steven} \snm{Kou}}\thanksref{t3}\ead[label=e3]{matsteve@nus.edu.sg}
+\author{\fnms{Lewei} \snm{Li}\thanksref{t4}\ead[label=e4]{lewei.li@finbook.co}}
+\author{\fnms{Chen} \snm{Yang}\thanksref{t5}\ead[label=e5]{chen.yang@math.ethz.ch}}
 
-% \thankstext{t1}{FinBook, Singapore\\ \printead{e1}}
-% \thankstext{t2}{Risk Management Institute and Department of Mathematics, National University of Singapore\\ \printead{e2}}
-% \thankstext{t3}{Risk Management Institute and Department of Mathematics, National University of Singapore\\ \printead{e3}}
-% \thankstext{t4}{FinBook, Singapore\\ \printead{e4}}
-% \thankstext{t5}{Department of Mathematics, ETH Zurich\\\printead{e5}}
+
+%\runauthor{Cao, Dai, Kou, Li and Yang}
+
+\thankstext{t1}{FinBook, Singapore, \printead{e1}}
+
+\thankstext{t2}{Risk Management Institute and Department of Mathematics, National University of Singapore, \printead{e2}}
+
+\thankstext{t3}{Risk Management Institute and Department of Mathematics, National University of Singapore, \printead{e3}}
+
+\thankstext{t4}{FinBook, Singapore, \printead{e4}}
+
+\thankstext{t5}{Department of Mathematics, ETH Zurich, \printead{e5}}
 
 % \address{FinBook, Singapore\\\printead{e1,e4}}
 % \address{Risk Management Institute and Department of Mathematics, National University of Singapore\\\printead{e2,e3}}
 % \address{Department of Mathematics, ETH Zurich\\\printead{e5}}
-% \end{aug}
+\end{aug}
 
-\author{Yizhou CAO\thanks{\textit{Email}: \protect\href{mailto:yizhou.cao@finbook.co}{yizhou.cao@finbook.co},
-FinBook, Singapore}, Min DAI\thanks{\textit{Email}: \protect\href{mailto:matdm@nus.edu.sg}{matdm@nus.edu.sg}, Risk Management Institute and Department of Mathematics, National University of Singapore}, Steven KOU\thanks{\textit{Email}: \protect\href{mailto:matsteve@nus.edu.sg}{matsteve@nus.edu.sg}, Risk Management Institute and Department of Mathematics, National University of Singapore}, Lewei LI\thanks{\textit{Email}: \protect\href{mailto:lewei.li@finbook.co}{lewei.li@finbook.co}, FinBook, Singapore}, Chen YANG\thanks{\textit{Email}: \protect\href{mailto:chen.yang@math.ethz.ch}{chen.yang@math.ethz.ch}, Department of Mathematics, ETH Zurich}}
+% \author{Yizhou CAO\thanks{\textit{Email}: \protect\href{mailto:yizhou.cao@finbook.co}{yizhou.cao@finbook.co},
+% FinBook, Singapore}, Min DAI\thanks{\textit{Email}: \protect\href{mailto:matdm@nus.edu.sg}{matdm@nus.edu.sg}, Risk Management Institute and Department of Mathematics, National University of Singapore}, Steven KOU\thanks{\textit{Email}: \protect\href{mailto:matsteve@nus.edu.sg}{matsteve@nus.edu.sg}, Risk Management Institute and Department of Mathematics, National University of Singapore}, Lewei LI\thanks{\textit{Email}: \protect\href{mailto:lewei.li@finbook.co}{lewei.li@finbook.co}, FinBook, Singapore}, Chen YANG\thanks{\textit{Email}: \protect\href{mailto:chen.yang@math.ethz.ch}{chen.yang@math.ethz.ch}, Department of Mathematics, ETH Zurich}}
 
-\date{\today}
+
 
 % \maketitle
 \begin{abstract}
-Stable coins, which are cryptocurrencies pegged to other stable financial assets, are desirable for blockchain networks to be used as public accounting ledgers for payment transactions  and as crypto money market accounts for asset allocation involving cryptocurrencies, whereby being often called the ``Holy Grail of cryptocurrency.'' However, existing cryptocurrencies, such as Bitcoins, are too volatile for these purposes. Inspired by the dual purpose funds popular in the US and China, we design, for the first time to our best knowledge, several dual-class structures that offer entitlements to either fixed income stable coins (class A funds) pegged to a traditional currency or leveraged investment opportunities (class B funds). Unlike traditional currencies, the new class A funds record all transactions on a blockchain without centralized counterparties. By using the option pricing theory, we show that proposed stable coins indeed have very low volatility. Indeed, the class A coin has a volatility comparable to that of the exchange rate of world currencies against U.S. dollar, and the class \Ap coin essentially is pegged to U.S. dollar. When combined with insurance from a government, the design can also serve as a basis for issuing a sovereign cryptocurrency. 
+Stable coins, which are cryptocurrencies pegged to other stable financial assets such as U.S. dollar, are desirable for blockchain networks to be used as public accounting ledgers for payment transactions  and as crypto money market accounts for asset allocation involving cryptocurrencies, whereby being often called the ``Holy Grail of cryptocurrency.'' However, existing cryptocurrencies, such as Bitcoins, are too volatile for these purposes. By using the option pricing theory and inspired by the dual purpose funds popular in the US and China, we design several dual-class structures that offer either fixed income stable coins (class A coins) pegged to a traditional currency or leveraged investment instruments (class B coins). Unlike traditional currencies, the new class A coins record all transactions on a blockchain without centralized counterparties.  We show that
+%proposed stable coins indeed have very low volatility. More precisely,
+the class A coin has a volatility comparable to that of the average exchange rate of world currencies against U.S. dollar, and the class \Ap coin is essentially pegged to U.S. dollar. When combined with insurance from a government, the design can also serve as a basis for issuing a sovereign cryptocurrency.
+
+JEL Codes: G10, O30, E40
+
+
 \end{abstract}
 
 \begin{keyword}
@@ -96,7 +135,7 @@ stable coins, fixed income crypto asset, leveraged return crypto asset, smart co
 
 \end{frontmatter}
 
-\clearpage
+%\clearpage
 
 \section{Introduction}
 %\begin{flushright}
@@ -108,20 +147,58 @@ stable coins, fixed income crypto asset, leveraged return crypto asset, smart co
 %{\small{}\textendash{} }\emph{\small{}Niccolo Machiavelli: The Prince}
 %\par\end{flushright}{\small \par}
 
-Cryptocurrencies, such as Bitcoin and Ethereum (ETH), are distributed payment systems. They have three important features in common. First, they are a peer-to-peer network, that is, payment from one user to another is processed without any intermediary. Second, they use the Blockchain technology, such that all transaction records are stored by every user. Third, they allow anonymous payment. Anonymous transaction orders are recorded to Blockchain, after miners' verification, and updated to all users immediately. 
 
-One major characteristic of cryptocurrencies is their extreme volatility. For instance, the ETH/USD price from October 1, 2017 to February 28, 2018 is shown in Figure \ref{fig:ethprice}. During this period, ETH/USD price has an annualized return volatility of 120\%, which is more than 9 times that of S\&P 500 during the same period (13\%). This extremely large volatility means that cryptocurrencies like ETH are not a reliable store of value. It is risky to hold the currency even for a single day due to this fluctuation, the potential cost to retailers can be much higher than that for credit card (3\% usually). This means that, even if retailers accept cryptocurrencies for payment, they need to change it immediately into traditional currency to avoid risk.
+How to create a digital currency was a long-standing open problem for many years, due to two main challenges: First, as people can easily copy music and movie files, how to prevent people from copying digital currency token electronically? Secondly, how to avoid the double spending problem in which a single digital currency token can be spent more than once to settle liabilities. A revolution in FinTech was that the two problems can be solved by using blockchains.
 
-% Since their inception, crypto currencies aim to create an alternative financial system comparable to fiat financial systems. In a fiat system, money or credit exists in a few different forms: actual currency in circulation and fixed income assets such as time deposits and money market funds, which are the foundation for the rest of the financial market to build on. The crypto market is at primitive stage as it lacks coins or tokens comparable to fiat money due to their huge price volatility,  and thus there are no established fixed income assets either. However, currently the crypto market is at primitive stage as it lacks coins or tokens comparable to fiat money due to their huge price volatility, and thus there are no established fixed income assets either.
+A blockchain is a decentralized (peer to peer) and distributed network that is used to record, after miners' verification, all transactions which can be viewed by every users, thus allowing people to verify and audit transactions in a transparent and inexpensive way. The records cannot be easily altered retroactively\footnote{In fact, any alternation of the records will trigger the alteration of all subsequent blocks, and unless there is a collusion of majority users of the network, it is impossible to change the records.}. Furthermore, a blockchain confirms with very high probability that each unit of value was transferred only once, solving the  double spending problem without a trusted authority\footnote{Even if an attacker has 10\% success probability of finding the next block, in the standard 6 block verification scheme, the chance of the attacker will ever be successful in double spending is only about 0.0005914. Note that the calculation 0.0002428 in \cite{nakamoto_bitcoin:_2008} was wrong and was corrected in a recent paper by \cite{Grunspan_2018}.}. The first blockchain was conceptualized in \cite{nakamoto_bitcoin:_2008}, and was implemented in 2009 as the core component of the first cryptocurrency, Bitcoin.
 
-A Stable Token, also known as stablecoin, is a crypto-token that keeps stable market value against a specific index, most noticeably US Dollar. Stable coins are needed since they can be used within the Blockchain to settle payments, in crypto money market accounts, or by miners who may find that it is difficult to convert the mined coins into traditional currencies in some countries. However, the existing cryptocurrencies are too volatile to be served as stable coins. 
+Another breakthrough came in late 2013 when Vitalik Buterin extends the idea of Bitcoin to create the Ethereum platform on which people can write smart contracts. This is a very important technology advance, as many types of clerk works, such as public notary, import and export paper works, certain legal and accounting documentations, can be
+programmed as smart contracts which can be tracked and executed automatically on the Ethereum platform. The cryptocurrency generated and circulated on the Ethereum platform is Ether (with the trading symbol ETH).
 
-\begin{figure}[h]
+Currently, there are hundreds, if not thousands, crytocurrencies traded in exchanges. Some of them are based on public blockchains, such as Bitcoin and Ether, and others on private blockchains, such as Ripple. In fact, one can buy crytocurrencies from online exchanges or at ATM machines worldwide, just like buying standard financial securities or foreign currencies.  All cryptocurrencies share three important features. First, a payment from one user to another is processed in a decentralized way without any intermediary. Second, all transaction records are stored in the networks and can be viewed by every user. Third, they allow anonymous payments.
+
+%Smart Contract was first proposed by Nick Szabo in 1994, who described it as \textquotedblleft a set of promises, specified in digital form, including protocols within which the parties perform on these promises\textquotedblright .
+
+% The idea has not received commercial adoption due to lack of trustworthy execution environment, until the appearance of blockchain technology. Released in 2015, Ethereum implements a nearly Turing-complete language on its blockchain, a prominent smart contract framework. The Ethereum white paper describes smart contracts as \textquotedblleft cryptographic boxes contain value and only unlock it if certain conditions are met". It also lists financial derivatives as the most common application of a smart contract, and introduces a rough idea about creating stable-value currencies through a hedging contract \cite{ETH}.
+
+
+This paper attempts to design stable coins, which are cryptocurrencies pegged to other stable financial assets such as U.S. dollars, by using concepts from the option pricing theory.  Stable coins are desirable to be used as public accounting ledgers for payment transactions within  blockchain networks, and as crypto money market accounts for asset allocation involving cryptocurrencies.
+
+
+\subsection{Stable Coins}
+
+One major characteristic (or drawback) of cryptocurrencies is their extreme volatility.
+Figure \ref{fig:ethprice} illustrates the price of Ether in U.S. dollars, ETH/USD, from October 1, 2017 to February 28, 2018. During this period, ETH/USD has an annualized return volatility of 120\%, which is more than 9 times that of S\&P 500 during the same period (13\%).
+
+
+
+
+
+\begin{figure}[!htb]
 \begin{centering}
 \includegraphics[width=0.95\textwidth]{eth_price}
 \par\end{centering}
 \caption{ETH/USD Price from 1 Oct 2017 to 28 Feb 2018}\label{fig:ethprice}
 \end{figure}
+
+
+The extremely large volatility means that a cryptocurrency like ETH cannot be used as a reliable means to store value. It is risky to hold the currency even for a single day due to this fluctuation. Even if retailers accept cryptocurrencies for payments, they may have to exchange it immediately into traditional currencies to avoid risk.
+
+
+% Since their inception, crypto currencies aim to create an alternative financial system comparable to fiat financial systems. In a fiat system, money or credit exists in a few different forms: actual currency in circulation and fixed income assets such as time deposits and money market funds, which are the foundation for the rest of the financial market to build on. The crypto market is at primitive stage as it lacks coins or tokens comparable to fiat money due to their huge price volatility,  and thus there are no established fixed income assets either. However, currently the crypto market is at primitive stage as it lacks coins or tokens comparable to fiat money due to their huge price volatility, and thus there are no established fixed income assets either.
+
+A stable coin, is a crypto coin that keeps stable market value against a specific index or asset, most noticeably U.S. dollar. Stable coins are desirable for at least three reasons:
+\begin{itemize}
+\item They can be used within blockchain systems to settle payments. For example, a lawyer and an accountant can exchange their stable coins generated by smart contracts automatically for the services they provide within the system, without being bothered by the exchange fees from a cryptocurrency to U.S. dollar, which can range from 0.7\% to 5\%.
+\item  They can be used to form crypto money market accounts, for the purpose of doing asset allocation for hundreds cryptocurrencies.
+\item They can be used by miners or other people who provide essential services to maintain blockchain systems to store values, as it may be difficult and expensive to convert mined coins into traditional currencies.
+\end{itemize}
+However, as we can see, existing cryptocurrencies are too volatile to be served as stable coins.
+In fact, how to create a good stable coin is called the ``Holy Grail of Cryptocurrency'' in the media (Forbes, March 12, 2018,
+Sydney Morning Herald, Feb 22, 2018, Yahoo Finance, Oct 14, 2017)
+
+
+
 
 
 % Tether claims to have 1:1 USD collateral in its centralized bank accounts \cite{USDT}; Basecoin tries to control money supply by playing an algorithmic version of central bank \cite{Basecoin}; MakerDAO uses decentralized over-collateralization to maintain confidence of its Dai stablecoin \cite{MAKERDAO}.
@@ -130,10 +207,32 @@ A Stable Token, also known as stablecoin, is a crypto-token that keeps stable ma
 % Most stable token designs to date face a common problem: their holders bear variable levels of counter-party risks, but there is little incentive or even additional cost to hold these tokens. We believe a crypto-token with low price volatility and stable income is a superior safe haven asset and is essential for a more robust crypto market.
 
 
-Inspired by the dual purpose funds popular in the U.S. and China, we design, for the first time to our best knowledge, several dual-class structures that offer entitlements to either fixed income stable coins (Class A coins) pegged to a traditional currency or leveraged investment opportunities (Class B coins). Due to downward resets, a vanilla A coin behaves like a corporate bond with the collateral amount being reset automatically. To reduce volatility, the vanilla A coin can be further split into additional coins, \Ap and \Bp or A0 and A1. Unlike traditional currencies, these new class A coins record all transactions on a blockchain without centralized counter parties. By using the option pricing theory, we show that proposed stable coins indeed have very low volatility; indeed the volatility of class \Ap coin is so low that it is essentially pegged to the U.S. dollar.
-Table \ref{tbl:volcomp} reports the volatility of ETH, S\&P 500 index, Gold price, U.S. Dollar index, class A and \Ap coins. 
+There are four existing types of issuance of stable coins. The first type is the issuance backed by accounts in real assets such as U.S. dollars, gold, oil, etc. More precisely, these stable coins represent claims on the underlying assets. For example, Tether coin is claimed to be backed by USD, with the conversion rate  1 Tether to 1 USD (see \cite{tether_tether:_2016}). However, it is very difficult to verify the claim that Tether has enough reserve in U.S. dollar, especially on daily basis\footnote{
+In fact, U.S. regulators issued a subpoena to Tether on December 6, 2017, on whether \$2.3 billion of the tokers outstanding are backed by U.S. dollars held in reserve (Bloomberg news, January 31, 2018).}.
+%In fact
+%has a major disadvantage: the total assets is about \$62.46 million, but the total liabilities is \$63.014 million, with a negative equity more than half million.
+There are other tokens claimed to link to gold (e.g. Digix, GoldMint, Royal Mint Gold, OzCoinGold, and ONEGRAM), although the claims are also hard to verify. Recently in February 2018, the government of Venezuela issued Petro, a cryptocurrency claimed to be backed by one barrel of oil.
 
-\begin{table}[htb]
+The second type is the issuance backed by over-collateralized cryptocurrencies with automatic exogenous liquidation. For example, one can generate \$100 worth of stable coins by depositing \$150 worth of Ether. The collateral will be sold automatically by a smart contract, if the Ether price reaches \$110. Examples of this type include tokens issued by BitShares and MakerDAO.
+
+The third type is the seigniorage shares system, which has automatic adjustment of the quantity of coin supply: When the coin price is too low, new coins are issued; when the coin price is too high, bonds are issued to remove tokens from circulation. A typical example of this type is Basecoin (see \cite{al-naji_basecoin:_2018}). However, the difficulty of maintaining the right balance of supply and demand of a stable coin is at the same level of difficulty faced by a central bank issuing fiat currency.
+
+The last type is government-backed stable coins. Besides Venezuela, other countries are considering issuing cryptocurrencies, including Russia and China. For instance, Canadian government also did Project Jasper involving the ``CAD-coin'', in which a Blockchain network is built for domestic interbank payment settlements. There is a virtual currency working group under the Federal Reserve System in U.S., which uses the ``Fedcoin'' internally. As commented by \cite{garratt_cad-coin_2016}, ``The goal is to create a stable (less price volatility) and dependable cryptocurrency that delivers the practical advantages of Bitcoin even if this means involving the central government and abandoning the Libertarian principles that many believe underlay Bitcoin's creation.''
+
+There are several advantages of issuing stable coins by governments. They are cheaper to produce than the cash in bills or coins, and stable coins are never worn out. They can be tracked and taxed automatically by the blockchain technology. They can facilitate statistical works, such as GDP calculation and collecting consumer data. Furthermore, they can simplify legal money transfers inside and outside blockchains. Finally, as pointed out by \cite{bech_central_2017}, the main benefit of a retail central bank backed cryptocurrency is that it would have the potential to provide the anonymity of cash. The first countries that adopt stable coins will likely see the inflow of money from people who want stable currencies on blockchains.
+
+However, a main drawback of issuing stable coins purely by governments is the cost. More precisely, does a government have enough expertise in maintaining a computer system, is a government willing to put enough reserve to back up a stable coin fully, and  how does a government control supply and demand of a stable coin in a global anonymous blockchain network (which can be quite different from a fiat currency network)?
+
+
+
+\subsection{Our Contribution}
+
+To our best knowledge, we are the first to use the option pricing theory to design several dual-class structures that offer entitlements to either fixed income stable coins (Class A coins) pegged to a traditional currency or leveraged investment opportunities (Class B coins).  The design is inspired by the dual purpose funds popular in the U.S. and China. More precisely, due to downward resets, a vanilla A coin behaves like a bond with the collateral amount being reset automatically. To reduce volatility, the vanilla A coin can be further split into additional coins, \Ap and \Bp. Unlike traditional currencies, these new class A coins record all transactions on a blockchain without centralized counterparties.
+
+We show that the proposed stable coins have very low volatility; indeed the volatility of class \Ap coin is so low that it is essentially pegged to the U.S. dollar.
+Table \ref{tbl:volcomp} reports the volatility of ETH, S\&P 500 index, Gold price, U.S. Dollar index, class A and \Ap coins.
+
+\begin{table}[!htb]
 	\footnotesize
 	\centering
 	\caption{Annualized Volatility of Our Stable Coins versus Common Market Indices}\label{tbl:volcomp}
@@ -144,9 +243,22 @@ Table \ref{tbl:volcomp} reports the volatility of ETH, S\&P 500 index, Gold pric
 	\bottomrule
 	\end{tabular}
 	\vspace{0.5em}
-	\par\flushleft\footnotesize Annualized volatility is calculated during the sample period 1 Oct 2017 to 28 Feb 2018.
+	\par\flushleft\footnotesize Annualized volatility is calculated from 1 Oct 2017 to 28 Feb 2018.
 \end{table}
 
+
+The design of stable coins can be used alone in most cases, except in the case of Black Swan events, when the underlying cryptocurrency suddenly drops close to zero within an extremely short time period\footnote{The intuition here is similar to that of the risk of the top tranche of a CDO contract. If the correlations of all firms covered within the CDO are close to 1, then one firm defaults leads to almost all other firms default, resulting in a significant drop of the top tranche value.}. Therefore, to be truly stable, stable coins need a guarantee in the Black Swan events.
+
+
+
+
+A policy implication of this paper is that a public-private partnership may be formed to issue a stable coin backed by a government. More precisely, by designing a set of stable coins using the option pricing theory via private market forces, the government only needs to back up a stable coin in extreme cases of Black swan events, just like what the U.S. government does for the FDIC insurance for private money market accounts in U.S.
+
+
+%When combined with insurance from a government, similar to FDIC insurance, our design can also serve as a basis for issuing a sovereign cryptocurrency via a private-public partnership. By doing so, the government can let the private sector do the job of issuing stable coins, except to provide insurance in rare cases, saving government human and financial resources.
+
+
+\subsection{Literature Review}
 
 Although our design of stable coins is inspired by dual-purpose funds, it is different from dual-purpose funds in U.S. and China in the aspects shown in Panel A of Table \ref{tbl:difference}. These differences require a more delicate modeling method, which is summarized in Panel B of Table \ref{tbl:difference}.
 
@@ -161,7 +273,7 @@ Although our design of stable coins is inspired by dual-purpose funds, it is dif
 		& \begin{tabular}{@{}c@{}}Payment Style\\ of A Share\end{tabular} & \begin{tabular}{@{}c@{}}Payment Style\\ of B Share\end{tabular} & \begin{tabular}{@{}c@{}}Leverage\\ Ratio\\ Reset\end{tabular} & Lifespan & \begin{tabular}{@{}c@{}}Reference\\ Asset\end{tabular} \\ \midrule
 	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in U.S.\end{tabular} & Dividend & \begin{tabular}{@{}c@{}}Single payment\\ at wind-up date\end{tabular}  & No & Finite & \begin{tabular}{@{}c@{}}Stock/\\ Stock Index\end{tabular}\\ \midrule
 	\begin{tabular}{@{}c@{}}Dual-Purpose\\ Fund in China\end{tabular} & Fixed Income &  \begin{tabular}{@{}c@{}c@{}}Payments affect \\  the underlying\\ asset but not\\ the exchange ratio\end{tabular} & Yes & Infinite & Stock Index\\ \midrule
-	\begin{tabular}{@{}c@{}}Our vanilla\\ A and B\end{tabular} & Fixed Income & \begin{tabular}{@{}c@{}c@{}}Payments affect \\ the exchange ratio 
+	\begin{tabular}{@{}c@{}}Our vanilla\\ A and B\end{tabular} & Fixed Income & \begin{tabular}{@{}c@{}c@{}}Payments affect \\ the exchange ratio
 	\\but not the \\underlying asset \end{tabular} & Yes & Infinite & \begin{tabular}{@{}c@{}}USD denominated\\ cryptocurrency\\ value\end{tabular}\\
 	\bottomrule \addlinespace[8pt]
 	\end{tabularx}
@@ -178,29 +290,20 @@ Although our design of stable coins is inspired by dual-purpose funds, it is dif
 	\par\flushleft\scriptsize The dual-purpose funds in U.S. include those studied in \cite{ingersoll_theoretical_1976} and the prime and scores studied in \cite{jarrow_primes_1989}.
 \end{table}
 
-The design of stable coins can be used alone in most cases, except in the case of Black Swan events, when the underlying cryptocurrency suddenly drops close to zero within an extremely short time period. This is like the top tranche of a CDO contract. If the correlation of all firms covered within the CDO are close to 1, then one firm defaults leads to almost all other firms default. Therefore, to be truly stable, stable coins need a guarantee in the Black Swan events. When combined with insurance from a government, similar to FDIC insurance, the design can also serve as a basis for issuing a sovereign cryptocurrency via a private-public partnership. By doing so, the government can let the private sector do the job of issuing stable coins, except to provide insurance in rare cases, saving government human and financial resources.
 
 
-\subsection{Pros and Cons of Cryptocurrencies}
+%\subsection{Pros and Cons of Cryptocurrencies}
 
-Using cryptocurrencies as a payment method has several benefits. First, as pointed out in \cite{harvey_cryptofinance_2016}, the core innovation of cryptocurrencies like Bitcoin is the ability to publicly verify ownership, instantly transfer the ownership, and to do that without any trusted intermediary. Therefore, cryptocurrencies reduce the cost of transferring ownership. Also, the blockchain technology makes the ledger easy to maintain, and it is robust to attackers. Indeed, the attacker needs to race with his CPU power against the whole system; if he fails behind in the beginning, the probability of his catching up diminishes exponentially as the race goes on (see \cite{nakamoto_bitcoin:_2008}). Furthermore, since the transaction is recorded to the blockchain anonymously, cryptocurrencies helps in protecting the privacy of their users. The underlying technology of cryptocurrencies may one day strengthen the menu of electronic payments options, while the use of paper currency is phased out (see \cite{rogoff_costs_2015}).
+There are many papers discussed pros and cons of cryptocurrencies.
+Using cryptocurrencies as a payment method has several benefits. First, as pointed out in \cite{harvey_cryptofinance_2016}, the core innovation of cryptocurrencies like Bitcoin is the ability to publicly verify ownership, instantly transfer the ownership, and to do that without any trusted intermediary. Therefore, cryptocurrencies reduce the cost of transferring ownership. Also, the blockchain technology makes the ledger easy to maintain, and it is robust against attackers. Indeed, an attacker needs to race with his CPU power against the whole system; if he fails behind in the beginning, the probability of his catching up diminishes exponentially as the race goes on (see \cite{nakamoto_bitcoin:_2008} and  \cite{Grunspan_2018}). Furthermore, since the transaction is recorded to the blockchain anonymously, cryptocurrencies help in protecting the privacy of their users. The underlying technology of cryptocurrencies may one day strengthen the menu of electronic payments options, while the use of paper currency is phased out (see \cite{rogoff_costs_2015}).
 
 However, there are also some criticisms of cryptocurrencies. First, a payment system with cryptocurrencies lacks a key feature: the confidence that one can get his money back if he is not satisfied with the goods he purchased. As pointed out in \cite{grinberg_bitcoin:_2011}, Bitcoin is unlikely to play an important role in the traditional e-commerce market, since consumers typically do not care about the anonymity that Bitcoin provides; instead, they prefer a currency they are familiar with for most goods and services, and they want fraud protection.  Second, unlike government-backed systems, Bitcoin does not have identity verification, audit standards, or an investigation system in case something bad happens. For instance, one may lose all his deposit in cryptocurrencies should his password get stolen, and there is no remedy. Furthermore, Blockchain systems are not as trustworthy as they seem to be. Without an intermediate, individuals are responsible for their own security precautions. Finally, the value of cryptocurrencies like Bitcoin is hard to pin down. By considering the equilibrium in the case where Bitcoin is the only currency in the economy and the case with two currencies, \cite{garratt_bitcoin_2018} found that the value of Bitcoin lies upon self-fulfilling beliefs, and the set of beliefs that can be self-fulfilling needs to be huge.
 
+Here we want to point out that despite significant drawbacks of cryptocurrencies, the blockchain technologies are here to stay. Because blockchain technologies automatically generate cryptocurrencies for the purpose of crediting essential services to the system (such as the verification services provided by miners), and of exchanging credits for services, cryptocurrencies will not disappear. Therefore, designing suitable stable coins is essential for the blockchain system to perform financial functions efficiently and for doing asset allocation across different cryptocurrencies generated by different blockchain systems. In this regard, governments can provide an essential role in helping design a better financial ecosystem of blockchains.
 
-\subsection{Existing Stable Coins}
+The rest of paper is organized as follows. The design of stable coins is presented in Section 2, while the valuation of these coins is given in Section 3. Numerical examples are given in Section 4. Further design details and extension of A0 and A1 coins are given in appendices, along with technical theorems and propositions.
 
-There have been three types of issuance to create stable tokens. The first type is issuance backed by accounts in cash, gold, oil, etc. One has certain assets and issues tokens that represent a claim on the underlying asset. The most famous one is Tether, which 100\% backed by USD. The conversion rate is 1 tether USDT equals 1 USD (see \cite{tether_tether:_2016}). However, Tether has a major disadvantage: the total assets is about \$62.46 million, but the total liabilities is \$63.014 million, with a negative equity more than half million. There are other tokens claimed to link to gold, e.g. Digix, GoldMint, Royal Mint Gold, OzCoinGold, and ONEGRAM, although the claims are hard to verify. Recently in February 2018, the government of Venezuela issued Petro, a cryptocurrency backed by one barrel of oil.
 
-The second type is issuance backed by over-collateralized cryptocurrencies with automatic exogenous liquidation. For example, one can generate \$100 worth of stable coins by depositing \$150 worth of Ether. The collateral will be sold automatically by the smart contract, if the Ether price reaches \$110. Examples of this type include tokens issued by BitShares and MakerDAO.
-
-The third type is seigniorage shares, which has automatic adjustment of the quantity of coin supply: when the price is too high, new coins are issued; when the price is too low, bonds are issued to remove coins from circulation. Typical example of this type include Basecoin (see \cite{al-naji_basecoin:_2018}, etc.
-
-\subsection{Government-backed Stable Coins}
-
-Besides Venezuela, other countries are considering issuing cryptocurrencies, including Russia and China. For instance, Canadian government also did ``Project Jasper'' involving the asset CAD-coin, in which a Blockchain network is built for domestic interbank payments settlement. Also, there is a virtual currency working group under the Federal Reserve System in U.S, which uses the Fedcoin internally. As commented by \cite{garratt_cad-coin_2016}, ``The goal is to create a stable (less price volatility) and dependable cryptocurrency that delivers the practical advantages of Bitcoin even if this means involving the central government and abandoning the Libertarian principles that many believe underlay Bitcoin's creation.''.
-
-There are several advantages of issuing stable coins by governments. They are cheaper to produce than the cash in bills or coins, and stable coins are never worn out. They can be tracked and taxed automatically by the Blockchain technology. Also, they can facilitate statistical works, such as GDP calculation and collecting consumer data. Furthermore, they can simplify legal money transfers inside and outside Blockchains. Finally, as pointed out by \cite{bech_central_2017}, the main benefit of a consumer-facing retail central bank backed cryptocurrency is that it would have the potential to provide the anonymity of cash. The first countries that adapt stable coins will likely see the inflow of money from people who want stable currencies on Blockchains.
 
 
 % \subsection{Risk Segmentation}
@@ -223,9 +326,6 @@ There are several advantages of issuing stable coins by governments. They are ch
 
 % \subsection{Smart Contract}
 
-% Smart Contract was first proposed by Nick Szabo in 1994, who described it as \textquotedblleft a set of promises, specified in digital form, including protocols within which the parties perform on these promises\textquotedblright .
-
-% The idea has not received commercial adoption due to lack of trustworthy execution environment, until the appearance of blockchain technology. Released in 2015, Ethereum implements a nearly Turing-complete language on its blockchain, a prominent smart contract framework. The Ethereum white paper describes smart contracts as \textquotedblleft cryptographic boxes contain value and only unlock it if certain conditions are met". It also lists financial derivatives as the most common application of a smart contract, and introduces a rough idea about creating stable-value currencies through a hedging contract \cite{ETH}.
 
 % Up until now, the most popular stablecoin solution has been issuer-backed assets. And it is almost a market consensus that such issuers are not always trustworthy. We agree with Ethereum authors' argument that, a decentralized market of speculators and arbitragers powered by smart contract, could be an alternative solution.
 
@@ -238,90 +338,85 @@ There are several advantages of issuing stable coins by governments. They are ch
 %}\\
 %{\small{}\textendash{} }\emph{\small{}Albert Einstein}
 %\par\end{flushright}{\small \par}
-In this section, we introduce the detailed design of our stable coin, including its creation/redemption, its cash flow, and related arbitrage mechanism. We also point out several differences between the product and the dual-purpose funds.
+In this section, we introduce the detailed design of our stable coin, including its creation/redemption, its cash flow, and related arbitrage mechanism. We also point out several differences between the product and the dual-purpose funds in U.S. and in China.
 
 \subsection{Vanilla Class A and B Coins}\label{subsect:vanilla}
 
-Our stable coin has a dual-class split structure that, combined with smart contract governed rules and market arbitrage mechanism, provides principal-guaranteed fixed incomes and leveraged capital gains for holders of each class, respectively. The Class A Coin, also known as the Income Coin, continuously accumulates interests based on its original net value at last Reset event. It will also receive token payments at each Reset event. The Class B Coin, also known as the Leverage Coin, entitles leveraged participation of the underlying digital assets.
+Our stable coin has a dual-class split structure which, combined with smart contract rules and market arbitrage mechanism, provides the holders of each class with principal-guaranteed fixed incomes and leveraged capital gains, respectively. The Class A Coin behaves like a bond and receives periodical coupon payments. The Class B Coin entitles leveraged participation of the underlying cryptocurrency. Simply put, this split structure means that the holders of Class B coins borrow capital from the holders of Class A coins and invest in a volatile cryptocurrency. Furthermore, a set of upward and downward reset clauses is imposed, where downward resets reduce default risk of Class B to protect Class A, and upward resets ensure a minimum leverage ratio of Class B to make Class B attractive to leverage investors.
 
-Class A and B coins can be created by depositing underlying tokens to the Custodian contract.\footnote{The Custodian smart contract performs multiple tasks that facilitate key mechanism of the system, including: creation and redemption of the stable coin, safekeeping the underlying digital assets (e.g. ETH), calculation of tokens' net values, and execution of Reset events. The deposited underlying tokens are kept by the Custodian contract, as collateral of the Class A and Class B coins issued by the contract. Any user or member of the public can verify the collateral and tokens issued through third party applications such as \href{http://etherscan.io}{Etherscan.io}.} Upon receiving underlying tokens of amount $M_{C}$, the Custodian contract will return to the sender equal amount of Class A and Class B coins. Such amount $C$ can be calculated by
-\begin{equation}\label{eq:creation}
-C=\frac{M_{C}\cdot P_{0}\cdot\beta}{2},
-\end{equation}
-where $P_{0}$ is the recorded price of underlying token in USD at last contingent reset event, and $\beta$ is the conversion factor set as 1 at inception (its behaviour is detailed later). Also, holders of Class A and Class B tokens can withdraw deposited underlying tokens at any time by sending equal amount $C$ of Class A and Class B tokens to the Custodian contract. The contract will deduct Class A and Class B tokens, and return to the sender $M_{C}$ underlying tokens, where $M_{C}$ can be calculated by:
-\begin{equation}
-M_{C}=\frac{2C}{P_{0}\cdot\beta}\ .\label{eq:redemption}
-\end{equation}
-For instance, if the ETH/USD price is \$500 and $\beta=1$, then 2 shares of ETH can create 500 shares of Class A coins and Class B coins each, and 500 shares of Class A and B coins each can be redeemed into 2 shares of ETH. Figure \ref{fig:initial} illustrate this split structure.
+For illustration we choose ETH as the underlying cryptocurrency, and the initial leverage ratio is set to $2$. Class A and B coins can be created by depositing ETHs to the Custodian contract.\footnote{The Custodian smart contract performs multiple tasks that facilitate key mechanism of the system, including: creation and redemption of the stable coin, safekeeping the underlying digital assets (e.g. ETH), calculation of stable coins' net values, and execution of Reset events. The deposited underlying cryptocurrency is kept by the Custodian contract, as collateral of the Class A and Class B coins issued by the contract. Any user or member of the public can verify the collateral and coins issued through third party applications such as \href{http://etherscan.io}{Etherscan.io}.} Upon receiving two shares of underlying ETH at time $t$, the Custodian contract will return to the depositor $\beta_t P_0 $ of Class A and Class B coins each, where $P_{0}$ is the initial price of underlying ETH in USD at the inception of the coins ($t=0$), and $\beta_t$ is the time-$t$ conversion factor. Initially $\beta_0=1$, which means that two shares of ETH can initially exchange for $P_0$ shares of Class A and Class B each. The conversion factor $\beta_t$ changes only on upward/downward resets or coupon payout dates, and the change rule will be introduced later. To withdraw ETH at time $t$, holders of Class A and Class B coins can send, e.g., $\beta_t P_0$ shares of Class A and Class B coins each to the Custodian contract, then the contract will deduct the same amount of Class A and Class B coins, and return to the sender two ETHs.
+For instance, if the initial ETH/USD price is 500 and $\beta_t=1$, then two shares of ETH can create 500 shares of Class A coins and Class B coins each, and 500 shares of Class A and B coins each can be redeemed into two shares of ETH. Figure \ref{fig:initial} illustrates this split structure.
 
-\begin{figure}[hb]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{initial}
-	\caption{Class A and B, Initial Split. At the beginning, one share of Class A and B each invests \$1 in ETH. The ETH price is \$500, so two shares of ETH correspond to 500 shares of Class A coins and 500 shares of Class B coins. $\beta = 1$.}\label{fig:initial}
+	\caption{Class A and B, Initial Split. At time $t$, one share of Class A and B each invests \$1 in ETH. The initial ETH price is $P_0=\$500$, and the prevailing conversion factor $\beta_t=1$. So two shares of ETH exchange for 500 shares of Class A coins and 500 shares of Class B coins.}\label{fig:initial}
 \end{figure}
 
-The net values of Class A and B coins, $V_A$ and $V_B$, are defined as
+To describe the cash flow of Class A and B coins, we introduce the net asset dollar values of Class A and B coins, $V_A$ and $V_B$. Thanks to the exchange between ETH and Class A/B coins, the following parity relation holds at any time:
+\begin{eqnarray}
+\label{parity}
+V_{A}^{t}+V_{B}^{t}=\frac{2P_{t}}{\beta_tP_{0}}.
+\end{eqnarray}
+The net asset value of Class A coins at time $t$ is defined as 
 \begin{equation}
-\begin{array}{ll}
-V_{A}^{t}= & 1+R\cdot t,\\
-V_{B}^{t}= & 2\cdot\frac{P_{t}}{P_{0}\cdot\beta}-V_{A}^{t}\ ,
-\end{array}\label{eq:netvalue}
+V_{A}^{t}= 1+R\cdot v_t, \label{eq:netvalue}
 \end{equation}
-where $R$ is the \emph{daily} coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in USD. The net asset values are used to determine the cash flow of Class A and B.
+where $R$ is the \emph{daily} coupon rate, $v_t$ is the number of days from the inception, last reset, or regular payout date, and $P_{t}$ is the prevailing price of underlying ETH in USD.
 
-% \subsubsection{Implied Leverage Ratio}
-
-% Class B has the following leverage ratio:
-% $$
-% L_{B}^{t}  =\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{2}{V_{B}^{t}}.$$
-% Note that at inception or after contingent resets, above simply reduces to $L_{B}^{0}=2$.
+\subsubsection{Regular Payout}
+Assume regular coupons are paid every $T$ days. When $v_t$=T, i.e., $V_{A}^{t-}=1+RT$, a regular payout is triggered, then the holder of each Class A coin receives payment with dollar value $RT$,\footnote{Payments are made in the form of underlying ETH from the Custodian contract. For instance, upon regular payout, the holder of each Class A coin receives underlying ETH with amount $\frac{RT}{P_{t}}$.}
+ and the net asset value of Class A resets to \$1, namely, $V_{A}^{t+}=1$. Since no cash flow occurs for Class B coin upon regular payout, the net asset value of Class B remains unchanged, that is, $V_{B}^{t-}=V_{B}^{t+}$. Noting that the parity relation (\ref{parity}) always holds across regular payout, we deduce that the conversion factor $\beta$ experiences a jump upon regular payout:  $$\beta_{t+}=\frac{2P_{t}}{2P_{t}-\beta_{t-}P_{0} RT}\beta_{t-}.$$ For instance, assuming $R=0.02\%$ and $T=100$, a regular reset occurs and the prevailing ETH price drops to $P_t=\$450$, then Class A receives \$0.02 coupon payment, and the conversion ratio is reset to $\beta_{t+}=1.01$, which indicates that two shares of ETH can exchange for 505.62 shares of Class A and 505.62 shares of Class B after regular payout. This is illustrated in Figure \ref{fig:regular}.
 
 
-Next, we describe the cash flow of Class A and B coins. Simply put, the holders of Class B tokens borrow capital from the holders of Class A tokens and invest in a volatile asset (i.e. ETH), which leads the Class B token to possess a continuum of leverage ratios. To reduce risk of both classes, a set of upward and downward reset clauses is imposed. Resets preserve total value in the system.
-
-When a given time period (100 days) has passed from the last reset time, or equivalently, $V_{A}^{t}$ grows to upper limit $\mathcal{H}_{p}$, a regular payout is triggered. On a regular payout, the total amount of both classes token remain unchanged. The net asset value of Class A reset to 1 USD. Class A holder will receive payment with value $V_{A}^{t}-1$. The conversion factor $\beta_{t+}=\beta_t\cdot\frac{2P_{t}}{2P_{t}-P_{0}\cdot\beta_t\cdot\left(V_{A}^{t}-1\right)}$. For instance, 100 days after the creation, a regular reset occurs and Class A receives \$0.02 coupon payment (assuming $R=0.02\%$), as illustrated in Figure \ref{fig:regular}.
-
-\begin{figure}[h]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{periodic}
-	\caption{Class A and B, Regular Payout. After 100 days, the ETH price drops to \$450, so that total investment of one Class A coin and one Class B coin becomes \$1.8, within which \$1.02 belongs to Class A. A regular payout takes place, and Class A receives \$0.02 coupon payment. New exchange ratio: 2 shares of ETH now correspond to 505.62 ($=500\times\frac{2\times450}{2\times450-500*0.02}$) shares of Class A and 505.62 shares of Class B, yielding $\beta=1.01$.}\label{fig:regular}
+	\caption{Class A and B, Regular Payout. After 100 days, the ETH price drops to \$450, so that total investment of one Class A coin and one Class B coin becomes \$1.8, within which \$1.02 belongs to Class A. A regular payout takes place, and Class A receives \$0.02 coupon payment. New exchange ratio: 2 shares of ETH now correspond to 505.62 ($=500\times\frac{2\times450}{2\times450-500*0.02}$) shares of Class A and 505.62 shares of Class B, yielding $\beta_{t+}=1.01$.}\label{fig:regular}
 \end{figure}
 
-An upward reset is triggered when the Net Value of Class B token reaches the upper limit $\mathcal{H}_{u}$. On an upward reset, total amount of both classes token remains unchanged, net asset of both classes resets to 1 USD. Class A and B's holders will receive payments of value $V_{A}^{t}-1$ and $V_{B}^{t}-1$, respectively.\footnote{Payments to both classes are made in the form of underlying token from the Custodian contract. For instance, on upward reset, Class A and B receive underlying tokens with amount $\frac{V_{A}^{t}-1}{P_{t}}$ and $\frac{V_{B}^{t}-1}{P_{t}}$, respectively.} Conversion factor $\beta$ is reset to 1. For instance, as illustrated in Figure \ref{fig:upward}, after another 50 days, the Class B NAV grows to \$2, triggering an upward reset. Class A and B receive payments with amount \$0.01 and \$1, respectively.
+\subsubsection{Upward Reset}
+An upward reset is triggered when the net asset value of Class B coins reaches the predetermined upper bound, denoted by $\mathcal{H}_{u}$. On an upward reset time $t$, net asset value of both classes resets to 1 USD, Class A and B's holders will receive payments of value $V_{A}^{t}-1$ and $V_{B}^{t}-1\equiv \mathcal{H}_{u}$, respectively, and conversion factor $\beta$ is reset to $P_t/P_0$ so that after the upward reset two shares of ETH can exchange for $P_t$ share of class A and B. For instance, as illustrated in Figure \ref{fig:upward}, after another 50 days, the ETH price grows to \$760.95, so the net asset value of the Class B grows to $\mathcal{H}_{u}\equiv \$2$, triggering an upward reset. The holders of Class A and B receive payments with amount \$0.01 and \$1, respectively. Two shares of ETH now correspond to 760.95 shares of Class A and 760.95 shares of Class B, yielding $\beta_{t+}=1.52$.
 
-\begin{figure}[h]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{upward}
-	\caption{Class A and B, Upward Reset. After 50 days, the ETH price grows to \$760.95, and Class B NAV grows to \$2, triggering an upward reset. Class A NAV equals \$1.01, where \$0.01 is half-year accrued coupon. On this date, Class A receives \$0.01 coupon payment, and Class B receives \$1 dividend payment. New exchange ratio: 2 shares of ETH now correspond to 760.95 shares of Class A and 760.95 shares of Class B, yielding $\beta=1$. }\label{fig:upward}
+	\caption{Class A and B, Upward Reset. After 50 days, the ETH price grows to \$760.95, and Class B NAV grows to \$2, triggering an upward reset. Class A NAV equals \$1.01, where \$0.01 is half-year accrued coupon. On this date, Class A receives \$0.01 coupon payment, and Class B receives \$1 dividend payment. New exchange ratio: 2 shares of ETH now correspond to 760.95 shares of Class A and 760.95 shares of Class B, yielding $\beta_{t+}=760.95/500=1.52$. }\label{fig:upward}
 \end{figure}
 
-Finally, a Downward Reset is triggered when the net asset value of Class B coins reaches the lower limit $\mathcal{H}_{d}$. Similar to an Upward Reset, a Downward Reset restores the leverage ratio. By reducing leverage ratio and restoring net asset value, the structure strengthens principal protection to Class A holders. On a downward reset, each one share of both classes is reduced to $(V_{B}^t)^+$, where $x^+=\max\{x,0\}$ denotes the positive part. The net Value of both classes resets to 1 USD. Class A holders will receive $V_{A}^{t}-|V_{B}^{t}|$, and the conversion factor $\beta$ is reset to 1. Note that, under a black swan event such that $V_B^t<0$, both classes are fully liquidated, and the payment to Class A is lower than $V_A^t$, that is, Class A takes a loss. For instance, as illustrated in Figure \ref{fig:downward}, after another 50 days, Class B NAV drops to \$0.25, triggering a downward reset. Class A receives \$0.01 coupon payment and \$0.75 principal payback, and then both classes undergo a 4:1 merger.
+\subsubsection{Downward Reset}
+ A downward reset is triggered when the net asset value of Class B coins reaches the predetermined lower bound, denoted by $\mathcal{H}_{d}$,  On a downward reset time $t$, Class A holders receive a payment with dollar value $V_{A}^{t}-\mathcal{H}_{d}$, and  $1/\mathcal{H}_{d}$ shares of Class A and B are merged into one share of Class A and B so that the net asset value of both classes resets to \$1. The conversion factor $\beta_{t+}$ resets to $P_t/P_0$, that is, two ETHs can exchange for $P_t$ shares of Class A and B after the reset. For instance, as illustrated in Figure \ref{fig:downward}, after another 50 days, the ETH price drops to \$479.40, so that the net asset value of Class B drops to $\mathcal{H}_{d}\equiv \$0.25$, triggering a downward reset. Class A receives \$0.01 coupon payment and \$0.75 principal payback, and then both classes undergo a 4:1 merger. Two shares of ETH now correspond to 479.40 shares of Class A and 479.40 shares of Class B, yielding $\beta_{t+}=479.4/500=0.96$.
+ 
+ Under a black swan event, the net asset value of Class B coins $V_B^t$ is likely lower than $\mathcal{H}_{d}$ or even becomes negative upon downward reset. In the case of $V_B^t>0$, we can simply replace $\mathcal{H}_{d}$ by $V_B^t$ for the description of cash flow and operations on downward reset. If $V_B^t<0$, then both classes are fully liquidated, the holders of Class B receive nothing, and the holders of Class A receives the payment $V_A^t-|V_{B}^{t}|$. 
 
-\begin{figure}[h]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{downward}
-	\caption{Class A and B, Downward Reset. After another 50 days, the ETH price drops to \$479.40, and Class B NAV drops to \$0.25, triggering an downward reset. Again, Class A NAV equals \$1.01, where \$0.01 is half-year accrued coupon. On this date, Class A receives \$0.01 coupon payment, as well as \$0.75 principal payback. Then, Class A and B each undergo a 4:1 merger, so that both have NAV equal to \$1. New exchange ratio: 2 shares of ETH now correspond to 479.40 shares of Class A and 479.40 shares of Class B, yielding $\beta=1$.}\label{fig:downward}
+	\caption{Class A and B, Downward Reset. After another 50 days, the ETH price drops to \$479.40, and Class B NAV drops to \$0.25, triggering an downward reset. Again, Class A NAV equals \$1.01, where \$0.01 is half-year accrued coupon. On this date, Class A receives \$0.01 coupon payment, as well as \$0.75 principal payback. Then, Class A and B each undergo a 4:1 merger, so that both have NAV equal to \$1. New exchange ratio: 2 shares of ETH now correspond to 479.40 shares of Class A and 479.40 shares of Class B, yielding $\beta_{t+}=0.96$.}\label{fig:downward}
 \end{figure}
 
-No arbitrage implies that the prices of Class A and B coins satisfy
+No arbitrage implies that the market prices of Class A and B coins also satisfy the parity relation:
 $$W_A^t +W_B^t=\frac{2 P_t}{\beta_t P_0},$$
-where $P_t$ is the USD price of the underlying cryptocurrency, $W_A$ and $W_B$ are the price of the Class A and B coins, and $\beta_t$ is the conversion ratio. Class A coin behaves like a corporate bond. Although Class A has a fixed coupon rate and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. The main risk of Class A is not credit risk, but the risk of a downward reset. On a downward reset, a portion of Class A coin will be liquidated, so the investor will lose the value of future coupons that would be generated from this portion. Therefore, a downward reset will reduce the value of Class A. We propose two classes of more stable coins, the class of A' and B' coins and the class of A0 and A1 coins.
+where $P_t$ is the USD price of the underlying ETH, $W_A$ and $W_B$ are the market price of the Class A and B coins. Class A coin behaves like a corporate bond. Although Class A has a fixed coupon rate and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. The main risk of Class A is caused by a downward reset, instead of the credit risk of class B. This is because the coupon rate is usually higher than the riskfree rate, and on a downward reset, a portion of Class A coin will be liquidated, then the holder of Class A will lose high coupons that would be generated from this portion. Therefore, a potential downward reset will make the price of Class A volatile. We will propose two types of more stable coins: A' coins (Section 2.2) and A0 coins (see Appendix D).
 
 
-\subsection{\texorpdfstring{Class \Ap and \Bp Coins}{Lg}}
-This extension splits Class A into two sub-classes: Class \Ap and \Bp. Both classes invest in Class A coins. At any time, two Class A coins can be split into one Class \Ap and one Class \Bp coin. Conversely, one Class \Ap and \Bp coin can be merged into 2 Class A coins. The split structure for Class \Ap and \Bp resembles that for Class A and B: Class \Bp borrows money from Class \Ap at the rate $R^\prime$ to invest in Class A. Here $R^\prime$ is set to close to the risk-free rate $r$, whereas the rate $R$ for Class A is generally much higher. 
-
-Class \Ap and \Bp resets {\it when and only when} Class A resets or gets regular payout. Class \Ap gets coupon at the rate $R^\prime$ on regular payouts, upward and downward reset (provided the net asset value of Class B then is positive), and Class \Bp gets coupon at the rate $2R-R^\prime$ on upward reset. On downward resets, each one share of both Class \Ap and \Bp is reduced to $(V_B^t)^+$ shares, and Class \Ap gets the value of the liquidated shares. In the extreme case where $V_B^t\le 0$, then both Class \Ap and \Bp are fully liquidated, and \Ap receives its full NAV $1+R^\prime t$, or the remaining total asset for \Ap and \Bp, $2(1+Rt-|V_B^t|)$, whichever is smaller. Class \Ap behaves like cash, except in extreme case, when the underlying asset suddenly jumps (not smooth transit) to close to zero. Using the same example as in Section \ref{subsect:vanilla}, Figure \ref{fig:Ap} illustrates the cash flow of Class \Ap and \Bp coins.
-
-\begin{figure}[p!]
+\begin{figure}[p]
 \centering
 	\includegraphics[width=0.8\textwidth]{Ap_periodic}
 	\vspace{1em}
 	\includegraphics[width=0.8\textwidth]{Ap_upward}
 	\vspace{1em}
 	\includegraphics[width=0.8\textwidth]{Ap_downward}
-	\caption{{\bf Top Figure:} What happens to Class \Ap on a regular payout date of A. On regular payout dates for Class A (per 100 days), 2 shares of A receives coupon payment \$0.04, i.e. at daily rate 0.02\%. \$0.0082 is paid to \Ap and \$0.0318 to \Bp. {\bf Middle Figure:} Upward Reset of Class \Ap. After 50 days, Class B's NAV grows to \$2, triggering an upward reset. {\bf Bottom Figure:} Downward Reset of Class \Bp. After another 50 days, Class B NAV drops to \$0.25, triggering an downward reset. }\label{fig:Ap}
+	\caption{{\bf Top Figure:} What happens to Class \Ap on a regular payout date of A. On regular payout dates for Class A (per 100 days), 2 shares of A receives coupon payment \$0.04, i.e. at daily rate 0.02\%. \$0.0082 is paid to \Ap and \$0.0318 to \Bp. {\bf Middle Figure:} Upward Reset of Class \Ap. After 50 days, Class B's net asset value grows to \$2, triggering an upward reset. {\bf Bottom Figure:} Downward Reset of Class \Bp. After another 50 days, Class B's net asset value drops to \$0.25, triggering an downward reset. }\label{fig:Ap}
 \end{figure}
+
+
+
+\subsection{\texorpdfstring{Class \Ap and \Bp Coins}{Lg}}
+This extension splits Class A into two sub-classes: Class \Ap and \Bp. Both classes invest in Class A coins. At any time, two Class A coins can be split into one Class \Ap and one Class \Bp coin. Conversely, one Class \Ap and \Bp coin can be merged into two Class A coins. The split structure for Class \Ap and \Bp resembles that for Class A and B: Class \Bp borrows money from Class \Ap at the rate $R^\prime$ to invest in Class A. Here $R^\prime$ is set to close to the risk-free rate $r$, whereas the rate $R$ for Class A is generally much higher.
+
+Class \Ap and \Bp resets {\it when and only when} Class A resets or gets regular payout. Class \Ap gets coupon at the rate $R^\prime$ on regular payouts, upward and downward reset (provided the net asset value of Class B then is positive), and Class \Bp gets coupon at the rate $2R-R^\prime$ on upward reset. On downward resets, each share of both Class \Ap and \Bp is reduced to $(V_B^t)^+$ share, and Class \Ap gets the value of the liquidated shares. In the extreme case where $V_B^t\le 0$, then both Class \Ap and \Bp are fully liquidated, and \Ap receives its full net asset value $1+R^\prime t$, or the remaining total asset for \Ap and \Bp, $2(1+Rt-|V_B^t|)$, whichever is smaller. Class \Ap behaves like cash, except in extreme case, when the underlying asset suddenly jumps (not smooth transit) to close to zero. Using the same example as in Section \ref{subsect:vanilla}, Figure \ref{fig:Ap} illustrates the cash flow of Class \Ap and \Bp coins.
+
 
 
 
@@ -391,38 +486,43 @@ Class \Ap and \Bp resets {\it when and only when} Class A resets or gets regular
 
 \subsection{Differences from the Dual-Purpose Fund Contract}
 
-There are four main differences between DUO with dual-purpose funds in China. First, for the coupon payments from the upward and downward resets and regular payouts, the price of a underlying fund in China will change their values, but here the underlying ETH price will never change by the resets. Second, during the regular payout and the upward and downwards resets, the exchange ratio of the shares between the underlying asset and A and B funds will change in our case, to maintain that the related value of the underlying asset is equal to
-the sum of Fund A and Fund B immediately after these events; in particular, during the regular payout the new exchange ratio will be determined by the coupon rate, and during the upward and downward resets the new exchange ratio will be determined by the prevailing market price of the underlying asset. Third, for the dual-purpose funds, the upward reset is triggered by the underlying up-crossing $\mathcal{H}_u$ while the downward reset is triggered by the Net Value of B share down-crossing $\mathcal{H}_d$. In contrast, for DUO, the triggering conditions of both upward and downward resets are all based on the Net Value of Class B token. This brings about symmetry and simplicity to the triggering condition, making it easier to understand. Finally, Chinese dual purpose funds have service fees for the underlying asset, where here the underlying ETH does not.
+There are four main differences between our stable coin with dual-purpose funds in China. First, in China a dual-purpose fund and its underlying fund share the same fund managers, hence the fund managers re-scale the price of the underlying fund upon upward and downward resets and regular payouts, in order to easily ensure the no arbitrage parity relation between the dual-purpose fund and the underlying fund. Since we cannot change the underlying ETH price, we instead change the exchange ratio of the shares between the underlying ETH and Class A and B coins will change in our case, to maintain no-arbitrage across upward and downward resets and regular payouts.
+ 
+ Second, for the dual-purpose funds, the upward reset is triggered by the underlying up-crossing $\mathcal{H}_u$ while the downward reset is triggered by the net asset value of B share down-crossing $\mathcal{H}_d$. In contrast, for our stable coin, the triggering conditions of both upward and downward resets are all based on the net asset value of Class B coins. This is because unlike the re-scaled underlying fund price in China, the underlying ETH price is not so appropriate as the net asset value of Class B to measure the leverage ratio of Class B.
+ 
+ Third, the underlying funds of Chinese dual purpose funds incur management fees, whereas the underlying ETH does not. Finally, the periodic payout of dual-purpose fund is annually at a fixed date (e.g. first trading day of each year), while the periodic payout of our Class A coins happens when a pre-specified time has passed from the last reset or payout event, which reduces the frequency of payouts, making the coins more stable.
 
 
 
 \section{Valuation}\label{sect:valuation}
 
-In this section, we discuss the valuation of coins we described in Section \ref{sec:Product-Design}, including Class A and B coins, Class \Ap, \Bp coins, and Class A0 and A1 coins. For each of them, we describe its risk-neutral value in terms of a stochastic representation, and the corresponding partial differential equation (PDE) under the geometric Brownian motion assumption.
+In this section, we discuss the valuation of coins described in Section \ref{sec:Product-Design}, including Class A, B, \Ap, and \Bp coins. For each of them, we describe its risk-neutral value in terms of a stochastic representation, and the corresponding partial differential equation (PDE) under the geometric Brownian motion assumption.
 
 \subsection{Class A and B coins}
 
-Let the downward reset boundary be $H_{d}(t)=\frac{1}{2}(1+Rt)+\frac{1}{2}\mathcal{H}_{d}$, and upward reset boundary $H_{u}(t)=\frac{1}{2}(1+Rt)+\frac{1}{2}\mathcal{H}_{u}$. Denote $W_{A}(t,S)$ as the market value of Class A coin with time from last interest payment $0\le t\le T$, with $S_t=P_t/(\beta_t P_0)$, $H_{d}(t)\le S_t \le H_{u}(t)$. By the design of contract, $S$ returns to 1 on every reset date, and is reduced by $\frac{1}{2}RT$ on every regular payout date.
+Denote the relative price $S_t=P_t/(\beta_t P_0)$. Since the cash flow of the fund depends on the time from last payment (on reset or regular payout), rather than the actual time $t$, in the remaining of this chapter we shall relabel the time of the last payment as 0 without loss of generality, so that $0\le t\le T$ denotes the time from last payment. Let the downward reset boundary be $H_{d}(t)=\frac{1}{2}(1+Rt)+\frac{1}{2}\mathcal{H}_{d}$, and upward reset boundary $H_{u}(t)=\frac{1}{2}(1+Rt)+\frac{1}{2}\mathcal{H}_{u}$, so that $H_{d}(t)\le S_t \le H_{u}(t)$. Denote $W_{A}(t,S)$ as the market value of Class A coin with time from last interest payment $0\le t\le T$. By the design of contract, $S$ returns to 1 on every reset date, and is reduced by $\frac{1}{2}RT$ on every regular payout date. Since $W_A^t +W_B^t=2S_t$, in the following we only discuss the valuation of Class A coins.
 
-Under the risk-neutral pricing framework, the current market value of Class A token, $W_A(t,S)$, is given recursively as
+Under the risk-neutral pricing framework, the current market value of Class A coins, $W_A(t,S)$, is given recursively as
 \begin{align}
 \begin{split}W_{A}(t,S) & =E_{t}\Bigg[\sum_{1\le i<\tau\land\eta}e^{-r(i-t)}RT+e^{-r(\tau-t)}(R\tau+W_{A}(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}\\
  & \quad+e^{-r(\eta-t)}(R\eta+1-|V_{B}^{\eta}|+(V_{B}^{\eta})^+W_{A}(0,1))\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg],
 \end{split}
 \label{VAL2}
 \end{align}
-where $E_{t}$ is the expectation computed under the risk-neutral measure and under the initial condition $S_{t-}=S$, random times $\zeta$, $\tau$ and $\eta$ represent the first regular payout, upward and downward reset date from $t$, respectively. Once we calculate $W_A$, the value of Class B token can be calculated as $W_B=2S- W_A$.
+where $E_{t}$ is the expectation computed under the risk-neutral measure and under the initial condition $S_{t-}=S$, random times $\tau$ and $\eta$ represent the first upward and downward reset date from $t$, respectively. Specifically, $\tau=\{s\ge t:V_B^s\ge \mathcal{H}_u\}$, and $\eta=\{s\ge t:V_B^s\le \mathcal{H}_d\}$. The value of Class A can be determined as above in a recursive manner, since investors still get Class A coins in addition to the payments after a reset. On the right hand side, the first term is value of the all coupons on the regular payout dates before the first reset. The second and third terms describe the cash flow on upward and downward resets. The second term shows that, if the reset is an upward reset, investors get coupon payment, and the time from last reset changes to 0 and $S$ to $1$. The third term shows that, if a downward reset comes first, investors receive payment of value $V_{A}^{\eta}-|V_{B}^{\eta}|$ (including coupon payment of value $V_{A}^{\eta}-1$ and compensation for the quantity reduction $1-V_{B}^{\eta}$), each Class A coin reduces to $V_{B}^{\eta}$ coins, and the time from last reset changes to 0 and $S$ to $1$. As long as $V_B^\eta\ge 0$, Class A receives its accrued coupon and full value for the quantity reduction, and hence obtains its full net asset value. However, under a black swan event when $V_B^{\eta}<0$, Class A losses $V_B^{\eta}$ of its net asset value.
 
-The value of Class A can be determined as above in a recursive manner, since investors still get Class A token in addition to the payments after a reset. On the right hand side, the first term is value of the all coupons on the regular payout dates before the first reset. The second and third terms describe the cash flow on upward and downward resets. The second term shows that, if the reset is an upward reset, investors get coupon payment, and the time from last reset changes to 0 and $S$ to $1$. The third term shows that, if a downward reset comes first, investors receive payment of value $V_{A}^{\eta}-|V_{B}^{\eta}|$ (including coupon payment of value $V_{A}^{\eta}-1$ and compensation for the quantity reduction $1-V_{B}^{\eta}$), each Class A token reduces to $V_{B}^{\eta}$ token, and the time from last reset changes to 0 and $S$ to $1$. As long as $V_B^\eta\ge 0$, Class A receives its accrued coupon and full value for the quantity reduction, and hence obtains its full NAV. However, under a black swan event when $V_B^{\eta}<0$, Class A losses $V_B^{\eta}$ of its NAV.
-
-One can estimate $W_A$ via \eqref{VAL2} using Monte Carlo simulation, which is also proposed by \cite{adams_risk_2006} to deal with the complexities in the fund contract. Due to the high volatility of the underlying token price, it is important to achieve real-time calculation of $W_A$. However, the efficiency of the simulation-based method is not high enough for this purpose, since the cash flow of Class A token has an infinite horizon and a weakly path-dependent nature. Therefore, in the following we propose an efficient PDE-based estimation method.
+One can estimate $W_A$ via \eqref{VAL2} using Monte Carlo simulation, which is also proposed by \cite{adams_risk_2006} to deal with the complexities in the fund contract. Due to the high volatility of the underlying cryptocurrency price, it is important to achieve real-time calculation of $W_A$. However, the efficiency of the simulation-based method is not high enough for this purpose, since the cash flow of Class A coins has an infinite horizon and a weakly path-dependent nature. Therefore, in the following we propose an efficient PDE-based estimation method.
 
 Next, we describe a PDE characterization of $W_A$. We assume that $P$ follows a geometric Brownian motion under the risk neutral measure:
-\begin{align*}
-dP_{t}=r Pdt+\sigma P_{t}d\mathcal{B}_{t},
-\end{align*}
-where $\mathcal{B}_{t}$ is a one-dimensional standard Brownian motion. Then, $W_{A}$ can be characterized in terms of a partial differential equation:
-
+$$
+dP_{t}=r P_tdt+\sigma P_{t}d\mathcal{B}_{t},
+$$
+where $\mathcal{B}_{t}$ is a one-dimensional standard Brownian motion. Under this assumption, $V_B$ always equals $\mathcal{H}_d$ on downward reset, therefore \eqref{VAL2} can be simplified to
+\begin{align} \label{srep0}
+W_{A}(t,S) & =E_{t}\Bigg[\sum_{1\le i<\tau\land\eta}e^{-r(i-t)}RT+e^{-r(\tau-t)}(R\tau+W_{A}(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}\\
+ & \quad+e^{-r(\eta-t)}(R\eta+1-\mathcal{H}_d+\mathcal{H}_d W_{A}(0,1))\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg]. \nonumber
+\end{align}
+Then, $W_{A}$ can be characterized in terms of a partial differential equation:
 \begin{align}\label{eqn:PDEstart}
 &-\frac{\partial W_{A}}{\partial t} =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+r S\frac{\partial W_{A}}{\partial S}-r W_{A}, &&0\le t<T,~H_d(t)<S<H_u(t)\\\label{eqn:ter}
 &W_{A}(T,S)  =RT+W_{A}(0,S-\frac{1}{2}RT),&&H_d(T)<S<H_u(T)\\\label{eqn:bound1}
@@ -430,20 +530,32 @@ where $\mathcal{B}_{t}$ is a one-dimensional standard Brownian motion. Then, $W_
 &W_{A}(t,H_d(t))  =Rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}(0,1),&&0\le t\le T.
 \end{align}
 
-The main feature of the above PDE problem is the nonlocal terminal and boundary conditions $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$, where the given data also depends on the solution $W_{A}$ itself. Although \eqref{eqn:PDEstart} involves the standard Black-Scholes operator (due to our geometric Brownian motion assumption), the presence of the solution $W_{A}$ in terminal and boundary data makes the PDE significantly different from the classical Black-Scholes PDE, leading to challenges in both theoretical and numerical aspects. On the theoretical aspect, the existing stochastic representation result is not applicable to PDE $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ due to the nonlocalness of the terminal and boundary conditions. On the numerical aspect, the nonlocalness in the terminal and boundary data also causes problem since a numerical solution in the interior region depends on the boundary and terminal data, which in turns depends on the numerical solution in the interior region. To solve this, we propose an iterative procedure presented in Appendix $\ref{subsec:Numerical-Procedure-for}$.
+The terminal and boundary conditions $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ are directly related with the cash flow of Class A coins. The upper boundary condition ($\ref{eqn:bound1}$) at $S=H_{u}(t)$ corresponds to the upward reset, when early payment $Rt$ is delivered and $S$ resets to 1; the lower boundary condition ($\ref{eqn:PDEend}$) at $S=H_d(t)$ corresponds downward reset, when early payment $1-\mathcal{H}_d+Rt$ is delivered to Class A, each Class A coins shrinks to $\mathcal{H}_{d}$, and $S$ resets to 1.\footnote{Since $P$ has continuous sample path due to the geometric Brownian motion assumption, we have $V_B^{\eta}=\mathcal{H}_d$ on downward resets.} Finally, the terminal condition ($\ref{eqn:ter}$) corresponds to the regular payout, where Class A receives coupon payment $RT$ and $S$ is reduced by $\frac{1}{2}RT$.
 
-The nonlocal terminal and boundary conditions in $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$ are directly related with the cash flow of Class A token. The upper boundary condition ($\ref{eqn:bound1}$) at $S=H_{u}(t)$ corresponds to the upward reset, when early payment $Rt$ is delivered and $S$ resets to 1; the lower boundary condition ($\ref{eqn:PDEend}$) at $S=H_d(t)$ corresponds downward reset, when early payment $1-\mathcal{H}_d+Rt$ is delivered to Class A, each Class A token shrinks to $\mathcal{H}_{d}$ token, and $S$ resets to 1.\footnote{Since $P$ has continuous sample path due to the geometric Brownian motion assumption, we have $V_B^{\eta}=\mathcal{H}_d$ on downward resets.} Finally, the terminal condition ($\ref{eqn:ter}$) corresponds to the regular payout, where Class A receives coupon payment $RT$ and $S$ is reduced by $\frac{1}{2}RT$.
+ Despite that \eqref{eqn:PDEstart} is the same as the standard Black-Scholes equation (due to our geometric Brownian motion assumption), the terminal and boundary conditions $\eqref{eqn:ter}$ \textendash{} $\eqref{eqn:PDEend}$, depend on the solution $W_{A}$ itself. Such nonlocal terminal and boundary conditions make the PDE problem significantly different from the classical Black-Scholes model, leading to challenges in both theoretical and numerical aspects. On the theoretical aspect, due to the nonlocal conditions, the linkage between the stochastic representation (\ref{srep0}) and the PDE problem $\eqref{eqn:PDEstart}$ \textendash{} $\eqref{eqn:PDEend}$ is not straightforward, and no analytical solution is available. On the numerical aspect, the nonlocalness makes the problem nonlinear, which motivates us to propose an efficient iterative procedure to find numerical solutions (see Appendix $\ref{subsec:Numerical-Procedure-for}$).
+
+
 
 \subsection{\texorpdfstring{Class \Ap and \Bp Coins}{Lg}}
-Under the risk-neutral pricing framework, the current market value of Class \Ap token, $W_{\Ap}(t,S)$ is given recursively as
+Since two shares of A coins correspond to one \Ap and \Bp coin, in the following we only discuss the valuation of \Ap coin, and the value of Class \Bp coin is calculated as $2W_A-W_{\Ap}$. Under the risk-neutral pricing framework, the current market value of Class \Ap coins, $W_{\Ap}(t,S)$ is given recursively as
+\begin{equation}    \label{VAL3}
+\begin{split}
+ &~ E_{t}\Bigg[\sum_{1\le i<\tau\land\eta}e^{-r(i-t)}R^\prime T+e^{-r(\tau-t)}(R^\prime\tau+W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}
+                       \\
+ &~ \quad + \left(\min\{R^\prime\eta+1-(V_{B}^{\eta})^+,2(R\eta+1+V_B^{\eta})^+\}+(V_{B}^{\eta})^+W_{A^\prime}(0,1)\right) \\
+  &~ \quad \cdot e^{-r(\eta-t)} \mathbf{1}_{\{\eta<\tau\}}\Bigg],
+\end{split}
+\end{equation}
+where $\tau$ and $\eta$ are the first upward and downward reset of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively. On downward reset, if $V_B^{\eta}>0$, Class \Ap receives coupon $R^\prime\eta$, $1-V_B^{\eta}$ shares of \Ap is liquidated, and \Ap receives the liquidation value; if $\frac{R^\prime\eta-1}{2}-R\eta\le V_B^{\eta}\le 0$, \Ap is fully liquidated, and still receives full net asset value; otherwise, \Ap is fully liquidated and takes a loss by receiving $2(1+R\eta+V_B^{\eta})^+$ which is smaller than its net asset value $1+R\eta$. Recall that Class A will suffer a loss if $V_B^\eta<0$ on downward reset, therefore Class \Ap is safer than Class A since it can still recover its full net asset value in this case, provided $V_B^{\eta}\ge \frac{R^\prime\eta-1}{2}-R\eta$; only when $V_B^{\eta}< \frac{R^\prime\eta-1}{2}-R\eta$ will Class \Ap take a loss.
+
+Assuming that $P_t$ follows a geometric Brownian motion, it is easy to see that \eqref{VAL3} reduces to 
 \begin{align*}
 \begin{split} ~& E_{t}\Bigg[\sum_{1\le i<\tau\land\eta}e^{-r(i-t)}R^\prime T+e^{-r(\tau-t)}(R^\prime\tau+W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}\\
- & \quad+e^{-r(\eta-t)}\left(\min\{R^\prime\eta+1-(V_{B}^{\eta})^+,2(R\eta+1+V_B^{\eta})^+\}+(V_{B}^{\eta})^+W_{A^\prime}(0,1)\right)\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg],
+ & \quad+e^{-r(\eta-t)}\left(R^\prime\eta+1-\mathcal{H}_d+\mathcal{H}_d W_{A^\prime}(0,1)\right)\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg],
 \end{split}
 \end{align*}
-where $\tau$ and $\eta$ are the first upward and downward reset of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively. On downward reset, if $V_B^{\eta}>0$, Class \Ap receives coupon $R^\prime\eta$, $1-V_B^{\eta}$ shares of \Ap is liquidated, and \Ap receives the liquidation value; if $\frac{R^\prime\eta-1}{2}-R\eta\le V_B^{\eta}\le 0$, \Ap is fully liquidated, and still receives full NAV; otherwise, \Ap is fully liquidated and takes a loss by receiving $2(1+R\eta+V_B^{\eta})^+$ which is smaller than its NAV $1+R\eta$. Recall that Class A will suffer a loss if $V_B^\eta<0$ on downward reset, therefore Class \Ap is safer than Class A since it can still recover its full NAV in this case, provided $V_B^{\eta}\ge \frac{R^\prime\eta-1}{2}-R\eta$; only when $V_B^{\eta}< \frac{R^\prime\eta-1}{2}-R\eta$ will Class \Ap take a loss.
-
-By assuming that $P_t$ follows a geometric Brownian motion, we can also show that $W_{A^\prime}$ satisfies the following PDE. This ODE is the same as that for $W_{A}$, except for changing $R$ to $R^\prime$ for the coupon payment:
+It follows that $W_{A^\prime}(t,S)$ satisfies the following PDE:
+%This ODE is the same as that for $W_{A}$, except for changing $R$ to $R^\prime$ for the coupon payment:
 \begin{align*}
 &-\frac{\partial W_{A^\prime}}{\partial t}  =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A^\prime}}{\partial S^{2}}
    +r S\frac{\partial W_{A^\prime}}{\partial S}-r W_{A^\prime}, &&0\le t<T, H_d(t)<S<H_u(t)\\
@@ -451,7 +563,6 @@ By assuming that $P_t$ follows a geometric Brownian motion, we can also show tha
 &W_{A^\prime}(t,H_{u}(t))  =R^\prime t+W_{A^\prime}(0,1),&&0\le t\le T\\
 &W_{A^\prime}(t,H_d(t))  =R^\prime t+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A^\prime}(0,1),&&0\le t\le T.
 \end{align*}
-Then, the value of Class \Bp coin is calculated as $2W_A-W_{\Ap}$.
 
 
 
@@ -467,7 +578,7 @@ Then, the value of Class \Bp coin is calculated as $2W_A-W_{\Ap}$.
 % \begin{align*}
 % W_{A1}(t,S) & =E_{t}\Bigg[e^{-r(\zeta-t)}RT\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}+e^{-r(\tau-t)}R\tau\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}+e^{-r(\eta-t)}R\eta\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
 % \end{align*}
-% where the first regular payout time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined in the same way as \eqref{VAL2}.  
+% where the first regular payout time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined in the same way as \eqref{VAL2}.
 % $W_{A1}$ is the unique solution of the following PDE
 % \begin{align*}
 % -\frac{\partial W_{A1}}{\partial t} & =\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A1}}{\partial S^{2}}+r S\frac{\partial W_{A1}}{\partial S}-r W_{A1},~~t\in[0,T),~S\in (H_d(t),H_u(t))\\
@@ -495,7 +606,7 @@ Then, the value of Class \Bp coin is calculated as $2W_A-W_{\Ap}$.
 %  & \quad+e^{-r(\eta-t)}(R^\prime\eta+1-V_{B}^{\eta-}+V_{B}^{\eta-}W_{A^\prime}(0,1))\cdot\mathbf{1}_{\{\eta<\tau\}}\Bigg],
 % \end{split}
 % \end{align}
-% where $\tau,\eta$ are the first upward or downward reset (whichever comes first) of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively. 
+% where $\tau,\eta$ are the first upward or downward reset (whichever comes first) of Class A (or equivalently, Class \Ap and \Bp) after $t$, respectively.
 
 % $W_{A^\prime}$ satisfies the following PDE, which is the same to \eqref{eqn:PDEstart} -- \eqref{eqn:PDEend} except for changing $R$ to $R^\prime$ for the coupon payment:
 % \begin{align*}
@@ -507,16 +618,16 @@ Then, the value of Class \Bp coin is calculated as $2W_A-W_{\Ap}$.
 
 % Given $W_{\Ap}$, the value of Class \Bp is given as $2W_A(t,S)-W_{\Ap}$.
 
-% Although Class \Ap and A look similar under normal situations, under extreme scenario in practice, Class \Ap is safer than Class A. Consider the scenario when the underlying value suddenly drops to a level $P_t<\frac{P_0}{2}(1+Rt)$. In this case, the net asset value of Class B, $V_B$, becomes negative. A downward reset will be triggered, when Class A gets all the remaining value $\frac{2P_t}{P_0}$, Class B gets nothing, and all Class A and B tokens are liquidated. This means that Class A will suffer a loss (getting a liquidation value $\frac{2P_t}{P_0}$ smaller than its net asset value $1+Rt$) if $P_t$ suddenly drops below $P_t<\frac{P_0}{2}(1+Rt)$. In comparison, under the same scenario, Class \Ap and \Bp will get $\frac{4P_t}{P_0}$ in the form of underlying token from Class A. Therefore, Class \Ap will have a loss if and only if $\frac{4P_t}{P_0}<1+R^\prime t$, or equivalently, $P_t<\frac{P_0}{4}(1+R^\prime t)$, and when $\frac{P_0}{4}(1+R^\prime t)<P_t<\frac{P_0}{2}(1+Rt)$, Class \Ap will get full payment $1+R^\prime t$ while Class A will have a loss. 
+% Although Class \Ap and A look similar under normal situations, under extreme scenario in practice, Class \Ap is safer than Class A. Consider the scenario when the underlying value suddenly drops to a level $P_t<\frac{P_0}{2}(1+Rt)$. In this case, the net asset value of Class B, $V_B$, becomes negative. A downward reset will be triggered, when Class A gets all the remaining value $\frac{2P_t}{P_0}$, Class B gets nothing, and all Class A and B tokens are liquidated. This means that Class A will suffer a loss (getting a liquidation value $\frac{2P_t}{P_0}$ smaller than its net asset value $1+Rt$) if $P_t$ suddenly drops below $P_t<\frac{P_0}{2}(1+Rt)$. In comparison, under the same scenario, Class \Ap and \Bp will get $\frac{4P_t}{P_0}$ in the form of underlying token from Class A. Therefore, Class \Ap will have a loss if and only if $\frac{4P_t}{P_0}<1+R^\prime t$, or equivalently, $P_t<\frac{P_0}{4}(1+R^\prime t)$, and when $\frac{P_0}{4}(1+R^\prime t)<P_t<\frac{P_0}{2}(1+Rt)$, Class \Ap will get full payment $1+R^\prime t$ while Class A will have a loss.
 
 
 
-\section{Numerical Examples}
+\section{Numerical Examples}\label{sect:numerical}
 
-For illustration, we use Ethereum (ETH) as the underlying token, during the period from 1 Oct 2017 to 28 Feb 2018.\footnote{The dual class structure of the stable coin is independent of the choice of underlying token; however, the liquidity and popularity of the underlying price pair do impact the viability of the structure as market arbitrage is important to ensure the structure trades as designed. In this paper, ETH/USD is used as the underlying price pair, but other popular ERC20 tokens, such as EOS, ADA, paired with major fiat other than USD, can also be considered.} We further assume that the price is monitored on a \emph{daily} basis, the upward and downward resets are performed according to the end-of-day prices, and reinvestment of ETH payout as coupon payout is not considered. The default model parameters are selected as follows.
+For illustration, we use Ethereum (ETH) as the underlying cryptocurrency, during the period from 1 Oct 2017 to 28 Feb 2018.\footnote{The dual class structure of the stable coin is independent of the choice of underlying cryptocurrency; however, the liquidity and popularity of the underlying price pair do impact the viability of the structure as market arbitrage is important to ensure the structure trades as designed. In this paper, ETH/USD is used as the underlying price pair, but other popular ERC20 tokens, such as EOS, ADA, paired with major fiat other than USD, can also be considered.} We further assume that the price is monitored on a \emph{daily} basis, the upward and downward resets are performed according to the end-of-day prices, and reinvestment of ETH payout as coupon payout is not considered. The default model parameters are given as follows.
 \begin{align*}
-R& =0.02\% \text{ (7.3\% p.a.)} & R^\prime & = 0.0082\% \text{ (3\% p.a.)} & r&=0.0082\% \text{ (3\% p.a.)}\\
-\mathcal{H}_{u} & =2 & \mathcal{H}_{p} & =1.02 & \mathcal{H}_{d} & =0.25 \\
+R& =0.02\% \text{ (7.3\% p.a.)} & R^\prime & = 0.0082\% \text{ (3\% p.a.)} &\mathcal{H}_{u} & =2\\
+r&=0.0082\% \text{ (3\% p.a.)}  & \mathcal{H}_{p} & =1.02 & \mathcal{H}_{d} & =0.25 \\
 \sigma &= 0.0628 \text{ (120\% p.a.)}& T &= 100 .
 \end{align*}
 
@@ -607,18 +718,19 @@ R& =0.02\% \text{ (7.3\% p.a.)} & R^\prime & = 0.0082\% \text{ (3\% p.a.)} & r&=
 \subsection{Market Values of Class A and Class B}
 
 
-We first compute the market values of Class A and Class B coins, based on the geometric Brownian motion assumption and on the historical prices of ETH. Figure \ref{fig:valA} shows that, although Class A has a fixed coupon rate, and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. This should be compared to the behavior of a junk bond, whose value is influenced by its issuer's credit risk. In contrast, the main risk of Class A is not credit risk, but the risk of a downward reset. On a downward reset, a portion of Class A token will be liquidated, so the investor will lose the value of future coupons that would be generated from this portion. Therefore, an approaching downward reset will pull down the value of Class A. This is illustrated in Figure \ref{fig:valA} at the end of January: as the downward reset approaches, the value of Class A also goes down, especially when the model underestimates the market volatility (by setting $\sigma=0.0262$ per day (annualized 0.5)).
-\begin{figure}[htb]
+We first compute the market values of Class A and Class B coins, based on the geometric Brownian motion assumption and on the historical prices of ETH. Figure \ref{fig:valA} shows that, although Class A has a fixed coupon rate, and its coupon payment is periodic and protected by the resets, its value is still volatile on non-coupon dates. This should be compared to the behavior of a junk bond, whose value is influenced by its issuer's credit risk. In contrast, the main risk of Class A is not credit risk, but the risk of a downward reset. On a downward reset, a portion of Class A coins will be liquidated, so the investor will lose the value of future coupons that would be generated from this portion. Therefore, an approaching downward reset will pull down the value of Class A. This is illustrated in Figure \ref{fig:valA} at the end of January: as the downward reset approaches, the value of Class A also goes down, especially when the model underestimates the market volatility (by setting $\sigma=0.0262$ per day (annualized 0.5)).
+
+\begin{figure}[!htb]
 \begin{centering}
 \includegraphics[width=0.9\textwidth]{WA.eps}
 \par\end{centering}
 \caption{Simulated class A Market Value. $\sigma = 0.0628$ for the blue solid curve, $\sigma=0.0262$ for the red dashed curve. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25$, $\mathcal{H}_{u} =2$, $\mathcal{H}_{p}=1.02$, $T=100$, $r=0.0082\%$ per day ($3\%$ per year). Upward reset takes place on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018. Downward reset date takes place on 5 Feb 2018.}\label{fig:valA}
 \end{figure}
 
-Figure \ref{fig:valB} shows the simulated paths from class B coins. Note that B has upward resets (on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018) with dividend payments \$1.0846, \$1.0467, and \$1.1106 and downward resets on (7 Jan 2018). 
+Figure \ref{fig:valB} shows the simulated paths from class B coins. Note that B has upward resets (on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018) with dividend payments \$1.0846, \$1.0467, and \$1.1106 and downward resets on (7 Jan 2018).
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 \begin{centering}
 \includegraphics[width=0.9\textwidth]{WB}
 \par\end{centering}
@@ -629,9 +741,9 @@ Figure \ref{fig:valB} shows the simulated paths from class B coins. Note that B 
 
 \subsection{\texorpdfstring{Market Value of Class \Ap and \Bp}{Lg}}
 
-We can see from Figure \ref{fig:valAPrime} that the market value of Class A$^\prime$ token is very stable during our sample period, with a value close to 1, except for four downward jumps. These downward jumps correspond to the coupon payment of Class \Ap on the reset dates of Class A. If we de-trend the value of Class \Ap by its NAV and consider $W_{\Ap}-V_{\Ap}$, it has an annualized standard deviation of $5.4\times 10^{-5}$, which is much smaller than that of $W_{A}-V_{A}$ (0.0178). Even without de-trending, Class \Ap has an annualized return volatility of 0.87\%, which is comparable to that of the short term U.S. treasury bill, 0.96\% (912828K2 Govt, from April 2015 to February 2018).
+We can see from Figure \ref{fig:valAPrime} that the market value of Class A$^\prime$ coins is very stable during our sample period, with a value close to 1, except for four downward jumps. These downward jumps correspond to the coupon payment of Class \Ap on the reset dates of Class A. If we de-trend the value of Class \Ap by its net asset value and consider $W_{\Ap}-V_{\Ap}$, it has an annualized standard deviation of $5.4\times 10^{-5}$, which is much smaller than that of $W_{A}-V_{A}$ (0.0178). Even without de-trending, Class \Ap has an annualized return volatility of 0.87\%, which is comparable to that of the short term U.S. treasury bill, 0.96\% (912828K2 Govt, from April 2015 to February 2018).
 
-\begin{figure}[h]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.9\textwidth]{WABpnoCI4.eps}
 \caption{Market Value of Class A$^\prime$ (red) and B$^\prime$ (blue), compared with Class A (black). Annualized volatility of Class A$^\prime$ and B$^\prime$ are 0.0087 and 0.0403, respectively. Parameters: $R=0.02\%$ per day, $\mathcal{H}_{d}=0.25$, $\mathcal{H}_{u} =2$, $\mathcal{H}_{p}=1.02$, $R^\prime = 0.0082\%$ ($3\%$ per year), $T=100$, $\sigma= 120\%$ per year, $r=0.0082\%$ per day. Upward reset takes place on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018. Downward reset date takes place on 5 Feb 2018.}
@@ -641,11 +753,17 @@ We can see from Figure \ref{fig:valAPrime} that the market value of Class A$^\pr
 
 
 \subsection{Black Swan Events}
-Assume that at time $\eta$, an extreme event happens, and there is a 80\% sudden drop in the ETH price. Assuming $\beta_{\eta-} = 1$, $P_{\eta-} = P_0 = 500$ (so that the relative price $S_{\eta−} = 1$), and P suddenly drops to $P_\eta = 100$. Then the NAV of Class A coins $V_A^\eta = 2S_{\eta-} \cdot(1-80\%) = 0.4$, while the NAV of Class \Ap coins is $V^\eta_{\Ap} = 2 \cdot V^\eta_A = 0.8$. A downward reset is triggered, Class A and Class \Ap are fully liquidated, and they receive \$0.4 and \$0.8 payout, respectively. Therefore, when a sudden drop in ETH price occurs, although both Class A and \Ap take a loss, \Ap still recovers a larger value than A.
+Assume that at time $\eta$, an extreme event happens, and there is a 80\% sudden drop in the ETH price. Assuming $\beta_{\eta-} = 1$, $P_{\eta-} = P_0 = 500$ (so that the relative price $S_{\eta−} = 1$), and P suddenly drops to $P_\eta = 100$. Then the net asset value of Class A coins $V_A^\eta = 2S_{\eta-} \cdot(1-80\%) = 0.4$, while the net asset value of Class \Ap coins is $V^\eta_{\Ap} = 2 \cdot V^\eta_A = 0.8$. A downward reset is triggered, Class A and Class \Ap are fully liquidated, and they receive \$0.4 and \$0.8 payout, respectively. Therefore, when a sudden drop in ETH price occurs, although both Class A and \Ap take a loss, \Ap still recovers a larger value than A.
 
-Now we assume that this kind of downward jump occurs in a jump diffusion model with a Poisson intensity 0.2 per 100 days and constant jump size -80\%, then we have at time 0, $W_A(0,1) = 0.888$ and $W_{\Ap} (0,1) = 0.962$; in contrast, if there is no jump risk (intensity equals 0), $W_A(0,1) = 1.013$, $W_{\Ap} (0,1) = 1.000$. Therefore, the presence of extreme jump risk has a smaller impact on Class \Ap coins.
+Now we assume that this kind of downward jump occurs in a jump diffusion model. Specifically,
+\begin{align*}
+dP_{t}/P_{t-}=r dt+\sigma d\mathcal{B}_{t}+ dJ_t,
+\end{align*}
+where $J$ is a compound Poisson process with constant intensity 0.2 (per 100 days) and constant jump size $-80\%$. Using simulation based on \eqref{VAL2} and \eqref{VAL3}, we have at time 0, $W_A(0,1) = 0.888$ and $W_{\Ap} (0,1) = 0.962$; in contrast, if there is no jump risk (intensity equals 0), $W_A(0,1) = 1.013$, $W_{\Ap} (0,1) = 1.000$. Therefore, the presence of extreme jump risk has a smaller impact on Class \Ap coins.
 
 
+\section{Conclusion}
+Stable coins, which are cryptocurrencies pegged to other stable financial assets, are desirable for blockchain networks to be used as public accounting ledgers for payment transactions  and as crypto money market accounts for asset allocation involving cryptocurrencies, whereby being often called the ``Holy Grail of cryptocurrency.'' However, existing cryptocurrencies, such as Bitcoins, are too volatile for these purposes. Inspired by the dual purpose funds popular in the US and China, this paper designs, for the first time to our best knowledge, several dual-class structures that offer entitlements to either fixed income stable coins (class A funds) pegged to a traditional currency or leveraged investment opportunities (class B funds). Unlike traditional currencies, the new class A funds record all transactions on a blockchain without centralized counterparties. By using the option pricing theory, we show that the proposed stable coins indeed have very low volatility. Indeed, the class A coin has a volatility comparable to that of the exchange rate of world currencies against U.S. dollar, and the class \Ap coin essentially is pegged to U.S. dollar. When combined with insurance from a government, the design can also serve as a basis for issuing a sovereign cryptocurrency.
 %\clearpage
 
 \begin{appendices}
@@ -658,46 +776,45 @@ In Section \ref{sec:Product-Design}, we have described a specific product design
 
 %\subsection{Creation}
 
-Dual-class tokens can be created by depositing underlying tokens to the Custodian contract. Upon receiving underlying tokens of amount $M_{C}$, the Custodian contract will return to the sender certain amount of Class A and Class B tokens. Such amount $C_{A}$ and $C_{B}$ can be calculated by:
+Dual-class coins can be created by depositing underlying cryptocurrency to the Custodian contract. Upon receiving underlying cryptocurrency of amount $M_{C}$, the Custodian contract will return to the sender certain amount of Class A and Class B coins. Such amount $C_{A}$ and $C_{B}$ can be calculated by:
 \begin{equation}
-\begin{array}{cc}
-C_{B}= & \frac{M_{C}\cdot P_{0}\cdot\beta\cdot\left(1-c\right)}{1+\alpha}\\
-C_{A}= & C_{B}\cdot\alpha\ ,
+\begin{array}{ll}
+C_{B}= & \frac{M_{C} P_{0}\beta_t\left(1-c\right)}{1+\alpha}\\
+C_{A}= & \alpha C_{B}\ ,
 \end{array}\label{eq:creation-1}
 \end{equation}
-where $c$ is the processing fee of the smart contract, $\alpha$ is a positive number to determine the ratio of A and B, and $P_{0}$ is the recorded price of underlying token in target fiat currency at last reset event, and $\beta$ is the conversion factor set as 1 at inception and its behaviour is detailed later in Section \ref{subsec:Contingent-Upward-Reset}
-to \ref{subsec:Periodic-Reset}.
+where $c$ is the processing fee of the smart contract, $\alpha$ is a positive number to determine the ratio of A and B, and $P_{0}$ is the recorded price of underlying cryptocurrency in target fiat currency at last reset event, and $\beta_t$ is the conversion factor set as 1 at inception and its behaviour is detailed later in Section \ref{subsec:Periodic-Reset} to \ref{subsec:Contingent-Upward-Reset}.
 
 %\subsection{Redemption}
 
-Holders of Class A and Class B tokens can withdraw deposited underlying tokens at any time by performing a redemption. To do this, the user will send amount of $C\cdot\alpha$ Class A and amount of $C$ Class B tokens to the Custodian contract. The contract will deduct Class A and Class B tokens, and return to the sender $M_{C}$ underlying tokens, where $M_{C}$ can be calculated by:
+Holders of Class A and Class B coins can withdraw deposited underlying cryptocurrency at any time by performing a redemption. To do this, the user will send $\alpha C$ amount of Class A coins and $C$ amount of Class B coins to the Custodian contract. The contract will deduct Class A and Class B coins, and return to the sender $M_{C}$ underlying cryptocurrency, where $M_{C}$ can be calculated by:
 \begin{equation}
-M_{C}=\frac{C\cdot\left(1-c\right)\cdot\left(1+\alpha\right)}{P_{0}\cdot\beta}\ .\label{eq:redemption-1}
+M_{C}=\frac{C \left(1-c\right) \left(1+\alpha\right)}{\beta_t P_{0}}\ .\label{eq:redemption-1}
 \end{equation}
 
 %\subsection{Net Value}
 
-The net value of tokens are calculated based on the coupon rate, the elapsed time from last reset event, and the latest underlying token price in target fiat currency fed to the system. In particular:
+The net value of coins are calculated based on the coupon rate, the elapsed time from last reset event, and the latest underlying cryptocurrency price in target fiat currency fed to the system. In particular:
 \begin{equation}
-\begin{array}{cc}
-V_{A}^{t}= & 1+R\cdot t\\
-V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{P_{0}\cdot\beta}-\alpha\cdot V_{A}^{t}\ ,
+\begin{array}{ll}
+V_{A}^{t}= & 1+R\cdot v_t\\
+V_{B}^{t}= & \left(1+\alpha\right)\cdot\frac{P_{t}}{\beta_tP_{0}}-\alpha\cdot V_{A}^{t}\ ,
 \end{array}\label{eq:netvalue-1}
 \end{equation}
-where $R$ is the daily coupon rate, $t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying token in target fiat currency.
+where $R$ is the daily coupon rate, $v_t$ is the number of days from last reset event, and $P_{t}$ is the current price of underlying cryptocurrency in target fiat currency.
 
 %\subsection{Quantity}
 
 Below holds in the system at all time
 \[
-Q_{A}^{t}=Q_{B}^{t}\cdot\alpha\ ,
+Q_{A}^{t}=\alpha Q_{B}^{t}\ ,
 \]
-where $Q_{A}^{t}$ and $Q_{B}^{t}$ are the total amount of Class A and Class B tokens.
+where $Q_{A}^{t}$ and $Q_{B}^{t}$ are the total amount of Class A and Class B coins.
 
 %\subsection{Implied Leverage Ratio}
-
+The implied leverage ratio is
 \begin{align*}
-L_{B}^{t} & =\frac{P_{t}}{P_{0}\cdot\beta}\cdot\frac{1+\alpha}{V_{B}^{t}}
+L_{B}^{t} & =\frac{P_{t}}{\beta_tP_{0}}\cdot\frac{1+\alpha}{V_{B}^{t}}
 \end{align*}
 Note that at inception or after contingent resets, above simply reduces to $L_{B}^{0}=1+\alpha$.
 
@@ -705,17 +822,16 @@ Note that at inception or after contingent resets, above simply reduces to $L_{B
 
 A regular payout is triggered when $V_{A}^{t}\geqslant\mathcal{H}_{p}$. Upon regular payout:
 \begin{enumerate}
-\item Total amount of both classes token remain unchanged, $Q_{A}^{t+}=Q_{A}^{t}$ and $Q_{B}^{t+}=Q_{B}^{t}$
-\item Net Value of Class A reset to 1 USD
-\item Class A holder will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is $U_{A}=\frac{V_{A}^{t}-1}{P_{t}}$
-\item Conversion factor $\beta_{t+}=\beta_t\cdot\frac{\left(1+\alpha\right)\cdot P_{t}}{\left(1+\alpha\right)\cdot P_{t}-P_{0}\cdot\alpha\cdot\beta\cdot\left(V_{A}^{t}-1\right)}$
-\item Unlike contingent resets, $P_{0}$ does NOT reset to $P_{t}$
+\item Total amount of both classes coin remain unchanged, $Q_{A}^{t+}=Q_{A}^{t-}$ and $Q_{B}^{t+}=Q_{B}^{t-}$
+\item Net asset value of Class A reset to 1 USD
+\item Class A holder will receive certain amount of underlying cryptocurrency from the Custodian contract. Such amount for each Class A coin is $U_{A}=\frac{V_{A}^{t}-1}{P_{t}}$
+\item Conversion factor $\beta_{t+}=\beta_{t-}\cdot\frac{\left(1+\alpha\right) P_{t}}{\left(1+\alpha\right) P_{t}-\alpha\beta_{t-} P_{0}\left(V_{A}^{t}-1\right)}$
 \end{enumerate}
 Total value in the system is unchanged after reset:
 \begin{align*}
- & U_{A}\cdot P_{t}\cdot Q_{A}^{t}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
-= & \left(V_{A}^{t}-1\right)\cdot Q_{A}^{t}+Q_{A}^{t}\cdot1+V_{B}^{t}\cdot Q_{B}^{t}\\
-= & V_{A}^{t}\cdot Q_{A}^{t}+V_{B}^{t}\cdot Q_{B}^{t}\ .
+ & U_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left(V_{A}^{t-}-1\right)\cdot Q_{A}^{t-}+Q_{A}^{t-}\cdot1+V_{B}^{t-}\cdot Q_{B}^{t-}\\
+= & V_{A}^{t-}\cdot Q_{A}^{t-}+V_{B}^{t-}\cdot Q_{B}^{t-}\ .
 \end{align*}
 
 
@@ -724,10 +840,10 @@ Total value in the system is unchanged after reset:
 
 An upward reset is triggered when $V_{B}^{t}\geqslant\mathcal{H}_{u}$. Upon upward reset:
 \begin{enumerate}
-\item Total amount of both classes token remain unchanged, $Q_{A}^{t+}=Q_{A}^{t}$ and $Q_{B}^{t+}=Q_{B}^{t}$.
-\item Net Value of both classes reset to 1 target fiat currency.
-\item Both classes' holders will receive certain amount of underlying token from the Custodian contract. Such amount for each Class A token is $U_{A}=\frac{V_{A}^{t}-1}{P_{t}}$ and for each Class B token is $U_{B}=\frac{V_{B}^{t}-1}{P_{t}}$.
-\item Conversion factor $\beta$ is reset to 1.
+\item Total amount of both classes coins remain unchanged, $Q_{A}^{t+}=Q_{A}^{t-}$ and $Q_{B}^{t+}=Q_{B}^{t-}$.
+\item Net asset value of both classes reset to 1 target fiat currency.
+\item Both classes' holders will receive certain amount of underlying cryptocurrency from the Custodian contract. Such amount for each Class A coin is $U_{A}=\frac{V_{A}^{t}-1}{P_{t}}$ and for each Class B coin is $U_{B}=\frac{V_{B}^{t}-1}{P_{t}}$.
+\item Conversion factor $\beta_{t+}$ is reset to $P_t/P_0$.
 \end{enumerate}
 Total value in the system is unchanged after reset:
 \begin{align*}
@@ -740,20 +856,20 @@ Total value in the system is unchanged after reset:
 
 A downward reset is triggered when $V_{B}^{t}\leqslant\mathcal{H}_{d}$. Upon downward reset:
 \begin{enumerate}
-\item Total amount of Class B token is reduced to $Q_{B}^{t+}=Q_{B}^{t}\cdot (V_{B}^{t})^+$.
-\item Total amount of Class A token is reduced to $Q_{A}^{t+}=Q_{B}^{t+}\cdot\alpha$.
+\item Total amount of Class B coins is reduced to $Q_{B}^{t+}=Q_{B}^{t-}\cdot (V_{B}^{t})^+$.
+\item Total amount of Class A coins is reduced to $Q_{A}^{t+}=Q_{B}^{t+}\cdot\alpha$.
 \item Net Value of both classes reset to 1 target fiat currency.
-\item Class A holders will receive certain amount of underlying token from the Custodian contract. Such amount of each Class A token is: $D_{A}=\frac{V_{A}^{t}-V_{B}^{t}}{P_{t}}$ if $V_B^t\ge 0$, and $D_{A}=\frac{V_{A}^{t}+V_{B}^{t}/\alpha}{P_{t}}$ if $V_B^t< 0$
-\item Conversion factor $\beta$ is reset to 1
+\item Class A holders will receive certain amount of underlying cryptocurrency from the Custodian contract. Such amount of each Class A coin is: $D_{A}=\frac{V_{A}^{t}-V_{B}^{t}}{P_{t}}$ if $V_B^t\ge 0$, and $D_{A}=\frac{V_{A}^{t}+V_{B}^{t}/\alpha}{P_{t}}$ if $V_B^t< 0$
+\item Conversion factor $\beta_{t+}$ is reset to $P_t/P_0$.
 \end{enumerate}
 Total value in the system is unchanged after reset:
 \begin{align*}
- & D_{A}\cdot P_{t}\cdot Q_{A}^{t}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
-= & \left[\left(V_{A}^{t}-V_{B}^{t}\right)\cdot\mathbf{1}_{V_B^t\ge 0}+\left(V_{A}^{t}+V_{B}^{t}/\alpha\right)\cdot\mathbf{1}_{V_B^t< 0}\right]\cdot Q_{A}^{t}+Q_{B}^{t+}\cdot\alpha\cdot1+Q_{B}^{t+}\cdot1\\
-= & V_{A}^{t}\cdot Q_{A}^{t}-(V_{B}^{t})^+\cdot Q_{B}^{t}\cdot\alpha-(V_{B}^{t})^-\cdot Q_{B}^{t}+Q_{B}^{t}\cdot (V_{B}^{t})^+\cdot\alpha+Q_{B}^{t}\cdot (V_{B}^{t})^+\\
-= & V_{A}^{t}\cdot Q_{A}^{t}+V_{B}^{t}\cdot Q_{B}^{t}\ .
+ & D_{A}\cdot P_{t}\cdot Q_{A}^{t-}+Q_{A}^{t+}\cdot V_{A}^{t+}+Q_{B}^{t+}\cdot V_{B}^{t+}\\
+= & \left[\left(V_{A}^{t}-V_{B}^{t}\right)\cdot\mathbf{1}_{V_B^t\ge 0}+\left(V_{A}^{t}+V_{B}^{t}/\alpha\right)\cdot\mathbf{1}_{V_B^t< 0}\right]\cdot Q_{A}^{t-}+Q_{B}^{t+}\cdot\alpha\cdot1+Q_{B}^{t+}\cdot1\\
+= & V_{A}^{t}\cdot Q_{A}^{t-}-(V_{B}^{t})^+\cdot Q_{B}^{t-}\cdot\alpha-(V_{B}^{t})^-\cdot Q_{B}^{t-}+Q_{B}^{t-}\cdot (V_{B}^{t})^+\cdot\alpha+Q_{B}^{t-}\cdot (V_{B}^{t})^+\\
+= & V_{A}^{t}\cdot Q_{A}^{t-}+V_{B}^{t}\cdot Q_{B}^{t-}\ .
 \end{align*}
-Note above used the fact $Q_{A}^{t}=Q_{B}^{t}\cdot\alpha$.
+Note above used the fact $Q_{A}^{t-}=Q_{B}^{t-}\cdot\alpha$.
 
 
 
@@ -841,9 +957,10 @@ First, we derive the following proposition, which expresses the stochastic repre
 	\end{align*}
 	where $E_{\tau_1\land\eta_1}^{(u,x,y)}$ denotes the conditional expectation computed at time $\tau_1\land\eta_1$ with $(v,S,Y)_{\tau_1\land\eta_1}=(u,s,y)$. As a result,
 	\begin{align*}
-	&E_{\tau_1\land\eta_1}^{(0,1,Y_{\tau_1\land\eta_1})}\Bigg[\sum_{\xi_i\ge\tau_1\land\eta_1}e^{-r(\zeta_i-\tau_1\land\eta_1)}\frac{Y_{\zeta_i-}}{Y_{\tau_1\land\eta_1}}R+\sum_{\tau_i>\tau_1\land\eta_1}e^{-r(\tau_i-\tau_1\land\eta_1)}\frac{Y_{\tau_i-}}{Y_{\tau_1\land\eta_1}}Rv_{\tau_i-}\\
+	 &E_{\tau_1\land\eta_1}^{(0,1,Y_{\tau_1\land\eta_1})}\Bigg[\sum_{\xi_i\ge\tau_1\land\eta_1}e^{-r(\zeta_i-\tau_1\land\eta_1)}\frac{Y_{\zeta_i-}}{Y_{\tau_1\land\eta_1}}R+\sum_{\tau_i>\tau_1\land\eta_1}e^{-r(\tau_i-\tau_1\land\eta_1)}\frac{Y_{\tau_i-}}{Y_{\tau_1\land\eta_1}}Rv_{\tau_i-}\\
 	&\quad+\sum_{\eta_i>\tau_1\land\eta_1}e^{-r(\eta_i-\tau_1\land\eta_1)}\frac{Y_{\eta_i-}}{Y_{\tau_1\land\eta_1}}(Rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg]\Bigg]\\
-	&=E_{0}^{(0,1,1)}\Bigg[\sum_{\xi_i\ge0}e^{-r\zeta_i}Y_{\zeta_i-}R+\sum_{\tau_i\ge0}e^{-r\tau_i}Y_{\tau_i-}Rv_{\tau_i-}+\sum_{\eta_i\ge0}e^{-r\eta_i}Y_{\eta_i-}(Rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg]\\
+	&=E_{0}^{(0,1,1)}\Bigg[\sum_{\xi_i\ge0}e^{-r\zeta_i}Y_{\zeta_i-}R+\sum_{\tau_i\ge0}e^{-r\tau_i}Y_{\tau_i-}Rv_{\tau_i-} \\
+	&~ \quad +\sum_{\eta_i\ge0}e^{-r\eta_i}Y_{\eta_i-}(Rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg]\\
 	&=W_A(0,1),
 	\end{align*}
 	where the first equality follows from the Markov property of $(v,S,Y)$ and the fact that time 0 cannot be an interest payment date given $(v,S,Y)_0=(0,1,1)$. Plugging this equation into the previous equation, we get
@@ -857,20 +974,26 @@ First, we derive the following proposition, which expresses the stochastic repre
 	
 	{\flushleft\bf Step 2:} Next we show that any solution $W_A$ satisfying \eqref{VAL2} is a bounded function of $(t,S)$ in $0\le t\le 1$, $H_d(t)\le S\le H_u(t)$. Indeed,
 	\begin{align*}
-	&W_A(t,S)=E_t^{(t,S,1)}\Bigg[\sum_{1\le i< \tau\land\eta}e^{-r(i-t)}R+e^{-r(\tau-t)}(R(\tau-\lfloor\tau\rfloor)+W_A(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}}\\
-	&\quad+e^{-r(\eta-t)}(R(\eta-\lfloor\eta\rfloor)+1-\mathcal{H}_d+\mathcal{H}_d W_A(0,1))\cdot \mathbf{1}_{\{\eta<\tau\}}\Bigg]\\
-	&\le E_t^{(t,S,1)}\Bigg[\sum_{1\le i< \tau\land\eta}e^{-r(i-t)}R+e^{-r(\tau\land\eta-t)}(R+\max\{W_A(0,1),1-\mathcal{H}_d+\mathcal{H}_d W_A(0,1)\})\Bigg]\\
+	&W_A(t,S)=E_t^{(t,S,1)}\Bigg[\sum_{1\le i< \tau\land\eta}e^{-r(i-t)}R+e^{-r(\tau-t)} \Bigg( R(\tau-\lfloor\tau\rfloor)  \\
+	&\quad+W_A(0,1))\cdot\mathbf{1}_{\{\tau<\eta\}} \\
+	&\quad   +e^{-r(\eta-t)}(R(\eta-\lfloor\eta\rfloor)+1-\mathcal{H}_d+\mathcal{H}_d W_A(0,1) \Bigg) \cdot \mathbf{1}_{\{\eta<\tau\}}\Bigg]\\
+	&\le E_t^{(t,S,1)}\Bigg[\sum_{1\le i< \tau\land\eta}e^{-r(i-t)}R   \\
+	&\quad +e^{-r(\tau\land\eta-t)}(R+\max\{W_A(0,1),1-\mathcal{H}_d+\mathcal{H}_d W_A(0,1)\})\Bigg]\\
 	&\le \frac{e^{-r}R}{1-e^{-r}}+(R+\max\{W_A(0,1),1-\mathcal{H}_d+\mathcal{H}_d W_A(0,1)\}):=\overline{K}.
 	\end{align*}
 	Note that the right hand side does not depend on $t$ or $S$.
 	
-	{\flushleft\bf Step 3:} To see the uniqueness, for any $W_A$ satisfying \eqref{VAL2}, by conditioning on the first interest payment time $\theta_1=\tau_1\land\eta_1\land1$ on the right hand side of \eqref{VAL2},
+	{\flushleft\bf Step 3:} To see the uniqueness, for any $W_A$ satisfying \eqref{VAL2}, by conditioning on the first interest payment time $\theta_1=\tau_1\land\eta_1\land1$ on the right hand side of \eqref{VAL2}, we get
 	\begin{align*}
 	&W_A(t,S)=E_t^{(t,S,1)}\Bigg[e^{-r(\theta_1-t)}\Bigg((R+W_A(0,S_{\theta_1-}-\alpha R))\cdot\mathbf{1}_{\{\theta_1<\tau_1\land\eta_1\}}\\
 	&\quad+(R(\theta_1-\lfloor\theta_1\rfloor)+W_A(0,1))\cdot\mathbf{1}_{\{\theta_1=\tau_1\}}\\
 	&\quad+(R(\theta_1-\lfloor\theta_1\rfloor)+1-\mathcal{H}_d+\mathcal{H}_d W_A(0,1))\cdot \mathbf{1}_{\{\theta_1=\eta_1\}}\Bigg)\Bigg]\\
 	&=E_t^{(t,S,1)}\Bigg[e^{-r(\theta_1-t)}\Bigg(R\cdot\mathbf{1}_{\{\theta_1=\zeta_1\}}+Rv_{\theta_1-}\cdot\mathbf{1}_{\{\theta_1=\tau_1\}}\\
-	&\quad+(Rv_{\theta_1-}+1-\mathcal{H}_d)\cdot \mathbf{1}_{\{\theta_1=\eta_1\}}+Y_{\theta_1} W_A(v_{\theta_1},S_{\theta_1})\Bigg)\Bigg]\\
+	&\quad+(Rv_{\theta_1-}+1-\mathcal{H}_d)\cdot \mathbf{1}_{\{\theta_1=\eta_1\}}+Y_{\theta_1} W_A(v_{\theta_1},S_{\theta_1})\Bigg)\Bigg].
+	\end{align*}
+	Therefore,
+	\begin{align*}
+	&W_A(t,S) \\
 	&=E_t^{(t,S,1)}\Bigg[\Bigg(\sum_{\zeta_i\le\theta_1}e^{-r(\zeta_i-t)}Y_{\zeta_i-}R+\sum_{\tau_i\le\theta_1}e^{-r(\tau_i-t)}Y_{\tau_i-}Rv_{\tau_i-}\\
 	&\quad+\sum_{\eta_i\le\theta_1}e^{-r(\eta_i-t)}Y_{\eta_i-}(Rv_{\eta_i-}+1-\mathcal{H}_d)+e^{-r(\theta_1-t)}Y_{\theta_1} W_A(0,S_{\theta_1})\Bigg)\Bigg].
 	\end{align*}
@@ -878,8 +1001,13 @@ First, we derive the following proposition, which expresses the stochastic repre
 	\begin{align*}
 	&W_A(t,S)=E_t^{(t,S,1)}\Bigg[\Bigg(\sum_{\zeta_i\le\theta_1}e^{-r(\zeta_i-t)}Y_{\zeta_i-}R+\sum_{\tau_i\le\theta_1}e^{-r(\tau_i-t)}Y_{\tau_i-}Rv_{\tau_i-}\\
 	&\quad+\sum_{\eta_i\le\theta_1}e^{-r(\eta_i-t)}Y_{\eta_i-}(Rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg)\\
-	&\quad+e^{-r(\theta_1-t)}Y_{\theta_1} E_{\theta_1}^{(v_{\theta_1},S_{\theta_1},Y_{\theta_1})}\Bigg[\Bigg(\sum_{\theta_1<\zeta_i\le\theta_2}e^{-r(\zeta_i-\theta_1)}\frac{Y_{\zeta_i-}}{Y_{\eta_i}}R+\sum_{\theta_1<\tau_i\le\theta_2}e^{-r(\tau_i-\theta_1)}\frac{Y_{\tau_i-}}{Y_{\theta_1}}Rv_{\eta_i-}\\
-	&\quad+\sum_{\theta_1<\eta_i\le\theta_2}e^{-r(\eta_i-\theta_1)}\frac{Y_{\eta_i-}}{Y_{\theta_1}}(Rv_{\eta_i-}+1-\mathcal{H}_d)+e^{-r(\theta_2-\theta_1)}\frac{Y_{\theta_2}}{Y_{\theta_1}} W_A(v_{\theta_2},S_{\theta_2})\Bigg)\Bigg]\Bigg]\\
+	&\quad+e^{-r(\theta_1-t)}Y_{\theta_1} E_{\theta_1}^{(v_{\theta_1},S_{\theta_1},Y_{\theta_1})}\Bigg[\Bigg(\sum_{\theta_1<\zeta_i\le\theta_2}e^{-r(\zeta_i-\theta_1)}\frac{Y_{\zeta_i-}}{Y_{\eta_i}}R   \\
+	&\quad+\sum_{\theta_1<\tau_i\le\theta_2}e^{-r(\tau_i-\theta_1)}\frac{Y_{\tau_i-}}{Y_{\theta_1}}Rv_{\eta_i-}\\
+	&\quad+\sum_{\theta_1<\eta_i\le\theta_2}e^{-r(\eta_i-\theta_1)}\frac{Y_{\eta_i-}}{Y_{\theta_1}}(Rv_{\eta_i-}+1-\mathcal{H}_d)+e^{-r(\theta_2-\theta_1)}\frac{Y_{\theta_2}}{Y_{\theta_1}} W_A(v_{\theta_2},S_{\theta_2})\Bigg)\Bigg]\Bigg].
+	\end{align*}
+	Thus,
+	\begin{align*}
+	&W_A(t,S) \\
 	&=E_t^{(t,S,1)}\Bigg[\Bigg(\sum_{\zeta_i\le\theta_2}e^{-r(\zeta_i-t)}Y_{\zeta_i-}R+\sum_{\tau_i\le\theta_2}e^{-r(\tau_i-t)}Y_{\tau_i-}Rv_{\tau_i-}\\
 	&\quad+\sum_{\eta_i\le\theta_2}e^{-r(\eta_i-t)}Y_{\eta_i-}(Rv_{\eta_i-}+1-\mathcal{H}_d)+e^{-r(\theta_2-t)}Y_{\theta_2} W_A(v_{\theta_2},S_{\theta_2})\Bigg)\Bigg].
 	\end{align*}
@@ -892,9 +1020,10 @@ First, we derive the following proposition, which expresses the stochastic repre
 	\end{align}
 	where $\theta_N$ denotes the $N$-th interest payment time. Thanks to Lemma 2.1 in \cite{dai_stochastic_2017} and the boundedness of $W_A$, we have
 	\begin{align*}
-	0\le \lim_{N\to\infty}E_t^{(t,S,1)}\left[e^{-r(\theta_N-t)}Y_{\theta_N}W_A(v_{\theta_N},S_{\theta_N})\right]\le \overline{K}\cdot\lim_{N\to\infty}E_t^{(t,S,1)}\left[e^{-r(\theta_N-t)}\right]=0.
+	0&\le \lim_{N\to\infty}E_t^{(t,S,1)}\left[e^{-r(\theta_N-t)}Y_{\theta_N}W_A(v_{\theta_N},S_{\theta_N})\right] \\
+	&\le \overline{K}\cdot\lim_{N\to\infty}E_t^{(t,S,1)}\left[e^{-r(\theta_N-t)}\right]=0.
 	\end{align*}
-	Therefore, by sending $N\to\infty$, we infer that the right hand side of \eqref{eqn:22} converges to \eqref{VALnonrecur}. This shows that any $W_A$ is equal to the right hand side of \eqref{VALnonrecur}, which gives the uniqueness of $W_A$ satisfying \eqref{VAL2}. 
+	Therefore, by sending $N\to\infty$, we infer that the right hand side of \eqref{eqn:22} converges to \eqref{VALnonrecur}. This shows that any $W_A$ is equal to the right hand side of \eqref{VALnonrecur}, which gives the uniqueness of $W_A$ satisfying \eqref{VAL2}.
 \end{proof}
 
 
@@ -931,7 +1060,7 @@ $W_{A}$ is the unique classical solution\footnote{By classical solution we mean 
 		b(v,x)&=r(x-1)-\frac{\alpha}{1+\alpha}\frac{R}{H_u(t)-H_d(t)}+\frac{rH_u(t)}{H_u(t)-H_d(t)},\\
 		\sigma(v,x)&=\frac{\sigma H_d(t)}{H_u(t)-H_d(t)}.
 	\end{align*}
-	Besides, after this transform, the definition $\tau_i$, $\eta_i$ and $\zeta_i$ becomes 
+	Besides, after this transform, the definition $\tau_i$, $\eta_i$ and $\zeta_i$ becomes
 	\begin{align*}
 		\tau_i&=\inf\{s>\tau_{i-1}:X_{s-}\ge 1\},\eta_i=\inf\{s>\eta_{i-1}:X_{s-}\le 0\}\\
 		\zeta_i&=\inf\{s>\zeta_{i-1}:v_{s-}=T,X_{s-}\in(0,1)\}.
@@ -944,7 +1073,7 @@ $W_{A}$ is the unique classical solution\footnote{By classical solution we mean 
 	\begin{align*}
 		Y_{\eta_i}=\mathcal{H}_d Y_{\eta_i-},
 	\end{align*}
-	due to the reduction in the number of shares. 
+	due to the reduction in the number of shares.
 
 	Now denote $\mathcal{O}=(0,1)$,
 	\begin{align*}
@@ -961,7 +1090,7 @@ $W_{A}$ is the unique classical solution\footnote{By classical solution we mean 
 	\begin{align*}
 		W_A(t,x)=E_t^x\left[\sum_{\theta_i\ge t}e^{-r(\theta_i-t)}Y_{\theta_i-}\tilde{h}(v_{\theta_i-},X_{\theta_i-},\bar{\nu}(X_{\theta_i-}))\right].
 	\end{align*}
-	Then, Corollary 3.1 in \cite{dai_stochastic_2017} shows that $W$ is the unique classic solution to 
+	Then, Corollary 3.1 in \cite{dai_stochastic_2017} shows that $W$ is the unique classic solution to
 	\begin{align*}
 		-\der{W_A}{t}&-\frac{1}{2}\sigma^2(t,x)\dder{W_A}{x}-b(t,x)\der{W_A}{x}=0 && \text{ in }[0,T)\times(0,1)\\
 		W(T,x)&=RT+W_A(0,g(x)) && \text{ in }(0,1)\\
@@ -975,33 +1104,37 @@ $W_{A}$ is the unique classical solution\footnote{By classical solution we mean 
 
 We propose an iterative algorithm to obtain a numerical solution of the periodic parabolic terminal-boundary value problem ($\ref{eqn:PDEstart}$) \textendash{} ($\ref{eqn:PDEend}$).
 
-\subsection*{Algorithm 1}
-\begin{enumerate}
-\item \textit{Set the initial guess $W_{A}^{(0)}=0$; }
-\item \textit{For $i=1,2,\cdots$: Given $W_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$, the solution to the equation
+\begin{center}
+Algorithm 1
+\end{center}
+
+1. Set the initial guess $W_{A}^{(0)}=0$.
+
+2.  For $i=1,2,\cdots$: Given $W_{A}^{(i-1)}$, solve for $W_{A}^{(i)}$, the solution to the equation
 \begin{align*}
 -\frac{\partial W_{A}}{\partial t}= & \frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}W_{A}}{\partial S^{2}}+r S\frac{\partial W_{A}}{\partial S}-r W_{A} &  & 0\le t<T,H_{d}(t)<S<H_{u}(t)\\
 W_{A}(1,S)= & RT+W_{A}^{(i-1)}(0,S-\frac{1}{2}RT) &  & H_{d}(t)<S<H_{u}(t)\\
 W_{A}(t,H_{u}(t))= & Rt+W_{A}^{(i-1)}(0,1) &  & 0\le t\le T\\
 W_{A}(t,H_{d}(t))= & Rt+1-\mathcal{H}_{d}+\mathcal{H}_{d}W_{A}^{(i-1)}(0,1) &  & 0\le t\le T.
 \end{align*}
-}
-\item \textit{If $||W_{A}^{(i)}-W_{A}^{(i-1)}||<$ tolerance, stop and return $W_{A}^{(i)}$; otherwise set $i=i+1$ and go to step 2. }
-\end{enumerate}
+
+
+3.  If $||W_{A}^{(i)}-W_{A}^{(i-1)}||<$ tolerance, stop and return $W_{A}^{(i)}$; otherwise set $i=i+1$ and go to step 2.
+
 By using a similar proof as Theorem C.1 in \cite{dai_overpricing_2018}, one can show that the sequence $(W_{A}^{(i)})_{i\ge1}$ defined in Algorithm 1 is monotonically increasing and converges to $W_{A}$ uniformly.
 
 \begin{theorem}\label{thm:convergence}
 	The sequence $(W_A^{(k)})_{k\ge 1}$ defined in Algorithm 1 is monotonically increasing, and it converges to $W_A$ uniformly.
 \end{theorem}
 \begin{proof}[Proof of Theorem \ref{thm:convergence}]
-	We follow the notation in the proof of \ref{thm:main}. Lemma A.1 in \cite{dai_stochastic_2017} shows that the solution $W_A^{(k)}$ defined in Algorithm 1 can be stochastically represented as 
+	We follow the notation in the proof of \ref{thm:main}. Lemma A.1 in \cite{dai_stochastic_2017} shows that the solution $W_A^{(k)}$ defined in Algorithm 1 can be stochastically represented as
 	\begin{align*}
 	\begin{split}
 	W_A^{(k)}(t,S)&=E_t^{(t,S,1)}\Bigg[\sum_{t\le \zeta_i\le \theta_k}e^{-R(\zeta_i-t)}Y_{\zeta_i-}RT+\sum_{t\le \tau_i\le \theta_k}e^{-R(\tau_i-t)}Y_{\tau_i-}rv_{\tau_i-}\\
 	&\quad+\sum_{t\le \eta_i\le \theta_k}e^{-R(\eta_i-t)}Y_{\eta_i-}(rv_{\eta_i-}+1-\mathcal{H}_d)\Bigg],
 	\end{split}
 	\end{align*}
-	In other words, $W_A^{(k)}$ is the expected present value of the first $k$ payments. Since each payment is nonnegative, $(W_A^{(k)})_{k\ge 1}$ is nondecreasing. Furthermore, Lemma A.2 and Proposition A.2 shows that the right hand side of $W_A^{(k)}$ converges uniformly to 
+	In other words, $W_A^{(k)}$ is the expected present value of the first $k$ payments. Since each payment is nonnegative, $(W_A^{(k)})_{k\ge 1}$ is nondecreasing. Furthermore, Lemma A.2 and Proposition A.2 shows that the right hand side of $W_A^{(k)}$ converges uniformly to
 	\begin{align*}
 	\begin{split}
 	&E_t^{(t,S,1)}\Bigg[\sum_{\zeta_i\ge t}e^{-R(\zeta_i-t)}Y_{\zeta_i-}RT+\sum_{\tau_i\ge t}e^{-R(\tau_i-t)}Y_{\tau_i-}rv_{\tau_i-}\\
@@ -1022,10 +1155,10 @@ In this extension, each Class A coin is split into one Class A0 coin and one Cla
 	\includegraphics[width=0.7\textwidth]{A0_upward}
 	\vspace{1em}
 	\includegraphics[width=0.7\textwidth]{A0_downward}
-	\caption{{\bf Top Figure:} Class A0 receives no coupon.  Class A1 receives all the coupon payment. After the coupon payment, Class A1 is terminated, and 1 Class A0 is split into 1 new Class A0 and Class A1. {\bf Middle Figure:} Upward Reset of Class A0. After 50 days, Class B NAV grows to \$2, triggering an upward reset. {\bf Bottom Figure:} After another 50 days, Class B NAV drops to \$0.25, triggering a downward reset. }\label{fig:A0}
+	\caption{{\bf Top Figure:} Class A0 receives no coupon.  Class A1 receives all the coupon payment. After the coupon payment, Class A1 is terminated, and 1 Class A0 is split into 1 new Class A0 and Class A1. {\bf Middle Figure:} Upward Reset of Class A0. After 50 days, Class B's net asset value grows to \$2, triggering an upward reset. {\bf Bottom Figure:} After another 50 days, Class B's net asset value drops to \$0.25, triggering a downward reset. }\label{fig:A0}
 \end{figure}
 
-By contract design, the coupon of Class A1 is delivered in the form of the underlying token, whose value in USD may subject to volatile changes due to the high volatility of ETH. In contrast, the coupon of Class A0 is paid in the form of Class A1 token, whose value in USD is much less volatile compared to ETH. Therefore, Class A0 is more suitable for investors with lower risk tolerance or are less active on the market; upon receiving Class A1 tokens as coupon, they have a relatively longer period of time to liquidate the token before its value changes noticeably. In contrast, Class A1 is more suitable for investors who are willing to take certain degree of risk and are more active on the market; so that upon receiving the underlying token, they can monitor the market actively and spot a good opportunity to liquidate the underlying token.
+By contract design, the coupon of Class A1 is delivered in the form of the underlying cryptocurrency, whose value in USD may subject to volatile changes due to the high volatility of ETH. In contrast, the coupon of Class A0 is paid in the form of Class A1 coins, whose value in USD is much less volatile compared to ETH. Therefore, Class A0 is more suitable for investors with lower risk tolerance or are less active on the market; upon receiving Class A1 coins as coupon, they have a relatively longer period of time to liquidate the coins before its value changes noticeably. In contrast, Class A1 is more suitable for investors who are willing to take certain degree of risk and are more active on the market; so that upon receiving the underlying cryptocurrency, they can monitor the market actively and spot a good opportunity to liquidate the underlying cryptocurency.
 
 
 Under the risk-neutral pricing framework, the market value $W_{A1}(t,S)$ of Class A1 coin is given as
@@ -1033,7 +1166,7 @@ Under the risk-neutral pricing framework, the market value $W_{A1}(t,S)$ of Clas
  & E_{t}\Bigg[e^{-r(\zeta-t)}RT\cdot\mathbf{1}_{\{\zeta\le\tau,\eta\}}+e^{-r(\tau-t)}R\tau\cdot\mathbf{1}_{\{\tau<\eta,\zeta\}}\\
  &\quad+e^{-r(\eta-t)}(R\eta-(V_B^{\eta-})^-)^+\cdot\mathbf{1}_{\{\eta<\tau,\zeta\}}\Bigg],
 \end{align*}
-where the first regular payout time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined as before. On a downward reset, if $V_B^{\eta-}>0$, A1 gets the coupon payment $R\eta$; if $V_B^{\eta-}\le 0$, A1 only gets a part of the coupon $(R\eta+V_B^{\eta-})^+ < R\eta$. 
+where the first regular payout time $\zeta$, the first upward reset time $\tau$ and the first downward reset time $\eta$ are defined as before. On a downward reset, if $V_B^{\eta-}>0$, A1 gets the coupon payment $R\eta$; if $V_B^{\eta-}\le 0$, A1 only gets a part of the coupon $(R\eta+V_B^{\eta-})^+ < R\eta$.
 
 By assuming that $P_t$ follows a geometric Brownian motion, $W_{A1}$ is the unique solution of the following PDE
 \begin{align*}
@@ -1044,10 +1177,10 @@ By assuming that $P_t$ follows a geometric Brownian motion, $W_{A1}$ is the uniq
 \end{align*}
 Finally, the value of Class A0 coin is calculated as $W_{A0}=W_A-W_{A1}$.
 
-Figure \ref{fig:valA0a1} shows the simulated path for the prices of class A0, the principal only part of A. A0 has an annualized standard deviation of 0.0412 for $\alpha=1$, as compared to SD of WA, which is 0.0531. Note that A0 is still volatile. To make A0 more stable, one can increase the split ratio between A and B from 1:1 to a higher split ratio $\alpha:1$, ($\alpha >1$), resulting in a lower leverage ratio for class B which in turn leads to a lower risk for Class A and Class A0, because the risk of downside resets is lower. Figure \ref{fig:valA0a2} illustrates the price of A0 with $\alpha=2$. Class A0 has an annualized standard deviation of 0.0156 for $\alpha=2$, as compared to SD of $W_A$, which is 0.0571. Note that with $\alpha = 2$, the NAV of B is $3S_t-2(1+Rt)$, making B more sensitive to $S$.
+Figure \ref{fig:valA0a1} shows the simulated path for the prices of class A0, the principal only part of A. A0 has an annualized standard deviation of 0.0412 for $\alpha=1$, as compared to SD of WA, which is 0.0531. Note that A0 is still volatile. To make A0 more stable, one can increase the split ratio between A and B from 1:1 to a higher split ratio $\alpha:1$, ($\alpha >1$), resulting in a lower leverage ratio for class B which in turn leads to a lower risk for Class A and Class A0, because the risk of downside resets is lower. Figure \ref{fig:valA0a2} illustrates the price of A0 with $\alpha=2$. Class A0 has an annualized standard deviation of 0.0156 for $\alpha=2$, as compared to SD of $W_A$, which is 0.0571. Note that with $\alpha = 2$, the net asset value of B is $3S_t-2(1+Rt)$, making B more sensitive to $S$.
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.9\textwidth]{WA0_alpha1.eps}
 \caption{Market Value of Class A0 compared to Class A. Annualized volatility of Class A0 is 0.0254. Parameters: $R=0.02\%,\mathcal{H}_{d}=0.25,\mathcal{H}_{u} =2,\mathcal{H}_{p}=1.02,T=100,\sigma= 120 \% \text{ per year}, r=0.0082\%$ (3\% per year). Upward reset takes place on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018. Downward reset date takes place on 5 Feb 2018.}
@@ -1055,10 +1188,10 @@ Figure \ref{fig:valA0a1} shows the simulated path for the prices of class A0, th
 \end{figure}
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.9\textwidth]{WA0_alpha2.eps}
-\caption{Market Value of Class A0 (principal only class) compared to Class A, where DUO is split into Class A and Class B token with a split ratio 2:1. Annualized volatility of Class A is 0.0125. Parameters: $R=0.02$ per day, $\mathcal{H}_{d}=0.25$, $\mathcal{H}_{u} =2$, $\mathcal{H}_{p}=1.02$, $T=100$, $\sigma= 120\%$ per year, $r=0.0082\%$ (3\% per year). Upward reset takes place on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018. Downward reset date takes place on 5 Feb 2018.}
+\caption{Market Value of Class A0 (principal only class) compared to Class A, where DUO is split into Class A and Class B coins with a split ratio 2:1. Annualized volatility of Class A is 0.0125. Parameters: $R=0.02$ per day, $\mathcal{H}_{d}=0.25$, $\mathcal{H}_{u} =2$, $\mathcal{H}_{p}=1.02$, $T=100$, $\sigma= 120\%$ per year, $r=0.0082\%$ (3\% per year). Upward reset takes place on 24 Nov 2017, 17 Dec 2017, and 7 Jan 2018. Downward reset date takes place on 5 Feb 2018.}
 \label{fig:valA0a2}
 \end{figure}
 
@@ -1091,10 +1224,15 @@ Figure \ref{fig:valA0a1} shows the simulated path for the prices of class A0, th
 
 \end{appendices}
 
-\clearpage
-\bibliographystyle{apalike}
+
+%\bibliographystyle{apalike}
+\bibliographystyle{econometrica}
 \bibliography{Token1}
-\clearpage
+%\clearpage
+
+%\bibliography{Token1}
+%  \newpage
+
 
 %\section*{\clearpage{}}
 % \begin{thebibliography}{1}

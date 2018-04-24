@@ -117,7 +117,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Modifications and "add-on" for article.cls starts:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Initiate some info:
-\def\journal@name{}
+%\def\journal@name{Submitted to Econometrica}
+\def\journal@name{                                          }
 \def\journal@url{http://www.econometricsociety.org/}
 \def\journal@issn{0012-9682}
 \def\journal@id{-econ}
